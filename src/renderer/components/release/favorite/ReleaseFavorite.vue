@@ -17,7 +17,8 @@
 
 <script>
 
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { useAccountStore } from '@store/app/account/useAccountStore'
+import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
 
 const props = {
   release: {
@@ -33,8 +34,8 @@ const props = {
 export default {
   props,
   computed: {
-    ...mapState('favorites', { _loading: s => s.loading }),
-    ...mapGetters('app/account', { _isAuthorized: 'isAuthorized' }),
+    _loading () { return useFavoritesStore().loading },
+    _isAuthorized () { return useAccountStore().isAuthorized },
 
     /**
      * Check if provided release is in favorite
@@ -42,7 +43,7 @@ export default {
      * @return {*}
      */
     isInFavorite () {
-      return this.$store.getters['favorites/isInFavorite'](this.release)
+      return useFavoritesStore().isInFavorite(this.release)
     },
 
     /**
@@ -57,10 +58,8 @@ export default {
   },
 
   methods: {
-    ...mapActions('favorites', {
-      _addToFavorites: 'addToFavorites',
-      _removeFromFavorites: 'removeFromFavorites'
-    })
+    _addToFavorites (release) { return useFavoritesStore().addToFavorites(release) },
+    _removeFromFavorites (release) { return useFavoritesStore().removeFromFavorites(release) },
   },
 }
 </script>

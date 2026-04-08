@@ -111,11 +111,12 @@ export default {
      * @return {*}
      */
     lastWatchedEpisode () {
+      const { useWatchStore } = require('@store/app/watch/useWatchStore')
       let lastWatchedEpIndex = null
       const episodes = this.$__get(this.release, 'episodes')
       const ordered = __orderBy(episodes || [], ['id'], [s => s.episodes.order])
       for (const i in ordered) {
-        const { isSeen } = this.$store.getters['app/watch/getWatchedEpisode']({
+        const { isSeen } = useWatchStore().getWatchedEpisode({
           release_id: this.release.id,
           episode_id: ordered[i].id
         }) || {}

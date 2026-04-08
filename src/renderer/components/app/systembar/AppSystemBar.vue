@@ -18,7 +18,7 @@
 <script>
 
 import { AppPlatformMixin } from '@mixins/app'
-import { mapState } from 'vuex'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 
 export default {
   mixins: [AppPlatformMixin],
@@ -39,6 +39,9 @@ export default {
     }
   },
   computed: {
+    appbarRight () {
+      return useSettingsStore().appbar_right
+    },
     controlsRight () {
       return !!(this.appbarRight || this.isWindows);
     },
@@ -54,9 +57,6 @@ export default {
         return [this.close, this.minimize, this.maximize]
       }
     },
-    ...mapState('app/settings/system', {
-      appbarRight: s => s.appbar_right
-    })
   },
 
   methods: {

@@ -13,7 +13,7 @@
 
 <script>
 
-import { mapActions, mapState } from 'vuex'
+import { useCatalogStore } from '@store/catalog/useCatalogStore'
 
 export default {
   data () {
@@ -31,11 +31,11 @@ export default {
     }
   },
   computed: {
-    ...mapState('catalog', { _value: s => s.filters.sort.value })
+    _value () { return useCatalogStore().filters.sort.value },
   },
 
   methods: {
-    ...mapActions('catalog', { _setFilterValue: 'setFilterValue' })
+    _setFilterValue (payload) { useCatalogStore().setFilterValue(payload) },
   },
 
 }

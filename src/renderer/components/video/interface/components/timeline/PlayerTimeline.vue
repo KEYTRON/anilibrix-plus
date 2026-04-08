@@ -62,7 +62,7 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener("mousedown", this.setPrimaryButtonState);
     document.removeEventListener("mousemove", this.setPrimaryButtonState);
     document.removeEventListener("mouseup", this.setPrimaryButtonState);

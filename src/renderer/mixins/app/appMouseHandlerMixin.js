@@ -27,7 +27,7 @@ export default {
     window.addEventListener('mousewheel', this.handleMouseScroll)
   },
 
-  destroyed () {
+  unmounted () {
     window.removeEventListener('mousemove', this.handleMouseEvents)
     window.removeEventListener('mousewheel', this.handleMouseScroll)
   }

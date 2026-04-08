@@ -45,7 +45,7 @@ import Filters from './components/filters'
 import Release from './components/release'
 
 import { toRelease } from '@utils/router/views'
-import { mapActions, mapState } from 'vuex'
+import { useCatalogStore } from '@store/catalog/useCatalogStore'
 import {nextTick} from "vue";
 
 export default {
@@ -67,14 +67,12 @@ export default {
   },
 
   computed: {
-    ...mapState('catalog', {
-      _page: s => s.items.page,
-      _items: s => s.items.data,
-      _loading: s => s.items.loading,
-      _perPage: s => s.items.perPage,
-      _pagination: s => s.items.pagination,
-      _is_initialized: s => s.is_initialized,
-    }),
+    _page () { return useCatalogStore().items.page },
+    _items () { return useCatalogStore().items.data },
+    _loading () { return useCatalogStore().items.loading },
+    _perPage () { return useCatalogStore().items.perPage },
+    _pagination () { return useCatalogStore().items.pagination },
+    _is_initialized () { return useCatalogStore().is_initialized },
 
     /**
      * Check if last items from server is equals to pet page items
@@ -89,11 +87,9 @@ export default {
   },
 
   methods: {
-    ...mapActions('catalog', {
-      _getCatalogItems: 'getCatalogItems',
-      _setPaginationPage: 'setPaginationPage',
-      _clearCatalogReleases: 'clearCatalogReleases',
-    }),
+    _getCatalogItems () { return useCatalogStore().getCatalogItems() },
+    _setPaginationPage (page) { return useCatalogStore().setPaginationPage(page) },
+    _clearCatalogReleases () { return useCatalogStore().clearCatalogReleases() },
 
     /**
      * Go to release

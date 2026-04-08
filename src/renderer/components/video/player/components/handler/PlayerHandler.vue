@@ -107,7 +107,7 @@ export default {
     )
   },
 
-  async destroyed () {
+  async unmounted () {
 
     // Destroy player instance
     if (this.player) {

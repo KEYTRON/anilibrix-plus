@@ -18,7 +18,7 @@
 <script>
 
 import app from '@/../package'
-import { mapActions } from 'vuex'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 import { sendAppAboutEvent } from '@main/handlers/app/app-handlers'
 
 export default {
@@ -55,8 +55,6 @@ export default {
   },
 
   methods: {
-    ...mapActions('app/settings/system', { _toggleDevtools: 'toggleDevtools' }),
-
     /**
      * Show about panel
      *
@@ -70,7 +68,7 @@ export default {
      * @return void
      */
     toggleDevtools () {
-      this._toggleDevtools()
+      useSettingsStore().toggleDevtools()
     }
 
   }

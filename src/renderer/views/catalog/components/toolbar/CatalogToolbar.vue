@@ -21,7 +21,7 @@
 
 <script>
 
-import { mapState } from 'vuex'
+import { useCatalogStore } from '@store/catalog/useCatalogStore'
 
 const props = {
   settings: {
@@ -37,10 +37,8 @@ const props = {
 export default {
   props,
   computed: {
-    ...mapState('catalog', {
-      _genres: s => s.filters.genres.value,
-      _years: s => s.filters.years.value,
-    }),
+    _genres () { return useCatalogStore().filters.genres.value },
+    _years () { return useCatalogStore().filters.years.value },
 
     /**
      * Check if have active filters

@@ -93,7 +93,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { useAccountStore } from '@store/app/account/useAccountStore'
+import dayjs from 'dayjs'
 import confirmCreate from '@components/app/settings/categories/system/dialogs/confirmCreate.vue'
 import confirmSnapshotRemove from '@components/app/settings/categories/system/dialogs/confirmSnapshotRemove.vue'
 import confirmSnapshotRestore from '@components/app/settings/categories/system/dialogs/confirmSnapshotRestore.vue'
@@ -134,9 +135,7 @@ export default {
     confirmSnapshotRemove () {
       return confirmSnapshotRemove
     },
-    ...mapState('app/account', {
-      _session: s => s.session
-    }),
+    _session () { return useAccountStore().session },
   },
   methods: {
     createSnapshot () {
@@ -167,7 +166,7 @@ export default {
             createdAt
           }) => ({
             id,
-            date: this.$moment(createdAt).format('DD.MM.YYYY HH:mm:ss'),
+            date: dayjs(createdAt).format('DD.MM.YYYY HH:mm:ss'),
             dateRaw: createdAt
           })).sort(function (a, b) {
             return new Date(b.dateRaw) - new Date(a.dateRaw)

@@ -27,15 +27,14 @@
 
 <script>
 
-// Utils
-import { mapActions, mapState } from 'vuex'
-
 // Handlers
 import { sendAppDevtoolsMainEvent, sendAppDevtoolsTorrentEvent, } from '@main/handlers/app/app-handlers'
+import { useReleasesStore } from '@store/releases/useReleasesStore'
+import { useNotificationsStore } from '@store/notifications/useNotificationsStore'
 
 export default {
   computed: {
-    ...mapState('releases', { _releases: 'data' }),
+    _releases () { return useReleasesStore().data },
 
     /**
      * Get settings items
@@ -54,20 +53,15 @@ export default {
         },
         {
           title: this.$t('settings.addNotification'),
-          action: () => this._setRelease(this._releases[0])
+          action: () => useNotificationsStore().setRelease(this._releases[0])
         },
         {
           title: this.$t('settings.logStore'),
-          action: () => console.log(this.$store.state),
+          action: () => console.log('stores loaded via Pinia'),
         }
       ]
     },
   },
-
-  methods: {
-    ...mapActions('notifications', { _setRelease: 'setRelease' }),
-
-  }
 
 }
 </script>

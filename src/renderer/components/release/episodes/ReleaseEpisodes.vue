@@ -41,7 +41,7 @@ import ReleaseProgress from './../progress'
 // Utils
 import Fuse from 'fuse.js'
 import __orderBy from 'lodash/orderBy'
-import { mapState } from 'vuex'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 
 const props = {
   loading: {
@@ -78,7 +78,7 @@ export default {
   },
 
   computed: {
-    ...mapState('app/settings/player', { _sort: s => s.episodes.order }),
+    _sort () { return useSettingsStore().episodes.order },
 
     /**
      * Get playlist

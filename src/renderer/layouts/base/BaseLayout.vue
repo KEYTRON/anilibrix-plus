@@ -54,7 +54,7 @@ export default {
   mounted() {
     this.$refs.container.addEventListener('scroll', this.onScroll)
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.$refs.container.removeEventListener('scroll', this.onScroll)
   },
   computed: {

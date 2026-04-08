@@ -76,7 +76,7 @@
 
 <script>
 
-import { mapActions, mapState } from 'vuex'
+import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
 
 export default {
   data () {
@@ -113,23 +113,17 @@ export default {
   },
 
   computed: {
-    ...mapState('favorites', {
-      _sort: s => s.settings.sort,
-      _group: s => s.settings.group,
-      _show_seen: s => s.settings.show_seen,
-      _show_completed: s => s.settings.show_completed,
-    })
+    _sort () { return useFavoritesStore().settings.sort },
+    _group () { return useFavoritesStore().settings.group },
+    _show_seen () { return useFavoritesStore().settings.show_seen },
+    _show_completed () { return useFavoritesStore().settings.show_completed },
   },
 
   methods: {
-
-    ...mapActions('favorites', {
-      _setSettingsSort: 'setSettingsSort',
-      _setSettingsGroup: 'setSettingsGroup',
-      _setSettingsShowSeen: 'setSettingsShowSeen',
-      _setSettingsShowCompleted: 'setSettingsShowCompleted',
-    })
-
+    _setSettingsSort (v) { useFavoritesStore().setSettingsSort(v) },
+    _setSettingsGroup (v) { useFavoritesStore().setSettingsGroup(v) },
+    _setSettingsShowSeen (v) { useFavoritesStore().setSettingsShowSeen(v) },
+    _setSettingsShowCompleted (v) { useFavoritesStore().setSettingsShowCompleted(v) },
   }
 
 }

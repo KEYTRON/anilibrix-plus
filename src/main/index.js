@@ -10,7 +10,7 @@ import Tray from './utils/tray'
 import Menu from './utils/menu'
 import { openWindowInterceptor } from './utils/windows/open-window-interceptor'
 import { debounce } from 'lodash';
-import store, { setUserId } from '@store'
+import Storage from 'electron-store'
 import { initProxy, setProxy } from './utils/proxy';
 import { initInternalServer } from './utils/internal-server';
 import { stopOperaProxy } from '@main/utils/opera-proxy';
@@ -171,9 +171,6 @@ if (!gotTheLock) {
       global.internalServerPort = await initInternalServer()
       console.log('Internal server listens', global.internalServerPort)
 
-      // Set user id
-      await setUserId()
-
       mWindowInstance.loadUrl()
       tWindowInstance.loadUrl()
 
@@ -200,9 +197,10 @@ if (!gotTheLock) {
         iconPath: path.join(__dirname, '../../build/icons/tray/icon.png')
       }).setTooltip(meta.name)
 
+      const appStorage = new Storage({ name: 'anilibrix', clearInvalidConfig: true })
       app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
-        if (store.state.app.settings.system.ignore_certs) {
-          // Verification logic.
+        const ignoreCerts = appStorage.get('settings.system.ignore_certs', false)
+        if (ignoreCerts) {
           event.preventDefault()
           console.log('Certificate error ignored', url, error)
           // eslint-disable-next-line standard/no-callback-literal

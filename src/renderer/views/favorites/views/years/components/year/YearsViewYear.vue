@@ -34,7 +34,7 @@
 import Release from './../../../../components/release'
 
 import pluralize from '@utils/strings/pluralize'
-import { mapActions, mapState } from 'vuex'
+import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
 
 const props = {
   year: {
@@ -54,7 +54,7 @@ export default {
   },
 
   computed: {
-    ...mapState('favorites', { _years: s => s.settings.years_collapsed }),
+    _years () { return useFavoritesStore().settings.years_collapsed },
 
     /**
      * Check if year is collapsed
@@ -113,7 +113,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('favorites', { _setSettingsYearsCollapsed: 'setSettingsYearsCollapsed' })
+    _setSettingsYearsCollapsed (year) { useFavoritesStore().setSettingsYearsCollapsed(year) }
   }
 
 }

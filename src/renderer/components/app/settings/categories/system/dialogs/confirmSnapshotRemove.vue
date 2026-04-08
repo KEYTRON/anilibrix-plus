@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import { catGirlFetch } from '@utils/fetch'
+import { useAccountStore } from '@store/app/account/useAccountStore'
 export default {
   data () {
     return {
@@ -46,9 +46,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('app/account', {
-      _session: s => s.session
-    }),
+    _session () { return useAccountStore().session },
   },
   methods: {
     deleteSnapshot: async function () {

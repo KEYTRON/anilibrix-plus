@@ -1,33 +1,47 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 import router from '@router'
-import store from '@store'
+import vuetify from '@plugins/vuetify'
 
-import vuetify, { setVuetifyLocale } from '@plugins/vuetify'
-import { setMomentLocale } from '@plugins/moment'
-
-import '@plugins/plyr'
-import '@plugins/moment'
-import '@plugins/lodash'
-import '@plugins/vue-meta'
-import '@plugins/vuelidate'
-import '@plugins/vue-toasted'
-import '@plugins/vue-electron'
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
 
 import '@assets/scss/style.scss'
 
-import App from './App'
+import App from './App.vue'
 
 import { installI18n, setLocale } from './i18n'
 import { resolveAppLocale } from '@shared/i18n/resolveLocale'
 import { invokeGetSystemLocale, invokeSetAppLocale } from '@main/handlers/app/app-handlers'
 
-Vue.config.productionTip = false
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
+import { useAccountStore } from '@store/app/account/useAccountStore'
+import { setVuetifyLocale } from '@plugins/vuetify'
+import dayjs from 'dayjs'
+import 'dayjs/locale/ru'
+import 'dayjs/locale/en'
 
-installI18n()
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+
+const app = createApp(App)
+
+app.use(pinia)
+app.use(router)
+app.use(vuetify)
+app.use(Toast, {
+  position: 'bottom-right',
+  timeout: 3000,
+  closeOnClick: true
+})
+
+installI18n(app)
 
 async function bootstrapLocale () {
-  const storedLocale = store.state.app.settings.system.language
+  const settingsStore = useSettingsStore()
+  const storedLocale = settingsStore.system?.language
   const rendererLocale = navigator.language || (navigator.languages && navigator.languages[0])
 
   let systemLocale = null
@@ -46,7 +60,7 @@ async function bootstrapLocale () {
 
   setLocale(locale)
   setVuetifyLocale(locale)
-  setMomentLocale(locale)
+  dayjs.locale(locale)
 
   try {
     await invokeSetAppLocale(locale)
@@ -58,15 +72,11 @@ async function bootstrapLocale () {
 async function startApp () {
   await bootstrapLocale()
 
-  const app = new Vue({
-    store,
-    router,
-    vuetify,
-    template: '<App/>',
-    components: { App }
-  })
+  // Generate user ID if not set (was previously done in main process via vuex-electron)
+  const accountStore = useAccountStore()
+  accountStore.setUserId()
 
-  app.$mount('#anilibrix')
+  app.mount('#anilibrix')
 }
 
 startApp()

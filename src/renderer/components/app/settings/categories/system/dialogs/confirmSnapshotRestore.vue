@@ -36,8 +36,10 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
 import { catGirlFetch } from '@utils/fetch'
+import { useAccountStore } from '@store/app/account/useAccountStore'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
+import { useWatchStore } from '@store/app/watch/useWatchStore'
 export default {
   data () {
     return {
@@ -47,29 +49,21 @@ export default {
     }
   },
   computed: {
-    ...mapState('app/account', {
-      _session: s => s.session
-    }),
+    _session () { return useAccountStore().session },
   },
   methods: {
-    ...mapActions('app/settings/system', {
-      _setUpdates: 'setUpdates',
-      _setAdsMaximum: 'setAdsMaximum',
-      _setUpdatesTimeout: 'setUpdatesTimeout',
-      _setSystemNotifications: 'setSystemNotifications',
-      _setAPIEndpoint: 'setAPIEndpoint',
-      _setAPIStaticEndpoint: 'setAPIStaticEndpoint',
-    }),
-    ...mapActions('app/settings/player', {
-      _setVideoBuffer: 'setVideoBuffer',
-      _setAutoplayNext: 'setAutoplayNext',
-      _setTorrentsProcess: 'setTorrentsProcess',
-      _setOpeningSkipTime: 'setOpeningSkipTime',
-      _setOpeningSkipButton: 'setOpeningSkipButton',
-    }),
-    ...mapActions('app/watch', {
-      _replaceWatchedEpisodes: 'replaceWatchedEpisodes'
-    }),
+    _setUpdates (v) { useSettingsStore().setUpdates(v) },
+    _setAdsMaximum (v) { useSettingsStore().setAdsMaximum(v) },
+    _setUpdatesTimeout (v) { useSettingsStore().setUpdatesTimeout(v) },
+    _setSystemNotifications (v) { useSettingsStore().setSystemNotifications(v) },
+    _setAPIEndpoint (v) { useSettingsStore().setAPIEndpoint(v) },
+    _setAPIStaticEndpoint (v) { useSettingsStore().setAPIStaticEndpoint(v) },
+    _setVideoBuffer (v) { useSettingsStore().setVideoBuffer(v) },
+    _setAutoplayNext (v) { useSettingsStore().setAutoplayNext(v) },
+    _setTorrentsProcess (v) { useSettingsStore().setTorrentsProcess(v) },
+    _setOpeningSkipTime (v) { useSettingsStore().setOpeningSkipTime(v) },
+    _setOpeningSkipButton (v) { useSettingsStore().setOpeningSkipButton(v) },
+    _replaceWatchedEpisodes (payload) { useWatchStore().replaceWatchedEpisodes(payload) },
     restoreSnapshot: async function () {
       this.loading = true
       await catGirlFetch(process.env.EXT_API_SERVER + '/snapshot/' + this.id, {

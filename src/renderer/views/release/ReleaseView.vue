@@ -170,10 +170,9 @@ import Comments from '@components/release/comments'
 import Torrents from '@components/release/torrents'
 
 import { toVideo } from '@utils/router/views'
-import { mapState } from 'vuex'
+import { useReleaseStore } from '@store/release/useReleaseStore'
 import router from '@router'
-import ReleaseProxy from '@proxies/release'
-import store from "@store";
+import ReleaseProxy from '@proxies/release';
 import LibriaTyan01 from "@assets/images/libria-tyan/LibriaTyan01.svg";
 
 const props = {
@@ -244,7 +243,7 @@ export default {
   },
 
   computed: {
-    ...mapState('release', { _release: s => s.data }),
+    _release () { return useReleaseStore().data },
     __release () {
       return {
         ...this._release
@@ -458,7 +457,7 @@ export default {
 
           // Get release data
           this.loading = true
-          await this.$store.dispatchPromise('release/getRelease', releaseId)
+          await useReleaseStore().getRelease(releaseId)
           this.updateShareLinks()
           this.loading = false
         }

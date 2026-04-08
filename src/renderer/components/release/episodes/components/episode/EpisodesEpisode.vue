@@ -33,7 +33,7 @@ import Quality from './components/quality'
 import Watched from './components/watched'
 import Playing from './components/playing'
 import Actions from './components/actions'
-import moment from 'moment/moment';
+import dayjs from 'dayjs';
 
 const props = {
   release: {
@@ -70,7 +70,7 @@ export default {
 
   methods: {
     formatTimestamp(time) {
-      return moment.unix(time).format('DD.MM.YYYY HH:mm:ss')
+      return dayjs.unix(time).format('DD.MM.YYYY HH:mm:ss')
     }
   },
 

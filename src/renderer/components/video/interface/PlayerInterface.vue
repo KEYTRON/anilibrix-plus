@@ -81,7 +81,7 @@ import PlayerBuffering from './components/buffering'
 
 import screenfull from 'screenfull'
 import { AppKeyboardHandlerMixin, AppMouseHandlerMixin } from '@mixins/app'
-import { mapActions, mapState } from 'vuex'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 
 const props = {
   player: {
@@ -135,12 +135,10 @@ export default {
   },
 
   computed: {
-    ...mapState('app/settings/player', {
-      _auto_opening_skip: s => s.opening.autoSkip,
-      _opening_skip_button_key: s => s.opening.skip_button_key,
-      _auto_opening_skip_key: s => s.opening.autoSkipKey,
-      _opening_skip_time: s => s.opening.skip_time
-    })
+    _auto_opening_skip () { return useSettingsStore().opening.autoSkip },
+    _opening_skip_button_key () { return useSettingsStore().opening.skip_button_key },
+    _auto_opening_skip_key () { return useSettingsStore().opening.autoSkipKey },
+    _opening_skip_time () { return useSettingsStore().opening.skip_time },
   },
 
   methods: {
@@ -300,9 +298,7 @@ export default {
         }
       }
     },
-    ...mapActions('app/settings/player', {
-      _setAutoSkip: 'setAutoSkip'
-    }),
+    _setAutoSkip (v) { useSettingsStore().setAutoSkip(v) },
     handleKeyUp (e) {
       this.handleKeys('keyup', e)
     },
@@ -334,7 +330,7 @@ export default {
 
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     document.removeEventListener('keyup', this.handleKeyUp)
     document.removeEventListener('keydown', this.handleKeyDown)
     // Remove player listeners

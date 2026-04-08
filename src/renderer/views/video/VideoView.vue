@@ -33,7 +33,8 @@ import VideoLayout from '@layouts/video'
 import PlayerInterface from '@components/video/interface'
 import { ServerHandler, TorrentHandler, UpscaleHandler } from '@components/video/player/types'
 
-import { mapActions, mapState } from 'vuex'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
+import { useWatchStore } from '@store/app/watch/useWatchStore'
 import { toBlank } from '@utils/router/views'
 
 const props = {
@@ -72,7 +73,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('app/settings/player', { _quality: s => s.quality }),
+    _quality () { return useSettingsStore().quality },
 
     /**
      * Get title
@@ -175,8 +176,8 @@ export default {
   },
 
   methods: {
-    ...mapActions('app/watch', { _setWatchedEpisode: 'setWatchedEpisode' }),
-    ...mapActions('app/settings/player', { _setQuality: 'setQuality' }),
+    _setWatchedEpisode (payload) { return useWatchStore().setWatchedEpisode(payload) },
+    _setQuality (alias) { return useSettingsStore().setQuality(alias) },
 
     /**
      * Go to blank page
@@ -209,7 +210,7 @@ export default {
         episode_id
       }
 
-      return await this.$store.getters['app/watch/getWatchedEpisode'](payload)
+      return await useWatchStore().getWatchedEpisode(payload)
     },
 
     /**
@@ -278,7 +279,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     this.setWatchedEpisode()
   },
 

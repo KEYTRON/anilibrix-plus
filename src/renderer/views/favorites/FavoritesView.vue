@@ -50,7 +50,9 @@ import Authorization from './components/authorization'
 
 import Fuse from 'fuse.js'
 import { toLogin, toRelease } from '@utils/router/views'
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { useAccountStore } from '@store/app/account/useAccountStore'
+import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
+import { useWatchStore } from '@store/app/watch/useWatchStore'
 
 export default {
   name: 'Favorites.View',
@@ -71,12 +73,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('app/account', { _isAuthorized: 'isAuthorized' }),
-    ...mapState('favorites', {
-      _items: s => s.items,
-      _loading: s => s.loading,
-      _settings: s => s.settings,
-    }),
+    _isAuthorized () { return useAccountStore().isAuthorized },
+    _items () { return useFavoritesStore().items },
+    _loading () { return useFavoritesStore().loading },
+    _settings () { return useFavoritesStore().settings },
 
     /**
      * Get view
@@ -148,7 +148,7 @@ export default {
           episodes
         }
 
-        const progress = this.$store.getters['app/watch/getReleaseProgress'](payload)
+        const progress = useWatchStore().getReleaseProgress(payload)
         return (progress < 100 || (progress === 100 && show_seen === true)) && (Number(statusCode) !== 1 || (Number(statusCode) === 1 && show_completed === false))
       })
 
@@ -158,7 +158,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('favorites', { _getFavorites: 'getFavorites' }),
+    _getFavorites () { return useFavoritesStore().getFavorites() },
 
     toLogin,
     toRelease,

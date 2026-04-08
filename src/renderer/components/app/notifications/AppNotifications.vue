@@ -3,7 +3,9 @@
 // Utils
 import { meta } from '@package'
 import { toVideo } from '@utils/router/views'
-import { mapGetters, mapState } from 'vuex'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
+import { useNotificationsStore } from '@store/notifications/useNotificationsStore'
+import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
 
 // Handlers
 import { sendAppDockNumberEvent } from '@main/handlers/app/app-handlers'
@@ -12,12 +14,15 @@ import { catchReleaseNotification } from '@main/handlers/notifications/notificat
 export default {
   render: () => null,
   computed: {
-    ...mapGetters('favorites', { isReleaseInFavorite: 'isInFavorite' }),
-    ...mapState('notifications', { _items: s => s.items }),
-    ...mapState('app/settings/system', {
-      _notifications: s => s.notifications.system,
-      _filter_notify: s => s.filter_notify,
-    }),
+    _items () {
+      return useNotificationsStore().items
+    },
+    _notifications () {
+      return useSettingsStore().notifications.system
+    },
+    _filter_notify () {
+      return useSettingsStore().filter_notify
+    },
 
     /**
      * Get unseen notifications
@@ -36,7 +41,7 @@ export default {
       // Check if release is set
       // Check if system notifications is enabled
       if (release && this._notifications === true) {
-        if (this._filter_notify && !this.isReleaseInFavorite(release)) return
+        if (this._filter_notify && !useFavoritesStore().isInFavorite(release)) return
 
         // Show notification
         const episode = release.episodes[0]

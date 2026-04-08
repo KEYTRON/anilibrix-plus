@@ -18,6 +18,9 @@
 <script>
 
 import { toVideo } from '@utils/router/views'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
 
 const props = {
   notification: {
@@ -87,7 +90,7 @@ export default {
      * @return {string}
      */
     datetime () {
-      return this.$moment(this.notification.datetime).fromNow()
+      return dayjs(this.notification.datetime).fromNow()
     }
 
   },

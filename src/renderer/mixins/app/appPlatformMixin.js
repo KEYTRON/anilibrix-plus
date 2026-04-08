@@ -66,7 +66,7 @@ export default {
     require('@electron/remote').getCurrentWindow().on('leave-full-screen', this.setFullscreenState)
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     // Remove fullscreen events
     require('@electron/remote').getCurrentWindow().off('enter-full-screen', this.setFullscreenState)
     require('@electron/remote').getCurrentWindow().off('leave-full-screen', this.setFullscreenState)

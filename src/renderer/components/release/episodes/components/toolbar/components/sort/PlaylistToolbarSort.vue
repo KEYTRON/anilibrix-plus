@@ -6,11 +6,11 @@
 
 <script>
 
-import { mapActions, mapState } from 'vuex'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 
 export default {
   computed: {
-    ...mapState('app/settings/player', { _sort: s => s.episodes.order }),
+    _sort () { return useSettingsStore().episodes.order },
 
     /**
      * Get sort order
@@ -23,7 +23,7 @@ export default {
 
   },
   methods: {
-    ...mapActions('app/settings/player', { _setEpisodesSort: 'setEpisodesSort' })
+    _setEpisodesSort (order) { useSettingsStore().setEpisodesSort(order) }
   }
 
 }

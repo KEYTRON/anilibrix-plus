@@ -63,6 +63,8 @@ import { ipcRenderer } from "electron";
 import { required } from 'vuelidate/lib/validators'
 import { BackViewMixin } from '@mixins/views'
 import { invokeSafeStorageEncrypt } from '@main/handlers/app/app-handlers'
+import { useAccountStore } from '@store/app/account/useAccountStore'
+import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
 
 export default {
   name: 'Account.Login.View',
@@ -86,14 +88,14 @@ export default {
     ipcRenderer.on('VK_CODE', async (event, session) => {
       try {
         this.loading = true
-        await this.$store.dispatchPromise('app/account/setSession', session)
+        await useAccountStore().setSession(session)
 
         // Get profile data
-        await this.$store.dispatchPromise('app/account/getProfile')
+        await useAccountStore().getProfile()
         await this.toBack()
 
         // Get user favorites
-        this.$store.dispatchPromise('favorites/getFavorites')
+        useFavoritesStore().getFavorites()
         this.loading = false
       } catch (e) {
         console.error(e)
@@ -105,7 +107,7 @@ export default {
       }
     })
   },
-  beforeDestroy() {
+  beforeUnmount() {
     ipcRenderer.removeAllListeners('VK_CODE')
   },
   methods: {
@@ -140,7 +142,7 @@ export default {
             login: this.login,
             password: this.password
           }
-          const session = await this.$store.dispatchPromise('app/account/login', payload)
+          const session = await useAccountStore().login(payload)
 
 
           if (!session) {
@@ -151,14 +153,14 @@ export default {
             await invokeSafeStorageEncrypt('user.login', this.login),
             await invokeSafeStorageEncrypt('user.password', this.password)
           ])
-          await this.$store.dispatchPromise('app/account/setSession', session)
+          await useAccountStore().setSession(session)
 
           // Get profile data
-          await this.$store.dispatchPromise('app/account/getProfile')
+          await useAccountStore().getProfile()
           await this.toBack()
 
           // Get user favorites
-          this.$store.dispatchPromise('favorites/getFavorites')
+          useFavoritesStore().getFavorites()
 
         } finally {
           this.loading = false

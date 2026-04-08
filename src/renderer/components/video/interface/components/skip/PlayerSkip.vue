@@ -119,7 +119,7 @@ export default {
     })
   },
 
-  destroyed () {
+  unmounted () {
     this.clearTimerAndInterval()
   },
 }

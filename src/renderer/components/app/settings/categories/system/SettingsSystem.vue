@@ -248,11 +248,11 @@
 
 <script>
 
-import { mapActions, mapGetters, mapState } from 'vuex'
 import Confirm from '@components/app/settings/categories/system/dialogs/confirm.vue'
 import snapshotsList from '@components/app/settings/categories/system/dialogs/snapshotsList.vue'
 import { AppPlatformMixin } from '@mixins/app'
-import {debounce} from "lodash";
+import { useAccountStore } from '@store/app/account/useAccountStore'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 import {invokeUpdateProxy} from "@main/handlers/app/app-handlers";
 
 export default {
@@ -266,21 +266,19 @@ export default {
   },
 
   computed: {
-    ...mapGetters('app/account', { _isAuthorized: 'isAuthorized' }),
-    ...mapState('app/settings/system', {
-      _ads: s => s.ads.enabled,
-      _ads_maximum: s => s.ads.maximum,
-      _updates_enabled: s => s.updates.enabled,
-      _updates_timeout: s => s.updates.timeout,
-      _api_endpoint: s => s.api._endpoint,
-      _static_endpoint: s => s.api._static_endpoint,
-      _notifications_system: s => s.notifications.system,
-      _appbar_right: s => s.appbar_right,
-      _filter_notify: s => s.filter_notify,
-      _drpc_enabled: s => s.drpc_enabled,
-      _proxy: s => s.proxy,
-      _ignore_certs: s => s.ignore_certs
-    }),
+    _isAuthorized () { return useAccountStore().isAuthorized },
+    _ads () { return useSettingsStore().ads.enabled },
+    _ads_maximum () { return useSettingsStore().ads.maximum },
+    _updates_enabled () { return useSettingsStore().updates.enabled },
+    _updates_timeout () { return useSettingsStore().updates.timeout },
+    _api_endpoint () { return useSettingsStore().api._endpoint },
+    _static_endpoint () { return useSettingsStore().api._static_endpoint },
+    _notifications_system () { return useSettingsStore().notifications.system },
+    _appbar_right () { return useSettingsStore().appbar_right },
+    _filter_notify () { return useSettingsStore().filter_notify },
+    _drpc_enabled () { return useSettingsStore().drpc_enabled },
+    _proxy () { return useSettingsStore().proxy },
+    _ignore_certs () { return useSettingsStore().ignore_certs },
   },
 
   methods: {
@@ -294,7 +292,7 @@ export default {
       }
     },
     setProxyServer: function ($event) {
-      this._setProxy($event)
+      useSettingsStore().setProxy($event)
       invokeUpdateProxy($event)
     },
     showSnapshotsList: function () {
@@ -305,20 +303,17 @@ export default {
     snapshots: function () {
       this.$refs.confirm.showDialog()
     },
-    ...mapActions('app/settings/system', {
-      _setAds: 'setAds',
-      _setUpdates: 'setUpdates',
-      _setAdsMaximum: 'setAdsMaximum',
-      _setUpdatesTimeout: 'setUpdatesTimeout',
-      _setSystemNotifications: 'setSystemNotifications',
-      _setAPIEndpoint: 'setAPIEndpoint',
-      _setAPIStaticEndpoint: 'setAPIStaticEndpoint',
-      _setAppbarRight: 'setAppbarRight',
-      _setFilterNotify: 'setFilterNotify',
-      _setDRPC: 'setDRPC',
-      _setProxy: 'setProxy',
-      _setIgnoreCerts: 'setIgnoreCerts'
-    })
+    _setAds (v) { useSettingsStore().setAds(v) },
+    _setUpdates (v) { useSettingsStore().setUpdates(v) },
+    _setAdsMaximum (v) { useSettingsStore().setAdsMaximum(v) },
+    _setUpdatesTimeout (v) { useSettingsStore().setUpdatesTimeout(v) },
+    _setSystemNotifications (v) { useSettingsStore().setSystemNotifications(v) },
+    _setAPIEndpoint (v) { useSettingsStore().setAPIEndpoint(v) },
+    _setAPIStaticEndpoint (v) { useSettingsStore().setAPIStaticEndpoint(v) },
+    _setAppbarRight (v) { useSettingsStore().setAppbarRight(v) },
+    _setFilterNotify (v) { useSettingsStore().setFilterNotify(v) },
+    _setDRPC (v) { useSettingsStore().setDRPC(v) },
+    _setIgnoreCerts (v) { useSettingsStore().setIgnoreCerts(v) },
   },
 
   mounted () {

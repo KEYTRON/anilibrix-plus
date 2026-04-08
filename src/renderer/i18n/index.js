@@ -1,11 +1,11 @@
-import Vue from 'vue'
+import { reactive } from 'vue'
 
 import en from '@shared/i18n/messages/en'
 import ru from '@shared/i18n/messages/ru'
 import { DEFAULT_LOCALE } from '@shared/i18n/locales'
 
 const messages = { en, ru }
-const state = Vue.observable({
+const state = reactive({
   locale: DEFAULT_LOCALE
 })
 
@@ -40,18 +40,12 @@ export function getLocale () {
   return state.locale
 }
 
-export function installI18n () {
-  Vue.prototype.$t = function (key, params = {}) {
-    return translate(key, params, state.locale)
-  }
-
-  Object.defineProperty(Vue.prototype, '$locale', {
-    get () {
-      return state.locale
-    }
+export function installI18n (app) {
+  app.config.globalProperties.$t = (key, params = {}) => translate(key, params, state.locale)
+  app.config.globalProperties.$setLocale = setLocale
+  Object.defineProperty(app.config.globalProperties, '$locale', {
+    get () { return state.locale }
   })
-
-  Vue.prototype.$setLocale = setLocale
 }
 
 export const i18nState = state

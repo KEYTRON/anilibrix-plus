@@ -17,7 +17,7 @@ const props = {
 
 export default {
   props,
-  destroyed () {
+  unmounted () {
 
     // Exit fullscreen if video view is exited
     // if (screenfull.isEnabled) screenfull.exit();

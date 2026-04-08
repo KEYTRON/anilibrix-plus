@@ -1,35 +1,42 @@
+import { createVuetify } from 'vuetify'
+import { en, ru } from 'vuetify/locale'
+import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
 import '@mdi/font/css/materialdesignicons.css'
-import en from 'vuetify/es5/locale/en'
-import ru from 'vuetify/es5/locale/ru'
-
-import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
 
 import { DEFAULT_LOCALE } from '@shared/i18n/locales'
 
-Vue.use(Vuetify)
+let vuetifyInstance = null
 
-const vuetify = new Vuetify({
-  lang: {
-    locales: { en, ru },
-    current: DEFAULT_LOCALE
+export function setVuetifyLocale (locale) {
+  if (vuetifyInstance) {
+    vuetifyInstance.locale.current.value = locale || DEFAULT_LOCALE
+  }
+}
+
+const vuetify = createVuetify({
+  locale: {
+    locale: DEFAULT_LOCALE,
+    messages: { en, ru }
   },
   icons: {
-    iconfont: 'mdi'
+    defaultSet: 'mdi',
+    aliases,
+    sets: { mdi }
   },
   theme: {
-    dark: true,
+    defaultTheme: 'dark',
     themes: {
       dark: {
-        primary: '#fff',
-        secondary: '#b32121'
+        dark: true,
+        colors: {
+          primary: '#ffffff',
+          secondary: '#b32121'
+        }
       }
     }
   }
 })
 
-export function setVuetifyLocale (locale) {
-  vuetify.framework.lang.current = locale || DEFAULT_LOCALE
-}
+vuetifyInstance = vuetify
 
 export default vuetify

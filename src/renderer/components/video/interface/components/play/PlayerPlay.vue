@@ -131,7 +131,7 @@ export default {
 
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.activityInterval !== null) {
       clearInterval(this.activityInterval)
     }

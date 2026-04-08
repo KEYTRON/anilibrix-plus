@@ -10,7 +10,6 @@
  *
  */
 import Axios from 'axios'
-import store from '@store'
 import { clone, cloneDeep } from 'lodash'
 import FormData from 'form-data'
 
@@ -95,9 +94,10 @@ const responseErrorHandler = async error => {
   if (error && error.response) {
     // If server responded with not authorized:
     if (error.response.status === 401) {
-      // Clear session and profile data
-      await store.dispatch('app/account/setSession')
-      await store.dispatch('app/account/setProfile')
+      const { useAccountStore } = await import('@store/app/account/useAccountStore')
+      const accountStore = useAccountStore()
+      accountStore.setSession(null)
+      accountStore.setProfile(null)
     }
   }
 

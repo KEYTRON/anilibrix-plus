@@ -28,16 +28,10 @@ export default {
      */
     watch () {
       if (this.release && this.episode) {
-
+        const { useWatchStore } = require('@store/app/watch/useWatchStore')
         const release_id = this.release.id
         const episode_id = this.episode.id
-
-        // Get watch data for provided release
-        const payload = {
-          release_id,
-          episode_id
-        }
-        return this.$store.getters['app/watch/getWatchedEpisode'](payload)
+        return useWatchStore().getWatchedEpisode({ release_id, episode_id })
       }
     },
 

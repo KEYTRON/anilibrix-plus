@@ -35,8 +35,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import { catGirlFetch } from '@utils/fetch'
+import { useAccountStore } from '@store/app/account/useAccountStore'
+import { useWatchStore } from '@store/app/watch/useWatchStore'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 
 export default {
   data () {
@@ -46,24 +48,18 @@ export default {
     }
   },
   computed: {
-    ...mapState('app/watch', { _watch: s => s.items }),
-    ...mapState('app/settings/player', {
-      _video_buffer: s => s.video.buffer,
-      _autoplay_next: s => s.autoplayNext,
-      _torrents_process: s => s.torrents.process,
-      _opening_skip_time: s => s.opening.skip_time,
-      _opening_skip_button: s => s.opening.skip_button,
-    }),
-    ...mapState('app/settings/system', {
-      _updates_enabled: s => s.updates.enabled,
-      _updates_timeout: s => s.updates.timeout,
-      _api_endpoint: s => s.api._endpoint,
-      _static_endpoint: s => s.api._static_endpoint,
-      _notifications_system: s => s.notifications.system,
-    }),
-    ...mapState('app/account', {
-      _session: s => s.session
-    }),
+    _watch () { return useWatchStore().items },
+    _video_buffer () { return useSettingsStore().video.buffer },
+    _autoplay_next () { return useSettingsStore().autoplayNext },
+    _torrents_process () { return useSettingsStore().torrents.process },
+    _opening_skip_time () { return useSettingsStore().opening.skip_time },
+    _opening_skip_button () { return useSettingsStore().opening.skip_button },
+    _updates_enabled () { return useSettingsStore().updates.enabled },
+    _updates_timeout () { return useSettingsStore().updates.timeout },
+    _api_endpoint () { return useSettingsStore().api._endpoint },
+    _static_endpoint () { return useSettingsStore().api._static_endpoint },
+    _notifications_system () { return useSettingsStore().notifications.system },
+    _session () { return useAccountStore().session },
   },
   methods: {
     async createSnapshot () {

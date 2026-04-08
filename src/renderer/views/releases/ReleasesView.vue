@@ -28,7 +28,8 @@ import Release from './components/release'
 import Actions from './components/actions'
 
 import { toRelease, toVideo } from '@utils/router/views'
-import { mapActions, mapState } from 'vuex'
+import { useAppStore } from '@store/app/useAppStore'
+import { useReleasesStore } from '@store/releases/useReleasesStore'
 import { AppKeyboardHandlerMixin } from '@mixins/app'
 
 export default {
@@ -51,17 +52,12 @@ export default {
   },
 
   computed: {
-    ...mapState('app', {
-      _drawer: s => s.drawer,
-      _is_searching: s => s.is_searching,
-    }),
-
-    ...mapState('releases', {
-      _index: s => s.index,
-      _loading: s => s.loading,
-      _releases: s => s.data || [],
-      _has_error: s => s.has_error,
-    }),
+    _drawer () { return useAppStore().drawer },
+    _is_searching () { return useAppStore().is_searching },
+    _index () { return useReleasesStore().index },
+    _loading () { return useReleasesStore().loading },
+    _releases () { return useReleasesStore().data || [] },
+    _has_error () { return useReleasesStore().has_error },
 
     index: {
 
@@ -111,7 +107,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('releases', { _setIndex: 'setIndex' }),
+    _setIndex (index) { useReleasesStore().setIndex(index) },
 
     /**
      * Push to video

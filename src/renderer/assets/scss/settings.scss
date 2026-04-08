@@ -1,0 +1,6 @@
+// Vuetify 3 SCSS settings — imported by vite-plugin-vuetify
+// Override Vuetify defaults here.
+
+@use 'vuetify/settings' with (
+  $color-pack: false
+);

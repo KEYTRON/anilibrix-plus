@@ -10,15 +10,15 @@
 
 <script>
 
-import { mapActions, mapState } from 'vuex'
+import { useAppStore } from '@store/app/useAppStore'
 
 export default {
   computed: {
-    ...mapState('app', { _drawer: 'drawer' }),
+    _drawer () { return useAppStore().drawer },
   },
 
   methods: {
-    ...mapActions('app', { _setDrawer: 'setDrawer' }),
+    _setDrawer (val) { useAppStore().setDrawer(val) },
   }
 }
 </script>

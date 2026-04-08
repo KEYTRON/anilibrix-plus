@@ -22,14 +22,12 @@
 
 <script>
 
-import { mapActions, mapState } from 'vuex'
+import { useReleasesStore } from '@store/releases/useReleasesStore'
 
 export default {
   computed: {
-    ...mapState('releases', {
-      _loading: s => s.loading,
-      _datetime: s => s.datetime,
-    }),
+    _loading () { return useReleasesStore().loading },
+    _datetime () { return useReleasesStore().datetime },
 
     /**
      * Get human update datetime
@@ -44,7 +42,7 @@ export default {
 
   },
   methods: {
-    ...mapActions('releases', ['getReleases']),
+    getReleases () { return useReleasesStore().getReleases() },
   }
 }
 </script>

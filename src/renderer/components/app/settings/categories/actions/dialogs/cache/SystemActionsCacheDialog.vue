@@ -49,12 +49,31 @@ export default {
      *
      * @return void
      */
-    resetCache () {
+    async resetCache () {
       this.loading = true
-      this.$store
-        .dispatchPromise('RESET_STORE')
-        .then(() => require('@electron/remote').getCurrentWindow().reload())
-        .finally(() => this.loading = false)
+      try {
+        const { useAppStore } = await import('@store/app/useAppStore')
+        const { useAccountStore } = await import('@store/app/account/useAccountStore')
+        const { useWatchStore } = await import('@store/app/watch/useWatchStore')
+        const { useReleasesStore } = await import('@store/releases/useReleasesStore')
+        const { useReleaseStore } = await import('@store/release/useReleaseStore')
+        const { useCatalogStore } = await import('@store/catalog/useCatalogStore')
+        const { useFavoritesStore } = await import('@store/favorites/useFavoritesStore')
+        const { useNotificationsStore } = await import('@store/notifications/useNotificationsStore')
+
+        useAppStore().$reset()
+        useAccountStore().$reset()
+        useWatchStore().$reset()
+        useReleasesStore().$reset()
+        useReleaseStore().$reset()
+        useCatalogStore().$reset()
+        useFavoritesStore().$reset()
+        useNotificationsStore().$reset()
+
+        require('@electron/remote').getCurrentWindow().reload()
+      } finally {
+        this.loading = false
+      }
     }
   }
 

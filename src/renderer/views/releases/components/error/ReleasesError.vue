@@ -25,9 +25,6 @@
 
 <script>
 
-// Utils
-import { mapActions } from 'vuex'
-
 // Images
 import LibriaTyan01 from '@assets/images/libria-tyan/LibriaTyan01.svg'
 
@@ -41,7 +38,6 @@ export default {
     reload () {
       window.location.reload()
     },
-    ...mapActions('releases', { _getReleases: 'getReleases' }),
   }
 }
 </script>

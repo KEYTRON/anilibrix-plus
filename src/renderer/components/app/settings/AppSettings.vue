@@ -63,7 +63,8 @@ import AnilibriaSettings from './categories/app'
 import SystemBarPlaceholder from './../systembar/placeholder'
 
 import { AppPlatformMixin } from '@mixins/app'
-import { mapActions, mapState } from 'vuex'
+import { useAppStore } from '@store/app/useAppStore'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 
 export default {
   mixins: [AppPlatformMixin],
@@ -72,24 +73,19 @@ export default {
     SystemBarPlaceholder
   },
   computed: {
-    ...mapState('app', { _drawer: s => s.drawer }),
-    ...mapState('app/settings/system', {
-      _devtools: s => s.devtools,
-      _language: s => s.language
-    }),
-
     /**
      * Get categories components
      *
      * @return Array
      */
     categories () {
+      const settingsStore = useSettingsStore()
       return [
         PlayerSettings,
         SystemSettings,
         ActionsSettings,
         AnilibriaSettings,
-        this._devtools ? DevtoolsSettings : null
+        settingsStore.devtools ? DevtoolsSettings : null
       ].filter(category => category)
     },
 
@@ -101,7 +97,7 @@ export default {
        * @return boolean
        */
       get () {
-        return !!this._drawer
+        return !!useAppStore().drawer
       },
 
       /**
@@ -111,7 +107,7 @@ export default {
        * @return void
        */
       set (state) {
-        this._setDrawer(state)
+        useAppStore().setDrawer(state)
       }
     },
 
@@ -128,11 +124,8 @@ export default {
   },
 
   methods: {
-    ...mapActions('app', { _setDrawer: 'setDrawer' }),
-    ...mapActions('app/settings/system', { _setLanguage: 'setLanguage' }),
-
     toggleLanguage () {
-      this._setLanguage(this.$locale === 'ru' ? 'en' : 'ru')
+      useSettingsStore().setLanguage(this.$locale === 'ru' ? 'en' : 'ru')
     }
   }
 

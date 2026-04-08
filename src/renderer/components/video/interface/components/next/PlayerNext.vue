@@ -38,7 +38,7 @@
 <script>
 
 import { toVideo } from '@utils/router/views'
-import { mapState } from 'vuex'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 
 const props = {
   player: {
@@ -68,7 +68,7 @@ export default {
   },
 
   computed: {
-    ...mapState('app/settings/player', { _autoplay_next: s => s.autoplayNext }),
+    _autoplay_next () { return useSettingsStore().autoplayNext },
 
     /**
      * Get episodes
@@ -168,7 +168,7 @@ export default {
     }
   },
 
-  destroyed () {
+  unmounted () {
 
     // Destroy interval and timer
     if (this.timer) clearTimeout(this.timer)

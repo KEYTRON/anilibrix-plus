@@ -22,7 +22,7 @@ import PlayerHandler from './../../components/handler'
 import Hls from 'hls.js'
 
 // Store
-import { mapState } from 'vuex'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 
 const props = {
   source: {
@@ -48,7 +48,7 @@ export default {
   },
 
   computed: {
-    ...mapState('app/settings/player', { _video_buffer: s => s.video.buffer || 60 }),
+    _video_buffer () { return useSettingsStore().video.buffer || 60 },
 
     /**
      * Playback player options

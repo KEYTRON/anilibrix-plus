@@ -29,7 +29,7 @@
 
 <script>
 
-import { mapActions } from 'vuex'
+import { useWatchStore } from '@store/app/watch/useWatchStore'
 
 const props = {
   release: {
@@ -66,11 +66,6 @@ export default {
   },
 
   methods: {
-    ...mapActions('app/watch', {
-      _setWatchedEpisodes: 'setWatchedEpisodes',
-      _removeWatchedEpisodes: 'removeWatchedEpisodes'
-    }),
-
     /**
      * Set watch package data
      *
@@ -86,7 +81,7 @@ export default {
         episodes
       }
 
-      await this._setWatchedEpisodes(payload)
+      await useWatchStore().setWatchedEpisodes(payload)
 
       this.loading = false
     },
@@ -106,7 +101,7 @@ export default {
         episodes
       }
 
-      await this._removeWatchedEpisodes(payload)
+      await useWatchStore().removeWatchedEpisodes(payload)
 
       this.loading = false
     },

@@ -64,9 +64,9 @@
 <script>
 import Loader from './components/loader'
 import humanFormat from 'human-format'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { invokeTorrentParse } from '@main/handlers/app/app-handlers';
-import { mapActions, mapState } from 'vuex';
+import { useSettingsStore } from '@store/app/settings/useSettingsStore';
 
 const props = {
   loading: {
@@ -87,15 +87,12 @@ export default {
   computed: {
     _torrentType: {
       get() {
-        return this.torrentType
+        return useSettingsStore().torrentType
       },
       set(v) {
-        this._setTorrentType(v)
+        useSettingsStore().setTorrentType(v)
       }
     },
-    ...mapState('app/settings/system', {
-      torrentType: s => s.torrentType,
-    }),
   },
   data() {
     return {
@@ -125,9 +122,6 @@ export default {
         this.$toasted.error(this.$t('release.torrentCopyError'));
       }
     },
-    ...mapActions('app/settings/system', {
-      _setTorrentType: 'setTorrentType',
-    }),
     humanFormat,
 
     download(torrent) {
@@ -158,7 +152,7 @@ export default {
     },
 
     formatTimestamp(time) {
-      return moment.unix(time).format('DD.MM.YYYY HH:mm:ss')
+      return dayjs.unix(time).format('DD.MM.YYYY HH:mm:ss')
     },
 
     async parseTorrents() {
@@ -189,7 +183,7 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.copyTimeout) {
       clearTimeout(this.copyTimeout);
     }

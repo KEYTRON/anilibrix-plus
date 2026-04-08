@@ -84,7 +84,7 @@
 
 <script>
 
-import { mapState } from 'vuex'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 import { toFavorites, toRelease, toReleases } from '@utils/router/views'
 import screenfull from 'screenfull'
 
@@ -123,10 +123,8 @@ export default {
     }
   },
   computed: {
-    ...mapState('app/settings/player', {
-      _opening_skip_time: s => s.opening.skip_time,
-      _opening_skip_button: s => s.opening.skip_button,
-    }),
+    _opening_skip_time () { return useSettingsStore().opening.skip_time },
+    _opening_skip_button () { return useSettingsStore().opening.skip_button },
 
     /**
      * Get release poster src

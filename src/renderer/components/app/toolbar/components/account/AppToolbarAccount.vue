@@ -71,7 +71,9 @@
 <script>
 
 import stringsPluralize from '@utils/strings/pluralize/stringsPluralize'
-import { mapGetters, mapState } from 'vuex'
+import { useAccountStore } from '@store/app/account/useAccountStore'
+import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
+import { useWatchStore } from '@store/app/watch/useWatchStore'
 import { toLogin } from '@utils/router/views'
 
 export default {
@@ -83,10 +85,10 @@ export default {
     }
   },
   computed: {
-    ...mapState('app/watch', { _watch: s => s.items }),
-    ...mapState('favorites', { _favorites: s => s.items }),
-    ...mapState('app/account', { _profile: s => s.profile }),
-    ...mapGetters('app/account', { _isAuthorized: 'isAuthorized' }),
+    _watch () { return useWatchStore().items },
+    _favorites () { return useFavoritesStore().items },
+    _profile () { return useAccountStore().profile },
+    _isAuthorized () { return useAccountStore().isAuthorized },
 
     /**
      * Get favorites length
@@ -163,7 +165,7 @@ export default {
     async logout () {
       try {
 
-        await this.$store.dispatchPromise('app/account/logout')
+        await useAccountStore().logout()
 
       } finally {
 
@@ -182,7 +184,7 @@ export default {
       try {
 
         this.loading = true
-        await this.$store.dispatchPromise('app/account/getProfile')
+        await useAccountStore().getProfile()
 
       } catch (e) {
 
@@ -204,7 +206,7 @@ export default {
 
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.handler) {
       clearInterval(this.handler)
     }

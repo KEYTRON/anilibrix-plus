@@ -91,7 +91,7 @@
 import VClamp from 'vue-clamp'
 import Favorite from '@components/release/favorite'
 import RProgress from '@components/release/progress'
-import {mapActions} from "vuex";
+import { useWatchStore } from '@store/app/watch/useWatchStore';
 
 const props = {
   release: {
@@ -111,10 +111,6 @@ export default {
     this.updateShareLinks()
   },
   methods: {
-    ...mapActions('app/watch', {
-      _setWatchedEpisodes: 'setWatchedEpisodes',
-      _removeWatchedEpisodes: 'removeWatchedEpisodes'
-    }),
     show (e) {
       if (window.__ctxMenuClose) {
         window.__ctxMenuClose()
@@ -151,7 +147,7 @@ export default {
 
       this.$nextTick(async () => {
         try {
-          await this._setWatchedEpisodes(payload)
+          await useWatchStore().setWatchedEpisodes(payload)
         } catch (e) {
           console.error(e)
         } finally {
@@ -179,7 +175,7 @@ export default {
 
       this.$nextTick(async () => {
         try {
-          await this._removeWatchedEpisodes(payload)
+          await useWatchStore().removeWatchedEpisodes(payload)
         } catch (e) {
           console.error(e)
         } finally {
@@ -393,7 +389,7 @@ export default {
         episodes
       }
 
-      const watched_episodes = this.$store.getters['app/watch/getWatchedEpisodes'](payload)
+      const watched_episodes = useWatchStore().getWatchedEpisodes(payload)
       return watched_episodes.length
     },
 

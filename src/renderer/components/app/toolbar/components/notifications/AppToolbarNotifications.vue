@@ -60,14 +60,16 @@
 <script>
 
 import NotificationItem from './components/item'
-import { mapActions, mapState } from 'vuex'
+import { useNotificationsStore } from '@store/notifications/useNotificationsStore'
 
 export default {
   components: {
     NotificationItem
   },
   computed: {
-    ...mapState('notifications', { _items: s => s.items }),
+    _items () {
+      return useNotificationsStore().items
+    },
 
     /**
      * Get unseen notifications
@@ -81,10 +83,8 @@ export default {
   },
 
   methods: {
-    ...mapActions('notifications', {
-      _setSeen: 'setSeen',
-      _clearNotifications: 'clearNotifications'
-    })
+    _setSeen () { useNotificationsStore().setSeen() },
+    _clearNotifications () { useNotificationsStore().clearNotifications() }
   }
 
 }

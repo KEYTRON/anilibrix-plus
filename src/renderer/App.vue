@@ -27,10 +27,15 @@ import AppUpdate from '@components/app/AppUpdate.vue'
 import { version } from '@package'
 import { setLocale } from './i18n'
 import { setVuetifyLocale } from '@plugins/vuetify'
-import { setMomentLocale } from '@plugins/moment'
 import { invokeSetAppLocale } from '@main/handlers/app/app-handlers'
+import dayjs from 'dayjs'
 
-import { mapActions, mapState } from 'vuex'
+import { useAppStore } from '@store/app/useAppStore'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
+import { useReleasesStore } from '@store/releases/useReleasesStore'
+import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
+import { mapStores } from 'pinia'
+import get from 'lodash/get'
 
 export default {
   name: 'AniLibrix',
@@ -44,6 +49,16 @@ export default {
     AppNotifications,
     AppUpdate
   },
+
+  setup () {
+    return {
+      appStore: useAppStore(),
+      settingsStore: useSettingsStore(),
+      releasesStore: useReleasesStore(),
+      favoritesStore: useFavoritesStore()
+    }
+  },
+
   data () {
     return {
       loading: false,
@@ -53,87 +68,54 @@ export default {
   },
 
   computed: {
-    ...mapState('app', { _welcome_view: s => s.welcome_view }),
-    ...mapState('app/settings/system', {
-      _updates_enabled: s => s.updates.enabled,
-      _updates_timeout: s => (s.updates.timeout > 0 ? s.updates.timeout : 1) * 60 * 1000,
-      _language: s => s.language
-    }),
+    _welcome_view () { return this.appStore.welcome_view },
+    _updates_enabled () { return this.settingsStore.system?.updates?.enabled },
+    _updates_timeout () {
+      const t = this.settingsStore.system?.updates?.timeout
+      return (t > 0 ? t : 1) * 60 * 1000
+    },
+    _language () { return this.settingsStore.system?.language },
 
-    /**
-     * Get route layout
-     *
-     * @return {{}}
-     */
     layout () {
-      return this.$__get(this.$route, 'meta.layout.is', AppBaseLayout)
+      return get(this.$route, 'meta.layout.is', AppBaseLayout)
     },
 
-    /**
-     * Get current route name
-     *
-     * @return {string|null}
-     */
     view () {
       return this.$route.name || null
-    },
-
+    }
   },
 
   methods: {
-    ...mapActions('app', { _setWelcomeView: 'setWelcomeView' }),
-    ...mapActions('releases', { _getReleases: 'getReleases' }),
-    ...mapActions('favorites', { _getFavorites: 'getFavorites' }),
-
-    /**
-     * Toggle releases updates
-     *
-     * @return void
-     */
     toggleUpdates () {
-
-      // Clear update interval
       if (this.update_handler) clearInterval(this.update_handler)
-
-      // If updated are enabled -> set interval for auto updates
       if (this._updates_enabled === true) {
         this.update_handler = setInterval(() => {
-
-          this._getReleases()
-          this._getFavorites()
-
+          this.releasesStore.getReleases()
+          this.favoritesStore.getFavorites()
         }, this._updates_timeout)
       }
     },
 
     async syncLocale (locale) {
-      if (!locale) {
-        return
-      }
-
+      if (!locale) return
       setLocale(locale)
       setVuetifyLocale(locale)
-      setMomentLocale(locale)
-
+      dayjs.locale(locale)
       try {
         await invokeSetAppLocale(locale)
       } catch (error) {
         console.error('Failed to sync app locale', error)
       }
     }
-
   },
 
   async mounted () {
     try {
-      const data = await fetch("https://raw.githubusercontent.com/AnimeHaze/anilibrix-plus/refs/heads/lord/latest.json")
+      const data = await fetch('https://raw.githubusercontent.com/AnimeHaze/anilibrix-plus/refs/heads/lord/latest.json')
         .then(async x => {
           const text = await x.text()
-          try {
-            return JSON.parse(text)
-          } catch (e) {
+          try { return JSON.parse(text) } catch (e) {
             console.error('Check version error', x.status, x.statusText, text, e)
-
             throw e
           }
         })
@@ -142,7 +124,6 @@ export default {
         this.update_notes = data.beta_notes
         this.$refs.appUpdate.showDialog()
       }
-
       if (!version.includes('beta') && data.stable !== version) {
         this.update_notes = data.stable_notes
         this.$refs.appUpdate.showDialog()
@@ -152,52 +133,38 @@ export default {
     }
   },
 
-  async created() {
+  async created () {
     const last_page_release = localStorage.getItem('last_page_release')
-    // Initial loading
     this.loading = true
-    setTimeout(() => this.loading = false, 1000)
+    setTimeout(() => (this.loading = false), 1000)
 
-    // Get releases
-    // Get favorites
-    this._getReleases()
-    this._getFavorites()
+    this.releasesStore.getReleases()
+    this.favoritesStore.getFavorites()
 
-    console.log('Last page release', last_page_release)
     if (last_page_release) {
-      console.log('Redirecting to release', last_page_release)
-      await this.$router.push({name: 'release', params: JSON.parse(last_page_release)})
+      await this.$router.push({ name: 'release', params: JSON.parse(last_page_release) })
     } else if (this._welcome_view !== null && this.view !== this._welcome_view) {
-      this.$router.push({name: this._welcome_view})
+      this.$router.push({ name: this._welcome_view })
     }
-
   },
 
   watch: {
-
-    _updates: {
+    _updates_enabled: {
       immediate: true,
-      handler () {
-        this.toggleUpdates()
-      }
+      handler () { this.toggleUpdates() }
     },
-
-    _timeout: {
-      handler () {
-        this.toggleUpdates()
-      }
+    _updates_timeout: {
+      handler () { this.toggleUpdates() }
     },
-
     _language: {
       immediate: true,
-      handler (locale) {
-        this.syncLocale(locale)
-      }
+      handler (locale) { this.syncLocale(locale) }
     },
-
     view: {
       handler (view) {
-        if (['releases', 'catalog', 'favorites'].includes(view)) this._setWelcomeView(view)
+        if (['releases', 'catalog', 'favorites'].includes(view)) {
+          this.appStore.setWelcomeView(view)
+        }
       }
     }
   }

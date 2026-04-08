@@ -19,22 +19,18 @@
 
 <script>
 
-import { mapActions, mapState } from 'vuex'
+import { useCatalogStore } from '@store/catalog/useCatalogStore'
 
 export default {
   computed: {
-    ...mapState('catalog', {
-      _items: s => s.filters.years.items,
-      _value: s => s.filters.years.value,
-      _loading: s => s.filters.years.loading,
-    })
+    _items () { return useCatalogStore().filters.years.items },
+    _value () { return useCatalogStore().filters.years.value },
+    _loading () { return useCatalogStore().filters.years.loading },
   },
 
   methods: {
-    ...mapActions('catalog', {
-      _setFilterValue: 'setFilterValue',
-      _getCatalogYearsFilter: 'getCatalogYearsFilter'
-    })
+    _setFilterValue (payload) { useCatalogStore().setFilterValue(payload) },
+    _getCatalogYearsFilter () { return useCatalogStore().getCatalogYearsFilter() },
   },
 
   created () {

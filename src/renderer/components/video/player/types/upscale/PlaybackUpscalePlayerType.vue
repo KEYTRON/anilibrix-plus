@@ -24,7 +24,7 @@ import PlaybackPlayer from './../../components/handler'
 
 import Hls from 'hls.js'
 import __get from 'lodash/get'
-import { mapState } from 'vuex'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 import Anime4KUpscale from '@utils/upscale'
 
 const props = {
@@ -52,10 +52,8 @@ export default {
   },
 
   computed: {
-    ...mapState('app/settings/player', {
-      _blur: s => s.upscale.blur,
-      _bold: s => s.upscale.bold,
-    }),
+    _blur () { return useSettingsStore().upscale.blur },
+    _bold () { return useSettingsStore().upscale.bold },
 
     /**
      * Playback player options

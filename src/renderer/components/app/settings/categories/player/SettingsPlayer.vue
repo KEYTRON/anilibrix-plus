@@ -161,21 +161,18 @@
 
 <script>
 
-import { mapActions, mapState } from 'vuex'
-
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 
 export default {
   computed: {
-    ...mapState('app/settings/player', {
-      _video_buffer: s => s.video.buffer,
-      _autoplay_next: s => s.autoplayNext,
-      _torrents_process: s => s.torrents.process,
-      _opening_skip_time: s => s.opening.skip_time,
-      _opening_skip_button: s => s.opening.skip_button,
-      _opening_skip_button_key: s => s.opening.skip_button_key,
-      _auto_opening_skip: s => s.opening.autoSkip,
-      _auto_opening_skip_key: s => s.opening.autoSkipKey
-    })
+    _video_buffer () { return useSettingsStore().video.buffer },
+    _autoplay_next () { return useSettingsStore().autoplayNext },
+    _torrents_process () { return useSettingsStore().torrents.process },
+    _opening_skip_time () { return useSettingsStore().opening.skip_time },
+    _opening_skip_button () { return useSettingsStore().opening.skip_button },
+    _opening_skip_button_key () { return useSettingsStore().opening.skip_button_key },
+    _auto_opening_skip () { return useSettingsStore().opening.autoSkip },
+    _auto_opening_skip_key () { return useSettingsStore().opening.autoSkipKey },
   },
   data () {
     return {
@@ -190,7 +187,7 @@ export default {
         }
 
         if (this.keysDown.length && !['ControlLeft'].includes(this.keysDown.toString())) {
-          this._setAutoSkipKey(this.keysDown.join('+'))
+          useSettingsStore().setAutoSkipKey(this.keysDown.join('+'))
         }
       } else if (type === 'keyup') {
         const index = this.keysDown.indexOf(e.code);
@@ -207,7 +204,7 @@ export default {
         }
 
         if (this.keysDown.length && !['ControlLeft'].includes(this.keysDown.toString())) {
-          this._setOpeningSkipButtonKey(this.keysDown.join('+'))
+          useSettingsStore().setOpeningSkipButtonKey(this.keysDown.join('+'))
         }
       } else if (type === 'keyup') {
         const index = this.keysDown.indexOf(e.code);
@@ -217,16 +214,14 @@ export default {
         }
       }
     },
-    ...mapActions('app/settings/player', {
-      _setAutoSkip: 'setAutoSkip',
-      _setVideoBuffer: 'setVideoBuffer',
-      _setAutoplayNext: 'setAutoplayNext',
-      _setTorrentsProcess: 'setTorrentsProcess',
-      _setOpeningSkipTime: 'setOpeningSkipTime',
-      _setOpeningSkipButton: 'setOpeningSkipButton',
-      _setOpeningSkipButtonKey: 'setOpeningSkipButtonKey',
-      _setAutoSkipKey: 'setAutoSkipKey'
-    }),
+    _setAutoSkip (v) { useSettingsStore().setAutoSkip(v) },
+    _setVideoBuffer (v) { useSettingsStore().setVideoBuffer(v) },
+    _setAutoplayNext (v) { useSettingsStore().setAutoplayNext(v) },
+    _setTorrentsProcess (v) { useSettingsStore().setTorrentsProcess(v) },
+    _setOpeningSkipTime (v) { useSettingsStore().setOpeningSkipTime(v) },
+    _setOpeningSkipButton (v) { useSettingsStore().setOpeningSkipButton(v) },
+    _setOpeningSkipButtonKey (v) { useSettingsStore().setOpeningSkipButtonKey(v) },
+    _setAutoSkipKey (v) { useSettingsStore().setAutoSkipKey(v) },
   }
 
 }

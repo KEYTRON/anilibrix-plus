@@ -17,7 +17,7 @@ export default {
     document.addEventListener('keydown', this.handleKeyboardEvents)
   },
 
-  destroyed () {
+  unmounted () {
     document.removeEventListener('keydown', this.handleKeyboardEvents)
   }
 }

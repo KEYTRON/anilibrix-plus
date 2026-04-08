@@ -133,7 +133,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     const webview = this.$refs.comments
     webview.removeEventListener('did-navigate', this.didloadedEvent)
     webview.removeEventListener('certificate-error', this.certError)

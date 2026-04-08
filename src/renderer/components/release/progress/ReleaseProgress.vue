@@ -98,7 +98,7 @@ export default {
      * @return {*}
      */
     progress () {
-
+      const { useWatchStore } = require('@store/app/watch/useWatchStore')
       const release_id = this.release.id
       const episodes = (this.episodes || []).map(x => x.id)
       const payload = {
@@ -106,7 +106,7 @@ export default {
         episodes
       }
 
-      return this.$store.getters['app/watch/getReleaseProgress'](payload)
+      return useWatchStore().getReleaseProgress(payload)
 
     },
 
@@ -116,7 +116,7 @@ export default {
      * @return {*}
      */
     watched () {
-
+      const { useWatchStore } = require('@store/app/watch/useWatchStore')
       const release_id = this.release.id
 
       const episodes = (this.episodes || []).map(x => x.id)
@@ -127,7 +127,7 @@ export default {
 
       // Get watched episodes
       // Convert to string with suffix
-      const watched_episodes = this.$store.getters['app/watch/getWatchedEpisodes'](payload)
+      const watched_episodes = useWatchStore().getWatchedEpisodes(payload)
       return pluralize(watched_episodes.length, this.$t('units.episode'))
 
     },

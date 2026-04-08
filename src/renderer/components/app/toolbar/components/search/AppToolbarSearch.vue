@@ -35,7 +35,8 @@
 
 import __debounce from 'lodash/debounce'
 import { toRelease } from '@utils/router/views'
-import { mapActions, mapState } from 'vuex'
+import { useAppStore } from '@store/app/useAppStore'
+import { useReleasesStore } from '@store/releases/useReleasesStore'
 
 export default {
   data () {
@@ -48,11 +49,11 @@ export default {
   },
 
   computed: {
-    ...mapState('app', { _is_searching: 'is_searching' }),
+    _is_searching () { return useAppStore().is_searching },
   },
 
   methods: {
-    ...mapActions('app', { _setSearching: 'setSearching' }),
+    _setSearching (val) { useAppStore().setSearching(val) },
 
     /**
      * Get releases
@@ -64,7 +65,7 @@ export default {
       // Set loading state
       // Get releases from server
       this.loading = true
-      this.items = await this.$store.dispatchPromise('releases/searchReleases', searchQuery)
+      this.items = await useReleasesStore().searchReleases(searchQuery)
 
       // Reset loading
       this.loading = false
