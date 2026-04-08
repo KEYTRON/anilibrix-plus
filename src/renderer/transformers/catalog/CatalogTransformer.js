@@ -1,4 +1,4 @@
-import stripHtml from 'string-strip-html'
+import { stripHtml } from 'string-strip-html'
 import BaseTransformer from '@transformers/BaseTransformer'
 import humanFormat from 'human-format'
 
@@ -37,7 +37,7 @@ export default class CatalogTransformer extends BaseTransformer {
    * @private
    */
   _stripHtml (value) {
-    return value ? stripHtml(value) : null
+    return value ? stripHtml(value).result : null
   }
 
   _getFavoriteRating (release) {

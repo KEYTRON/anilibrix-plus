@@ -17,7 +17,7 @@
 
 <script>
 
-import app from '@/../package'
+import app from '@package'
 import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 import { sendAppAboutEvent } from '@main/handlers/app/app-handlers'
 

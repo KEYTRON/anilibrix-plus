@@ -1,9 +1,9 @@
 import __get from 'lodash/get'
-import store from '@store/index'
+import { useAccountStore } from '@store/app/account/useAccountStore'
 import axios from '@plugins/axios'
 import FormData from 'form-data'
 import { meta, version } from '@package'
-import { getLocale, translate } from '@/renderer/i18n'
+import { getLocale, translate } from '@/i18n'
 
 export default class BaseProxy {
   /**
@@ -111,7 +111,7 @@ export default class BaseProxy {
 
     // Set header session
     // Set session in cookies
-    const session = __get(store, 'state.app.account.session')
+    const session = useAccountStore().session
     if (session && session.length > 0) {
       headers.Cookie = `PHPSESSID=${session}; Path=/; Secure; HttpOnly`
     }

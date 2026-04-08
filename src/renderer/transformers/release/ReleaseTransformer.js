@@ -2,7 +2,7 @@
 import BaseTransformer from '@transformers/BaseTransformer'
 
 // Utils
-import stripHtml from 'string-strip-html'
+import { stripHtml } from 'string-strip-html'
 import humanFormat from 'human-format';
 
 export default class ReleaseTransformer extends BaseTransformer {
@@ -88,6 +88,6 @@ export default class ReleaseTransformer extends BaseTransformer {
    * @private
    */
   _stripHtml (value) {
-    return value ? stripHtml(value) : null
+    return value ? stripHtml(value).result : null
   }
 }

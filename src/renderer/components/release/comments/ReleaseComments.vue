@@ -16,8 +16,8 @@
 import { meta } from '@package'
 
 // Raw
-import preloadScript from '!raw-loader!./utils/preload'
-import darkThemeStyle from '!raw-loader!./themes/dark.css'
+import preloadScript from './utils/preload?raw'
+import darkThemeStyle from './themes/dark.css?raw'
 
 const props = {
   release: {

@@ -16,8 +16,8 @@
       <!-- Slider Items -->
       <loader v-if="loading"/>
       <template v-else>
-        <template v-for="(release, k) in releases">
-          <v-slide-item v-slot:default="{ active, toggle }" :key="k">
+        <template v-for="(release, k) in releases" :key="k">
+          <v-slide-item v-slot:default="{ active, toggle }">
             <poster
               v-bind="{release, active}"
               @click="toggle"

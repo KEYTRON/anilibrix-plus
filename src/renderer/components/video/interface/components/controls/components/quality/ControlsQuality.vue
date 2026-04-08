@@ -10,9 +10,8 @@
 
     <!-- Qualities -->
     <v-list dense>
-      <template v-for="(s, k) in sortedSources">
+      <template v-for="(s, k) in sortedSources" :key="k">
         <v-list-item
-          :key="k"
           :input-value="s.alias === source.alias"
           @click="$emit('click', s)">
 

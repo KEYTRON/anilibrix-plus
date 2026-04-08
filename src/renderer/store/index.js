@@ -12,7 +12,7 @@ export { useNotificationsStore } from './notifications/useNotificationsStore'
 
 /**
  * Convenience helper — kept for any code that previously called setUserId() at startup.
- * Usage: import { setUserId } from '@/renderer/store'; await setUserId()
+ * Usage: import { setUserId } from '@/store'; await setUserId()
  */
 export async function setUserId () {
   const { useAccountStore } = await import('./app/account/useAccountStore')

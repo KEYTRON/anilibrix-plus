@@ -1,4 +1,7 @@
-@import "plugins/vuetify/style";
+// Vuetify 3 base styles (pre-compiled, since we use styles: 'none' in vite-plugin-vuetify)
+@import "vuetify/styles";
+// Old Vuetify 2 customizations (kept for reference, may need updating)
+// @import "plugins/vuetify/style";
 
 *, *::after, *::before {
   -webkit-user-select: none;
@@ -22,4 +25,14 @@ html, body {
 ::-webkit-scrollbar {
   width: 9px;
   background-color: #1d1d1d;
+}
+
+// Replaces vue-clamp (Vue 2 only) — CSS line clamping
+.text-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 4;
+
+  &--5 { -webkit-line-clamp: 5; }
 }

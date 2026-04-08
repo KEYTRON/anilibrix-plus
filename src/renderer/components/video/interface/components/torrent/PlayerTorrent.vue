@@ -15,10 +15,10 @@
       <v-card-title>{{ $t('player.torrentTitle') }}</v-card-title>
       <v-card-subtitle>{{ $t('player.torrentSubtitle') }}</v-card-subtitle>
       <v-list dense>
-        <template v-for="(item, k) in items">
-          <v-divider :key="`d:${k}`"/>
+        <template v-for="(item, k) in items" :key="k">
+          <v-divider/>
 
-          <v-list-item :key="k">
+          <v-list-item>
             <v-list-item-content>
               <v-list-item-subtitle v-text="item.title"/>
               <v-list-item-title v-text="item.value" :class="item.classes"/>

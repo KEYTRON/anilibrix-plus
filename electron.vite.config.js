@@ -28,10 +28,11 @@ export default defineConfig({
       }),
       vuetify({
         autoImport: true,
-        styles: { configFile: 'src/renderer/assets/scss/settings.scss' }
+        styles: 'none'
       })
     ],
     resolve: {
+      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
       alias: {
         '@': resolve('src/renderer'),
         '@renderer': resolve('src/renderer'),
@@ -41,6 +42,7 @@ export default defineConfig({
         '@router': resolve('src/renderer/router'),
         '@plugins': resolve('src/renderer/plugins'),
         '@proxies': resolve('src/renderer/proxies'),
+        '@transformers': resolve('src/renderer/transformers'),
         '@assets': resolve('src/renderer/assets'),
         '@components': resolve('src/renderer/components'),
         '@views': resolve('src/renderer/views'),

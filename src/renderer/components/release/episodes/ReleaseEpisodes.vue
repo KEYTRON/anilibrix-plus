@@ -14,11 +14,10 @@
 
     <!-- Playlist Items -->
     <v-list v-if="playlistSearched.length > 0" dense dark>
-      <template v-for="(episode, k) in playlistSearched">
-        <v-divider v-if="k > 0" :key="`d:${k}`"/>
+      <template v-for="(episode, k) in playlistSearched" :key="episode.id">
+        <v-divider v-if="k > 0"/>
         <episode
           v-bind="{release, episode}"
-          :key="episode.id"
           :is-playing="playing && playing.id === episode.id"
           @click="$emit('episode', episode)">
         </episode>

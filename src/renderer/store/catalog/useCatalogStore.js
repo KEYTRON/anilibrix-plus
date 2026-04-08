@@ -7,7 +7,7 @@ import CatalogTransformer from '@transformers/catalog'
 
 // Utils
 import __capitalize from 'lodash/capitalize'
-import { getLocale, translate } from '@/renderer/i18n'
+import { getLocale, translate } from '@/i18n'
 
 // Handlers
 import { showAppError } from '@main/handlers/notifications/notifications-handler'

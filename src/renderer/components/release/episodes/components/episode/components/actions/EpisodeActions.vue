@@ -15,9 +15,9 @@
       :activator="`#episode__actions-${episode.id}`">
 
       <v-list dense class="grey darken-4">
-        <template v-for="(item, k) in actions">
-          <v-divider v-if="k > 0" :key="`d:${k}`"/>
-          <v-list-item :key="k" :disabled="loading" @click.stop="item.action">
+        <template v-for="(item, k) in actions" :key="k">
+          <v-divider v-if="k > 0"/>
+          <v-list-item :disabled="loading" @click.stop="item.action">
 
             <!-- Icon -->
             <v-icon class="mr-2" color="grey">{{ item.icon }}</v-icon>

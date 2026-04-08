@@ -14,8 +14,8 @@
         ></v-checkbox>
       </v-list-item>
 
-      <template v-for="(torrent, k) in torrentsList">
-        <v-divider v-if="k > 0" :key="`d:${k}`"/>
+      <template v-for="(torrent, k) in torrentsList" :key="k">
+        <v-divider v-if="k > 0"/>
 
         <v-list-item two-line @click="download(torrent)">
           <v-list-item-content>

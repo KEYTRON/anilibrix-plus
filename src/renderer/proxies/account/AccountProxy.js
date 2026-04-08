@@ -4,7 +4,7 @@ import BaseProxy from '@proxies/BaseProxy'
 // Utils
 import __get from 'lodash/get'
 import cookieParser from 'set-cookie-parser'
-import { getLocale, translate } from '@/renderer/i18n'
+import { getLocale, translate } from '@/i18n'
 
 export default class AccountProxy extends BaseProxy {
   /**

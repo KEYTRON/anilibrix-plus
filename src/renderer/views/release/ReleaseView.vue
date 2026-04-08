@@ -63,7 +63,7 @@
       <v-card v-if="franchises.length" flat color="transparent" class="mb-6">
         <v-card-title>{{ $t('common.linked') }}</v-card-title>
         <v-list three-line>
-          <template v-for="(item, index) in franchises">
+          <template v-for="(item, index) in franchises" :key="index">
             <v-list-item :link="true" @click="router().push('/release/' + release.id + '/' + encodeURIComponent(release.names.en))"
                          :disabled="release.id == releaseId"
                          v-for="(release, index) in item.releases"

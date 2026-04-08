@@ -3,7 +3,7 @@
 import BaseTransformer from '@transformers/BaseTransformer'
 
 // Utils
-import store from '@store'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 import __camelCase from 'lodash/camelCase'
 
 function countNumbersInRanges(ranges) {
@@ -246,7 +246,7 @@ export default class EpisodesTransformer extends BaseTransformer {
         this._createEpisode(seriesNum, episodes)
 
         episodes[seriesNum].id = episodes[seriesNum].id ?? seriesNum
-        episodes[seriesNum].title = episodes[seriesNum].title || (store.state.app.settings.system.language === 'ru' ? `Серия ${seriesNum}` : `Episode ${seriesNum}`)
+        episodes[seriesNum].title = episodes[seriesNum].title || (useSettingsStore().system?.language === 'ru' ? `Серия ${seriesNum}` : `Episode ${seriesNum}`)
         episodes[seriesNum].sources.push(this._createSource(type, label, alias, {
           torrent: {
             id: this.get(torrent, 'id'),

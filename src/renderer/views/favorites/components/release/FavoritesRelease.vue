@@ -67,9 +67,9 @@
 
               <!-- Description -->
               <div class="flex-grow-1 overflow-hidden">
-                <v-clamp autoresize class="caption" max-height="100%" :style="{hyphens: 'auto'}">
+                <div class="caption text-clamp" style="hyphens: auto">
                   {{ description }}
-                </v-clamp>
+                </div>
               </div>
 
               <!-- Status -->
@@ -111,7 +111,6 @@
 
 <script>
 
-import VClamp from 'vue-clamp'
 import ReleaseProgress from '@components/release/progress'
 import { useWatchStore } from '@store/app/watch/useWatchStore';
 
@@ -129,7 +128,6 @@ const props = {
 export default {
   props,
   components: {
-    VClamp,
     ReleaseProgress
   },
   mounted() {

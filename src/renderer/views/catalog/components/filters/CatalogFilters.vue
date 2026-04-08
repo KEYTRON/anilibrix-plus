@@ -1,7 +1,7 @@
 <template>
   <div>
-    <template v-for="(filter, k) in filters">
-      <v-card :key="k" :class="{'mt-2': k > 0}">
+    <template v-for="(filter, k) in filters" :key="k">
+      <v-card :class="{'mt-2': k > 0}">
         <v-list-item class="py-2">
           <v-list-item-content>
             <v-list-item-title v-text="filter.title"/>

@@ -6,9 +6,9 @@
     :class="{'is-mac--fullscreen': this.isMacOnFullscreen, 'right': this.controlsRight}"
     @dblclick="() => maximizeApp()">
     <template v-if="!this.isMac">
-      <template v-for="(control, k) in controls">
-        <v-btn icon small class="system-bar__button" :key="k" @click="control.action">
-          <v-icon small color="grey">{{ control.icon }}</v-icon>
+      <template v-for="(control, k) in controls" :key="k">
+        <v-btn icon size="small" class="system-bar__button" @click="control.action">
+          <v-icon size="small" color="grey">{{ control.icon }}</v-icon>
         </v-btn>
       </template>
     </template>

@@ -1,4 +1,4 @@
-import stripHtml from 'string-strip-html'
+import { stripHtml } from 'string-strip-html'
 import BaseTransformer from '@transformers/BaseTransformer'
 
 export default class SearchTransformer extends BaseTransformer {
@@ -27,6 +27,6 @@ export default class SearchTransformer extends BaseTransformer {
    * @private
    */
   _stripHtml (value) {
-    return value ? stripHtml(value) : null
+    return value ? stripHtml(value).result : null
   }
 }

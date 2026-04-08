@@ -78,7 +78,7 @@
 
         <!-- Description -->
         <v-card-text v-if="description" class="pt-0 grey--text">
-          <v-clamp max-height="85px">{{ description }}</v-clamp>
+          <div class="text-clamp text-clamp--5">{{ description }}</div>
         </v-card-text>
       </div>
 
@@ -88,7 +88,6 @@
 
 <script>
 
-import VClamp from 'vue-clamp'
 import Favorite from '@components/release/favorite'
 import RProgress from '@components/release/progress'
 import { useWatchStore } from '@store/app/watch/useWatchStore';
@@ -103,7 +102,6 @@ const props = {
 export default {
   props,
   components: {
-    VClamp,
     Favorite,
     RProgress,
   },

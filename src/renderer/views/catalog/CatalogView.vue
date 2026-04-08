@@ -18,8 +18,8 @@
     <!-- Catalog Loader -->
     <!-- Catalog Items -->
     <div class="my-2">
-      <template v-for="release in _items">
-        <release v-bind="{release, episodes: release.episodes }" class="mb-2" :ref="release.id" :key="release.id" @click="toRelease(release)"/>
+      <template v-for="release in _items" :key="release.id">
+        <release v-bind="{release, episodes: release.episodes }" class="mb-2" :ref="release.id" @click="toRelease(release)"/>
       </template>
       <loader v-if="_loading" v-for="i in _perPage" class="mb-2" :key="i"/>
     </div>

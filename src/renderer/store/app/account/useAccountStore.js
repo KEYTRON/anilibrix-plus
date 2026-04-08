@@ -3,7 +3,7 @@ import AccountProxy from '@proxies/account'
 
 // Utils
 import __get from 'lodash/get'
-import { randomUUID as uuid } from 'crypto'
+const uuid = () => crypto.randomUUID()
 
 // Handlers
 import { showAppError } from '@main/handlers/notifications/notifications-handler'

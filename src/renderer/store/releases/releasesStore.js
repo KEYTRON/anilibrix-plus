@@ -8,7 +8,7 @@ import EpisodesTransformer from '@transformers/episode'
 
 // Utils
 import axios from 'axios'
-import { getLocale, translate } from '@/renderer/i18n'
+import { getLocale, translate } from '@/i18n'
 
 // Handlers
 import { sendReleaseNotification, showAppError } from '@main/handlers/notifications/notifications-handler'

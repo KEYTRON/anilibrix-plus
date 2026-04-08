@@ -60,7 +60,7 @@
 import LibriaTyan03 from '@assets/images/libria-tyan/LibriaTyan03.svg'
 import { ipcRenderer } from "electron";
 // Utils
-import { required } from 'vuelidate/lib/validators'
+import { required } from '@vuelidate/validators'
 import { BackViewMixin } from '@mixins/views'
 import { invokeSafeStorageEncrypt } from '@main/handlers/app/app-handlers'
 import { useAccountStore } from '@store/app/account/useAccountStore'

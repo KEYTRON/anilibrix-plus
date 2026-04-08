@@ -45,14 +45,14 @@
           <v-divider/>
 
           <!-- Profile statistics -->
-          <template v-for="(item, k) in statistics">
-            <v-list-item :key="k">
+          <template v-for="(item, k) in statistics" :key="k">
+            <v-list-item>
               <v-list-item-content>
                 <v-list-item-subtitle v-text="item.title"/>
                 <v-list-item-title v-text="item.value" class="font-weight-bold"/>
               </v-list-item-content>
             </v-list-item>
-            <v-divider :key="`d:${k}`"/>
+            <v-divider/>
           </template>
 
 

@@ -1,7 +1,7 @@
 // To keep the UI snappy, we run WebTorrent in its own hidden window, a separate
 // process from the main window.
 
-import app from '@/../package'
+import app from '@package'
 
 // Torrent handlers
 import { catchTorrentDestroy, catchTorrentParse, catchTorrentStart, sendTorrentClear, sendTorrentDownload, sendTorrentError, sendTorrentServer } from '@main/handlers/torrents/torrents-handler'

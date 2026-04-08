@@ -8,10 +8,12 @@
     @update:duration="$emit('update:duration', $event)">
 
     <!-- Canvas -->
-    <canvas ref="board" slot="prepend" width="1280" height="720"></canvas>
+    <template #prepend>
+      <canvas ref="board" width="1280" height="720"></canvas>
+    </template>
 
     <!-- Interface -->
-    <template v-slot="context">
+    <template #default="context">
       <slot v-bind="context"/>
     </template>
 

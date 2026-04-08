@@ -1,0 +1,16 @@
+.release-card[data-v-674885ae] {
+  position: relative;
+  display: flex;
+}
+.release-card--reveal[data-v-674885ae] {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.release-card--progress[data-v-674885ae] {
+  bottom: 0;
+  position: absolute;
+  border-radius: 0;
+}

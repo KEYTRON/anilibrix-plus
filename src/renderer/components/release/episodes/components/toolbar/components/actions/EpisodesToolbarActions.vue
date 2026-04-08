@@ -7,9 +7,9 @@
 
     <v-menu bottom left activator="#episodes__actions" :attach="container">
       <v-list dense class="grey darken-4">
-        <template v-for="(item, k) in actions">
-          <v-divider v-if="k > 0" :key="`d:${k}`"/>
-          <v-list-item :key="k" :disabled="loading" @click="item.action">
+        <template v-for="(item, k) in actions" :key="k">
+          <v-divider v-if="k > 0"/>
+          <v-list-item :disabled="loading" @click="item.action">
 
             <!-- Icon -->
             <v-icon class="mr-2">{{ item.icon }}</v-icon>

@@ -1,9 +1,9 @@
 <template>
   <v-card>
     <v-list dense>
-      <template v-for="(item, k) in settings">
-        <v-divider v-if="k > 0" :key="`d:${k}`"/>
-        <v-list-item :key="k" @click="item.action">
+      <template v-for="(item, k) in settings" :key="k">
+        <v-divider v-if="k > 0"/>
+        <v-list-item @click="item.action">
           <v-list-item-content>
             <v-list-item-title v-text="item.title" :class="item.classes"/>
           </v-list-item-content>

@@ -3,7 +3,6 @@ const electron = require("electron");
 const child_process = require("child_process");
 const path$3 = require("path");
 const windowStateKeeper = require("electron-window-state");
-const dns = require("dns");
 const contentDispositionAttachment = require("content-disposition-attachment");
 const FormData = require("form-data");
 const lodash = require("lodash");
@@ -21,6 +20,7 @@ const asyncMutex = require("async-mutex");
 const crypto = require("crypto");
 const util = require("util");
 const stream = require("logrotate-stream");
+const dns = require("dns");
 const archiver = require("archiver");
 function _interopNamespaceDefault(e) {
   const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
@@ -261,42 +261,38 @@ function setEncrypted(prop, string) {
   storage$1.set(prop, encryptedString);
   return encryptedString;
 }
-const originalFetch = require("isomorphic-fetch");
-let fixWwndChecked = false;
-let fixWwwdNeeded = false;
 const DOMAIN = "wwnd.space";
 const OLD_IP = "78.46.255.254";
 const NEW_IP = "31.184.217.238";
-async function catGirlFetch(url2, init) {
-  if (!fixWwndChecked) {
-    await new Promise((resolve) => {
-      dns.lookup(DOMAIN, (err, address, family) => {
-        if (!err) {
-          if (address === OLD_IP && family === 4) {
-            fixWwwdNeeded = true;
-          }
-          fixWwndChecked = true;
-        }
-        resolve();
-      });
+let fixWwndChecked = false;
+let fixWwwdNeeded = false;
+async function checkWwnd() {
+  if (fixWwndChecked) return;
+  try {
+    const res = await fetch(`https://cloudflare-dns.com/dns-query?name=${DOMAIN}&type=A`, {
+      headers: { Accept: "application/dns-json" }
     });
-    console.log("EU IP OF WWND.SPACE FOUND, ENABLE REWRITE");
+    const data = await res.json();
+    const answer = data?.Answer?.find((a) => a.type === 1);
+    if (answer?.data === OLD_IP) {
+      fixWwwdNeeded = true;
+      console.log("EU IP OF WWND.SPACE FOUND, ENABLE REWRITE");
+    }
+  } catch (e) {
   }
+  fixWwndChecked = true;
+}
+async function catGirlFetch(url2, init = {}) {
+  await checkWwnd();
   const u = new URL(url2);
-  if (!init) {
-    init = {};
-  }
   if (fixWwwdNeeded && u.host === DOMAIN) {
     url2 = url2.replace(DOMAIN, NEW_IP);
-    if (!init.headers) {
-      init.headers = {};
-    }
+    if (!init.headers) init.headers = {};
     init.headers.Host = DOMAIN;
     console.log("FIX WWND.SPACE REQUEST");
   }
   init.redirect = "follow";
-  init.follow = 1e4;
-  return originalFetch(url2, init);
+  return fetch(url2, init);
 }
 const APP_ERROR = "app:error";
 const showAppError = (error) => Main.sendToWindow(APP_ERROR, error);

@@ -10,8 +10,8 @@
 
     <!-- Qualities -->
     <v-list dense>
-      <template v-for="(s, k) in variants">
-        <v-list-item :key="k" :input-value="s.value === active.value" @click="$emit('click', s.value)">
+      <template v-for="(s, k) in variants" :key="k">
+        <v-list-item :input-value="s.value === active.value" @click="$emit('click', s.value)">
           <v-list-item-subtitle v-text="s.label"/>
         </v-list-item>
       </template>

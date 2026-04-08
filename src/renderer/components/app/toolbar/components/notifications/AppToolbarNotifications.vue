@@ -33,9 +33,9 @@
         <v-divider/>
 
         <v-list dense>
-          <template v-for="(notification, k) in _items">
-            <v-divider v-if="k > 0" :key="`d: ${k}`"/>
-            <notification-item v-bind="{notification}" :key="k"/>
+          <template v-for="(notification, k) in _items" :key="k">
+            <v-divider v-if="k > 0"/>
+            <notification-item v-bind="{notification}"/>
           </template>
         </v-list>
       </v-card>

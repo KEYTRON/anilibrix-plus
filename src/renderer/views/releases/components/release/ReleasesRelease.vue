@@ -17,7 +17,7 @@
       </v-layout>
 
       <!-- Description -->
-      <v-clamp class="allow-select my-3 grey--text lighten-1" max-height="75px">{{ description }}</v-clamp>
+      <div class="allow-select my-3 grey--text lighten-1 text-clamp">{{ description }}</div>
 
     </div>
   </v-layout>
@@ -25,7 +25,6 @@
 
 <script>
 
-import VClamp from 'vue-clamp'
 import Loader from './components/loader'
 import Favorite from '@components/release/favorite'
 
@@ -47,7 +46,6 @@ const props = {
 export default {
   props,
   components: {
-    VClamp,
     Loader,
     Favorite,
   },

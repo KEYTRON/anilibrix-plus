@@ -1,7 +1,7 @@
 <template>
   <v-row dense>
-    <template v-for="release in releases">
-      <v-col cols="3" lg="2" :key="release.id">
+    <template v-for="release in releases" :key="release.id">
+      <v-col cols="3" lg="2">
         <release
           v-bind="{release}"
           @click="$emit('toRelease', release)">

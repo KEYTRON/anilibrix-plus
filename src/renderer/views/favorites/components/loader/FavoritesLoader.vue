@@ -1,7 +1,7 @@
 <template>
   <v-row dense>
-    <template v-for="k in 18">
-      <v-col cols="3" lg="2" :key="k">
+    <template v-for="k in 18" :key="k">
+      <v-col cols="3" lg="2">
         <v-img :transition="false" aspect-ratio=".7">
           <v-skeleton-loader boilerplate type="image" height="100%" width="100%"/>
         </v-img>
