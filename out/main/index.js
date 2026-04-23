@@ -22,6 +22,7 @@ const util = require("util");
 const stream = require("logrotate-stream");
 const dns = require("dns");
 const archiver = require("archiver");
+const remoteMain = require("@electron/remote/main");
 function _interopNamespaceDefault(e) {
   const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
   if (e) {
@@ -41,7 +42,7 @@ function _interopNamespaceDefault(e) {
 const path__namespace = /* @__PURE__ */ _interopNamespaceDefault(path$3);
 const dns__namespace = /* @__PURE__ */ _interopNamespaceDefault(dns);
 function applyAppSwitches() {
-  electron.app.commandLine.appendSwitch("--no-sandbox");
+  electron.app.commandLine.appendSwitch("no-sandbox");
   electron.app.commandLine.appendSwitch("disable-site-isolation-trials");
   electron.app.commandLine.appendSwitch("disable-features", "OutOfBlinkCors");
   electron.app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required");
@@ -200,7 +201,7 @@ class MainWindow extends Window {
    * @return {string}
    */
   getWindowUrl() {
-    return process.env.NODE_ENV === "development" ? "http://localhost:9080" : `file://${__dirname}/index.html`;
+    return process.env.NODE_ENV === "development" ? process.env.VITE_DEV_SERVER_URL || "http://localhost:5173" : `file://${__dirname}/index.html`;
   }
 }
 const Main = new MainWindow();
@@ -231,7 +232,8 @@ class TorrentWindow extends Window {
    * @return {string}
    */
   getWindowUrl() {
-    return process.env.NODE_ENV === "development" ? "http://localhost:9080/webtorrent.html" : `file://${__dirname}/webtorrent.html`;
+    const base = process.env.NODE_ENV === "development" ? process.env.VITE_DEV_SERVER_URL || "http://localhost:5173" : `file://${__dirname}/`;
+    return `${base}webtorrent.html`;
   }
 }
 const Torrent = new TorrentWindow();
@@ -2867,16 +2869,109 @@ function normalizeLocale(input) {
   }
   return SUPPORTED_LOCALES.includes(normalized) ? normalized : DEFAULT_LOCALE;
 }
+const logs = !!process.env.DISCORD_RICH_PRESENCE_DEBUG;
+const logger = logs ? console.log : () => {
+};
+const RECONNECT_DELAY = 1e3;
+const UPDATE_INTERVAL = 1e3;
+function discordActivity() {
+  let client = null;
+  let activity = null;
+  let destroyed = false;
+  let reconnectTimeout = null;
+  let RPCClient = null;
+  const ensureReadableStream = () => {
+    if (!global.ReadableStream) {
+      const { ReadableStream } = require("readable-stream-polyfill");
+      global.ReadableStream = ReadableStream;
+    }
+  };
+  const getDRPCClient = () => {
+    if (!RPCClient) {
+      const RPC = require("@xhayper/discord-rpc");
+      RPCClient = RPC.Client;
+    } else {
+      return RPCClient;
+    }
+  };
+  const scheduleReconnect = () => {
+    if (destroyed || reconnectTimeout) return;
+    reconnectTimeout = setTimeout(() => {
+      reconnectTimeout = null;
+      connect();
+    }, RECONNECT_DELAY);
+  };
+  const connect = async () => {
+    if (destroyed) return;
+    try {
+      ensureReadableStream();
+      const Client = getDRPCClient();
+      client = new Client({
+        clientId: process.env.DISCORD_CLIENT_ID
+      });
+      client.on("disconnected", async () => {
+        logger("Discord rich presence disconnected");
+        try {
+          await client.destroy();
+        } catch {
+        }
+        client = null;
+        scheduleReconnect();
+      });
+      client.on("error", logger);
+      client.on("ready", () => {
+        logger("Discord rich presence ready");
+      });
+      await client.login();
+    } catch (error) {
+      logger("Discord login failed", error);
+      scheduleReconnect();
+    }
+  };
+  const syncActivity = async () => {
+    if (destroyed || !client || !client.isConnected) {
+      return;
+    }
+    const enabled = store.state.app.settings.system.drpc_enabled;
+    try {
+      if (!enabled || !activity) {
+        await client.user.clearActivity();
+        return;
+      }
+      await client.user.setActivity(activity);
+      logger("Discord set activity", activity);
+    } catch (error) {
+      logger("Discord activity sync error", error);
+    }
+  };
+  connect();
+  const interval = setInterval(syncActivity, UPDATE_INTERVAL);
+  return {
+    setActivity(discordPresence) {
+      activity = discordPresence;
+    },
+    destroy() {
+      destroyed = true;
+      clearInterval(interval);
+      if (reconnectTimeout) {
+        clearTimeout(reconnectTimeout);
+      }
+      logger("Discord rich presence destroyed");
+      if (client) {
+        client.destroy().catch(logger);
+      }
+    }
+  };
+}
 consoleLogToFile({
   logFilePath: path$3.join(electron.app.getPath("userData") + "/anilibrix.log")
 });
 applyAppSwitches();
-const { discordActivity } = require("./utils/discord");
 const {
   setActivity,
   destroy: destroyRichPresence
 } = discordActivity();
-require("@electron/remote/main").initialize();
+remoteMain.initialize();
 const trayController = new AppTray();
 const menuController = new AppMenu();
 function resolveSystemLocale() {
@@ -2884,7 +2979,7 @@ function resolveSystemLocale() {
   return preferred || electron.app.getLocale();
 }
 if (process.env.NODE_ENV !== "development") {
-  global.__static = require("path").join(__dirname, "/static").replace(/\\/g, "\\\\");
+  global.__static = path$3.join(__dirname, "/static").replace(/\\/g, "\\\\");
 }
 process.on("uncaughtException", (error) => console.log("Unhandled Error", error));
 process.on("unhandledRejection", (error) => console.log("Unhandled Promise Rejection", error));
@@ -2970,8 +3065,8 @@ if (!gotTheLock) {
     mWindowInstance.loadUrl();
     tWindowInstance.loadUrl();
     if (process.env.NODE_ENV === "development") mainWindow.webContents.openDevTools();
-    require("@electron/remote/main").enable(mainWindow.webContents);
-    require("@electron/remote/main").enable(torrentWindow.webContents);
+    remoteMain.enable(mainWindow.webContents);
+    remoteMain.enable(torrentWindow.webContents);
     mainWindow.once("ready-to-show", () => {
       splash.destroy();
       global.splash = null;

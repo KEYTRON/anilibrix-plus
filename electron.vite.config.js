@@ -31,6 +31,14 @@ export default defineConfig({
         styles: 'none'
       })
     ],
+    build: {
+      rollupOptions: {
+        input: {
+          index: resolve('src/renderer/index.html'),
+          webtorrent: resolve('src/renderer/webtorrent.html')
+        }
+      }
+    },
     resolve: {
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
       alias: {

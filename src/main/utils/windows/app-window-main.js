@@ -53,7 +53,7 @@ class MainWindow extends Window {
    */
   getWindowUrl () {
     return process.env.NODE_ENV === 'development'
-      ? 'http://localhost:9080'
+      ? (process.env.VITE_DEV_SERVER_URL || 'http://localhost:5173')
       : `file://${__dirname}/index.html`
   }
 }

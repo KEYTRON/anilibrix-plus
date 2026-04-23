@@ -30,9 +30,10 @@ class TorrentWindow extends Window {
    * @return {string}
    */
   getWindowUrl () {
-    return process.env.NODE_ENV === 'development'
-      ? 'http://localhost:9080/webtorrent.html'
-      : `file://${__dirname}/webtorrent.html`
+    const base = process.env.NODE_ENV === 'development'
+      ? (process.env.VITE_DEV_SERVER_URL || 'http://localhost:5173')
+      : `file://${__dirname}/`
+    return `${base}webtorrent.html`
   }
 }
 

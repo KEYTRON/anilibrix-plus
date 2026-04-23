@@ -20,6 +20,8 @@ import { createSplash } from '@main/utils/splash-window';
 import { stopForwardProxy } from '@main/utils/forward-proxy';
 import { normalizeLocale } from '@shared/i18n/resolveLocale'
 import { setMainLocale } from '@main/utils/i18n'
+import { discordActivity } from './utils/discord'
+import remoteMain from '@electron/remote/main'
 
 consoleLogToFile({
   logFilePath: path.join(app.getPath('userData') + '/anilibrix.log')
@@ -27,14 +29,13 @@ consoleLogToFile({
 
 applyAppSwitches()
 
-const { discordActivity } = require('./utils/discord')
 const {
   setActivity,
   destroy: destroyRichPresence
 } = discordActivity()
 
 // Remote
-require('@electron/remote/main').initialize()
+remoteMain.initialize()
 
 const trayController = new Tray()
 const menuController = new Menu()
@@ -52,7 +53,7 @@ function resolveSystemLocale () {
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
 if (process.env.NODE_ENV !== 'development') {
-  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
+  global.__static = path.join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 
 process.on('uncaughtException', error => console.log('Unhandled Error', error))
@@ -176,8 +177,8 @@ if (!gotTheLock) {
 
       if (process.env.NODE_ENV === 'development') mainWindow.webContents.openDevTools()
 
-      require('@electron/remote/main').enable(mainWindow.webContents)
-      require('@electron/remote/main').enable(torrentWindow.webContents)
+      remoteMain.enable(mainWindow.webContents)
+      remoteMain.enable(torrentWindow.webContents)
 
       mainWindow
         .once('ready-to-show', () => {
