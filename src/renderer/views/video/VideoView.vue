@@ -1,6 +1,6 @@
 <template>
   <video-layout :hide-cursor="cursor_is_hidden">
-    <v-layout fill-height class="black">
+    <div class="d-flex fill-height black">
       <v-fade-transition mode="out-in" appear>
         <component
           v-if="is_mounted"
@@ -23,7 +23,7 @@
 
         </component>
       </v-fade-transition>
-    </v-layout>
+    </div>
   </video-layout>
 </template>
 

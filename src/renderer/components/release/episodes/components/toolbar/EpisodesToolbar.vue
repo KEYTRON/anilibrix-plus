@@ -1,5 +1,5 @@
 <template>
-  <v-layout align-center>
+  <div class="d-flex align-center">
 
     <!-- Search -->
     <search v-bind="{search}" @update:search="$emit('update:search', $event)"/>
@@ -8,7 +8,7 @@
     <sort class="mx-2"/>
     <actions v-bind="{release, container}"/>
 
-  </v-layout>
+  </div>
 </template>
 
 <script>

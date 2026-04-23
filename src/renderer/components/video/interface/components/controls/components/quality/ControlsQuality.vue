@@ -16,9 +16,9 @@
           @click="$emit('click', s)">
 
           <v-icon class="mr-2" color="grey">{{ getSourceIcon(s) }}</v-icon>
-          <v-list-item-content>
+          
             <v-list-item-subtitle v-text="s.label"/>
-          </v-list-item-content>
+          
 
         </v-list-item>
       </template>

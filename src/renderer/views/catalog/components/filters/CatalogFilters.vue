@@ -3,11 +3,11 @@
     <template v-for="(filter, k) in filters" :key="k">
       <v-card :class="{'mt-2': k > 0}">
         <v-list-item class="py-2">
-          <v-list-item-content>
+          
             <v-list-item-title v-text="filter.title"/>
             <v-list-item-subtitle v-text="filter.subtitle"/>
             <component class="mt-4" :is="filter.is"/>
-          </v-list-item-content>
+          
         </v-list-item>
       </v-card>
     </template>

@@ -1,5 +1,5 @@
 <template>
-  <v-layout fill-height align-center justify-center>
+  <div class="d-flex fill-height align-center justify-center">
     <v-row justify="center" align="center">
 
       <v-col cols="12" sm="3" align-self="center">
@@ -75,7 +75,7 @@
       </v-col>
 
     </v-row>
-  </v-layout>
+  </div>
 </template>
 
 <script>

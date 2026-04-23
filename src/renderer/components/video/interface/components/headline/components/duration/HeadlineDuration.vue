@@ -1,7 +1,7 @@
 <template>
-  <v-layout v-if="is_ready && current_time && total_duration" align-end class="shrink duration font-weight-bold">
+  <div class="d-flex align-end shrink duration font-weight-bold" v-if="is_ready && current_time && total_duration">
     {{ time }} / {{ duration }}
-  </v-layout>
+  </div>
 </template>
 
 <script>

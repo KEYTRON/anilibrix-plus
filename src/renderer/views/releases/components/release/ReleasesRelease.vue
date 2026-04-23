@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="release__data">
+  <div class="d-flex release__data">
     <loader v-if="loading"/>
     <div v-else :style="{maxWidth: '100%'}">
 
@@ -10,17 +10,17 @@
 
       <!-- Episode -->
       <!-- Favorite action -->
-      <v-layout class="my-3">
+      <div class="d-flex my-3">
         <favorite v-bind="{release}" class="mr-1"/>
         <v-chip v-text="episode.title" label color="secondary" class="font-weight-black mr-1" :style="{height: '36px'}"/>
         <v-chip v-text="type" label color="grey darken-4" :style="{height: '36px'}"/>
-      </v-layout>
+      </div>
 
       <!-- Description -->
       <div class="allow-select my-3 grey--text lighten-1 text-clamp">{{ description }}</div>
 
     </div>
-  </v-layout>
+  </div>
 </template>
 
 <script>

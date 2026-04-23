@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="shrink">
+  <div class="d-flex shrink">
     <v-skeleton-loader
       v-for="i in 14"
       boilerplate
@@ -10,5 +10,5 @@
       min-height="250"
       :key="i">
     </v-skeleton-loader>
-  </v-layout>
+  </div>
 </template>

@@ -19,9 +19,9 @@
       </v-card-text>
       <v-list-item dense @click="_setTorrentsProcess(!_torrents_process)">
         <v-list-item-title>{{ $t('settings.torrentsEnabled') }}</v-list-item-title>
-        <v-list-item-action class="mr-2">
+        <template v-slot:prepend><div class="mr-2">
           <v-switch :input-value="_torrents_process" @change="_setTorrentsProcess"/>
-        </v-list-item-action>
+        </div></template>
       </v-list-item>
       <v-card-text class="caption">
         {{ $t('settings.torrentsHint') }}
@@ -32,9 +32,9 @@
     <v-card class="mt-2">
       <v-list-item dense @click="_setAutoplayNext(!_autoplay_next)">
         <v-list-item-title>{{ $t('settings.autoplayNext') }}</v-list-item-title>
-        <v-list-item-action class="mr-2">
+        <template v-slot:prepend><div class="mr-2">
           <v-switch :input-value="_autoplay_next" @change="_setAutoplayNext"/>
-        </v-list-item-action>
+        </div></template>
       </v-list-item>
       <v-card-text class="pt-2 caption">
         {{ $t('settings.autoplayNextHint') }}
@@ -71,9 +71,9 @@
     <v-card class="mt-2">
       <v-list-item dense @click="_setAutoSkip(!_auto_opening_skip)">
         <v-list-item-title>{{ $t('settings.autoSkip') }}</v-list-item-title>
-        <v-list-item-action class="mr-2">
+        <template v-slot:prepend><div class="mr-2">
           <v-switch :input-value="_auto_opening_skip" @change="_setAutoSkip"/>
-        </v-list-item-action>
+        </div></template>
       </v-list-item>
       <v-card-text class="pt-2 caption">
         <div>
@@ -107,9 +107,9 @@
     <v-card class="mt-2">
       <v-list-item dense @click="_setOpeningSkipButton(!_opening_skip_button)">
         <v-list-item-title>{{ $t('settings.openingSkipButton') }}</v-list-item-title>
-        <v-list-item-action class="mr-2">
+        <template v-slot:prepend><div class="mr-2">
           <v-switch :input-value="_opening_skip_button" @change="_setOpeningSkipButton"/>
-        </v-list-item-action>
+        </div></template>
       </v-list-item>
       <v-card-text class="pt-2 caption">
         <div>

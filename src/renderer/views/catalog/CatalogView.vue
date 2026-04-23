@@ -1,5 +1,5 @@
 <template>
-  <v-layout column>
+  <div class="d-flex flex-column">
 
     <!-- Header-->
     <v-card flat color="transparent">
@@ -34,7 +34,7 @@
       {{ $t('common.showMore') }}
     </v-btn>
 
-  </v-layout>
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <v-layout fill-height align-center justify-center @keyup.enter="authorize">
+  <div class="d-flex fill-height align-center justify-center" @keyup.enter="authorize">
     <v-row justify="center" align="center">
 
       <v-col cols="12" sm="3" align-self="center">
@@ -14,7 +14,7 @@
           </v-card-text>
           <!-- Login / Email -->
           <!-- Password -->
-          <v-layout class="py-6 pt-2">
+          <div class="d-flex py-6 pt-2">
             <v-text-field
               v-model="login"
               outlined
@@ -33,25 +33,25 @@
               :placeholder="$t('login.passwordPlaceholder')"
               prepend-inner-icon="mdi-lock">
             </v-text-field>
-          </v-layout>
+          </div>
 
           <!-- Actions -->
-          <v-layout>
+          <div class="d-flex">
             <v-btn v-bind="{loading}" class="mr-1" :disabled="$v.$invalid" @click="authorize">{{ $t('login.title') }}</v-btn>
             <v-btn v-bind="{loading}" text @click="toBack">{{ $t('common.back') }}</v-btn>
-          </v-layout>
+          </div>
 
           <v-divider class="my-6" />
 
-          <v-layout justify-center>
+          <div class="d-flex justify-center">
             <v-btn :color="'blue darken-1'" @click="authorizeWithVK">{{ $t('login.vkLogin') }}</v-btn>
-          </v-layout>
+          </div>
 
         </v-card>
       </v-col>
 
     </v-row>
-  </v-layout>
+  </div>
 </template>
 
 <script>

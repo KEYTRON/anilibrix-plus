@@ -1,9 +1,9 @@
 <template>
   <v-card flat color="transparent">
     <loader v-if="loading"/>
-    <v-layout v-else column>
+    <div class="d-flex flex-column" v-else>
 
-      <v-layout align-center class="my-4">
+      <div class="d-flex align-center my-4">
 
         <div style="display: flex; flex-direction: column">
           <img
@@ -63,12 +63,12 @@
           </v-card-text>
         </div>
 
-      </v-layout>
+      </div>
 
       <!-- Description -->
       <v-card-text v-text="description" class="white--text"/>
 
-    </v-layout>
+    </div>
   </v-card>
 </template>
 

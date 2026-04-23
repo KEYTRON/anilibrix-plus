@@ -1,16 +1,16 @@
 <template>
   <v-list-item v-on:click="toVideo(release, episode)">
     <!-- Avatar -->
-    <v-list-item-avatar>
+    <template v-slot:prepend><v-avatar>
       <v-img :transition="false" v-bind="{src}"/>
-    </v-list-item-avatar>
+    </v-avatar></template>
 
     <!-- Content -->
-    <v-list-item-content>
+    
       <v-list-item-title v-text="name"/>
       <v-list-item-subtitle>{{ $t('toolbar.notificationEpisode', { episodeNumber }) }}</v-list-item-subtitle>
       <v-list-item-subtitle v-text="datetime" class="grey--text text--darken-2"/>
-    </v-list-item-content>
+    
 
   </v-list-item>
 </template>

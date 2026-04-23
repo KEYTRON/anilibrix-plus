@@ -1,7 +1,7 @@
 <template>
 
   <!-- Favorites  -->
-  <v-layout v-if="_isAuthorized" column>
+  <div class="d-flex flex-column" v-if="_isAuthorized">
 
     <!-- Header -->
     <v-card flat color="transparent">
@@ -32,7 +32,7 @@
     <loader v-if="_loading && !releases.length" class="my-2"/>
     <component v-if="!_loading || releases.length" v-bind="{releases}" class="my-2" :is="view" @toRelease="toRelease"/>
 
-  </v-layout>
+  </div>
 
   <!-- Authorization -->
   <authorization v-else/>

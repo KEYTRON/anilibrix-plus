@@ -1,13 +1,13 @@
 <template>
   <loader v-if="loading"/>
-  <v-layout v-else class="shrink">
+  <div class="d-flex shrink" v-else>
 
     <!-- Show video -->
     <!-- Show release -->
     <v-btn class="mr-1" @click="$emit('toVideo')">{{ $t('releasesView.watch') }}</v-btn>
     <v-btn class="mr-1" @click="$emit('toRelease')">{{ $t('common.release') }}</v-btn>
 
-  </v-layout>
+  </div>
 </template>
 
 <script>

@@ -2,7 +2,7 @@
   <div>
     <!-- Main Interface Components -->
     <v-slide-y-reverse-transition>
-      <v-layout v-show="visible" column class="interface pa-8 pt-0">
+      <div class="d-flex flex-column interface pa-8 pt-0" v-show="visible">
 
         <player-headline v-bind="{player, release, episode}" class="pb-2"/>
         <player-timeline v-bind="{player}"/>
@@ -37,7 +37,7 @@
           </v-col>
         </v-row>
 
-      </v-layout>
+      </div>
     </v-slide-y-reverse-transition>
 
     <!-- Keyboard -->

@@ -1,5 +1,5 @@
 <template>
-  <v-layout align-center justify-end ref="controls">
+  <div class="d-flex align-center justify-end" ref="controls">
     <template v-if="is_mounted">
 
       <!-- Volume -->
@@ -22,7 +22,7 @@
       </v-btn>
 
     </template>
-  </v-layout>
+  </div>
 </template>
 
 <script>

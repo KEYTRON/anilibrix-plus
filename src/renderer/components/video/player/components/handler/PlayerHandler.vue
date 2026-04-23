@@ -1,5 +1,5 @@
 <template>
-  <v-layout column class="fill-height" justify-center>
+  <div class="d-flex flex-column justify-center fill-height">
 
     <slot name="prepend"/>
 
@@ -11,7 +11,7 @@
     <!-- Interface slot -->
     <slot v-if="player" v-bind="{player}"/>
 
-  </v-layout>
+  </div>
 </template>
 
 <script>

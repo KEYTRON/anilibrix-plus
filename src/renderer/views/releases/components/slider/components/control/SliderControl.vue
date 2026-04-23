@@ -1,9 +1,9 @@
 <template>
-  <v-layout class="controls" :class="`controls--${direction}`">
+  <div class="d-flex controls" :>
     <v-btn icon :disabled="isDisabled" @click="$emit('click')">
       <v-icon>mdi-arrow-{{ direction }}</v-icon>
     </v-btn>
-  </v-layout>
+  </div>
 </template>
 
 <script>

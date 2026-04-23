@@ -4,26 +4,26 @@
     <!-- Seen -->
     <v-card class="mb-2">
       <v-list-item class="py-2" @click="_setSettingsShowSeen(!_show_seen)">
-        <v-list-item-content>
+        
           <v-list-item-title>{{ $t('favorites.watchedReleases') }}</v-list-item-title>
           <v-list-item-subtitle>{{ $t('favorites.watchedReleasesHint') }}</v-list-item-subtitle>
-        </v-list-item-content>
-        <v-list-item-action>
+        
+        <template v-slot:prepend>
           <v-switch :input-value="_show_seen" @click="_setSettingsShowSeen"/>
-        </v-list-item-action>
+        </template>
       </v-list-item>
     </v-card>
 
     <!-- Completed -->
     <v-card class="mb-2">
       <v-list-item class="py-2" @click="_setSettingsShowCompleted(!_show_completed)">
-        <v-list-item-content>
+        
           <v-list-item-title>{{ $t('favorites.completedOnly') }}</v-list-item-title>
           <v-list-item-subtitle>{{ $t('favorites.completedOnlyHint') }}</v-list-item-subtitle>
-        </v-list-item-content>
-        <v-list-item-action>
+        
+        <template v-slot:prepend>
           <v-switch :input-value="_show_completed" @click="_setSettingsShowCompleted"/>
-        </v-list-item-action>
+        </template>
       </v-list-item>
     </v-card>
 
@@ -31,7 +31,7 @@
     <!-- Sort -->
     <v-card class="mb-2">
       <v-list-item class="py-2">
-        <v-list-item-content>
+        
           <v-list-item-title>{{ $t('favorites.sorting') }}</v-list-item-title>
           <v-list-item-subtitle>{{ $t('favorites.sortingHint') }}</v-list-item-subtitle>
           <v-select
@@ -45,7 +45,7 @@
             :value="_sort"
             @input="_setSettingsSort">
           </v-select>
-        </v-list-item-content>
+        
       </v-list-item>
     </v-card>
 
@@ -53,7 +53,7 @@
     <!-- Group -->
     <v-card>
       <v-list-item class="py-2">
-        <v-list-item-content>
+        
           <v-list-item-title>{{ $t('favorites.grouping') }}</v-list-item-title>
           <v-list-item-subtitle>{{ $t('favorites.groupingHint') }}</v-list-item-subtitle>
           <v-select
@@ -67,7 +67,7 @@
             :value="_group"
             @input="_setSettingsGroup">
           </v-select>
-        </v-list-item-content>
+        
       </v-list-item>
     </v-card>
 

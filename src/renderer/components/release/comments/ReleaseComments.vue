@@ -1,5 +1,5 @@
 <template>
-  <v-layout column>
+  <div class="d-flex flex-column">
 
     <!-- Comments loader -->
     <v-skeleton-loader v-if="visible === false" type="list-item-avatar-three-line@19"/>
@@ -7,7 +7,7 @@
     <!-- Comments content -->
     <webview v-bind="configuration" ref="comments" class="comments" :class="{visible}" :style="{height}"/>
 
-  </v-layout>
+  </div>
 </template>
 
 <script>

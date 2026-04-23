@@ -14,9 +14,9 @@
             {{ $t('settings.moveWindowButtons') }}
           </v-list-item-title>
 
-          <v-list-item-action class="mr-2">
+          <template v-slot:prepend><div class="mr-2">
             <v-switch :input-value="_appbar_right" @change="_setAppbarRight"/>
-          </v-list-item-action>
+          </div></template>
         </v-list-item>
 
         <v-card-text class="pt-2">
@@ -34,9 +34,9 @@
           {{ $t('settings.favoriteNotifications') }}
         </v-list-item-title>
 
-        <v-list-item-action class="mr-2">
+        <template v-slot:prepend><div class="mr-2">
           <v-switch :input-value="_filter_notify" @change="_setFilterNotify"/>
-        </v-list-item-action>
+        </div></template>
       </v-list-item>
 
       <v-card-text class="pt-2">
@@ -49,9 +49,9 @@
     <v-card class="mt-2">
       <v-list-item dense @click="_setIgnoreCerts(!_ignore_certs)">
         <v-list-item-title>{{ $t('settings.ignoreCerts') }}</v-list-item-title>
-        <v-list-item-action class="mr-2">
+        <template v-slot:prepend><div class="mr-2">
           <v-switch :input-value="_ignore_certs" @change="_setIgnoreCerts"/>
-        </v-list-item-action>
+        </div></template>
       </v-list-item>
       <v-card-text class="pt-2 caption">
         {{ $t('settings.ignoreCertsHint') }}
@@ -61,9 +61,9 @@
     <v-card class="mt-2">
       <v-list-item dense @click="toggleOperaProxy">
         <v-list-item-title>{{ $t('settings.operaProxy') }}</v-list-item-title>
-        <v-list-item-action class="mr-2">
+        <template v-slot:prepend><div class="mr-2">
           <v-switch :input-value="_proxy === 'http://opera'" @click="toggleOperaProxy"/>
-        </v-list-item-action>
+        </div></template>
       </v-list-item>
     </v-card>
 
@@ -122,9 +122,9 @@
     <v-card class="mt-2">
       <v-list-item dense @click="_setDRPC(!_drpc_enabled)">
         <v-list-item-title>Discord Rich Presence</v-list-item-title>
-        <v-list-item-action class="mr-2">
+        <template v-slot:prepend><div class="mr-2">
           <v-switch :input-value="_drpc_enabled" @change="_setDRPC"/>
-        </v-list-item-action>
+        </div></template>
       </v-list-item>
       <v-card-text class="pt-2 caption">
         {{ $t('settings.richPresenceHint') }}
@@ -136,9 +136,9 @@
     <v-card>
       <v-list-item dense @click="_setSystemNotifications(!_notifications_system)">
         <v-list-item-title>{{ $t('settings.systemNotifications') }}</v-list-item-title>
-        <v-list-item-action class="mr-2">
+        <template v-slot:prepend><div class="mr-2">
           <v-switch :input-value="_notifications_system" @change="_setSystemNotifications"/>
-        </v-list-item-action>
+        </div></template>
       </v-list-item>
       <v-card-text class="pt-2">
         <div class="caption">
@@ -152,9 +152,9 @@
     <v-card class="mt-2">
       <v-list-item dense @click="_setUpdates(!_updates_enabled)">
         <v-list-item-title>{{ $t('settings.autoUpdates') }}</v-list-item-title>
-        <v-list-item-action class="mr-2">
+        <template v-slot:prepend><div class="mr-2">
           <v-switch :input-value="_updates_enabled" @change="_setUpdates"/>
-        </v-list-item-action>
+        </div></template>
       </v-list-item>
       <v-card-text class="pt-2 caption">
         {{ $t('settings.autoUpdatesHint') }}
@@ -188,9 +188,9 @@
 <!--    <v-card class="mt-2">-->
 <!--      <v-list-item dense @click="_setAds(!_ads)">-->
 <!--        <v-list-item-title>Показывать рекламу</v-list-item-title>-->
-<!--        <v-list-item-action class="mr-2">-->
+<!--        <template v-slot:prepend><div class="mr-2">-->
 <!--          <v-switch :input-value="_ads" @change="_setAds"/>-->
-<!--        </v-list-item-action>-->
+<!--        </div></template>-->
 <!--      </v-list-item>-->
 <!--      <v-card-text class="pt-2 caption">-->
 <!--        <div>Спасибо, что выбрали <b>Анилибрию!</b></div>-->
@@ -206,9 +206,9 @@
 <!--    <v-card class="mt-2">
       <v-list-item dense @click="_setAdsMaximum(!_ads_maximum)">
         <v-list-item-title>Показывать рекламу перед каждым эпизодом</v-list-item-title>
-        <v-list-item-action class="mr-2">
+        <template v-slot:prepend><div class="mr-2">
           <v-switch :input-value="_ads_maximum" @change="_setAdsMaximum"/>
-        </v-list-item-action>
+        </div></template>
       </v-list-item>
       <v-card-text class="pt-2 caption">
         <div>Максимальная поддержка проекта!</div>
@@ -225,9 +225,9 @@
       <v-list dense>
         <template>
           <v-list-item @click="snapshots">
-            <v-list-item-content>
+            
               <v-list-item-title>{{ $t('settings.snapshotsList') }}</v-list-item-title>
-            </v-list-item-content>
+            
           </v-list-item>
         </template>
       </v-list>

@@ -1,6 +1,6 @@
 <template>
-  <v-layout fill-height align-center justify-center>
-    <v-layout align-center justify-center>
+  <div class="d-flex fill-height align-center justify-center">
+    <div class="d-flex align-center justify-center">
 
       <v-col cols="12" sm="3" align-self="center">
         <v-img :transition="false" class="image" contain :src="image"/>
@@ -13,14 +13,14 @@
             <div>{{ $t('favorites.subtitle') }}</div>
             <div>{{ $t('favorites.authorizationHint') }}</div>
           </v-card-text>
-          <v-layout>
+          <div class="d-flex">
             <v-btn @click="toLogin">{{ $t('favorites.authorize') }}</v-btn>
-          </v-layout>
+          </div>
         </v-card>
       </v-col>
 
-    </v-layout>
-  </v-layout>
+    </div>
+  </div>
 </template>
 
 <script>

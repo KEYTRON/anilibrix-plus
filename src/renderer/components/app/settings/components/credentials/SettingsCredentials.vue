@@ -2,10 +2,10 @@
   <v-card flat color="transparent" class="mt-auto py-3 credentials__data">
 
     <v-card-text class="caption">
-      <v-layout class="with-divider">
+      <div class="d-flex with-divider">
         <div>{{ $t('settings.credentialsBuild', { version: app.version }) }}</div>
         <a href="#" @click.prevent="sendAppAboutEvent">{{ $t('settings.about') }}</a>
-      </v-layout>
+      </div>
       <div>{{ $t('settings.credentialsDisclaimer') }}</div>
       <div>
         <a href="#" @click.prevent="toggleDevtools">{{ $t('settings.debugTools') }}</a>

@@ -1,28 +1,28 @@
 <template>
   <v-list-item two-line ref="container" @click="$emit('click')">
 
-    <v-list-item-content>
+    
       <v-list-item-title v-text="title" :title="title"/>
       <v-list-item-subtitle>
         <span class="caption" v-if="time">{{ time }}</span>
         <quality v-bind="{episode}"/>
       </v-list-item-subtitle>
-    </v-list-item-content>
+    
 
-    <v-list-item-action>
-      <v-layout>
+    <template v-slot:prepend>
+      <div class="d-flex">
 
         <!-- Episode Progress -->
-        <v-layout align-center justify-center :style="{width: '40px'}">
+        <div class="d-flex align-center justify-center" :style="{width: '40px'}">
           <playing v-if="isPlaying"/>
           <watched v-else v-bind="{episode, release}"/>
-        </v-layout>
+        </div>
 
         <!-- Actions -->
         <actions v-bind="{episode, release, container}"/>
 
-      </v-layout>
-    </v-list-item-action>
+      </div>
+    </template>
 
   </v-list-item>
 </template>

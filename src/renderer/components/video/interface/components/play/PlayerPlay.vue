@@ -1,5 +1,5 @@
 <template>
-  <v-layout align-center justify-center ref="play">
+  <div class="d-flex align-center justify-center" ref="play">
     <template v-if="is_mounted">
 
       <!-- Previous episode -->
@@ -40,7 +40,7 @@
       </v-tooltip>
 
     </template>
-  </v-layout>
+  </div>
 </template>
 
 <script>

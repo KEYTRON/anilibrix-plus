@@ -16,14 +16,14 @@
                 <v-icon class="mr-2">{{ item.icon }}</v-icon>
 
                 <!-- Item -->
-                <v-list-item-content>
+                
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item-content>
+                
 
               </v-list-item>
 
               <v-list-item @click.stop>
-                <v-list-item-content>
+                
                   <v-select
                     v-model="selectedDomain"
                     :items="availableDomains"
@@ -33,7 +33,7 @@
                     :label="$t('favorites.releaseDomain')"
                     @click.stop
                   ></v-select>
-                </v-list-item-content>
+                
               </v-list-item>
 
               <v-list-item
@@ -44,17 +44,17 @@
                 <v-list-item-icon class="mt-4">
                   <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-icon>
-                <v-list-item-content>
+                
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
                   <v-list-item-subtitle v-if="!item.isExternal" class="text-truncate" style="max-width: 200px;">{{ item.link }}</v-list-item-subtitle>
-                </v-list-item-content>
-                <v-list-item-action>
+                
+                <template v-slot:prepend>
                   <v-btn icon small>
                     <v-icon v-if="item.copied" color="success">mdi-check</v-icon>
                     <v-icon v-if="!item.copied && item.isExternal">mdi-open-in-new</v-icon>
                     <v-icon v-if="!item.copied && !item.isExternal">mdi-content-copy</v-icon>
                   </v-btn>
-                </v-list-item-action>
+                </template>
               </v-list-item>
             </v-list>
           </v-menu>

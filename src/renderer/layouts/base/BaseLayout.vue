@@ -1,11 +1,5 @@
 <template>
-  <v-layout
-    ref="container"
-    column
-    fill-height
-    id="container"
-    class="base-layout"
-    :class="{ showScroll, isOnBlack }">
+  <div class="d-flex flex-column fill-height base-layout" ref="container" id="container" :>
 
     <!-- App Toolbar -->
     <!-- Content -->
@@ -26,7 +20,7 @@
     </v-btn>
     <slot/>
 
-  </v-layout>
+  </div>
 </template>
 
 <script>

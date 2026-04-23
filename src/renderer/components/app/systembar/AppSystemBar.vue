@@ -1,10 +1,5 @@
 <template>
-  <v-layout
-    v-if="is_fullscreen === false"
-    align-center
-    class="black system-bar white--text px-2"
-    :class="{'is-mac--fullscreen': this.isMacOnFullscreen, 'right': this.controlsRight}"
-    @dblclick="() => maximizeApp()">
+  <div class="d-flex align-center black system-bar white--text px-2" v-if="is_fullscreen === false" : @dblclick="() => maximizeApp()">
     <template v-if="!this.isMac">
       <template v-for="(control, k) in controls" :key="k">
         <v-btn icon size="small" class="system-bar__button" @click="control.action">
@@ -12,7 +7,7 @@
         </v-btn>
       </template>
     </template>
-  </v-layout>
+  </div>
 </template>
 
 <script>

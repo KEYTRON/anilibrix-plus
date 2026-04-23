@@ -1,7 +1,7 @@
 <template>
-  <v-layout column fill-height class="ads black">
+  <div class="d-flex flex-column fill-height ads black">
     <video ref="video" autoplay muted playsinline/>
-  </v-layout>
+  </div>
 </template>
 
 <script>

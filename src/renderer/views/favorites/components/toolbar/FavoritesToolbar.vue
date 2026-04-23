@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="shrink">
+  <div class="d-flex shrink">
 
     <!-- Search -->
     <v-text-field
@@ -26,7 +26,7 @@
     </v-btn>
 
 
-  </v-layout>
+  </div>
 </template>
 
 <script>

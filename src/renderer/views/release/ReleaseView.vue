@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout v-if="loading || _release" column>
+    <div class="d-flex flex-column" v-if="loading || _release">
       <!-- Release Card -->
       <v-card class="mb-2" color="transparent" flat>
         <v-card-actions class="pa-0">
@@ -19,7 +19,7 @@
             <v-list>
               <!-- Domain selector -->
               <v-list-item @click.stop>
-                <v-list-item-content>
+                
                   <v-select
                     v-model="selectedDomain"
                     :items="availableDomains"
@@ -30,7 +30,7 @@
                     @change="updateShareLinks"
                     @click.stop
                   ></v-select>
-                </v-list-item-content>
+                
               </v-list-item>
 
               <v-divider></v-divider>
@@ -43,17 +43,17 @@
                 <v-list-item-icon>
                   <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-icon>
-                <v-list-item-content>
+                
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
                   <v-list-item-subtitle v-if="!item.isExternal" class="text-truncate" style="max-width: 200px;">{{ item.link }}</v-list-item-subtitle>
-                </v-list-item-content>
-                <v-list-item-action>
+                
+                <template v-slot:prepend>
                   <v-btn icon small>
                     <v-icon v-if="item.copied" color="success">mdi-check</v-icon>
                     <v-icon v-if="!item.copied && item.isExternal">mdi-open-in-new</v-icon>
                     <v-icon v-if="!item.copied && !item.isExternal">mdi-content-copy</v-icon>
                   </v-btn>
-                </v-list-item-action>
+                </template>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -69,11 +69,11 @@
                          v-for="(release, index) in item.releases"
                          :key="release.id"
             >
-              <v-list-item-avatar>
+              <template v-slot:prepend><v-avatar>
                 <v-img :transition="false" :src="release.poster"></v-img>
-              </v-list-item-avatar>
+              </v-avatar></template>
 
-              <v-list-item-content>
+              
                 <v-list-item-title>
                   <span>{{ release.names.ru }}</span>
 
@@ -88,7 +88,7 @@
                 </v-list-item-title>
                 <v-list-item-subtitle v-if="release.type && release.type !== 'null'" v-text="release.type">
                 </v-list-item-subtitle>
-              </v-list-item-content>
+              
             </v-list-item>
           </template>
         </v-list>
@@ -104,9 +104,9 @@
       <!-- Release Components -->
       <component v-if="component" v-on="component.events" v-bind="component.props" :is="component.is"/>
 
-    </v-layout>
+    </div>
 
-    <v-layout v-else-if="!loading && !_release" fill-height align-center justify-center>
+    <div class="d-flex fill-height align-center justify-center" v-else-if="!loading && !_release">
       <v-row justify="center" align="center">
 
         <v-col cols="12" sm="3" align-self="center">
@@ -158,7 +158,7 @@
         </v-col>
 
       </v-row>
-    </v-layout>
+    </div>
   </div>
 </template>
 

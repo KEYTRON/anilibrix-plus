@@ -1,7 +1,7 @@
 <template>
-  <v-layout fill-height align-center justify-center>
+  <div class="d-flex fill-height align-center justify-center">
     <loader-logo class="app__loader"/>
-  </v-layout>
+  </div>
 </template>
 
 <script>

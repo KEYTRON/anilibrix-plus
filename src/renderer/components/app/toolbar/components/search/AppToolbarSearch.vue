@@ -19,13 +19,13 @@
     @input="toRelease">
 
     <template v-slot:item="{item}">
-      <v-list-item-avatar>
+      <template v-slot:prepend><v-avatar>
         <v-img :transition="false" :src="item.poster"/>
-      </v-list-item-avatar>
-      <v-list-item-content :style="{maxWidth: $refs.search.$el.clientWidth + 'px'}">
+      </v-avatar></template>
+      
         <v-list-item-title v-text="item.names.ru"/>
         <v-list-item-subtitle v-text="item.names.original"/>
-      </v-list-item-content>
+      
     </template>
 
   </v-autocomplete>

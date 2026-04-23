@@ -1,10 +1,10 @@
 <template>
-  <v-layout justify-space-between align-content-end :style="{lineHeight: 1}">
+  <div class="d-flex align-content-end justify-space-between" :style="{lineHeight: 1}">
 
     <description v-bind="{release, episode}"/>
     <duration v-bind="{player}"/>
 
-  </v-layout>
+  </div>
 </template>
 
 <script>

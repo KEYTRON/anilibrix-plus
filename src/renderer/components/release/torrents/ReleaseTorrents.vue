@@ -18,7 +18,7 @@
         <v-divider v-if="k > 0"/>
 
         <v-list-item two-line @click="download(torrent)">
-          <v-list-item-content>
+          
             <v-list-item-title class="d-flex justify-space-between">
               <span>{{ $t('release.torrentSeries', { series: torrent.series }) }}</span>
               <span>{{ formatTimestamp(torrent.ctime) }}</span>
@@ -43,14 +43,14 @@
                 </span>
               </div>
             </v-list-item-subtitle>
-          </v-list-item-content>
+          
 
-          <v-list-item-action @click.stop="copyToClipboard(torrent.magnet, k)">
+          <template v-slot:prepend>
             <v-btn icon>
               <v-icon v-if="copiedIndex === k" color="success">mdi-check</v-icon>
               <v-icon v-else>mdi-content-copy</v-icon>
             </v-btn>
-          </v-list-item-action>
+          </template>
         </v-list-item>
       </template>
     </v-list>

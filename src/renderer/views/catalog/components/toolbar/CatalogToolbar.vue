@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="shrink">
+  <div class="d-flex shrink">
 
 
     <!-- Reload -->
@@ -16,7 +16,7 @@
       </v-btn>
     </v-badge>
 
-  </v-layout>
+  </div>
 </template>
 
 <script>

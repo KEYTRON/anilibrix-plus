@@ -11,12 +11,12 @@
         <template v-for="(item, k) in settings" :key="k">
           <v-divider v-if="k > 0"/>
           <v-list-item @click="item.action">
-            <v-list-item-content>
+            
               <v-list-item-title v-text="item.title" :class="item.classes"/>
-            </v-list-item-content>
-            <v-list-item-action class="text-right">
+            
+            <template v-slot:append><div class="text-right">
               <v-list-item-subtitle v-text="item.value"/>
-            </v-list-item-action>
+            </div></template>
           </v-list-item>
         </template>
       </v-list>

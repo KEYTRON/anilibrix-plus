@@ -1,5 +1,5 @@
 <template>
-  <v-layout fill-height align-center justify-center>
+  <div class="d-flex fill-height align-center justify-center">
     <v-row justify="center" align="center">
 
       <v-col cols="12" sm="3" align-self="center">
@@ -13,14 +13,14 @@
             <div>{{ $t('releasesView.errorSubtitlePrimary') }}</div>
             <div>{{ $t('releasesView.errorSubtitleSecondary') }}</div>
           </v-card-text>
-          <v-layout>
+          <div class="d-flex">
             <v-btn @click="reload">{{ $t('releasesView.retry') }}</v-btn>
-          </v-layout>
+          </div>
         </v-card>
       </v-col>
 
     </v-row>
-  </v-layout>
+  </div>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
   <v-fade-transition appear mode="out-in">
-    <v-layout v-if="loading || !_has_error" column justify-center class="releases">
+    <div class="d-flex flex-column justify-center releases" v-if="loading || !_has_error">
 
       <slider
         v-bind="{loading}"
@@ -15,7 +15,7 @@
       <release v-bind="{loading, release, episode}" class="mb-4" :key="release ? release.id : null"/>
       <actions v-bind="{loading, release}" @toVideo="toVideo(release, episode)" @toRelease="toRelease(release)"/>
 
-    </v-layout>
+    </div>
     <error v-else-if="!loading && _has_error"/>
   </v-fade-transition>
 </template>

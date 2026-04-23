@@ -19,10 +19,10 @@
           <v-divider/>
 
           <v-list-item>
-            <v-list-item-content>
+            
               <v-list-item-subtitle v-text="item.title"/>
               <v-list-item-title v-text="item.value" :class="item.classes"/>
-            </v-list-item-content>
+            
           </v-list-item>
 
         </template>

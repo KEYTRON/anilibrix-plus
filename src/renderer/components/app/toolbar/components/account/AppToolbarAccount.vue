@@ -34,23 +34,23 @@
         <!-- User -->
         <v-list dense>
           <v-list-item>
-            <v-list-item-avatar>
+            <template v-slot:prepend><v-avatar>
               <v-img :transition="false" :src="_profile.avatar"/>
-            </v-list-item-avatar>
-            <v-list-item-content>
+            </v-avatar></template>
+            
               <v-list-item-title v-text="_profile.login"/>
             <v-list-item-subtitle>ID: {{ _profile.id }}</v-list-item-subtitle>
-            </v-list-item-content>
+            
           </v-list-item>
           <v-divider/>
 
           <!-- Profile statistics -->
           <template v-for="(item, k) in statistics" :key="k">
             <v-list-item>
-              <v-list-item-content>
+              
                 <v-list-item-subtitle v-text="item.title"/>
                 <v-list-item-title v-text="item.value" class="font-weight-bold"/>
-              </v-list-item-content>
+              
             </v-list-item>
             <v-divider/>
           </template>

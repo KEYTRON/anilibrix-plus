@@ -1,5 +1,5 @@
 <template>
-  <v-layout align-center class="shrink">
+  <div class="d-flex align-center shrink">
 
     <!-- Volume Mute -->
     <v-btn icon large @click="$emit('change', 0)">
@@ -17,7 +17,7 @@
       @input="$emit('change', $event)">
     </v-slider>
 
-  </v-layout>
+  </div>
 </template>
 
 <script>
