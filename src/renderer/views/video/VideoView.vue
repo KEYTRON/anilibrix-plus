@@ -7,8 +7,8 @@
           v-bind="{sources, source}"
           :is="component"
           :key="`video:${key}`"
-          :time.sync="time"
-          :duration.sync="duration"
+          v-model:time="time"
+          v-model:duration="duration"
           @error="toBlank">
 
           <template v-slot="{player}">

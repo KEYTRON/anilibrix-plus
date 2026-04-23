@@ -13,7 +13,7 @@
     </v-expand-transition>
 
     <!-- Toolbar -->
-    <toolbar class="mb-2" :settings.sync="settings" @reload="showReleases"/>
+    <toolbar class="mb-2" v-model:settings="settings" @reload="showReleases"/>
 
     <!-- Catalog Loader -->
     <!-- Catalog Items -->

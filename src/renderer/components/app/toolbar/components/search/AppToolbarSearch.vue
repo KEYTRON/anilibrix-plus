@@ -13,7 +13,7 @@
     class="grey darken-2"
     :placeholder="$t('toolbar.searchPlaceholder')"
     :append-icon="null"
-    :search-input.sync="search"
+    v-model:search="search"
     @blur="_setSearching(false)"
     @focus="_setSearching(true)"
     @input="toRelease">

@@ -21,8 +21,8 @@
     <toolbar
       class="mb-2"
       :loading="_loading"
-      :search.sync="search"
-      :settings.sync="settings"
+      v-model:search="search"
+      v-model:settings="settings"
       @reload="_getFavorites">
     </toolbar>
 
