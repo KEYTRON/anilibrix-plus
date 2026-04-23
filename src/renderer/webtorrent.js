@@ -8,15 +8,14 @@ import { catchTorrentDestroy, catchTorrentParse, catchTorrentStart, sendTorrentC
 
 // Utils
 import { parse, stringify } from 'flatted'
-import {ipcRenderer} from "electron";
-import parseTorrent from "parse-torrent";
-
-const http = require('http')
-const path = require('path')
-const rimraf = require('rimraf')
-const WebTorrent = require('webtorrent')
-const parseTorrentData = require('parse-torrent')
-const { SubtitleParser } = require('matroska-subtitles')
+import { ipcRenderer } from 'electron'
+import parseTorrentData from 'parse-torrent'
+import http from 'http'
+import nodePath from 'path'
+import { rimraf } from 'rimraf'
+import WebTorrent from 'webtorrent'
+import { SubtitleParser } from 'matroska-subtitles'
+import remoteRenderer from '@electron/remote'
 
 // Create WebTorrentClient
 // Connect to the WebTorrent and BitTorrent networks. WebTorrent Desktop is a hybrid
@@ -36,7 +35,7 @@ const store = {
  *
  * @type {string}
  */
-const torrentPath = path.join(require('@electron/remote').app.getPath('temp'), app.build.appId)
+const torrentPath = nodePath.join(remoteRenderer.app.getPath('temp'), app.build.appId)
 
 /**
  * Start torrent from provided source
@@ -144,11 +143,10 @@ const startTorrent = async ({
  *
  * @return Promise
  */
-const destroyTorrent = ({ torrentId }) => {
+const destroyTorrent = async ({ torrentId }) => {
   try {
     // Stop server
     if (store.servers[torrentId]) {
-      // Show in console
       console.log('Destroy Server', {
         torrentId,
         server: parse(stringify(store.servers[torrentId]))
@@ -158,44 +156,30 @@ const destroyTorrent = ({ torrentId }) => {
         server: parse(stringify(store.vttServers[torrentId]))
       })
 
-      // Stop and destroy server
       store.servers[torrentId].close()
       store.servers[torrentId] = null
 
-      // Stop and destroy VTT server
       if (store.vttServers[torrentId]) {
         store.vttServers[torrentId].close()
         store.vttServers[torrentId] = null
       }
     }
 
-    // Destroy handler
     if (store.handlers[torrentId]) {
       clearInterval(store.handlers[torrentId])
     }
 
-    // Destroy torrent
     if (store.torrents[torrentId]) {
-      // Torrent files path
-      const path = store.torrents[torrentId].path
+      const torrentFilePath = store.torrents[torrentId].path
 
-      // Remove files from fs
-      rimraf(path, () => {
-        // Show in console
-        console.log('Destroy Torrent', {
-          torrentId,
-          path
-        })
+      await rimraf(torrentFilePath)
 
-        // Destroy torrent
-        // Clear storage
-        store.torrents[torrentId].destroy()
-        store.torrents[torrentId] = null
+      console.log('Destroy Torrent', { torrentId, path: torrentFilePath })
 
-        // Remove files from torrent
-        // Send clear event
-        sendTorrentClear({ torrentId })
-      })
+      store.torrents[torrentId].destroy()
+      store.torrents[torrentId] = null
+
+      sendTorrentClear({ torrentId })
     }
   } catch (error) {
     _sendError({
