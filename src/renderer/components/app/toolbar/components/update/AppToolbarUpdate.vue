@@ -7,10 +7,10 @@
       </div>
     </template>
     <template #activator="{ props }">
-      <v-btn icon size="small" v-bind="props" :disabled="_loading" @click="getReleases()">
+      <v-btn icon size="default" v-bind="props" :disabled="_loading" @click="getReleases()">
         <v-fade-transition mode="out-in">
-          <v-progress-circular v-if="_loading" indeterminate size="18"/>
-          <v-icon v-else size="18">mdi-refresh</v-icon>
+          <v-progress-circular v-if="_loading" indeterminate size="22"/>
+          <v-icon v-else size="26">mdi-refresh</v-icon>
         </v-fade-transition>
       </v-btn>
     </template>

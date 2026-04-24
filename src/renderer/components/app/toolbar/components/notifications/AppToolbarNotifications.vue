@@ -6,8 +6,8 @@
         dot
         :content="unseen"
         :model-value="unseen > 0">
-        <v-btn icon size="small" v-bind="menuProps" @click="_setSeen()">
-          <v-icon size="18">mdi-bell</v-icon>
+        <v-btn icon size="default" v-bind="menuProps" @click="_setSeen()">
+          <v-icon size="26">mdi-bell</v-icon>
         </v-btn>
       </v-badge>
     </template>

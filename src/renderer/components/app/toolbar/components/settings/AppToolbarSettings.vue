@@ -1,8 +1,8 @@
 <template>
   <v-tooltip location="left" :text="$t('toolbar.settings')">
     <template #activator="{ props }">
-      <v-btn icon size="small" v-bind="props" @click="_setDrawer(!_drawer)">
-        <v-icon size="18">mdi-cog</v-icon>
+      <v-btn icon size="default" v-bind="props" @click="_setDrawer(!_drawer)">
+        <v-icon size="26">mdi-cog</v-icon>
       </v-btn>
     </template>
   </v-tooltip>

@@ -1,44 +1,46 @@
 <template>
-  <v-app-bar v-if="!hideToolbar" flat color="transparent" class="toolbar shrink">
+  <div v-if="!hideToolbar" class="toolbar">
     <!-- Navigation buttons -->
-    <div class="d-flex align-center mr-4">
-      <v-btn icon small class="mr-1" @click="goback" :disabled="!canGoBack">
-        <v-icon size="20">mdi-arrow-left</v-icon>
+    <div class="d-flex align-center mr-2 toolbar__nav">
+      <v-btn icon size="default" class="mr-1" @click="goback" :disabled="!canGoBack">
+        <v-icon size="24">mdi-arrow-left</v-icon>
       </v-btn>
-      <v-btn icon small @click="goforward" :disabled="!canGoForward">
-        <v-icon size="20">mdi-arrow-right</v-icon>
+      <v-btn icon size="default" @click="goforward" :disabled="!canGoForward">
+        <v-icon size="24">mdi-arrow-right</v-icon>
       </v-btn>
     </div>
 
     <!-- Releases -->
-    <v-btn small text exact class="mr-1" height="38" :to="{name: 'releases'}" active-class="primary--text">
-      <v-icon size="18" class="mr-2">mdi-view-column</v-icon>
-      <span>{{ $t('toolbar.releases') }}</span>
+    <v-btn variant="text" class="mr-1 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('releases') }" :to="{name: 'releases'}">
+      <v-icon size="22" class="mr-2">mdi-view-column</v-icon>
+      <span class="toolbar__label">{{ $t('toolbar.releases') }}</span>
     </v-btn>
 
     <!-- Catalog-->
-    <v-btn small text exact class="mr-1" height="38" :to="{name: 'catalog'}" active-class="primary--text">
-      <v-icon size="18" class="mr-2">mdi-folder-text-outline</v-icon>
-      <span>{{ $t('toolbar.catalog') }}</span>
+    <v-btn variant="text" class="mr-1 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('catalog') }" :to="{name: 'catalog'}">
+      <v-icon size="22" class="mr-2">mdi-folder-text-outline</v-icon>
+      <span class="toolbar__label">{{ $t('toolbar.catalog') }}</span>
     </v-btn>
 
     <!-- Favorite -->
-    <v-btn small text exact class="mr-4" height="38" :to="{name: 'favorites'}" active-class="primary--text">
-      <v-icon size="18" class="mr-2">mdi-star</v-icon>
-      <span>{{ $t('toolbar.favorites') }}</span>
+    <v-btn variant="text" class="mr-3 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('favorites') }" :to="{name: 'favorites'}">
+      <v-icon size="22" class="mr-2">mdi-star</v-icon>
+      <span class="toolbar__label">{{ $t('toolbar.favorites') }}</span>
     </v-btn>
 
     <!-- Search-->
-    <search class="mr-4"/>
+    <div class="toolbar__search mr-3">
+      <search/>
+    </div>
 
     <!-- Right side buttons -->
-    <div class="d-flex align-center ml-auto">
+    <div class="d-flex align-center ml-auto toolbar__actions">
       <!-- Random release -->
-      <div class="mr-2">
-        <v-btn :disabled="diceIntervalId !== null" icon id="toolbar__rand" v-on:click="randomRelease">
-          <v-icon>mdi-dice-{{ dice }}</v-icon>
+      <div class="mr-1">
+        <v-btn :disabled="diceIntervalId !== null" icon size="default" id="toolbar__rand" v-on:click="randomRelease">
+          <v-icon size="26">mdi-dice-{{ dice }}</v-icon>
         </v-btn>
-        <v-tooltip left activator="#toolbar__rand">{{ $t('toolbar.randomRelease') }}</v-tooltip>
+        <v-tooltip location="left" activator="#toolbar__rand">{{ $t('toolbar.randomRelease') }}</v-tooltip>
       </div>
 
       <update/>
@@ -46,7 +48,7 @@
       <settings/>
       <account/>
     </div>
-  </v-app-bar>
+  </div>
 </template>
 
 <script>
@@ -68,6 +70,9 @@ export default {
     Notifications
   },
   methods: {
+    isCurrentRoute (name) {
+      return this.$route.name === name
+    },
     goback() {
       this.$router.go(-1)
     },
@@ -138,11 +143,77 @@ export default {
 <style lang="scss" scoped>
 
 .toolbar {
-  ::v-deep {
-    .v-toolbar__content {
-      padding-left: 0;
-      padding-right: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  gap: 0;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  margin: 0 0 10px;
+
+  :deep(.v-btn) {
+    text-transform: none;
+    text-decoration: none !important;
+  }
+
+  :deep(.v-btn--icon) {
+    width: 40px;
+    height: 40px;
+  }
+
+  :deep(.v-btn__content) {
+    text-decoration: none !important;
+  }
+
+  :deep(a) {
+    text-decoration: none !important;
+  }
+
+  :deep(.v-btn--disabled) {
+    opacity: 0.32;
+  }
+
+  &__nav {
+    flex: 0 0 auto;
+  }
+
+  &__link {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    opacity: 0.74;
+    min-width: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    transition: opacity 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+    text-decoration: none !important;
+
+    &--active {
+      opacity: 1;
+      color: rgb(var(--v-theme-primary)) !important;
+      background: rgba(255, 255, 255, 0.08);
     }
+  }
+
+  &__label {
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none !important;
+  }
+
+  &__actions {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    gap: 4px;
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 }
 

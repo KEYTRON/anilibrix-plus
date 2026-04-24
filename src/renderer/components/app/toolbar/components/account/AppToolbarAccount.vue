@@ -1,38 +1,34 @@
 <template>
-  <div>
 
     <!-- Login -->
-    <!-- Tooltip -->
     <template v-if="!_isAuthorized">
-      <v-btn icon id="toolbar__login" @click="toLogin">
-        <v-icon>mdi-account</v-icon>
-      </v-btn>
-      <v-tooltip left key="login" activator="#toolbar__login">{{ $t('toolbar.login') }}</v-tooltip>
+      <v-tooltip location="left" :text="$t('toolbar.login')">
+        <template #activator="{ props }">
+          <v-btn icon size="default" v-bind="props" @click="toLogin">
+            <v-icon size="26">mdi-account</v-icon>
+          </v-btn>
+        </template>
+      </v-tooltip>
     </template>
 
-
     <!-- Profile -->
-    <!-- Menu -->
     <template v-else>
-
-      <v-btn icon id="toolbar__profile">
-        <v-icon v-if="menu" key="expanded">mdi-account</v-icon>
-        <v-avatar size="28" v-else>
-          <v-img :transition="false" :src="_profile.avatar"/>
-        </v-avatar>
-      </v-btn>
-
       <v-menu
         v-model="menu"
-        bottom
-        key="profile"
-        activator="#toolbar__profile"
-        min-width="100"
-        nudge-left="70"
-        nudge-bottom="40">
+        location="bottom end"
+        :offset="[8, 0]"
+        min-width="180">
+        <template #activator="{ props }">
+          <v-btn icon size="default" v-bind="props">
+            <v-icon v-if="menu" size="26">mdi-account</v-icon>
+            <v-avatar size="32" v-else>
+              <v-img :transition="false" :src="_profile.avatar"/>
+            </v-avatar>
+          </v-btn>
+        </template>
 
         <!-- User -->
-        <v-list dense>
+        <v-list density="compact">
           <v-list-item>
             <template v-slot:prepend><v-avatar>
               <v-img :transition="false" :src="_profile.avatar"/>
@@ -64,8 +60,6 @@
 
       </v-menu>
     </template>
-
-  </div>
 </template>
 
 <script>
@@ -74,7 +68,7 @@ import stringsPluralize from '@utils/strings/pluralize/stringsPluralize'
 import { useAccountStore } from '@store/app/account/useAccountStore'
 import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
 import { useWatchStore } from '@store/app/watch/useWatchStore'
-import { toLogin } from '@utils/router/views'
+import { toLogin } from '@utils/router/views/routerViews'
 
 export default {
   data () {
