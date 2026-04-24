@@ -3,7 +3,6 @@
     v-bind="{ items, loading }"
     variant="solo"
     density="compact"
-    rounded
     menu-icon=""
     no-filter
     hide-details
@@ -133,7 +132,12 @@ export default {
   :deep(.v-field) {
     width: 100%;
     border-radius: 20px !important;
-    box-shadow: none;
+    box-shadow: none !important;
+    overflow: hidden;
+  }
+
+  :deep(.v-field__overlay) {
+    border-radius: 20px !important;
     overflow: hidden;
   }
 

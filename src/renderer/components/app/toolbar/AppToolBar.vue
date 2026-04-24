@@ -146,35 +146,33 @@ export default {
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 48px;
+  min-height: 54px;
   gap: 0;
   flex: 0 0 auto;
   white-space: nowrap;
   margin: 0 0 10px;
   position: relative;
-  border-radius: 16px;
+  border-radius: 14px;
+  overflow: hidden;
 
   &::before {
     content: '';
     position: absolute;
     inset: 0;
     z-index: 0;
-    border-radius: inherit;
-    backdrop-filter: blur(18px) saturate(1.6);
-    -webkit-backdrop-filter: blur(18px) saturate(1.6);
+    backdrop-filter: blur(20px) saturate(1.8) brightness(1.1);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8) brightness(1.1);
     filter: url(#glass-distortion);
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.07) 0%,
-      rgba(255, 255, 255, 0.03) 100%
-    );
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 100%);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.12),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+      inset 1px 0 0 rgba(255, 255, 255, 0.06),
+      inset -1px 0 0 rgba(255, 255, 255, 0.06);
     pointer-events: none;
   }
 
-  // Content above glass layer
   > * {
     position: relative;
     z-index: 1;
@@ -214,12 +212,13 @@ export default {
     letter-spacing: 0.04em;
     text-transform: uppercase;
     text-decoration: none !important;
+    padding: 0 20px !important;
     transition: opacity 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 
     &--active {
       opacity: 1;
       color: rgb(var(--v-theme-primary)) !important;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.1);
     }
   }
 
