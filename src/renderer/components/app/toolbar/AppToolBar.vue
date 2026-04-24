@@ -34,7 +34,7 @@
     </div>
 
     <!-- Right side buttons -->
-    <div class="d-flex align-center ml-auto toolbar__actions">
+    <div class="d-flex align-center toolbar__actions">
       <!-- Random release -->
       <div class="mr-1">
         <v-btn :disabled="diceIntervalId !== null" icon size="default" id="toolbar__rand" v-on:click="randomRelease">
@@ -183,8 +183,9 @@ export default {
     white-space: nowrap;
     opacity: 0.74;
     min-width: 0;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 21px !important;
     transition: opacity 0.2s ease, color 0.2s ease, background-color 0.2s ease;
     text-decoration: none !important;
 

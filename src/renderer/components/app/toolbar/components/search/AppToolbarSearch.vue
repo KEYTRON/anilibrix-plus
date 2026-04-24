@@ -121,10 +121,9 @@ export default {
 
 <style lang="scss" scoped>
 .toolbar-search {
-  width: 208px;
-  min-width: 208px;
-  max-width: 208px;
-  flex: 0 0 208px;
+  width: 100%;
+  flex: 1 1 auto;
+  min-width: 0;
 
   :deep(.v-input__control) {
     width: 100%;
@@ -133,16 +132,13 @@ export default {
 
   :deep(.v-field) {
     width: 100%;
+    border-radius: 20px;
+    box-shadow: none;
   }
 
   :deep(.v-field__field) {
     flex: 1 1 auto;
     min-width: 0;
-  }
-
-  :deep(.v-field) {
-    border-radius: 20px;
-    box-shadow: none;
   }
 
   :deep(.v-field__append-inner),
@@ -152,25 +148,16 @@ export default {
 
   :deep(.v-field__input) {
     width: 100%;
-    min-height: 30px;
+    min-height: 34px;
     padding-top: 0;
     padding-bottom: 0;
     padding-inline: 14px 10px;
-    font-size: 0.82rem;
+    font-size: 0.86rem;
   }
 
   :deep(input) {
     width: 100% !important;
     min-width: 100% !important;
-  }
-}
-
-@media (max-width: 1200px) {
-  .toolbar-search {
-    width: 184px;
-    min-width: 184px;
-    max-width: 184px;
-    flex-basis: 184px;
   }
 }
 </style>
