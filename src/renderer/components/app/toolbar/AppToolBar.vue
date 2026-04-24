@@ -195,6 +195,11 @@ export default {
     transition: opacity 0.2s ease, color 0.2s ease, background-color 0.2s ease;
     text-decoration: none !important;
 
+    :deep(.v-btn__content) {
+      justify-content: center;
+      width: 100%;
+    }
+
     &--active {
       opacity: 1;
       color: rgb(var(--v-theme-primary)) !important;
@@ -206,14 +211,10 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     gap: 7px;
     line-height: 1;
-
-    .v-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    width: 100%;
   }
 
   &__label {
