@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-center" justify-start ref="links">
+  <div class="d-flex align-center justify-start" ref="links">
     <template v-if="isMounted">
 
       <!-- Releases -->

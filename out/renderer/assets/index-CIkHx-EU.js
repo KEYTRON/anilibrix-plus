@@ -1,4 +1,9 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./index-D5DSTe4e.js","./LibriaTyan01-DlPDW3gN.js","./index-R7_OlYZi.css","./index-RgnSgJp-.js","./ReleaseFavorite-BSuv1n56.js","./useReleaseStore-CpQmbHaP.js","./index-Cwm_Wk3M.css","./index-CB0SMNpT.js","./useCatalogStore-BDR0nl1X.js","./index-CBsYWYd5.css","./index-BFTtupUX.js","./index-ilUTyqys.css","./index-B0uS6AUL.js","./index-C0LM-nHh.css"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./index-CpTflkF2.js","./LibriaTyan01-DlPDW3gN.js","./torrents-handler-BtK2vzG6.js","./index-UQx4FiJu.css","./index-DmalZPSk.js","./ReleaseFavorite-BQG4Fd1H.js","./useReleaseStore-ulZOFbhK.js","./index-CcKD2dQw.css","./index-oLRKaCRS.js","./useCatalogStore-CVtj4-lI.js","./index-CBsYWYd5.css","./index-CjBKXaCe.js","./index-D2bv2-S0.js","./index-ChaTFX2r.css","./index-BUmOT9IZ.js","./index-BMYueNlg.css"])))=>i.map(i=>d[i]);
+import { c as commonjsGlobal, g as getDefaultExportFromCjs$1, w as windowStateKeeper, e as electronExports, m as meta, v as version$3, a as catchTorrentDownload, b as catchTorrentError, s as sendTorrentDestroy, d as catchTorrentClear, f as sendTorrentStart, h as catchTorrentServer, i as app$1, r as repository } from "./torrents-handler-BtK2vzG6.js";
+import * as require$$0 from "path";
+import "fs";
+import "stream";
+import "util";
 /**
 * @vue/shared v3.5.32
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
@@ -3994,7 +3999,7 @@ function createAppAPI(render11, hydrate) {
       _container: null,
       _context: context,
       _instance: null,
-      version: version$3,
+      version: version$2,
       get config() {
         return context.config;
       },
@@ -6786,7 +6791,7 @@ function h(type, propsOrChildren, children) {
     setBlockTracking(1);
   }
 }
-const version$3 = "3.5.32";
+const version$2 = "3.5.32";
 /**
 * @vue/runtime-dom v3.5.32
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
@@ -9820,34 +9825,6 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     return baseModule().catch(handlePreloadError);
   });
 };
-var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
-function getDefaultExportFromCjs$1(x2) {
-  return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
-}
-function getAugmentedNamespace(n) {
-  if (Object.prototype.hasOwnProperty.call(n, "__esModule")) return n;
-  var f2 = n.default;
-  if (typeof f2 == "function") {
-    var a = function a2() {
-      if (this instanceof a2) {
-        return Reflect.construct(f2, arguments, this.constructor);
-      }
-      return f2.apply(this, arguments);
-    };
-    a.prototype = f2.prototype;
-  } else a = {};
-  Object.defineProperty(a, "__esModule", { value: true });
-  Object.keys(n).forEach(function(k) {
-    var d2 = Object.getOwnPropertyDescriptor(n, k);
-    Object.defineProperty(a, k, d2.get ? d2 : {
-      enumerable: true,
-      get: function() {
-        return n[k];
-      }
-    });
-  });
-  return a;
-}
 var isArray_1;
 var hasRequiredIsArray;
 function requireIsArray() {
@@ -11630,1187 +11607,6 @@ class AccountProxy extends BaseProxy {
     return src ? this.getStaticEndpoint() + src : null;
   }
 }
-const __viteBrowserExternal = {};
-const __viteBrowserExternal$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: __viteBrowserExternal
-}, Symbol.toStringTag, { value: "Module" }));
-const require$$0 = /* @__PURE__ */ getAugmentedNamespace(__viteBrowserExternal$1);
-var electron;
-var hasRequiredElectron;
-function requireElectron() {
-  if (hasRequiredElectron) return electron;
-  hasRequiredElectron = 1;
-  var define_process_env_default2 = {};
-  const fs = require$$0;
-  const path = require$$0;
-  const pathFile = path.join(__dirname, "path.txt");
-  function getElectronPath() {
-    let executablePath;
-    if (fs.existsSync(pathFile)) {
-      executablePath = fs.readFileSync(pathFile, "utf-8");
-    }
-    if (define_process_env_default2.ELECTRON_OVERRIDE_DIST_PATH) {
-      return path.join(define_process_env_default2.ELECTRON_OVERRIDE_DIST_PATH, executablePath || "electron");
-    }
-    if (executablePath) {
-      return path.join(__dirname, "dist", executablePath);
-    } else {
-      throw new Error("Electron failed to install correctly, please delete node_modules/electron and try installing again");
-    }
-  }
-  electron = getElectronPath();
-  return electron;
-}
-var electronExports = requireElectron();
-var polyfills;
-var hasRequiredPolyfills;
-function requirePolyfills() {
-  if (hasRequiredPolyfills) return polyfills;
-  hasRequiredPolyfills = 1;
-  var define_process_env_default2 = {};
-  var constants = require$$0;
-  var origCwd = process.cwd;
-  var cwd = null;
-  var platform2 = define_process_env_default2.GRACEFUL_FS_PLATFORM || process.platform;
-  process.cwd = function() {
-    if (!cwd)
-      cwd = origCwd.call(process);
-    return cwd;
-  };
-  try {
-    process.cwd();
-  } catch (er) {
-  }
-  if (typeof process.chdir === "function") {
-    var chdir = process.chdir;
-    process.chdir = function(d2) {
-      cwd = null;
-      chdir.call(process, d2);
-    };
-    if (Object.setPrototypeOf) Object.setPrototypeOf(process.chdir, chdir);
-  }
-  polyfills = patch;
-  function patch(fs) {
-    if (constants.hasOwnProperty("O_SYMLINK") && process.version.match(/^v0\.6\.[0-2]|^v0\.5\./)) {
-      patchLchmod(fs);
-    }
-    if (!fs.lutimes) {
-      patchLutimes(fs);
-    }
-    fs.chown = chownFix(fs.chown);
-    fs.fchown = chownFix(fs.fchown);
-    fs.lchown = chownFix(fs.lchown);
-    fs.chmod = chmodFix(fs.chmod);
-    fs.fchmod = chmodFix(fs.fchmod);
-    fs.lchmod = chmodFix(fs.lchmod);
-    fs.chownSync = chownFixSync(fs.chownSync);
-    fs.fchownSync = chownFixSync(fs.fchownSync);
-    fs.lchownSync = chownFixSync(fs.lchownSync);
-    fs.chmodSync = chmodFixSync(fs.chmodSync);
-    fs.fchmodSync = chmodFixSync(fs.fchmodSync);
-    fs.lchmodSync = chmodFixSync(fs.lchmodSync);
-    fs.stat = statFix(fs.stat);
-    fs.fstat = statFix(fs.fstat);
-    fs.lstat = statFix(fs.lstat);
-    fs.statSync = statFixSync(fs.statSync);
-    fs.fstatSync = statFixSync(fs.fstatSync);
-    fs.lstatSync = statFixSync(fs.lstatSync);
-    if (fs.chmod && !fs.lchmod) {
-      fs.lchmod = function(path, mode, cb) {
-        if (cb) process.nextTick(cb);
-      };
-      fs.lchmodSync = function() {
-      };
-    }
-    if (fs.chown && !fs.lchown) {
-      fs.lchown = function(path, uid2, gid, cb) {
-        if (cb) process.nextTick(cb);
-      };
-      fs.lchownSync = function() {
-      };
-    }
-    if (platform2 === "win32") {
-      fs.rename = typeof fs.rename !== "function" ? fs.rename : (function(fs$rename) {
-        function rename(from, to, cb) {
-          var start = Date.now();
-          var backoff = 0;
-          fs$rename(from, to, function CB(er) {
-            if (er && (er.code === "EACCES" || er.code === "EPERM" || er.code === "EBUSY") && Date.now() - start < 6e4) {
-              setTimeout(function() {
-                fs.stat(to, function(stater, st) {
-                  if (stater && stater.code === "ENOENT")
-                    fs$rename(from, to, CB);
-                  else
-                    cb(er);
-                });
-              }, backoff);
-              if (backoff < 100)
-                backoff += 10;
-              return;
-            }
-            if (cb) cb(er);
-          });
-        }
-        if (Object.setPrototypeOf) Object.setPrototypeOf(rename, fs$rename);
-        return rename;
-      })(fs.rename);
-    }
-    fs.read = typeof fs.read !== "function" ? fs.read : (function(fs$read) {
-      function read(fd, buffer, offset, length, position, callback_) {
-        var callback;
-        if (callback_ && typeof callback_ === "function") {
-          var eagCounter = 0;
-          callback = function(er, _2, __) {
-            if (er && er.code === "EAGAIN" && eagCounter < 10) {
-              eagCounter++;
-              return fs$read.call(fs, fd, buffer, offset, length, position, callback);
-            }
-            callback_.apply(this, arguments);
-          };
-        }
-        return fs$read.call(fs, fd, buffer, offset, length, position, callback);
-      }
-      if (Object.setPrototypeOf) Object.setPrototypeOf(read, fs$read);
-      return read;
-    })(fs.read);
-    fs.readSync = typeof fs.readSync !== "function" ? fs.readSync : /* @__PURE__ */ (function(fs$readSync) {
-      return function(fd, buffer, offset, length, position) {
-        var eagCounter = 0;
-        while (true) {
-          try {
-            return fs$readSync.call(fs, fd, buffer, offset, length, position);
-          } catch (er) {
-            if (er.code === "EAGAIN" && eagCounter < 10) {
-              eagCounter++;
-              continue;
-            }
-            throw er;
-          }
-        }
-      };
-    })(fs.readSync);
-    function patchLchmod(fs2) {
-      fs2.lchmod = function(path, mode, callback) {
-        fs2.open(
-          path,
-          constants.O_WRONLY | constants.O_SYMLINK,
-          mode,
-          function(err, fd) {
-            if (err) {
-              if (callback) callback(err);
-              return;
-            }
-            fs2.fchmod(fd, mode, function(err2) {
-              fs2.close(fd, function(err22) {
-                if (callback) callback(err2 || err22);
-              });
-            });
-          }
-        );
-      };
-      fs2.lchmodSync = function(path, mode) {
-        var fd = fs2.openSync(path, constants.O_WRONLY | constants.O_SYMLINK, mode);
-        var threw = true;
-        var ret;
-        try {
-          ret = fs2.fchmodSync(fd, mode);
-          threw = false;
-        } finally {
-          if (threw) {
-            try {
-              fs2.closeSync(fd);
-            } catch (er) {
-            }
-          } else {
-            fs2.closeSync(fd);
-          }
-        }
-        return ret;
-      };
-    }
-    function patchLutimes(fs2) {
-      if (constants.hasOwnProperty("O_SYMLINK") && fs2.futimes) {
-        fs2.lutimes = function(path, at, mt, cb) {
-          fs2.open(path, constants.O_SYMLINK, function(er, fd) {
-            if (er) {
-              if (cb) cb(er);
-              return;
-            }
-            fs2.futimes(fd, at, mt, function(er2) {
-              fs2.close(fd, function(er22) {
-                if (cb) cb(er2 || er22);
-              });
-            });
-          });
-        };
-        fs2.lutimesSync = function(path, at, mt) {
-          var fd = fs2.openSync(path, constants.O_SYMLINK);
-          var ret;
-          var threw = true;
-          try {
-            ret = fs2.futimesSync(fd, at, mt);
-            threw = false;
-          } finally {
-            if (threw) {
-              try {
-                fs2.closeSync(fd);
-              } catch (er) {
-              }
-            } else {
-              fs2.closeSync(fd);
-            }
-          }
-          return ret;
-        };
-      } else if (fs2.futimes) {
-        fs2.lutimes = function(_a, _b, _c, cb) {
-          if (cb) process.nextTick(cb);
-        };
-        fs2.lutimesSync = function() {
-        };
-      }
-    }
-    function chmodFix(orig) {
-      if (!orig) return orig;
-      return function(target, mode, cb) {
-        return orig.call(fs, target, mode, function(er) {
-          if (chownErOk(er)) er = null;
-          if (cb) cb.apply(this, arguments);
-        });
-      };
-    }
-    function chmodFixSync(orig) {
-      if (!orig) return orig;
-      return function(target, mode) {
-        try {
-          return orig.call(fs, target, mode);
-        } catch (er) {
-          if (!chownErOk(er)) throw er;
-        }
-      };
-    }
-    function chownFix(orig) {
-      if (!orig) return orig;
-      return function(target, uid2, gid, cb) {
-        return orig.call(fs, target, uid2, gid, function(er) {
-          if (chownErOk(er)) er = null;
-          if (cb) cb.apply(this, arguments);
-        });
-      };
-    }
-    function chownFixSync(orig) {
-      if (!orig) return orig;
-      return function(target, uid2, gid) {
-        try {
-          return orig.call(fs, target, uid2, gid);
-        } catch (er) {
-          if (!chownErOk(er)) throw er;
-        }
-      };
-    }
-    function statFix(orig) {
-      if (!orig) return orig;
-      return function(target, options, cb) {
-        if (typeof options === "function") {
-          cb = options;
-          options = null;
-        }
-        function callback(er, stats) {
-          if (stats) {
-            if (stats.uid < 0) stats.uid += 4294967296;
-            if (stats.gid < 0) stats.gid += 4294967296;
-          }
-          if (cb) cb.apply(this, arguments);
-        }
-        return options ? orig.call(fs, target, options, callback) : orig.call(fs, target, callback);
-      };
-    }
-    function statFixSync(orig) {
-      if (!orig) return orig;
-      return function(target, options) {
-        var stats = options ? orig.call(fs, target, options) : orig.call(fs, target);
-        if (stats) {
-          if (stats.uid < 0) stats.uid += 4294967296;
-          if (stats.gid < 0) stats.gid += 4294967296;
-        }
-        return stats;
-      };
-    }
-    function chownErOk(er) {
-      if (!er)
-        return true;
-      if (er.code === "ENOSYS")
-        return true;
-      var nonroot = !process.getuid || process.getuid() !== 0;
-      if (nonroot) {
-        if (er.code === "EINVAL" || er.code === "EPERM")
-          return true;
-      }
-      return false;
-    }
-  }
-  return polyfills;
-}
-var legacyStreams;
-var hasRequiredLegacyStreams;
-function requireLegacyStreams() {
-  if (hasRequiredLegacyStreams) return legacyStreams;
-  hasRequiredLegacyStreams = 1;
-  var Stream = require$$0.Stream;
-  legacyStreams = legacy;
-  function legacy(fs) {
-    return {
-      ReadStream,
-      WriteStream
-    };
-    function ReadStream(path, options) {
-      if (!(this instanceof ReadStream)) return new ReadStream(path, options);
-      Stream.call(this);
-      var self2 = this;
-      this.path = path;
-      this.fd = null;
-      this.readable = true;
-      this.paused = false;
-      this.flags = "r";
-      this.mode = 438;
-      this.bufferSize = 64 * 1024;
-      options = options || {};
-      var keys2 = Object.keys(options);
-      for (var index = 0, length = keys2.length; index < length; index++) {
-        var key = keys2[index];
-        this[key] = options[key];
-      }
-      if (this.encoding) this.setEncoding(this.encoding);
-      if (this.start !== void 0) {
-        if ("number" !== typeof this.start) {
-          throw TypeError("start must be a Number");
-        }
-        if (this.end === void 0) {
-          this.end = Infinity;
-        } else if ("number" !== typeof this.end) {
-          throw TypeError("end must be a Number");
-        }
-        if (this.start > this.end) {
-          throw new Error("start must be <= end");
-        }
-        this.pos = this.start;
-      }
-      if (this.fd !== null) {
-        process.nextTick(function() {
-          self2._read();
-        });
-        return;
-      }
-      fs.open(this.path, this.flags, this.mode, function(err, fd) {
-        if (err) {
-          self2.emit("error", err);
-          self2.readable = false;
-          return;
-        }
-        self2.fd = fd;
-        self2.emit("open", fd);
-        self2._read();
-      });
-    }
-    function WriteStream(path, options) {
-      if (!(this instanceof WriteStream)) return new WriteStream(path, options);
-      Stream.call(this);
-      this.path = path;
-      this.fd = null;
-      this.writable = true;
-      this.flags = "w";
-      this.encoding = "binary";
-      this.mode = 438;
-      this.bytesWritten = 0;
-      options = options || {};
-      var keys2 = Object.keys(options);
-      for (var index = 0, length = keys2.length; index < length; index++) {
-        var key = keys2[index];
-        this[key] = options[key];
-      }
-      if (this.start !== void 0) {
-        if ("number" !== typeof this.start) {
-          throw TypeError("start must be a Number");
-        }
-        if (this.start < 0) {
-          throw new Error("start must be >= zero");
-        }
-        this.pos = this.start;
-      }
-      this.busy = false;
-      this._queue = [];
-      if (this.fd === null) {
-        this._open = fs.open;
-        this._queue.push([this._open, this.path, this.flags, this.mode, void 0]);
-        this.flush();
-      }
-    }
-  }
-  return legacyStreams;
-}
-var clone_1;
-var hasRequiredClone;
-function requireClone() {
-  if (hasRequiredClone) return clone_1;
-  hasRequiredClone = 1;
-  clone_1 = clone;
-  var getPrototypeOf2 = Object.getPrototypeOf || function(obj) {
-    return obj.__proto__;
-  };
-  function clone(obj) {
-    if (obj === null || typeof obj !== "object")
-      return obj;
-    if (obj instanceof Object)
-      var copy = { __proto__: getPrototypeOf2(obj) };
-    else
-      var copy = /* @__PURE__ */ Object.create(null);
-    Object.getOwnPropertyNames(obj).forEach(function(key) {
-      Object.defineProperty(copy, key, Object.getOwnPropertyDescriptor(obj, key));
-    });
-    return copy;
-  }
-  return clone_1;
-}
-var gracefulFs;
-var hasRequiredGracefulFs;
-function requireGracefulFs() {
-  if (hasRequiredGracefulFs) return gracefulFs;
-  hasRequiredGracefulFs = 1;
-  var define_process_env_default2 = {};
-  var fs = require$$0;
-  var polyfills2 = requirePolyfills();
-  var legacy = requireLegacyStreams();
-  var clone = requireClone();
-  var util = require$$0;
-  var gracefulQueue;
-  var previousSymbol;
-  if (typeof Symbol === "function" && typeof Symbol.for === "function") {
-    gracefulQueue = Symbol.for("graceful-fs.queue");
-    previousSymbol = Symbol.for("graceful-fs.previous");
-  } else {
-    gracefulQueue = "___graceful-fs.queue";
-    previousSymbol = "___graceful-fs.previous";
-  }
-  function noop3() {
-  }
-  function publishQueue(context, queue22) {
-    Object.defineProperty(context, gracefulQueue, {
-      get: function() {
-        return queue22;
-      }
-    });
-  }
-  var debug = noop3;
-  if (util.debuglog)
-    debug = util.debuglog("gfs4");
-  else if (/\bgfs4\b/i.test(define_process_env_default2.NODE_DEBUG || ""))
-    debug = function() {
-      var m = util.format.apply(util, arguments);
-      m = "GFS4: " + m.split(/\n/).join("\nGFS4: ");
-      console.error(m);
-    };
-  if (!fs[gracefulQueue]) {
-    var queue2 = commonjsGlobal[gracefulQueue] || [];
-    publishQueue(fs, queue2);
-    fs.close = (function(fs$close) {
-      function close(fd, cb) {
-        return fs$close.call(fs, fd, function(err) {
-          if (!err) {
-            resetQueue();
-          }
-          if (typeof cb === "function")
-            cb.apply(this, arguments);
-        });
-      }
-      Object.defineProperty(close, previousSymbol, {
-        value: fs$close
-      });
-      return close;
-    })(fs.close);
-    fs.closeSync = (function(fs$closeSync) {
-      function closeSync(fd) {
-        fs$closeSync.apply(fs, arguments);
-        resetQueue();
-      }
-      Object.defineProperty(closeSync, previousSymbol, {
-        value: fs$closeSync
-      });
-      return closeSync;
-    })(fs.closeSync);
-    if (/\bgfs4\b/i.test(define_process_env_default2.NODE_DEBUG || "")) {
-      process.on("exit", function() {
-        debug(fs[gracefulQueue]);
-        require$$0.equal(fs[gracefulQueue].length, 0);
-      });
-    }
-  }
-  if (!commonjsGlobal[gracefulQueue]) {
-    publishQueue(commonjsGlobal, fs[gracefulQueue]);
-  }
-  gracefulFs = patch(clone(fs));
-  if (define_process_env_default2.TEST_GRACEFUL_FS_GLOBAL_PATCH && !fs.__patched) {
-    gracefulFs = patch(fs);
-    fs.__patched = true;
-  }
-  function patch(fs2) {
-    polyfills2(fs2);
-    fs2.gracefulify = patch;
-    fs2.createReadStream = createReadStream;
-    fs2.createWriteStream = createWriteStream;
-    var fs$readFile = fs2.readFile;
-    fs2.readFile = readFile;
-    function readFile(path, options, cb) {
-      if (typeof options === "function")
-        cb = options, options = null;
-      return go$readFile(path, options, cb);
-      function go$readFile(path2, options2, cb2, startTime) {
-        return fs$readFile(path2, options2, function(err) {
-          if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-            enqueue([go$readFile, [path2, options2, cb2], err, startTime || Date.now(), Date.now()]);
-          else {
-            if (typeof cb2 === "function")
-              cb2.apply(this, arguments);
-          }
-        });
-      }
-    }
-    var fs$writeFile = fs2.writeFile;
-    fs2.writeFile = writeFile;
-    function writeFile(path, data, options, cb) {
-      if (typeof options === "function")
-        cb = options, options = null;
-      return go$writeFile(path, data, options, cb);
-      function go$writeFile(path2, data2, options2, cb2, startTime) {
-        return fs$writeFile(path2, data2, options2, function(err) {
-          if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-            enqueue([go$writeFile, [path2, data2, options2, cb2], err, startTime || Date.now(), Date.now()]);
-          else {
-            if (typeof cb2 === "function")
-              cb2.apply(this, arguments);
-          }
-        });
-      }
-    }
-    var fs$appendFile = fs2.appendFile;
-    if (fs$appendFile)
-      fs2.appendFile = appendFile;
-    function appendFile(path, data, options, cb) {
-      if (typeof options === "function")
-        cb = options, options = null;
-      return go$appendFile(path, data, options, cb);
-      function go$appendFile(path2, data2, options2, cb2, startTime) {
-        return fs$appendFile(path2, data2, options2, function(err) {
-          if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-            enqueue([go$appendFile, [path2, data2, options2, cb2], err, startTime || Date.now(), Date.now()]);
-          else {
-            if (typeof cb2 === "function")
-              cb2.apply(this, arguments);
-          }
-        });
-      }
-    }
-    var fs$copyFile = fs2.copyFile;
-    if (fs$copyFile)
-      fs2.copyFile = copyFile;
-    function copyFile(src, dest, flags, cb) {
-      if (typeof flags === "function") {
-        cb = flags;
-        flags = 0;
-      }
-      return go$copyFile(src, dest, flags, cb);
-      function go$copyFile(src2, dest2, flags2, cb2, startTime) {
-        return fs$copyFile(src2, dest2, flags2, function(err) {
-          if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-            enqueue([go$copyFile, [src2, dest2, flags2, cb2], err, startTime || Date.now(), Date.now()]);
-          else {
-            if (typeof cb2 === "function")
-              cb2.apply(this, arguments);
-          }
-        });
-      }
-    }
-    var fs$readdir = fs2.readdir;
-    fs2.readdir = readdir;
-    var noReaddirOptionVersions = /^v[0-5]\./;
-    function readdir(path, options, cb) {
-      if (typeof options === "function")
-        cb = options, options = null;
-      var go$readdir = noReaddirOptionVersions.test(process.version) ? function go$readdir2(path2, options2, cb2, startTime) {
-        return fs$readdir(path2, fs$readdirCallback(
-          path2,
-          options2,
-          cb2,
-          startTime
-        ));
-      } : function go$readdir2(path2, options2, cb2, startTime) {
-        return fs$readdir(path2, options2, fs$readdirCallback(
-          path2,
-          options2,
-          cb2,
-          startTime
-        ));
-      };
-      return go$readdir(path, options, cb);
-      function fs$readdirCallback(path2, options2, cb2, startTime) {
-        return function(err, files) {
-          if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-            enqueue([
-              go$readdir,
-              [path2, options2, cb2],
-              err,
-              startTime || Date.now(),
-              Date.now()
-            ]);
-          else {
-            if (files && files.sort)
-              files.sort();
-            if (typeof cb2 === "function")
-              cb2.call(this, err, files);
-          }
-        };
-      }
-    }
-    if (process.version.substr(0, 4) === "v0.8") {
-      var legStreams = legacy(fs2);
-      ReadStream = legStreams.ReadStream;
-      WriteStream = legStreams.WriteStream;
-    }
-    var fs$ReadStream = fs2.ReadStream;
-    if (fs$ReadStream) {
-      ReadStream.prototype = Object.create(fs$ReadStream.prototype);
-      ReadStream.prototype.open = ReadStream$open;
-    }
-    var fs$WriteStream = fs2.WriteStream;
-    if (fs$WriteStream) {
-      WriteStream.prototype = Object.create(fs$WriteStream.prototype);
-      WriteStream.prototype.open = WriteStream$open;
-    }
-    Object.defineProperty(fs2, "ReadStream", {
-      get: function() {
-        return ReadStream;
-      },
-      set: function(val) {
-        ReadStream = val;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(fs2, "WriteStream", {
-      get: function() {
-        return WriteStream;
-      },
-      set: function(val) {
-        WriteStream = val;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    var FileReadStream = ReadStream;
-    Object.defineProperty(fs2, "FileReadStream", {
-      get: function() {
-        return FileReadStream;
-      },
-      set: function(val) {
-        FileReadStream = val;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    var FileWriteStream = WriteStream;
-    Object.defineProperty(fs2, "FileWriteStream", {
-      get: function() {
-        return FileWriteStream;
-      },
-      set: function(val) {
-        FileWriteStream = val;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    function ReadStream(path, options) {
-      if (this instanceof ReadStream)
-        return fs$ReadStream.apply(this, arguments), this;
-      else
-        return ReadStream.apply(Object.create(ReadStream.prototype), arguments);
-    }
-    function ReadStream$open() {
-      var that = this;
-      open(that.path, that.flags, that.mode, function(err, fd) {
-        if (err) {
-          if (that.autoClose)
-            that.destroy();
-          that.emit("error", err);
-        } else {
-          that.fd = fd;
-          that.emit("open", fd);
-          that.read();
-        }
-      });
-    }
-    function WriteStream(path, options) {
-      if (this instanceof WriteStream)
-        return fs$WriteStream.apply(this, arguments), this;
-      else
-        return WriteStream.apply(Object.create(WriteStream.prototype), arguments);
-    }
-    function WriteStream$open() {
-      var that = this;
-      open(that.path, that.flags, that.mode, function(err, fd) {
-        if (err) {
-          that.destroy();
-          that.emit("error", err);
-        } else {
-          that.fd = fd;
-          that.emit("open", fd);
-        }
-      });
-    }
-    function createReadStream(path, options) {
-      return new fs2.ReadStream(path, options);
-    }
-    function createWriteStream(path, options) {
-      return new fs2.WriteStream(path, options);
-    }
-    var fs$open = fs2.open;
-    fs2.open = open;
-    function open(path, flags, mode, cb) {
-      if (typeof mode === "function")
-        cb = mode, mode = null;
-      return go$open(path, flags, mode, cb);
-      function go$open(path2, flags2, mode2, cb2, startTime) {
-        return fs$open(path2, flags2, mode2, function(err, fd) {
-          if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-            enqueue([go$open, [path2, flags2, mode2, cb2], err, startTime || Date.now(), Date.now()]);
-          else {
-            if (typeof cb2 === "function")
-              cb2.apply(this, arguments);
-          }
-        });
-      }
-    }
-    return fs2;
-  }
-  function enqueue(elem) {
-    debug("ENQUEUE", elem[0].name, elem[1]);
-    fs[gracefulQueue].push(elem);
-    retry();
-  }
-  var retryTimer;
-  function resetQueue() {
-    var now2 = Date.now();
-    for (var i = 0; i < fs[gracefulQueue].length; ++i) {
-      if (fs[gracefulQueue][i].length > 2) {
-        fs[gracefulQueue][i][3] = now2;
-        fs[gracefulQueue][i][4] = now2;
-      }
-    }
-    retry();
-  }
-  function retry() {
-    clearTimeout(retryTimer);
-    retryTimer = void 0;
-    if (fs[gracefulQueue].length === 0)
-      return;
-    var elem = fs[gracefulQueue].shift();
-    var fn = elem[0];
-    var args = elem[1];
-    var err = elem[2];
-    var startTime = elem[3];
-    var lastTime = elem[4];
-    if (startTime === void 0) {
-      debug("RETRY", fn.name, args);
-      fn.apply(null, args);
-    } else if (Date.now() - startTime >= 6e4) {
-      debug("TIMEOUT", fn.name, args);
-      var cb = args.pop();
-      if (typeof cb === "function")
-        cb.call(null, err);
-    } else {
-      var sinceAttempt = Date.now() - lastTime;
-      var sinceStart = Math.max(lastTime - startTime, 1);
-      var desiredDelay = Math.min(sinceStart * 1.2, 100);
-      if (sinceAttempt >= desiredDelay) {
-        debug("RETRY", fn.name, args);
-        fn.apply(null, args.concat([startTime]));
-      } else {
-        fs[gracefulQueue].push(elem);
-      }
-    }
-    if (retryTimer === void 0) {
-      retryTimer = setTimeout(retry, 0);
-    }
-  }
-  return gracefulFs;
-}
-var jsonfile_1;
-var hasRequiredJsonfile;
-function requireJsonfile() {
-  if (hasRequiredJsonfile) return jsonfile_1;
-  hasRequiredJsonfile = 1;
-  var _fs;
-  try {
-    _fs = requireGracefulFs();
-  } catch (_2) {
-    _fs = require$$0;
-  }
-  function readFile(file, options, callback) {
-    if (callback == null) {
-      callback = options;
-      options = {};
-    }
-    if (typeof options === "string") {
-      options = { encoding: options };
-    }
-    options = options || {};
-    var fs = options.fs || _fs;
-    var shouldThrow = true;
-    if ("throws" in options) {
-      shouldThrow = options.throws;
-    }
-    fs.readFile(file, options, function(err, data) {
-      if (err) return callback(err);
-      data = stripBom(data);
-      var obj;
-      try {
-        obj = JSON.parse(data, options ? options.reviver : null);
-      } catch (err2) {
-        if (shouldThrow) {
-          err2.message = file + ": " + err2.message;
-          return callback(err2);
-        } else {
-          return callback(null, null);
-        }
-      }
-      callback(null, obj);
-    });
-  }
-  function readFileSync(file, options) {
-    options = options || {};
-    if (typeof options === "string") {
-      options = { encoding: options };
-    }
-    var fs = options.fs || _fs;
-    var shouldThrow = true;
-    if ("throws" in options) {
-      shouldThrow = options.throws;
-    }
-    try {
-      var content = fs.readFileSync(file, options);
-      content = stripBom(content);
-      return JSON.parse(content, options.reviver);
-    } catch (err) {
-      if (shouldThrow) {
-        err.message = file + ": " + err.message;
-        throw err;
-      } else {
-        return null;
-      }
-    }
-  }
-  function stringify2(obj, options) {
-    var spaces;
-    var EOL = "\n";
-    if (typeof options === "object" && options !== null) {
-      if (options.spaces) {
-        spaces = options.spaces;
-      }
-      if (options.EOL) {
-        EOL = options.EOL;
-      }
-    }
-    var str = JSON.stringify(obj, options ? options.replacer : null, spaces);
-    return str.replace(/\n/g, EOL) + EOL;
-  }
-  function writeFile(file, obj, options, callback) {
-    if (callback == null) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-    var fs = options.fs || _fs;
-    var str = "";
-    try {
-      str = stringify2(obj, options);
-    } catch (err) {
-      if (callback) callback(err, null);
-      return;
-    }
-    fs.writeFile(file, str, options, callback);
-  }
-  function writeFileSync(file, obj, options) {
-    options = options || {};
-    var fs = options.fs || _fs;
-    var str = stringify2(obj, options);
-    return fs.writeFileSync(file, str, options);
-  }
-  function stripBom(content) {
-    if (Buffer.isBuffer(content)) content = content.toString("utf8");
-    content = content.replace(/^\uFEFF/, "");
-    return content;
-  }
-  var jsonfile = {
-    readFile,
-    readFileSync,
-    writeFile,
-    writeFileSync
-  };
-  jsonfile_1 = jsonfile;
-  return jsonfile_1;
-}
-var mkdirp;
-var hasRequiredMkdirp;
-function requireMkdirp() {
-  if (hasRequiredMkdirp) return mkdirp;
-  hasRequiredMkdirp = 1;
-  var path = require$$0;
-  var fs = require$$0;
-  var _0777 = parseInt("0777", 8);
-  mkdirp = mkdirP.mkdirp = mkdirP.mkdirP = mkdirP;
-  function mkdirP(p2, opts, f2, made) {
-    if (typeof opts === "function") {
-      f2 = opts;
-      opts = {};
-    } else if (!opts || typeof opts !== "object") {
-      opts = { mode: opts };
-    }
-    var mode = opts.mode;
-    var xfs = opts.fs || fs;
-    if (mode === void 0) {
-      mode = _0777;
-    }
-    if (!made) made = null;
-    var cb = f2 || /* istanbul ignore next */
-    function() {
-    };
-    p2 = path.resolve(p2);
-    xfs.mkdir(p2, mode, function(er) {
-      if (!er) {
-        made = made || p2;
-        return cb(null, made);
-      }
-      switch (er.code) {
-        case "ENOENT":
-          if (path.dirname(p2) === p2) return cb(er);
-          mkdirP(path.dirname(p2), opts, function(er2, made2) {
-            if (er2) cb(er2, made2);
-            else mkdirP(p2, opts, cb, made2);
-          });
-          break;
-        // In the case of any other error, just see if there's a dir
-        // there already.  If so, then hooray!  If not, then something
-        // is borked.
-        default:
-          xfs.stat(p2, function(er2, stat) {
-            if (er2 || !stat.isDirectory()) cb(er, made);
-            else cb(null, made);
-          });
-          break;
-      }
-    });
-  }
-  mkdirP.sync = function sync(p2, opts, made) {
-    if (!opts || typeof opts !== "object") {
-      opts = { mode: opts };
-    }
-    var mode = opts.mode;
-    var xfs = opts.fs || fs;
-    if (mode === void 0) {
-      mode = _0777;
-    }
-    if (!made) made = null;
-    p2 = path.resolve(p2);
-    try {
-      xfs.mkdirSync(p2, mode);
-      made = made || p2;
-    } catch (err0) {
-      switch (err0.code) {
-        case "ENOENT":
-          made = sync(path.dirname(p2), opts, made);
-          sync(p2, opts, made);
-          break;
-        // In the case of any other error, just see if there's a dir
-        // there already.  If so, then hooray!  If not, then something
-        // is borked.
-        default:
-          var stat;
-          try {
-            stat = xfs.statSync(p2);
-          } catch (err1) {
-            throw err0;
-          }
-          if (!stat.isDirectory()) throw err0;
-          break;
-      }
-    }
-    return made;
-  };
-  return mkdirp;
-}
-var electronWindowState;
-var hasRequiredElectronWindowState;
-function requireElectronWindowState() {
-  if (hasRequiredElectronWindowState) return electronWindowState;
-  hasRequiredElectronWindowState = 1;
-  const path = require$$0;
-  const electron2 = requireElectron();
-  const jsonfile = requireJsonfile();
-  const mkdirp2 = requireMkdirp();
-  electronWindowState = function(options) {
-    const app2 = electron2.app || electron2.remote.app;
-    const screen = electron2.screen || electron2.remote.screen;
-    let state2;
-    let winRef;
-    let stateChangeTimer;
-    const eventHandlingDelay = 100;
-    const config = Object.assign({
-      file: "window-state.json",
-      path: app2.getPath("userData"),
-      maximize: true,
-      fullScreen: true
-    }, options);
-    const fullStoreFileName = path.join(config.path, config.file);
-    function isNormal(win) {
-      return !win.isMaximized() && !win.isMinimized() && !win.isFullScreen();
-    }
-    function hasBounds() {
-      return state2 && Number.isInteger(state2.x) && Number.isInteger(state2.y) && Number.isInteger(state2.width) && state2.width > 0 && Number.isInteger(state2.height) && state2.height > 0;
-    }
-    function resetStateToDefault() {
-      const displayBounds = screen.getPrimaryDisplay().bounds;
-      state2 = {
-        width: config.defaultWidth || 800,
-        height: config.defaultHeight || 600,
-        x: 0,
-        y: 0,
-        displayBounds
-      };
-    }
-    function windowWithinBounds(bounds) {
-      return state2.x >= bounds.x && state2.y >= bounds.y && state2.x + state2.width <= bounds.x + bounds.width && state2.y + state2.height <= bounds.y + bounds.height;
-    }
-    function ensureWindowVisibleOnSomeDisplay() {
-      const visible = screen.getAllDisplays().some((display) => {
-        return windowWithinBounds(display.bounds);
-      });
-      if (!visible) {
-        return resetStateToDefault();
-      }
-    }
-    function validateState() {
-      const isValid2 = state2 && (hasBounds() || state2.isMaximized || state2.isFullScreen);
-      if (!isValid2) {
-        state2 = null;
-        return;
-      }
-      if (hasBounds() && state2.displayBounds) {
-        ensureWindowVisibleOnSomeDisplay();
-      }
-    }
-    function updateState(win) {
-      win = win || winRef;
-      if (!win) {
-        return;
-      }
-      try {
-        const winBounds = win.getBounds();
-        if (isNormal(win)) {
-          state2.x = winBounds.x;
-          state2.y = winBounds.y;
-          state2.width = winBounds.width;
-          state2.height = winBounds.height;
-        }
-        state2.isMaximized = win.isMaximized();
-        state2.isFullScreen = win.isFullScreen();
-        state2.displayBounds = screen.getDisplayMatching(winBounds).bounds;
-      } catch (err) {
-      }
-    }
-    function saveState(win) {
-      if (win) {
-        updateState(win);
-      }
-      try {
-        mkdirp2.sync(path.dirname(fullStoreFileName));
-        jsonfile.writeFileSync(fullStoreFileName, state2);
-      } catch (err) {
-      }
-    }
-    function stateChangeHandler() {
-      clearTimeout(stateChangeTimer);
-      stateChangeTimer = setTimeout(updateState, eventHandlingDelay);
-    }
-    function closeHandler() {
-      updateState();
-    }
-    function closedHandler() {
-      unmanage();
-      saveState();
-    }
-    function manage(win) {
-      if (config.maximize && state2.isMaximized) {
-        win.maximize();
-      }
-      if (config.fullScreen && state2.isFullScreen) {
-        win.setFullScreen(true);
-      }
-      win.on("resize", stateChangeHandler);
-      win.on("move", stateChangeHandler);
-      win.on("close", closeHandler);
-      win.on("closed", closedHandler);
-      winRef = win;
-    }
-    function unmanage() {
-      if (winRef) {
-        winRef.removeListener("resize", stateChangeHandler);
-        winRef.removeListener("move", stateChangeHandler);
-        clearTimeout(stateChangeTimer);
-        winRef.removeListener("close", closeHandler);
-        winRef.removeListener("closed", closedHandler);
-        winRef = null;
-      }
-    }
-    try {
-      state2 = jsonfile.readFileSync(fullStoreFileName);
-    } catch (err) {
-    }
-    validateState();
-    state2 = Object.assign({
-      width: config.defaultWidth || 800,
-      height: config.defaultHeight || 600
-    }, state2);
-    return {
-      get x() {
-        return state2.x;
-      },
-      get y() {
-        return state2.y;
-      },
-      get width() {
-        return state2.width;
-      },
-      get height() {
-        return state2.height;
-      },
-      get displayBounds() {
-        return state2.displayBounds;
-      },
-      get isMaximized() {
-        return state2.isMaximized;
-      },
-      get isFullScreen() {
-        return state2.isFullScreen;
-      },
-      saveState,
-      unmanage,
-      manage,
-      resetStateToDefault
-    };
-  };
-  return electronWindowState;
-}
-var electronWindowStateExports = requireElectronWindowState();
-const windowStateKeeper = /* @__PURE__ */ getDefaultExportFromCjs$1(electronWindowStateExports);
 let Window$1 = class Window2 {
   /**
    * Constructor
@@ -12929,7 +11725,7 @@ class MainWindow extends Window$1 {
       frame: false,
       darkTheme: true,
       icon: electronExports.nativeImage.createFromPath(
-        (void 0)(process.resourcesPath, "icons", "icon.png")
+        require$$0.join(process.resourcesPath, "icons", "icon.png")
       ),
       titleBarStyle: "hiddenInset",
       useContentSize: true,
@@ -21270,14 +20066,6 @@ const responseErrorHandler = async (error) => {
   return Promise.reject(error);
 };
 axios.interceptors.response.use((request) => request, responseErrorHandler);
-const version$2 = "2.0.0";
-const repository = { "type": "git", "url": "https://github.com/KEYTRON/anilibrix-plus" };
-const meta = { "name": "AniLibrix", "links": { "donate": "https://www.anilibria.tv/pages/donate.php", "telegram": "tg://resolve?domain=anilibrix", "anilibria": "https://anilibria.tv", "unofficial": "tg://resolve?domain=anilibrix_plus" } };
-const app$1 = {
-  version: version$2,
-  repository,
-  meta
-};
 class BaseProxy {
   /**
    * The method used to perform an AJAX-request.
@@ -21357,7 +20145,7 @@ class BaseProxy {
    */
   getRequestHeaders() {
     const headers = {};
-    headers["user-agent"] = `${meta.name}/${version$2}`;
+    headers["user-agent"] = `${meta.name}/${version$3}`;
     const session = useAccountStore().session;
     if (session && session.length > 0) {
       headers.Cookie = `PHPSESSID=${session}; Path=/; Secure; HttpOnly`;
@@ -29411,7 +28199,7 @@ function getPlatform(ssr) {
   const android = match(/android/i);
   const ios = match(/iphone|ipad|ipod/i);
   const cordova = match(/cordova/i);
-  const electron2 = match(/electron/i);
+  const electron = match(/electron/i);
   const chrome = match(/chrome/i);
   const edge = match(/edge/i);
   const firefox = match(/firefox/i);
@@ -29423,7 +28211,7 @@ function getPlatform(ssr) {
     android,
     ios,
     cordova,
-    electron: electron2,
+    electron,
     chrome,
     edge,
     firefox,
@@ -30588,12 +29376,12 @@ const _sfc_main$13 = {
     }
   }
 };
-const _hoisted_1$s = {
+const _hoisted_1$D = {
   class: "py-1",
   style: { lineHeight: 1 }
 };
-const _hoisted_2$c = { class: "font-weight-bold" };
-const _hoisted_3$9 = { class: "caption" };
+const _hoisted_2$g = { class: "font-weight-bold" };
+const _hoisted_3$b = { class: "caption" };
 function _sfc_render$$(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", null, [
     createVNode(VTooltip, {
@@ -30601,9 +29389,9 @@ function _sfc_render$$(_ctx, _cache, $props, $setup, $data, $options) {
       activator: "#toolbar__reload"
     }, {
       default: withCtx(() => [
-        createBaseVNode("div", _hoisted_1$s, [
-          createBaseVNode("div", _hoisted_2$c, toDisplayString(_ctx.$t("toolbar.refreshTitle")), 1),
-          createBaseVNode("div", _hoisted_3$9, toDisplayString(_ctx.$t("toolbar.refreshedAt", { datetime: $options.datetime })), 1)
+        createBaseVNode("div", _hoisted_1$D, [
+          createBaseVNode("div", _hoisted_2$g, toDisplayString(_ctx.$t("toolbar.refreshTitle")), 1),
+          createBaseVNode("div", _hoisted_3$b, toDisplayString(_ctx.$t("toolbar.refreshedAt", { datetime: $options.datetime })), 1)
         ])
       ]),
       _: 1
@@ -34930,29 +33718,6 @@ const VList = genericComponent()({
     };
   }
 });
-const makeVListItemActionProps = propsFactory({
-  start: Boolean,
-  end: Boolean,
-  ...makeComponentProps(),
-  ...makeTagProps()
-}, "VListItemAction");
-const VListItemAction = genericComponent()({
-  name: "VListItemAction",
-  props: makeVListItemActionProps(),
-  setup(props2, _ref) {
-    let {
-      slots
-    } = _ref;
-    useRender(() => createVNode(props2.tag, {
-      "class": normalizeClass(["v-list-item-action", {
-        "v-list-item-action--start": props2.start,
-        "v-list-item-action--end": props2.end
-      }, props2.class]),
-      "style": normalizeStyle(props2.style)
-    }, slots));
-    return {};
-  }
-});
 const makeVMenuProps = propsFactory({
   // TODO
   // disableKeys: Boolean,
@@ -37597,11 +36362,11 @@ const _sfc_main$12 = {
      */
     toRelease(release) {
       if (release) {
-        this.$refs.search.setValue(void 0);
-        toRelease(release);
+        this.search = null;
         this.items = [];
         this.visible = false;
         this._setSearching(false);
+        toRelease(release);
       }
     }
   },
@@ -37621,52 +36386,45 @@ const _sfc_main$12 = {
   }
 };
 function _sfc_render$_(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_avatar = resolveComponent("v-list-item-avatar");
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   return openBlock(), createBlock(VAutocomplete, mergeProps({ items: $data.items, loading: $data.loading }, {
-    solo: "",
-    dense: "",
+    variant: "solo",
+    density: "compact",
     "no-filter": "",
     "hide-details": "",
     "hide-no-data": "",
     "return-object": "",
     ref: "search",
     "item-value": "id",
-    "item-text": "names.ru",
+    "item-title": "names.ru",
     class: "grey darken-2",
     placeholder: _ctx.$t("toolbar.searchPlaceholder"),
-    "append-icon": null,
-    "search-input": $data.search,
-    onBlur: _cache[0] || (_cache[0] = ($event) => $options._setSearching(false)),
-    onFocus: _cache[1] || (_cache[1] = ($event) => $options._setSearching(true)),
-    onInput: $options.toRelease
+    "append-inner-icon": void 0,
+    search: $data.search,
+    "onUpdate:search": _cache[0] || (_cache[0] = ($event) => $data.search = $event),
+    onBlur: _cache[1] || (_cache[1] = ($event) => $options._setSearching(false)),
+    onFocus: _cache[2] || (_cache[2] = ($event) => $options._setSearching(true)),
+    "onUpdate:modelValue": $options.toRelease
   }), {
-    item: withCtx(({ item }) => [
-      createVNode(_component_v_list_item_avatar, null, {
-        default: withCtx(() => [
-          createVNode(VImg, {
-            transition: false,
-            src: item.poster
-          }, null, 8, ["src"])
+    item: withCtx(({ item, props: props2 }) => [
+      createVNode(VListItem, mergeProps(props2, {
+        title: item.raw.names.ru,
+        subtitle: item.raw.names.original
+      }), {
+        prepend: withCtx(() => [
+          createVNode(VAvatar, null, {
+            default: withCtx(() => [
+              createVNode(VImg, {
+                src: item.raw.poster
+              }, null, 8, ["src"])
+            ]),
+            _: 2
+          }, 1024)
         ]),
         _: 2
-      }, 1024),
-      createVNode(_component_v_list_item_content, {
-        style: normalizeStyle({ maxWidth: _ctx.$refs.search.$el.clientWidth + "px" })
-      }, {
-        default: withCtx(() => [
-          createVNode(VListItemTitle, {
-            textContent: toDisplayString(item.names.ru)
-          }, null, 8, ["textContent"]),
-          createVNode(VListItemSubtitle, {
-            textContent: toDisplayString(item.names.original)
-          }, null, 8, ["textContent"])
-        ]),
-        _: 2
-      }, 1032, ["style"])
+      }, 1040, ["title", "subtitle"])
     ]),
     _: 1
-  }, 16, ["placeholder", "search-input", "onInput"]);
+  }, 16, ["placeholder", "search", "onUpdate:modelValue"]);
 }
 const AppToolbarSearch = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["render", _sfc_render$_]]);
 const stringsPluralize = (count, words) => {
@@ -38107,8 +36865,6 @@ const _sfc_main$11 = {
   }
 };
 function _sfc_render$Z(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_avatar = resolveComponent("v-list-item-avatar");
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   return openBlock(), createElementBlock("div", null, [
     !$options._isAuthorized ? (openBlock(), createElementBlock(Fragment$1, { key: 0 }, [
       createVNode(VBtn, {
@@ -38176,8 +36932,8 @@ function _sfc_render$Z(_ctx, _cache, $props, $setup, $data, $options) {
           createVNode(VList, { dense: "" }, {
             default: withCtx(() => [
               createVNode(VListItem, null, {
-                default: withCtx(() => [
-                  createVNode(_component_v_list_item_avatar, null, {
+                prepend: withCtx(() => [
+                  createVNode(VAvatar, null, {
                     default: withCtx(() => [
                       createVNode(VImg, {
                         transition: false,
@@ -38185,18 +36941,15 @@ function _sfc_render$Z(_ctx, _cache, $props, $setup, $data, $options) {
                       }, null, 8, ["src"])
                     ]),
                     _: 1
-                  }),
-                  createVNode(_component_v_list_item_content, null, {
+                  })
+                ]),
+                default: withCtx(() => [
+                  createVNode(VListItemTitle, {
+                    textContent: toDisplayString($options._profile.login)
+                  }, null, 8, ["textContent"]),
+                  createVNode(VListItemSubtitle, null, {
                     default: withCtx(() => [
-                      createVNode(VListItemTitle, {
-                        textContent: toDisplayString($options._profile.login)
-                      }, null, 8, ["textContent"]),
-                      createVNode(VListItemSubtitle, null, {
-                        default: withCtx(() => [
-                          createTextVNode("ID: " + toDisplayString($options._profile.id), 1)
-                        ]),
-                        _: 1
-                      })
+                      createTextVNode("ID: " + toDisplayString($options._profile.id), 1)
                     ]),
                     _: 1
                   })
@@ -38208,18 +36961,13 @@ function _sfc_render$Z(_ctx, _cache, $props, $setup, $data, $options) {
                 return openBlock(), createElementBlock(Fragment$1, { key: k }, [
                   createVNode(VListItem, null, {
                     default: withCtx(() => [
-                      createVNode(_component_v_list_item_content, null, {
-                        default: withCtx(() => [
-                          createVNode(VListItemSubtitle, {
-                            textContent: toDisplayString(item.title)
-                          }, null, 8, ["textContent"]),
-                          createVNode(VListItemTitle, {
-                            textContent: toDisplayString(item.value),
-                            class: "font-weight-bold"
-                          }, null, 8, ["textContent"])
-                        ]),
-                        _: 2
-                      }, 1024)
+                      createVNode(VListItemSubtitle, {
+                        textContent: toDisplayString(item.title)
+                      }, null, 8, ["textContent"]),
+                      createVNode(VListItemTitle, {
+                        textContent: toDisplayString(item.value),
+                        class: "font-weight-bold"
+                      }, null, 8, ["textContent"])
                     ]),
                     _: 2
                   }, 1024),
@@ -38693,36 +37441,31 @@ const _sfc_main$$ = {
   }
 };
 function _sfc_render$X(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_avatar = resolveComponent("v-list-item-avatar");
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   return openBlock(), createBlock(VListItem, {
     onClick: _cache[0] || (_cache[0] = ($event) => $options.toVideo($options.release, $options.episode))
   }, {
-    default: withCtx(() => [
-      createVNode(_component_v_list_item_avatar, null, {
+    prepend: withCtx(() => [
+      createVNode(VAvatar, null, {
         default: withCtx(() => [
           createVNode(VImg, mergeProps({ transition: false }, { src: $options.src }), null, 16)
         ]),
         _: 1
-      }),
-      createVNode(_component_v_list_item_content, null, {
+      })
+    ]),
+    default: withCtx(() => [
+      createVNode(VListItemTitle, {
+        textContent: toDisplayString($options.name)
+      }, null, 8, ["textContent"]),
+      createVNode(VListItemSubtitle, null, {
         default: withCtx(() => [
-          createVNode(VListItemTitle, {
-            textContent: toDisplayString($options.name)
-          }, null, 8, ["textContent"]),
-          createVNode(VListItemSubtitle, null, {
-            default: withCtx(() => [
-              createTextVNode(toDisplayString(_ctx.$t("toolbar.notificationEpisode", { episodeNumber: $options.episodeNumber })), 1)
-            ]),
-            _: 1
-          }),
-          createVNode(VListItemSubtitle, {
-            textContent: toDisplayString($options.datetime),
-            class: "grey--text text--darken-2"
-          }, null, 8, ["textContent"])
+          createTextVNode(toDisplayString(_ctx.$t("toolbar.notificationEpisode", { episodeNumber: $options.episodeNumber })), 1)
         ]),
         _: 1
-      })
+      }),
+      createVNode(VListItemSubtitle, {
+        textContent: toDisplayString($options.datetime),
+        class: "grey--text text--darken-2"
+      }, null, 8, ["textContent"])
     ]),
     _: 1
   });
@@ -39427,297 +38170,6 @@ const VRow = genericComponent()({
   }
 });
 const VSpacer = createSimpleFunctional("v-spacer", "div", "VSpacer");
-const VuetifyLayoutKey = Symbol.for("vuetify:layout");
-const VuetifyLayoutItemKey = Symbol.for("vuetify:layout-item");
-const ROOT_ZINDEX = 1e3;
-const makeLayoutProps = propsFactory({
-  overlaps: {
-    type: Array,
-    default: () => []
-  },
-  fullHeight: Boolean
-}, "layout");
-const makeLayoutItemProps = propsFactory({
-  name: {
-    type: String
-  },
-  order: {
-    type: [Number, String],
-    default: 0
-  },
-  absolute: Boolean
-}, "layout-item");
-function useLayoutItem(options) {
-  const layout = inject$1(VuetifyLayoutKey);
-  if (!layout) throw new Error("[Vuetify] Could not find injected layout");
-  const id = options.id ?? `layout-item-${useId()}`;
-  const vm = getCurrentInstance("useLayoutItem");
-  provide(VuetifyLayoutItemKey, {
-    id
-  });
-  const isKeptAlive = /* @__PURE__ */ shallowRef(false);
-  onDeactivated(() => isKeptAlive.value = true);
-  onActivated(() => isKeptAlive.value = false);
-  const {
-    layoutItemStyles,
-    layoutItemScrimStyles
-  } = layout.register(vm, {
-    ...options,
-    active: computed(() => isKeptAlive.value ? false : options.active.value),
-    id
-  });
-  onBeforeUnmount(() => layout.unregister(id));
-  return {
-    layoutItemStyles,
-    layoutRect: layout.layoutRect,
-    layoutItemScrimStyles
-  };
-}
-const generateLayers = (layout, positions, layoutSizes, activeItems) => {
-  let previousLayer = {
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
-  };
-  const layers = [{
-    id: "",
-    layer: {
-      ...previousLayer
-    }
-  }];
-  for (const id of layout) {
-    const position = positions.get(id);
-    const amount = layoutSizes.get(id);
-    const active = activeItems.get(id);
-    if (!position || !amount || !active) continue;
-    const layer = {
-      ...previousLayer,
-      [position.value]: parseInt(previousLayer[position.value], 10) + (active.value ? parseInt(amount.value, 10) : 0)
-    };
-    layers.push({
-      id,
-      layer
-    });
-    previousLayer = layer;
-  }
-  return layers;
-};
-function createLayout(props2) {
-  const parentLayout = inject$1(VuetifyLayoutKey, null);
-  const rootZIndex = computed(() => parentLayout ? parentLayout.rootZIndex.value - 100 : ROOT_ZINDEX);
-  const registered = /* @__PURE__ */ ref([]);
-  const positions = /* @__PURE__ */ reactive(/* @__PURE__ */ new Map());
-  const layoutSizes = /* @__PURE__ */ reactive(/* @__PURE__ */ new Map());
-  const priorities = /* @__PURE__ */ reactive(/* @__PURE__ */ new Map());
-  const activeItems = /* @__PURE__ */ reactive(/* @__PURE__ */ new Map());
-  const disabledTransitions = /* @__PURE__ */ reactive(/* @__PURE__ */ new Map());
-  const {
-    resizeRef,
-    contentRect: layoutRect
-  } = useResizeObserver();
-  const computedOverlaps = computed(() => {
-    const map = /* @__PURE__ */ new Map();
-    const overlaps = props2.overlaps ?? [];
-    for (const overlap of overlaps.filter((item) => item.includes(":"))) {
-      const [top, bottom] = overlap.split(":");
-      if (!registered.value.includes(top) || !registered.value.includes(bottom)) continue;
-      const topPosition = positions.get(top);
-      const bottomPosition = positions.get(bottom);
-      const topAmount = layoutSizes.get(top);
-      const bottomAmount = layoutSizes.get(bottom);
-      if (!topPosition || !bottomPosition || !topAmount || !bottomAmount) continue;
-      map.set(bottom, {
-        position: topPosition.value,
-        amount: parseInt(topAmount.value, 10)
-      });
-      map.set(top, {
-        position: bottomPosition.value,
-        amount: -parseInt(bottomAmount.value, 10)
-      });
-    }
-    return map;
-  });
-  const layers = computed(() => {
-    const uniquePriorities = [...new Set([...priorities.values()].map((p2) => p2.value))].sort((a, b2) => a - b2);
-    const layout = [];
-    for (const p2 of uniquePriorities) {
-      const items2 = registered.value.filter((id) => priorities.get(id)?.value === p2);
-      layout.push(...items2);
-    }
-    return generateLayers(layout, positions, layoutSizes, activeItems);
-  });
-  const transitionsEnabled = computed(() => {
-    return !Array.from(disabledTransitions.values()).some((ref2) => ref2.value);
-  });
-  const mainRect = computed(() => {
-    return layers.value[layers.value.length - 1].layer;
-  });
-  const mainStyles = /* @__PURE__ */ toRef(() => {
-    return {
-      "--v-layout-left": convertToUnit(mainRect.value.left),
-      "--v-layout-right": convertToUnit(mainRect.value.right),
-      "--v-layout-top": convertToUnit(mainRect.value.top),
-      "--v-layout-bottom": convertToUnit(mainRect.value.bottom),
-      ...transitionsEnabled.value ? void 0 : {
-        transition: "none"
-      }
-    };
-  });
-  const items = computed(() => {
-    return layers.value.slice(1).map((_ref, index) => {
-      let {
-        id
-      } = _ref;
-      const {
-        layer
-      } = layers.value[index];
-      const size = layoutSizes.get(id);
-      const position = positions.get(id);
-      return {
-        id,
-        ...layer,
-        size: Number(size.value),
-        position: position.value
-      };
-    });
-  });
-  const getLayoutItem = (id) => {
-    return items.value.find((item) => item.id === id);
-  };
-  const rootVm = getCurrentInstance("createLayout");
-  const isMounted = /* @__PURE__ */ shallowRef(false);
-  onMounted(() => {
-    isMounted.value = true;
-  });
-  provide(VuetifyLayoutKey, {
-    register: (vm, _ref2) => {
-      let {
-        id,
-        order,
-        position,
-        layoutSize,
-        elementSize,
-        active,
-        disableTransitions,
-        absolute
-      } = _ref2;
-      priorities.set(id, order);
-      positions.set(id, position);
-      layoutSizes.set(id, layoutSize);
-      activeItems.set(id, active);
-      disableTransitions && disabledTransitions.set(id, disableTransitions);
-      const instances = findChildrenWithProvide(VuetifyLayoutItemKey, rootVm?.vnode);
-      const instanceIndex = instances.indexOf(vm);
-      if (instanceIndex > -1) registered.value.splice(instanceIndex, 0, id);
-      else registered.value.push(id);
-      const index = computed(() => items.value.findIndex((i) => i.id === id));
-      const zIndex = computed(() => rootZIndex.value + layers.value.length * 2 - index.value * 2);
-      const layoutItemStyles = computed(() => {
-        const isHorizontal = position.value === "left" || position.value === "right";
-        const isOppositeHorizontal = position.value === "right";
-        const isOppositeVertical = position.value === "bottom";
-        const size = elementSize.value ?? layoutSize.value;
-        const unit = size === 0 ? "%" : "px";
-        const styles = {
-          [position.value]: 0,
-          zIndex: zIndex.value,
-          transform: `translate${isHorizontal ? "X" : "Y"}(${(active.value ? 0 : -(size === 0 ? 100 : size)) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}${unit})`,
-          position: absolute.value || rootZIndex.value !== ROOT_ZINDEX ? "absolute" : "fixed",
-          ...transitionsEnabled.value ? void 0 : {
-            transition: "none"
-          }
-        };
-        if (!isMounted.value) return styles;
-        const item = items.value[index.value];
-        const overlap = computedOverlaps.value.get(id);
-        if (overlap) {
-          item[overlap.position] += overlap.amount;
-        }
-        return {
-          ...styles,
-          height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : elementSize.value ? `${elementSize.value}px` : void 0,
-          left: isOppositeHorizontal ? void 0 : `${item.left}px`,
-          right: isOppositeHorizontal ? `${item.right}px` : void 0,
-          top: position.value !== "bottom" ? `${item.top}px` : void 0,
-          bottom: position.value !== "top" ? `${item.bottom}px` : void 0,
-          width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : elementSize.value ? `${elementSize.value}px` : void 0
-        };
-      });
-      const layoutItemScrimStyles = computed(() => ({
-        zIndex: zIndex.value - 1
-      }));
-      return {
-        layoutItemStyles,
-        layoutItemScrimStyles,
-        zIndex
-      };
-    },
-    unregister: (id) => {
-      priorities.delete(id);
-      positions.delete(id);
-      layoutSizes.delete(id);
-      activeItems.delete(id);
-      disabledTransitions.delete(id);
-      registered.value = registered.value.filter((v2) => v2 !== id);
-    },
-    mainRect,
-    mainStyles,
-    getLayoutItem,
-    items,
-    layoutRect,
-    rootZIndex
-  });
-  const layoutClasses = /* @__PURE__ */ toRef(() => ["v-layout", {
-    "v-layout--full-height": props2.fullHeight
-  }]);
-  const layoutStyles = /* @__PURE__ */ toRef(() => ({
-    zIndex: parentLayout ? rootZIndex.value : void 0,
-    position: parentLayout ? "relative" : void 0,
-    overflow: parentLayout ? "hidden" : void 0
-  }));
-  return {
-    layoutClasses,
-    layoutStyles,
-    getLayoutItem,
-    items,
-    layoutRect,
-    layoutRef: resizeRef
-  };
-}
-const makeVLayoutProps = propsFactory({
-  ...makeComponentProps(),
-  ...makeDimensionProps(),
-  ...makeLayoutProps()
-}, "VLayout");
-const VLayout = genericComponent()({
-  name: "VLayout",
-  props: makeVLayoutProps(),
-  setup(props2, _ref) {
-    let {
-      slots
-    } = _ref;
-    const {
-      layoutClasses,
-      layoutStyles,
-      getLayoutItem,
-      items,
-      layoutRef
-    } = createLayout(props2);
-    const {
-      dimensionStyles
-    } = useDimension(props2);
-    useRender(() => createBaseVNode("div", {
-      "ref": layoutRef,
-      "class": normalizeClass([layoutClasses.value, props2.class]),
-      "style": normalizeStyle([dimensionStyles.value, layoutStyles.value, props2.style])
-    }, [slots.default?.()]));
-    return {
-      getLayoutItem,
-      items
-    };
-  }
-});
 const _sfc_main$_ = {
   components: {
     NotificationItem: AppNotificationsItem
@@ -39744,8 +38196,10 @@ const _sfc_main$_ = {
     }
   }
 };
-const _hoisted_1$r = { class: "grey--text" };
-const _hoisted_2$b = { class: "mr-4" };
+const _hoisted_1$C = { class: "d-flex align-center px-4 py-2" };
+const _hoisted_2$f = { class: "grey--text" };
+const _hoisted_3$a = { class: "d-flex align-center pa-4 caption grey--text" };
+const _hoisted_4$6 = { class: "mr-4" };
 function _sfc_render$W(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_notification_item = resolveComponent("notification-item");
   return openBlock(), createElementBlock("div", null, [
@@ -39791,31 +38245,25 @@ function _sfc_render$W(_ctx, _cache, $props, $setup, $data, $options) {
           elevation: "12"
         }, {
           default: withCtx(() => [
-            createVNode(VLayout, {
-              "align-center": "",
-              class: "px-4 py-2"
-            }, {
-              default: withCtx(() => [
-                createBaseVNode("h5", _hoisted_1$r, toDisplayString(_ctx.$t("toolbar.notificationsWeek")), 1),
-                createVNode(VSpacer),
-                createVNode(VBtn, {
-                  icon: "",
-                  color: "grey",
-                  onClick: _cache[1] || (_cache[1] = withModifiers(() => $options._clearNotifications(), ["stop"]))
-                }, {
-                  default: withCtx(() => [
-                    createVNode(VIcon, null, {
-                      default: withCtx(() => [..._cache[3] || (_cache[3] = [
-                        createTextVNode("mdi-close", -1)
-                      ])]),
-                      _: 1
-                    })
-                  ]),
-                  _: 1
-                })
-              ]),
-              _: 1
-            }),
+            createBaseVNode("div", _hoisted_1$C, [
+              createBaseVNode("h5", _hoisted_2$f, toDisplayString(_ctx.$t("toolbar.notificationsWeek")), 1),
+              createVNode(VSpacer),
+              createVNode(VBtn, {
+                icon: "",
+                color: "grey",
+                onClick: _cache[1] || (_cache[1] = withModifiers(() => $options._clearNotifications(), ["stop"]))
+              }, {
+                default: withCtx(() => [
+                  createVNode(VIcon, null, {
+                    default: withCtx(() => [..._cache[3] || (_cache[3] = [
+                      createTextVNode("mdi-close", -1)
+                    ])]),
+                    _: 1
+                  })
+                ]),
+                _: 1
+              })
+            ]),
             createVNode(VDivider),
             createVNode(VList, { dense: "" }, {
               default: withCtx(() => [
@@ -39832,26 +38280,20 @@ function _sfc_render$W(_ctx, _cache, $props, $setup, $data, $options) {
           _: 1
         })) : (openBlock(), createBlock(VCard, { key: 1 }, {
           default: withCtx(() => [
-            createVNode(VLayout, {
-              "align-center": "",
-              class: "pa-4 caption grey--text"
-            }, {
-              default: withCtx(() => [
-                createBaseVNode("div", _hoisted_2$b, [
-                  createVNode(VIcon, { color: "grey" }, {
-                    default: withCtx(() => [..._cache[4] || (_cache[4] = [
-                      createTextVNode("mdi-bell", -1)
-                    ])]),
-                    _: 1
-                  })
-                ]),
-                createBaseVNode("div", null, [
-                  createBaseVNode("div", null, toDisplayString(_ctx.$t("toolbar.notificationsEmptyTitle")), 1),
-                  createBaseVNode("div", null, toDisplayString(_ctx.$t("toolbar.notificationsEmptySubtitle")), 1)
-                ])
+            createBaseVNode("div", _hoisted_3$a, [
+              createBaseVNode("div", _hoisted_4$6, [
+                createVNode(VIcon, { color: "grey" }, {
+                  default: withCtx(() => [..._cache[4] || (_cache[4] = [
+                    createTextVNode("mdi-bell", -1)
+                  ])]),
+                  _: 1
+                })
               ]),
-              _: 1
-            })
+              createBaseVNode("div", null, [
+                createBaseVNode("div", null, toDisplayString(_ctx.$t("toolbar.notificationsEmptyTitle")), 1),
+                createBaseVNode("div", null, toDisplayString(_ctx.$t("toolbar.notificationsEmptySubtitle")), 1)
+              ])
+            ])
           ]),
           _: 1
         }))
@@ -40142,6 +38584,264 @@ const VToolbar = genericComponent()({
     };
   }
 });
+const VuetifyLayoutKey = Symbol.for("vuetify:layout");
+const VuetifyLayoutItemKey = Symbol.for("vuetify:layout-item");
+const ROOT_ZINDEX = 1e3;
+const makeLayoutProps = propsFactory({
+  overlaps: {
+    type: Array,
+    default: () => []
+  },
+  fullHeight: Boolean
+}, "layout");
+const makeLayoutItemProps = propsFactory({
+  name: {
+    type: String
+  },
+  order: {
+    type: [Number, String],
+    default: 0
+  },
+  absolute: Boolean
+}, "layout-item");
+function useLayoutItem(options) {
+  const layout = inject$1(VuetifyLayoutKey);
+  if (!layout) throw new Error("[Vuetify] Could not find injected layout");
+  const id = options.id ?? `layout-item-${useId()}`;
+  const vm = getCurrentInstance("useLayoutItem");
+  provide(VuetifyLayoutItemKey, {
+    id
+  });
+  const isKeptAlive = /* @__PURE__ */ shallowRef(false);
+  onDeactivated(() => isKeptAlive.value = true);
+  onActivated(() => isKeptAlive.value = false);
+  const {
+    layoutItemStyles,
+    layoutItemScrimStyles
+  } = layout.register(vm, {
+    ...options,
+    active: computed(() => isKeptAlive.value ? false : options.active.value),
+    id
+  });
+  onBeforeUnmount(() => layout.unregister(id));
+  return {
+    layoutItemStyles,
+    layoutRect: layout.layoutRect,
+    layoutItemScrimStyles
+  };
+}
+const generateLayers = (layout, positions, layoutSizes, activeItems) => {
+  let previousLayer = {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+  };
+  const layers = [{
+    id: "",
+    layer: {
+      ...previousLayer
+    }
+  }];
+  for (const id of layout) {
+    const position = positions.get(id);
+    const amount = layoutSizes.get(id);
+    const active = activeItems.get(id);
+    if (!position || !amount || !active) continue;
+    const layer = {
+      ...previousLayer,
+      [position.value]: parseInt(previousLayer[position.value], 10) + (active.value ? parseInt(amount.value, 10) : 0)
+    };
+    layers.push({
+      id,
+      layer
+    });
+    previousLayer = layer;
+  }
+  return layers;
+};
+function createLayout(props2) {
+  const parentLayout = inject$1(VuetifyLayoutKey, null);
+  const rootZIndex = computed(() => parentLayout ? parentLayout.rootZIndex.value - 100 : ROOT_ZINDEX);
+  const registered = /* @__PURE__ */ ref([]);
+  const positions = /* @__PURE__ */ reactive(/* @__PURE__ */ new Map());
+  const layoutSizes = /* @__PURE__ */ reactive(/* @__PURE__ */ new Map());
+  const priorities = /* @__PURE__ */ reactive(/* @__PURE__ */ new Map());
+  const activeItems = /* @__PURE__ */ reactive(/* @__PURE__ */ new Map());
+  const disabledTransitions = /* @__PURE__ */ reactive(/* @__PURE__ */ new Map());
+  const {
+    resizeRef,
+    contentRect: layoutRect
+  } = useResizeObserver();
+  const computedOverlaps = computed(() => {
+    const map = /* @__PURE__ */ new Map();
+    const overlaps = props2.overlaps ?? [];
+    for (const overlap of overlaps.filter((item) => item.includes(":"))) {
+      const [top, bottom] = overlap.split(":");
+      if (!registered.value.includes(top) || !registered.value.includes(bottom)) continue;
+      const topPosition = positions.get(top);
+      const bottomPosition = positions.get(bottom);
+      const topAmount = layoutSizes.get(top);
+      const bottomAmount = layoutSizes.get(bottom);
+      if (!topPosition || !bottomPosition || !topAmount || !bottomAmount) continue;
+      map.set(bottom, {
+        position: topPosition.value,
+        amount: parseInt(topAmount.value, 10)
+      });
+      map.set(top, {
+        position: bottomPosition.value,
+        amount: -parseInt(bottomAmount.value, 10)
+      });
+    }
+    return map;
+  });
+  const layers = computed(() => {
+    const uniquePriorities = [...new Set([...priorities.values()].map((p2) => p2.value))].sort((a, b2) => a - b2);
+    const layout = [];
+    for (const p2 of uniquePriorities) {
+      const items2 = registered.value.filter((id) => priorities.get(id)?.value === p2);
+      layout.push(...items2);
+    }
+    return generateLayers(layout, positions, layoutSizes, activeItems);
+  });
+  const transitionsEnabled = computed(() => {
+    return !Array.from(disabledTransitions.values()).some((ref2) => ref2.value);
+  });
+  const mainRect = computed(() => {
+    return layers.value[layers.value.length - 1].layer;
+  });
+  const mainStyles = /* @__PURE__ */ toRef(() => {
+    return {
+      "--v-layout-left": convertToUnit(mainRect.value.left),
+      "--v-layout-right": convertToUnit(mainRect.value.right),
+      "--v-layout-top": convertToUnit(mainRect.value.top),
+      "--v-layout-bottom": convertToUnit(mainRect.value.bottom),
+      ...transitionsEnabled.value ? void 0 : {
+        transition: "none"
+      }
+    };
+  });
+  const items = computed(() => {
+    return layers.value.slice(1).map((_ref, index) => {
+      let {
+        id
+      } = _ref;
+      const {
+        layer
+      } = layers.value[index];
+      const size = layoutSizes.get(id);
+      const position = positions.get(id);
+      return {
+        id,
+        ...layer,
+        size: Number(size.value),
+        position: position.value
+      };
+    });
+  });
+  const getLayoutItem = (id) => {
+    return items.value.find((item) => item.id === id);
+  };
+  const rootVm = getCurrentInstance("createLayout");
+  const isMounted = /* @__PURE__ */ shallowRef(false);
+  onMounted(() => {
+    isMounted.value = true;
+  });
+  provide(VuetifyLayoutKey, {
+    register: (vm, _ref2) => {
+      let {
+        id,
+        order,
+        position,
+        layoutSize,
+        elementSize,
+        active,
+        disableTransitions,
+        absolute
+      } = _ref2;
+      priorities.set(id, order);
+      positions.set(id, position);
+      layoutSizes.set(id, layoutSize);
+      activeItems.set(id, active);
+      disableTransitions && disabledTransitions.set(id, disableTransitions);
+      const instances = findChildrenWithProvide(VuetifyLayoutItemKey, rootVm?.vnode);
+      const instanceIndex = instances.indexOf(vm);
+      if (instanceIndex > -1) registered.value.splice(instanceIndex, 0, id);
+      else registered.value.push(id);
+      const index = computed(() => items.value.findIndex((i) => i.id === id));
+      const zIndex = computed(() => rootZIndex.value + layers.value.length * 2 - index.value * 2);
+      const layoutItemStyles = computed(() => {
+        const isHorizontal = position.value === "left" || position.value === "right";
+        const isOppositeHorizontal = position.value === "right";
+        const isOppositeVertical = position.value === "bottom";
+        const size = elementSize.value ?? layoutSize.value;
+        const unit = size === 0 ? "%" : "px";
+        const styles = {
+          [position.value]: 0,
+          zIndex: zIndex.value,
+          transform: `translate${isHorizontal ? "X" : "Y"}(${(active.value ? 0 : -(size === 0 ? 100 : size)) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}${unit})`,
+          position: absolute.value || rootZIndex.value !== ROOT_ZINDEX ? "absolute" : "fixed",
+          ...transitionsEnabled.value ? void 0 : {
+            transition: "none"
+          }
+        };
+        if (!isMounted.value) return styles;
+        const item = items.value[index.value];
+        const overlap = computedOverlaps.value.get(id);
+        if (overlap) {
+          item[overlap.position] += overlap.amount;
+        }
+        return {
+          ...styles,
+          height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : elementSize.value ? `${elementSize.value}px` : void 0,
+          left: isOppositeHorizontal ? void 0 : `${item.left}px`,
+          right: isOppositeHorizontal ? `${item.right}px` : void 0,
+          top: position.value !== "bottom" ? `${item.top}px` : void 0,
+          bottom: position.value !== "top" ? `${item.bottom}px` : void 0,
+          width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : elementSize.value ? `${elementSize.value}px` : void 0
+        };
+      });
+      const layoutItemScrimStyles = computed(() => ({
+        zIndex: zIndex.value - 1
+      }));
+      return {
+        layoutItemStyles,
+        layoutItemScrimStyles,
+        zIndex
+      };
+    },
+    unregister: (id) => {
+      priorities.delete(id);
+      positions.delete(id);
+      layoutSizes.delete(id);
+      activeItems.delete(id);
+      disabledTransitions.delete(id);
+      registered.value = registered.value.filter((v2) => v2 !== id);
+    },
+    mainRect,
+    mainStyles,
+    getLayoutItem,
+    items,
+    layoutRect,
+    rootZIndex
+  });
+  const layoutClasses = /* @__PURE__ */ toRef(() => ["v-layout", {
+    "v-layout--full-height": props2.fullHeight
+  }]);
+  const layoutStyles = /* @__PURE__ */ toRef(() => ({
+    zIndex: parentLayout ? rootZIndex.value : void 0,
+    position: parentLayout ? "relative" : void 0,
+    overflow: parentLayout ? "hidden" : void 0
+  }));
+  return {
+    layoutClasses,
+    layoutStyles,
+    getLayoutItem,
+    items,
+    layoutRect,
+    layoutRef: resizeRef
+  };
+}
 const makeScrollProps = propsFactory({
   scrollTarget: {
     type: String
@@ -40481,9 +39181,9 @@ const _sfc_main$Z = {
     }
   }
 };
-const _hoisted_1$q = { class: "d-flex align-center mr-4" };
-const _hoisted_2$a = { class: "d-flex align-center ml-auto" };
-const _hoisted_3$8 = { class: "mr-2" };
+const _hoisted_1$B = { class: "d-flex align-center mr-4" };
+const _hoisted_2$e = { class: "d-flex align-center ml-auto" };
+const _hoisted_3$9 = { class: "mr-2" };
 function _sfc_render$V(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_search = resolveComponent("search");
   const _component_update = resolveComponent("update");
@@ -40497,7 +39197,7 @@ function _sfc_render$V(_ctx, _cache, $props, $setup, $data, $options) {
     class: "toolbar shrink"
   }, {
     default: withCtx(() => [
-      createBaseVNode("div", _hoisted_1$q, [
+      createBaseVNode("div", _hoisted_1$B, [
         createVNode(VBtn, {
           icon: "",
           small: "",
@@ -40602,8 +39302,8 @@ function _sfc_render$V(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
       }),
       createVNode(_component_search, { class: "mr-4" }),
-      createBaseVNode("div", _hoisted_2$a, [
-        createBaseVNode("div", _hoisted_3$8, [
+      createBaseVNode("div", _hoisted_2$e, [
+        createBaseVNode("div", _hoisted_3$9, [
           createVNode(VBtn, {
             disabled: $data.diceIntervalId !== null,
             icon: "",
@@ -41127,25 +39827,19 @@ const _sfc_main$Y = {
     if (this.tagUrl === null) this.toRoute();
   }
 };
-const _hoisted_1$p = {
+const _hoisted_1$A = { class: "d-flex flex-column fill-height ads black" };
+const _hoisted_2$d = {
   ref: "video",
   autoplay: "",
   muted: "",
   playsinline: ""
 };
 function _sfc_render$U(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createBlock(VLayout, {
-    column: "",
-    "fill-height": "",
-    class: "ads black"
-  }, {
-    default: withCtx(() => [
-      createBaseVNode("video", _hoisted_1$p, null, 512)
-    ]),
-    _: 1
-  });
+  return openBlock(), createElementBlock("div", _hoisted_1$A, [
+    createBaseVNode("video", _hoisted_2$d, null, 512)
+  ]);
 }
-const AdsView = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [["render", _sfc_render$U], ["__scopeId", "data-v-34e3d857"]]);
+const AdsView = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [["render", _sfc_render$U], ["__scopeId", "data-v-5e1ee65c"]]);
 const adsRoutes = [
   {
     name: "ads",
@@ -41166,7 +39860,7 @@ const blankRoutes = [
         hide_toolbar: true
       }
     },
-    component: () => __vitePreload(() => import("./index-D5DSTe4e.js"), true ? __vite__mapDeps([0,1,2]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./index-CpTflkF2.js"), true ? __vite__mapDeps([0,1,2,3]) : void 0, import.meta.url)
   }
 ];
 const props$A = {
@@ -41505,110 +40199,107 @@ const _sfc_main$V = {
     this.is_mounted = true;
   }
 };
-const _hoisted_1$o = {
+const _hoisted_1$z = {
+  class: "d-flex align-center justify-center",
+  ref: "play"
+};
+const _hoisted_2$c = {
   key: 0,
   class: "play__tooltip py-2"
 };
-const _hoisted_2$9 = { class: "caption pb-1" };
-const _hoisted_3$7 = { class: "font-weight-bold" };
-const _hoisted_4$3 = {
+const _hoisted_3$8 = { class: "caption pb-1" };
+const _hoisted_4$5 = { class: "font-weight-bold" };
+const _hoisted_5$3 = {
   key: 0,
   class: "play__tooltip py-2"
 };
-const _hoisted_5$2 = { class: "caption pb-1" };
-const _hoisted_6$2 = { class: "font-weight-bold" };
+const _hoisted_6$3 = { class: "caption pb-1" };
+const _hoisted_7$3 = { class: "font-weight-bold" };
 function _sfc_render$R(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createBlock(VLayout, {
-    "align-center": "",
-    "justify-center": "",
-    ref: "play"
-  }, {
-    default: withCtx(() => [
-      $data.is_mounted ? (openBlock(), createElementBlock(Fragment$1, { key: 0 }, [
-        createVNode(VTooltip, {
-          left: "",
-          attach: _ctx.$refs.play
-        }, {
-          activator: withCtx(({ on }) => [
-            createVNode(VBtn, mergeProps(toHandlers(on), {
-              icon: "",
-              large: "",
-              disabled: !$options.previous,
-              onClick: _cache[0] || (_cache[0] = ($event) => $options.toVideo(_ctx.release, $options.previous, { fromStart: true }))
-            }), {
-              default: withCtx(() => [
-                createVNode(VIcon, null, {
-                  default: withCtx(() => [..._cache[3] || (_cache[3] = [
-                    createTextVNode("mdi-skip-previous", -1)
-                  ])]),
-                  _: 1
-                })
-              ]),
-              _: 1
-            }, 16, ["disabled"])
-          ]),
-          default: withCtx(() => [
-            $options.previous ? (openBlock(), createElementBlock("div", _hoisted_1$o, [
-              createBaseVNode("div", _hoisted_2$9, toDisplayString($options.title), 1),
-              createBaseVNode("div", _hoisted_3$7, toDisplayString($options.previous.title), 1)
-            ])) : createCommentVNode("", true)
-          ]),
-          _: 1
-        }, 8, ["attach"]),
-        createVNode(VBtn, {
-          icon: "",
-          class: "mx-2",
-          width: "90",
-          height: "90",
-          disabled: $data.is_buffering,
-          onClick: _cache[1] || (_cache[1] = ($event) => _ctx.player.togglePlay())
-        }, {
-          default: withCtx(() => [
-            createVNode(VIcon, { size: "40" }, {
-              default: withCtx(() => [
-                createTextVNode("mdi-" + toDisplayString($data.is_playing ? "pause" : "play"), 1)
-              ]),
-              _: 1
-            })
-          ]),
-          _: 1
-        }, 8, ["disabled"]),
-        createVNode(VTooltip, {
-          right: "",
-          attach: _ctx.$refs.play
-        }, {
-          activator: withCtx(({ on }) => [
-            createVNode(VBtn, mergeProps(toHandlers(on), {
-              icon: "",
-              large: "",
-              disabled: !$options.next,
-              onClick: _cache[2] || (_cache[2] = ($event) => $options.toVideo(_ctx.release, $options.next, { fromStart: true }))
-            }), {
-              default: withCtx(() => [
-                createVNode(VIcon, null, {
-                  default: withCtx(() => [..._cache[4] || (_cache[4] = [
-                    createTextVNode("mdi-skip-next", -1)
-                  ])]),
-                  _: 1
-                })
-              ]),
-              _: 1
-            }, 16, ["disabled"])
-          ]),
-          default: withCtx(() => [
-            $options.next ? (openBlock(), createElementBlock("div", _hoisted_4$3, [
-              createBaseVNode("div", _hoisted_5$2, toDisplayString($options.title), 1),
-              createBaseVNode("div", _hoisted_6$2, toDisplayString($options.next.title), 1)
-            ])) : createCommentVNode("", true)
-          ]),
-          _: 1
-        }, 8, ["attach"])
-      ], 64)) : createCommentVNode("", true)
-    ]),
-    _: 1
-  }, 512);
+  return openBlock(), createElementBlock("div", _hoisted_1$z, [
+    $data.is_mounted ? (openBlock(), createElementBlock(Fragment$1, { key: 0 }, [
+      createVNode(VTooltip, {
+        left: "",
+        attach: _ctx.$refs.play
+      }, {
+        activator: withCtx(({ on }) => [
+          createVNode(VBtn, mergeProps(toHandlers(on), {
+            icon: "",
+            large: "",
+            disabled: !$options.previous,
+            onClick: _cache[0] || (_cache[0] = ($event) => $options.toVideo(_ctx.release, $options.previous, { fromStart: true }))
+          }), {
+            default: withCtx(() => [
+              createVNode(VIcon, null, {
+                default: withCtx(() => [..._cache[3] || (_cache[3] = [
+                  createTextVNode("mdi-skip-previous", -1)
+                ])]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 16, ["disabled"])
+        ]),
+        default: withCtx(() => [
+          $options.previous ? (openBlock(), createElementBlock("div", _hoisted_2$c, [
+            createBaseVNode("div", _hoisted_3$8, toDisplayString($options.title), 1),
+            createBaseVNode("div", _hoisted_4$5, toDisplayString($options.previous.title), 1)
+          ])) : createCommentVNode("", true)
+        ]),
+        _: 1
+      }, 8, ["attach"]),
+      createVNode(VBtn, {
+        icon: "",
+        class: "mx-2",
+        width: "90",
+        height: "90",
+        disabled: $data.is_buffering,
+        onClick: _cache[1] || (_cache[1] = ($event) => _ctx.player.togglePlay())
+      }, {
+        default: withCtx(() => [
+          createVNode(VIcon, { size: "40" }, {
+            default: withCtx(() => [
+              createTextVNode("mdi-" + toDisplayString($data.is_playing ? "pause" : "play"), 1)
+            ]),
+            _: 1
+          })
+        ]),
+        _: 1
+      }, 8, ["disabled"]),
+      createVNode(VTooltip, {
+        right: "",
+        attach: _ctx.$refs.play
+      }, {
+        activator: withCtx(({ on }) => [
+          createVNode(VBtn, mergeProps(toHandlers(on), {
+            icon: "",
+            large: "",
+            disabled: !$options.next,
+            onClick: _cache[2] || (_cache[2] = ($event) => $options.toVideo(_ctx.release, $options.next, { fromStart: true }))
+          }), {
+            default: withCtx(() => [
+              createVNode(VIcon, null, {
+                default: withCtx(() => [..._cache[4] || (_cache[4] = [
+                  createTextVNode("mdi-skip-next", -1)
+                ])]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 16, ["disabled"])
+        ]),
+        default: withCtx(() => [
+          $options.next ? (openBlock(), createElementBlock("div", _hoisted_5$3, [
+            createBaseVNode("div", _hoisted_6$3, toDisplayString($options.title), 1),
+            createBaseVNode("div", _hoisted_7$3, toDisplayString($options.next.title), 1)
+          ])) : createCommentVNode("", true)
+        ]),
+        _: 1
+      }, 8, ["attach"])
+    ], 64)) : createCommentVNode("", true)
+  ], 512);
 }
-const PlayerPlay = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$R], ["__scopeId", "data-v-725d8516"]]);
+const PlayerPlay = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$R], ["__scopeId", "data-v-fe36f1d6"]]);
 const props$x = {
   player: {
     type: Object,
@@ -41726,20 +40417,20 @@ const _sfc_main$U = {
     }
   }
 };
-const _hoisted_1$n = { class: "player__next" };
-const _hoisted_2$8 = {
+const _hoisted_1$y = { class: "player__next" };
+const _hoisted_2$b = {
   key: 0,
   class: "player__next__label player__next__label--top"
 };
-const _hoisted_3$6 = { class: "player__next__label player__next__label--bottom" };
+const _hoisted_3$7 = { class: "player__next__label player__next__label--bottom" };
 function _sfc_render$Q(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createBlock(VOverlay, {
     value: $data.visible,
     opacity: 0.85
   }, {
     default: withCtx(() => [
-      withDirectives(createBaseVNode("div", _hoisted_1$n, [
-        _ctx.release && $options.next ? (openBlock(), createElementBlock("div", _hoisted_2$8, [
+      withDirectives(createBaseVNode("div", _hoisted_1$y, [
+        _ctx.release && $options.next ? (openBlock(), createElementBlock("div", _hoisted_2$b, [
           createBaseVNode("h2", null, toDisplayString($options.title), 1),
           createBaseVNode("h4", null, toDisplayString($options.nextEpisodeTitle), 1)
         ])) : createCommentVNode("", true),
@@ -41769,7 +40460,7 @@ function _sfc_render$Q(_ctx, _cache, $props, $setup, $data, $options) {
           ]),
           _: 1
         }, 16),
-        createBaseVNode("div", _hoisted_3$6, [
+        createBaseVNode("div", _hoisted_3$7, [
           createVNode(VBtn, {
             text: "",
             onClick: $options.cancel
@@ -41889,16 +40580,16 @@ const _sfc_main$T = {
     this.player.on("timeupdate", () => this.current_time = this.player.currentTime);
   }
 };
-const _hoisted_1$m = {
+const _hoisted_1$x = {
   ref: "button",
   class: "playback__button"
 };
-const _hoisted_2$7 = {
+const _hoisted_2$a = {
   key: 1,
   class: "font-weight-bold"
 };
 function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
-  return withDirectives((openBlock(), createElementBlock("div", _hoisted_1$m, [
+  return withDirectives((openBlock(), createElementBlock("div", _hoisted_1$x, [
     $data.icon ? (openBlock(), createBlock(VIcon, {
       key: 0,
       size: "32"
@@ -41908,7 +40599,7 @@ function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
       ]),
       _: 1
     })) : createCommentVNode("", true),
-    $data.content ? (openBlock(), createElementBlock("span", _hoisted_2$7, toDisplayString($data.content), 1)) : createCommentVNode("", true)
+    $data.content ? (openBlock(), createElementBlock("span", _hoisted_2$a, toDisplayString($data.content), 1)) : createCommentVNode("", true)
   ], 512)), [
     [vShow, $data.visible]
   ]);
@@ -42135,198 +40826,195 @@ const _sfc_main$S = {
     this.isMounted = true;
   }
 };
-const _hoisted_1$l = { class: "caption font-weight-bold" };
+const _hoisted_1$w = {
+  class: "d-flex align-center justify-start",
+  ref: "links"
+};
+const _hoisted_2$9 = { class: "caption font-weight-bold" };
 function _sfc_render$O(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createBlock(VLayout, {
-    "align-center": "",
-    "justify-start": "",
-    ref: "links"
-  }, {
-    default: withCtx(() => [
-      $data.isMounted ? (openBlock(), createElementBlock(Fragment$1, { key: 0 }, [
-        createVNode(VTooltip, {
-          right: "",
-          attach: _ctx.$refs.links
-        }, {
-          activator: withCtx(({ on }) => [
-            createVNode(VBtn, mergeProps(toHandlers(on), {
-              icon: "",
-              large: "",
-              onClick: $options.toReleases
-            }), {
-              default: withCtx(() => [
-                createVNode(VIcon, { size: "24" }, {
-                  default: withCtx(() => [..._cache[4] || (_cache[4] = [
-                    createTextVNode("mdi-view-column", -1)
-                  ])]),
-                  _: 1
-                })
-              ]),
-              _: 1
-            }, 16, ["onClick"])
-          ]),
-          default: withCtx(() => [
-            createBaseVNode("span", null, toDisplayString(_ctx.$t("player.toReleases")), 1)
-          ]),
-          _: 1
-        }, 8, ["attach"]),
-        createVNode(VTooltip, {
-          right: "",
-          attach: _ctx.$refs.links
-        }, {
-          activator: withCtx(({ on }) => [
-            createVNode(VBtn, mergeProps(toHandlers(on), {
-              icon: "",
-              large: "",
-              onClick: _cache[0] || (_cache[0] = () => $options.toRelease(_ctx.release))
-            }), {
-              default: withCtx(() => [
-                createVNode(VAvatar, { size: "24" }, {
-                  default: withCtx(() => [
-                    createBaseVNode("img", normalizeProps(guardReactiveProps({ src: $options.src })), null, 16)
-                  ]),
-                  _: 1
-                })
-              ]),
-              _: 1
-            }, 16)
-          ]),
-          default: withCtx(() => [
-            createBaseVNode("span", null, toDisplayString($options.title), 1)
-          ]),
-          _: 1
-        }, 8, ["attach"]),
-        createVNode(VTooltip, {
-          right: "",
-          attach: _ctx.$refs.links
-        }, {
-          activator: withCtx(({ on }) => [
-            createVNode(VBtn, mergeProps(toHandlers(on), {
-              icon: "",
-              large: "",
-              to: { name: "catalog" }
-            }), {
-              default: withCtx(() => [
-                createVNode(VIcon, { size: "24" }, {
-                  default: withCtx(() => [..._cache[5] || (_cache[5] = [
-                    createTextVNode("mdi-folder-text-outline", -1)
-                  ])]),
-                  _: 1
-                })
-              ]),
-              _: 1
-            }, 16)
-          ]),
-          default: withCtx(() => [
-            createBaseVNode("span", null, toDisplayString(_ctx.$t("player.toCatalog")), 1)
-          ]),
-          _: 1
-        }, 8, ["attach"]),
-        createVNode(VTooltip, {
-          right: "",
-          attach: _ctx.$refs.links
-        }, {
-          activator: withCtx(({ on }) => [
-            createVNode(VBtn, mergeProps(toHandlers(on), {
-              icon: "",
-              large: "",
-              onClick: _cache[1] || (_cache[1] = () => $options.toFavorites())
-            }), {
-              default: withCtx(() => [
-                createVNode(VIcon, { size: "24" }, {
-                  default: withCtx(() => [..._cache[6] || (_cache[6] = [
-                    createTextVNode("mdi-star", -1)
-                  ])]),
-                  _: 1
-                })
-              ]),
-              _: 1
-            }, 16)
-          ]),
-          default: withCtx(() => [
-            createBaseVNode("span", null, toDisplayString(_ctx.$t("player.toFavorites")), 1)
-          ]),
-          _: 1
-        }, 8, ["attach"]),
-        createVNode(VTooltip, {
-          right: "",
-          attach: _ctx.$refs.links
-        }, {
-          activator: withCtx(({ on }) => [
-            createVNode(VBtn, mergeProps(toHandlers(on), {
-              icon: "",
-              large: "",
-              onClick: _cache[2] || (_cache[2] = ($event) => _ctx.episodes().show())
-            }), {
-              default: withCtx(() => [
-                createVNode(VIcon, { size: "24" }, {
-                  default: withCtx(() => [..._cache[7] || (_cache[7] = [
-                    createTextVNode("mdi-playlist-play", -1)
-                  ])]),
-                  _: 1
-                })
-              ]),
-              _: 1
-            }, 16)
-          ]),
-          default: withCtx(() => [
-            createBaseVNode("span", null, toDisplayString(_ctx.$t("player.toEpisodes")), 1)
-          ]),
-          _: 1
-        }, 8, ["attach"]),
-        _ctx.source.type === "torrent" ? (openBlock(), createBlock(VTooltip, {
-          key: 0,
-          right: "",
-          attach: _ctx.$refs.links
-        }, {
-          activator: withCtx(({ on }) => [
-            createVNode(VBtn, mergeProps(toHandlers(on), {
-              icon: "",
-              large: "",
-              onClick: _cache[3] || (_cache[3] = ($event) => _ctx.torrent().show())
-            }), {
-              default: withCtx(() => [
-                createVNode(VIcon, { size: "20" }, {
-                  default: withCtx(() => [..._cache[8] || (_cache[8] = [
-                    createTextVNode("mdi-file-table-box-multiple", -1)
-                  ])]),
-                  _: 1
-                })
-              ]),
-              _: 1
-            }, 16)
-          ]),
-          default: withCtx(() => [
-            createBaseVNode("span", null, toDisplayString(_ctx.$t("player.toTorrent")), 1)
-          ]),
-          _: 1
-        }, 8, ["attach"])) : createCommentVNode("", true),
-        $options._opening_skip_button ? (openBlock(), createBlock(VTooltip, {
-          key: 1,
-          right: "",
-          attach: _ctx.$refs.links
-        }, {
-          activator: withCtx(({ on }) => [
-            createVNode(VBtn, mergeProps(toHandlers(on), {
-              icon: "",
-              large: "",
-              onClick: $options.skipOpening
-            }), {
-              default: withCtx(() => [
-                createBaseVNode("span", _hoisted_1$l, "+" + toDisplayString($options._opening_skip_time), 1)
-              ]),
-              _: 1
-            }, 16, ["onClick"])
-          ]),
-          default: withCtx(() => [
-            createBaseVNode("span", null, toDisplayString(_ctx.$t("player.openingSeek")), 1)
-          ]),
-          _: 1
-        }, 8, ["attach"])) : createCommentVNode("", true)
-      ], 64)) : createCommentVNode("", true)
-    ]),
-    _: 1
-  }, 512);
+  return openBlock(), createElementBlock("div", _hoisted_1$w, [
+    $data.isMounted ? (openBlock(), createElementBlock(Fragment$1, { key: 0 }, [
+      createVNode(VTooltip, {
+        right: "",
+        attach: _ctx.$refs.links
+      }, {
+        activator: withCtx(({ on }) => [
+          createVNode(VBtn, mergeProps(toHandlers(on), {
+            icon: "",
+            large: "",
+            onClick: $options.toReleases
+          }), {
+            default: withCtx(() => [
+              createVNode(VIcon, { size: "24" }, {
+                default: withCtx(() => [..._cache[4] || (_cache[4] = [
+                  createTextVNode("mdi-view-column", -1)
+                ])]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 16, ["onClick"])
+        ]),
+        default: withCtx(() => [
+          createBaseVNode("span", null, toDisplayString(_ctx.$t("player.toReleases")), 1)
+        ]),
+        _: 1
+      }, 8, ["attach"]),
+      createVNode(VTooltip, {
+        right: "",
+        attach: _ctx.$refs.links
+      }, {
+        activator: withCtx(({ on }) => [
+          createVNode(VBtn, mergeProps(toHandlers(on), {
+            icon: "",
+            large: "",
+            onClick: _cache[0] || (_cache[0] = () => $options.toRelease(_ctx.release))
+          }), {
+            default: withCtx(() => [
+              createVNode(VAvatar, { size: "24" }, {
+                default: withCtx(() => [
+                  createBaseVNode("img", normalizeProps(guardReactiveProps({ src: $options.src })), null, 16)
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 16)
+        ]),
+        default: withCtx(() => [
+          createBaseVNode("span", null, toDisplayString($options.title), 1)
+        ]),
+        _: 1
+      }, 8, ["attach"]),
+      createVNode(VTooltip, {
+        right: "",
+        attach: _ctx.$refs.links
+      }, {
+        activator: withCtx(({ on }) => [
+          createVNode(VBtn, mergeProps(toHandlers(on), {
+            icon: "",
+            large: "",
+            to: { name: "catalog" }
+          }), {
+            default: withCtx(() => [
+              createVNode(VIcon, { size: "24" }, {
+                default: withCtx(() => [..._cache[5] || (_cache[5] = [
+                  createTextVNode("mdi-folder-text-outline", -1)
+                ])]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 16)
+        ]),
+        default: withCtx(() => [
+          createBaseVNode("span", null, toDisplayString(_ctx.$t("player.toCatalog")), 1)
+        ]),
+        _: 1
+      }, 8, ["attach"]),
+      createVNode(VTooltip, {
+        right: "",
+        attach: _ctx.$refs.links
+      }, {
+        activator: withCtx(({ on }) => [
+          createVNode(VBtn, mergeProps(toHandlers(on), {
+            icon: "",
+            large: "",
+            onClick: _cache[1] || (_cache[1] = () => $options.toFavorites())
+          }), {
+            default: withCtx(() => [
+              createVNode(VIcon, { size: "24" }, {
+                default: withCtx(() => [..._cache[6] || (_cache[6] = [
+                  createTextVNode("mdi-star", -1)
+                ])]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 16)
+        ]),
+        default: withCtx(() => [
+          createBaseVNode("span", null, toDisplayString(_ctx.$t("player.toFavorites")), 1)
+        ]),
+        _: 1
+      }, 8, ["attach"]),
+      createVNode(VTooltip, {
+        right: "",
+        attach: _ctx.$refs.links
+      }, {
+        activator: withCtx(({ on }) => [
+          createVNode(VBtn, mergeProps(toHandlers(on), {
+            icon: "",
+            large: "",
+            onClick: _cache[2] || (_cache[2] = ($event) => _ctx.episodes().show())
+          }), {
+            default: withCtx(() => [
+              createVNode(VIcon, { size: "24" }, {
+                default: withCtx(() => [..._cache[7] || (_cache[7] = [
+                  createTextVNode("mdi-playlist-play", -1)
+                ])]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 16)
+        ]),
+        default: withCtx(() => [
+          createBaseVNode("span", null, toDisplayString(_ctx.$t("player.toEpisodes")), 1)
+        ]),
+        _: 1
+      }, 8, ["attach"]),
+      _ctx.source.type === "torrent" ? (openBlock(), createBlock(VTooltip, {
+        key: 0,
+        right: "",
+        attach: _ctx.$refs.links
+      }, {
+        activator: withCtx(({ on }) => [
+          createVNode(VBtn, mergeProps(toHandlers(on), {
+            icon: "",
+            large: "",
+            onClick: _cache[3] || (_cache[3] = ($event) => _ctx.torrent().show())
+          }), {
+            default: withCtx(() => [
+              createVNode(VIcon, { size: "20" }, {
+                default: withCtx(() => [..._cache[8] || (_cache[8] = [
+                  createTextVNode("mdi-file-table-box-multiple", -1)
+                ])]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 16)
+        ]),
+        default: withCtx(() => [
+          createBaseVNode("span", null, toDisplayString(_ctx.$t("player.toTorrent")), 1)
+        ]),
+        _: 1
+      }, 8, ["attach"])) : createCommentVNode("", true),
+      $options._opening_skip_button ? (openBlock(), createBlock(VTooltip, {
+        key: 1,
+        right: "",
+        attach: _ctx.$refs.links
+      }, {
+        activator: withCtx(({ on }) => [
+          createVNode(VBtn, mergeProps(toHandlers(on), {
+            icon: "",
+            large: "",
+            onClick: $options.skipOpening
+          }), {
+            default: withCtx(() => [
+              createBaseVNode("span", _hoisted_2$9, "+" + toDisplayString($options._opening_skip_time), 1)
+            ]),
+            _: 1
+          }, 16, ["onClick"])
+        ]),
+        default: withCtx(() => [
+          createBaseVNode("span", null, toDisplayString(_ctx.$t("player.openingSeek")), 1)
+        ]),
+        _: 1
+      }, 8, ["attach"])) : createCommentVNode("", true)
+    ], 64)) : createCommentVNode("", true)
+  ], 512);
 }
 const PlayerLinks = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["render", _sfc_render$O]]);
 const AppPlatformMixin = {
@@ -42588,21 +41276,6 @@ function prettyBytes(number, options) {
   const unit = UNITS[exponent];
   return prefix2 + numberString + separator + unit;
 }
-const TORRENT_CLEAR = "torrent:clear";
-const TORRENT_ERROR = "torrent:error";
-const TORRENT_START = "torrent:start";
-const TORRENT_SERVER = "torrent:server";
-const TORRENT_DESTROY = "torrent:destroy";
-const TORRENT_DOWNLOAD = "torrent:download";
-const catchTorrentServer = (callback) => electronExports.ipcRenderer.on(TORRENT_SERVER, (e, payload) => callback(JSON.parse(payload)));
-const catchTorrentDownload = (callback) => electronExports.ipcRenderer.on(TORRENT_DOWNLOAD, (e, payload) => callback(JSON.parse(payload)));
-const catchTorrentClear = (callback) => electronExports.ipcRenderer.on(TORRENT_CLEAR, (e, payload) => callback(JSON.parse(payload)));
-const catchTorrentError = (callback) => electronExports.ipcRenderer.on(TORRENT_ERROR, (e, payload) => callback(JSON.parse(payload)));
-const sendTorrentStart = (torrentId, fileIndex) => electronExports.ipcRenderer.send(TORRENT_START, JSON.stringify({
-  torrentId,
-  fileIndex
-}));
-const sendTorrentDestroy = (payload) => electronExports.ipcRenderer.send(TORRENT_DESTROY, JSON.stringify(payload));
 function useSticky(_ref) {
   let {
     rootEl,
@@ -43983,10 +42656,9 @@ const _sfc_main$P = {
     });
   }
 };
-const _hoisted_1$k = { class: "caption grey--text px-4 mt-4" };
+const _hoisted_1$v = { class: "caption grey--text px-4 mt-4" };
 function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_app_system_bar_placeholder = resolveComponent("app-system-bar-placeholder");
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   return _ctx.source.type === "torrent" ? (openBlock(), createBlock(VNavigationDrawer, {
     key: 0,
     modelValue: $data.visible,
@@ -44021,18 +42693,13 @@ function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
                   createVNode(VDivider),
                   createVNode(VListItem, null, {
                     default: withCtx(() => [
-                      createVNode(_component_v_list_item_content, null, {
-                        default: withCtx(() => [
-                          createVNode(VListItemSubtitle, {
-                            textContent: toDisplayString(item.title)
-                          }, null, 8, ["textContent"]),
-                          createVNode(VListItemTitle, {
-                            textContent: toDisplayString(item.value),
-                            class: normalizeClass(item.classes)
-                          }, null, 8, ["textContent", "class"])
-                        ]),
-                        _: 2
-                      }, 1024)
+                      createVNode(VListItemSubtitle, {
+                        textContent: toDisplayString(item.title)
+                      }, null, 8, ["textContent"]),
+                      createVNode(VListItemTitle, {
+                        textContent: toDisplayString(item.value),
+                        class: normalizeClass(item.classes)
+                      }, null, 8, ["textContent", "class"])
                     ]),
                     _: 2
                   }, 1024)
@@ -44045,12 +42712,12 @@ function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
         ]),
         _: 1
       }, 8, ["class"]),
-      createBaseVNode("div", _hoisted_1$k, toDisplayString(_ctx.$t("player.torrentWarning")), 1)
+      createBaseVNode("div", _hoisted_1$v, toDisplayString(_ctx.$t("player.torrentWarning")), 1)
     ]),
     _: 1
   }, 8, ["modelValue"])) : createCommentVNode("", true);
 }
-const PlayerTorrent = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$M], ["__scopeId", "data-v-fdaf3cd8"]]);
+const PlayerTorrent = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$M], ["__scopeId", "data-v-3e094fe8"]]);
 const props$r = {
   player: {
     type: Object,
@@ -44205,19 +42872,14 @@ const _sfc_main$N = {
     });
   }
 };
+const _hoisted_1$u = {
+  key: 0,
+  class: "d-flex align-end shrink duration font-weight-bold"
+};
 function _sfc_render$L(_ctx, _cache, $props, $setup, $data, $options) {
-  return $data.is_ready && $data.current_time && $data.total_duration ? (openBlock(), createBlock(VLayout, {
-    key: 0,
-    "align-end": "",
-    class: "shrink duration font-weight-bold"
-  }, {
-    default: withCtx(() => [
-      createTextVNode(toDisplayString($options.time) + " / " + toDisplayString($options.duration), 1)
-    ]),
-    _: 1
-  })) : createCommentVNode("", true);
+  return $data.is_ready && $data.current_time && $data.total_duration ? (openBlock(), createElementBlock("div", _hoisted_1$u, toDisplayString($options.time) + " / " + toDisplayString($options.duration), 1)) : createCommentVNode("", true);
 }
-const HeadlineDuration = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$L], ["__scopeId", "data-v-2bc1288f"]]);
+const HeadlineDuration = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$L], ["__scopeId", "data-v-383c537e"]]);
 const props$p = {
   release: {
     type: Object,
@@ -44250,14 +42912,14 @@ const _sfc_main$M = {
     }
   }
 };
-const _hoisted_1$j = {
+const _hoisted_1$t = {
   key: 0,
   class: "d-flex flex-column justify-end"
 };
-const _hoisted_2$6 = { class: "pb-1" };
+const _hoisted_2$8 = { class: "pb-1" };
 function _sfc_render$K(_ctx, _cache, $props, $setup, $data, $options) {
-  return $options.caption && $options.title ? (openBlock(), createElementBlock("div", _hoisted_1$j, [
-    createBaseVNode("h4", _hoisted_2$6, toDisplayString($options.caption), 1),
+  return $options.caption && $options.title ? (openBlock(), createElementBlock("div", _hoisted_1$t, [
+    createBaseVNode("h4", _hoisted_2$8, toDisplayString($options.caption), 1),
     createBaseVNode("h1", null, toDisplayString($options.title), 1)
   ])) : createCommentVNode("", true);
 }
@@ -44283,20 +42945,17 @@ const _sfc_main$L = {
     Description: HeadlineDescription
   }
 };
+const _hoisted_1$s = {
+  class: "d-flex align-content-end justify-space-between",
+  style: { lineHeight: 1 }
+};
 function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_description = resolveComponent("description");
   const _component_duration = resolveComponent("duration");
-  return openBlock(), createBlock(VLayout, {
-    "justify-space-between": "",
-    "align-content-end": "",
-    style: { lineHeight: 1 }
-  }, {
-    default: withCtx(() => [
-      createVNode(_component_description, normalizeProps(guardReactiveProps({ release: _ctx.release, episode: _ctx.episode })), null, 16),
-      createVNode(_component_duration, normalizeProps(guardReactiveProps({ player: _ctx.player })), null, 16)
-    ]),
-    _: 1
-  });
+  return openBlock(), createElementBlock("div", _hoisted_1$s, [
+    createVNode(_component_description, normalizeProps(guardReactiveProps({ release: _ctx.release, episode: _ctx.episode })), null, 16),
+    createVNode(_component_duration, normalizeProps(guardReactiveProps({ player: _ctx.player })), null, 16)
+  ]);
 }
 const PlayerHeadline = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$J]]);
 const VSliderSymbol = Symbol.for("vuetify:v-slider");
@@ -45107,7 +43766,7 @@ const _sfc_main$K = {
     this.player.on("seeking", () => this.player.play());
   }
 };
-const _hoisted_1$i = { class: "time font-weight-bold" };
+const _hoisted_1$r = { class: "time font-weight-bold" };
 function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createBlock(VSlider, {
     "hide-details": "",
@@ -45123,7 +43782,7 @@ function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
     onMouseup: _cache[2] || (_cache[2] = ($event) => $data.is_seeking = false)
   }, {
     "thumb-label": withCtx(({ value }) => [
-      createBaseVNode("div", _hoisted_1$i, toDisplayString($options.humanTime(value)), 1)
+      createBaseVNode("div", _hoisted_1$r, toDisplayString($options.humanTime(value)), 1)
     ]),
     _: 1
   }, 8, ["max", "value", "disabled"]);
@@ -45198,7 +43857,7 @@ const _sfc_main$J = {
     this.player.on("ratechange", () => this.speed = this.player.speed);
   }
 };
-const _hoisted_1$h = { class: "caption font-weight-bold" };
+const _hoisted_1$q = { class: "caption font-weight-bold" };
 function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createBlock(VMenu, mergeProps({ attach: _ctx.attach }, {
     top: "",
@@ -45211,7 +43870,7 @@ function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
         large: ""
       }), {
         default: withCtx(() => [
-          createBaseVNode("span", _hoisted_1$h, toDisplayString($options.active.label), 1)
+          createBaseVNode("span", _hoisted_1$q, toDisplayString($options.active.label), 1)
         ]),
         _: 1
       }, 16)
@@ -45272,39 +43931,34 @@ const _sfc_main$I = {
     this.player.on("volumechange", (e) => this.volume = this.player.volume);
   }
 };
+const _hoisted_1$p = { class: "d-flex align-center shrink" };
 function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createBlock(VLayout, {
-    "align-center": "",
-    class: "shrink"
-  }, {
-    default: withCtx(() => [
-      createVNode(VBtn, {
-        icon: "",
-        large: "",
-        onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("change", 0))
-      }, {
-        default: withCtx(() => [
-          createVNode(VIcon, { size: "24" }, {
-            default: withCtx(() => [
-              createTextVNode("mdi-volume-" + toDisplayString($options.getVolumeState), 1)
-            ]),
-            _: 1
-          })
-        ]),
-        _: 1
-      }),
-      createVNode(VSlider, {
-        "hide-details": "",
-        min: "0",
-        max: "1",
-        step: ".05",
-        value: $data.volume,
-        style: { maxWidth: "70px", width: "70px" },
-        onInput: _cache[1] || (_cache[1] = ($event) => _ctx.$emit("change", $event))
-      }, null, 8, ["value"])
-    ]),
-    _: 1
-  });
+  return openBlock(), createElementBlock("div", _hoisted_1$p, [
+    createVNode(VBtn, {
+      icon: "",
+      large: "",
+      onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("change", 0))
+    }, {
+      default: withCtx(() => [
+        createVNode(VIcon, { size: "24" }, {
+          default: withCtx(() => [
+            createTextVNode("mdi-volume-" + toDisplayString($options.getVolumeState), 1)
+          ]),
+          _: 1
+        })
+      ]),
+      _: 1
+    }),
+    createVNode(VSlider, {
+      "hide-details": "",
+      min: "0",
+      max: "1",
+      step: ".05",
+      value: $data.volume,
+      style: { maxWidth: "70px", width: "70px" },
+      onInput: _cache[1] || (_cache[1] = ($event) => _ctx.$emit("change", $event))
+    }, null, 8, ["value"])
+  ]);
 }
 const ControlsVolume = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$G]]);
 const props$k = {
@@ -45390,7 +44044,6 @@ const _sfc_main$H = {
   }
 };
 function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   return openBlock(), createBlock(VMenu, mergeProps({ attach: _ctx.attach }, {
     top: "",
     "nudge-left": "60",
@@ -45431,14 +44084,9 @@ function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
                   ]),
                   _: 2
                 }, 1024),
-                createVNode(_component_v_list_item_content, null, {
-                  default: withCtx(() => [
-                    createVNode(VListItemSubtitle, {
-                      textContent: toDisplayString(s.label)
-                    }, null, 8, ["textContent"])
-                  ]),
-                  _: 2
-                }, 1024)
+                createVNode(VListItemSubtitle, {
+                  textContent: toDisplayString(s.label)
+                }, null, 8, ["textContent"])
               ]),
               _: 2
             }, 1032, ["input-value", "onClick"]);
@@ -45481,63 +44129,60 @@ const _sfc_main$G = {
     this.is_mounted = true;
   }
 };
+const _hoisted_1$o = {
+  class: "d-flex align-center justify-end",
+  ref: "controls"
+};
 function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_volume = resolveComponent("volume");
   const _component_quality = resolveComponent("quality");
   const _component_speed = resolveComponent("speed");
-  return openBlock(), createBlock(VLayout, {
-    "align-center": "",
-    "justify-end": "",
-    ref: "controls"
-  }, {
-    default: withCtx(() => [
-      $data.is_mounted ? (openBlock(), createElementBlock(Fragment$1, { key: 0 }, [
-        createVNode(_component_volume, mergeProps({ player: _ctx.player }, {
-          class: "mr-2",
-          onChange: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("set:volume", $event))
-        }), null, 16),
-        _ctx.source ? (openBlock(), createBlock(_component_quality, mergeProps({ key: 0 }, { episode: _ctx.episode, source: _ctx.source }, {
-          attach: _ctx.$refs.controls,
-          onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$emit("set:source", $event))
-        }), null, 16, ["attach"])) : createCommentVNode("", true),
-        createVNode(_component_speed, mergeProps({ player: _ctx.player }, {
-          attach: _ctx.$refs.controls,
-          onClick: _cache[2] || (_cache[2] = ($event) => _ctx.$emit("set:speed", $event))
-        }), null, 16, ["attach"]),
-        createVNode(VBtn, {
-          icon: "",
-          large: "",
-          onClick: _cache[3] || (_cache[3] = ($event) => _ctx.$emit("toggle:pip"))
-        }, {
-          default: withCtx(() => [
-            createVNode(VIcon, { size: "22" }, {
-              default: withCtx(() => [..._cache[5] || (_cache[5] = [
-                createTextVNode("mdi-picture-in-picture-bottom-right", -1)
-              ])]),
-              _: 1
-            })
-          ]),
-          _: 1
-        }),
-        createVNode(VBtn, {
-          icon: "",
-          large: "",
-          onClick: _cache[4] || (_cache[4] = ($event) => _ctx.$emit("toggle:fullscreen"))
-        }, {
-          default: withCtx(() => [
-            createVNode(VIcon, { size: "28" }, {
-              default: withCtx(() => [..._cache[6] || (_cache[6] = [
-                createTextVNode("mdi-fullscreen", -1)
-              ])]),
-              _: 1
-            })
-          ]),
-          _: 1
-        })
-      ], 64)) : createCommentVNode("", true)
-    ]),
-    _: 1
-  }, 512);
+  return openBlock(), createElementBlock("div", _hoisted_1$o, [
+    $data.is_mounted ? (openBlock(), createElementBlock(Fragment$1, { key: 0 }, [
+      createVNode(_component_volume, mergeProps({ player: _ctx.player }, {
+        class: "mr-2",
+        onChange: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("set:volume", $event))
+      }), null, 16),
+      _ctx.source ? (openBlock(), createBlock(_component_quality, mergeProps({ key: 0 }, { episode: _ctx.episode, source: _ctx.source }, {
+        attach: _ctx.$refs.controls,
+        onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$emit("set:source", $event))
+      }), null, 16, ["attach"])) : createCommentVNode("", true),
+      createVNode(_component_speed, mergeProps({ player: _ctx.player }, {
+        attach: _ctx.$refs.controls,
+        onClick: _cache[2] || (_cache[2] = ($event) => _ctx.$emit("set:speed", $event))
+      }), null, 16, ["attach"]),
+      createVNode(VBtn, {
+        icon: "",
+        large: "",
+        onClick: _cache[3] || (_cache[3] = ($event) => _ctx.$emit("toggle:pip"))
+      }, {
+        default: withCtx(() => [
+          createVNode(VIcon, { size: "22" }, {
+            default: withCtx(() => [..._cache[5] || (_cache[5] = [
+              createTextVNode("mdi-picture-in-picture-bottom-right", -1)
+            ])]),
+            _: 1
+          })
+        ]),
+        _: 1
+      }),
+      createVNode(VBtn, {
+        icon: "",
+        large: "",
+        onClick: _cache[4] || (_cache[4] = ($event) => _ctx.$emit("toggle:fullscreen"))
+      }, {
+        default: withCtx(() => [
+          createVNode(VIcon, { size: "28" }, {
+            default: withCtx(() => [..._cache[6] || (_cache[6] = [
+              createTextVNode("mdi-fullscreen", -1)
+            ])]),
+            _: 1
+          })
+        ]),
+        _: 1
+      })
+    ], 64)) : createCommentVNode("", true)
+  ], 512);
 }
 const PlayerControls = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$E]]);
 const rootTypes = {
@@ -45660,32 +44305,30 @@ const VSkeletonLoader = genericComponent()({
   }
 });
 const _sfc_main$F = {};
+const _hoisted_1$n = { class: "d-flex mb-2" };
 function _sfc_render$D(_ctx, _cache) {
   return openBlock(), createElementBlock("div", null, [
-    createVNode(VLayout, { class: "mb-2" }, {
-      default: withCtx(() => [
-        createVNode(VSkeletonLoader, {
-          boilerplate: "",
-          type: "button",
-          height: "48",
-          width: "100%"
-        }),
-        createVNode(VSkeletonLoader, {
-          boilerplate: "",
-          type: "button",
-          height: "48",
-          width: "72",
-          class: "mx-2"
-        }),
-        createVNode(VSkeletonLoader, {
-          boilerplate: "",
-          type: "button",
-          height: "48",
-          width: "72"
-        })
-      ]),
-      _: 1
-    }),
+    createBaseVNode("div", _hoisted_1$n, [
+      createVNode(VSkeletonLoader, {
+        boilerplate: "",
+        type: "button",
+        height: "48",
+        width: "100%"
+      }),
+      createVNode(VSkeletonLoader, {
+        boilerplate: "",
+        type: "button",
+        height: "48",
+        width: "72",
+        class: "mx-2"
+      }),
+      createVNode(VSkeletonLoader, {
+        boilerplate: "",
+        type: "button",
+        height: "48",
+        width: "72"
+      })
+    ]),
     createVNode(VSkeletonLoader, {
       boilerplate: "",
       type: "button",
@@ -45736,9 +44379,9 @@ const _sfc_main$E = {
     }
   }
 };
-const _hoisted_1$g = { class: "caption grey--text text--darken-1" };
+const _hoisted_1$m = { class: "caption grey--text text--darken-1" };
 function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("span", _hoisted_1$g, toDisplayString($options.items), 1);
+  return openBlock(), createElementBlock("span", _hoisted_1$m, toDisplayString($options.items), 1);
 }
 const EpisodeQuality = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$C]]);
 const props$h = {
@@ -45796,9 +44439,9 @@ function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
 }
 const EpisodeWatched = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$B]]);
 const _sfc_main$C = {};
-const _hoisted_1$f = { class: "blob" };
+const _hoisted_1$l = { class: "blob" };
 function _sfc_render$A(_ctx, _cache) {
-  return openBlock(), createElementBlock("div", _hoisted_1$f);
+  return openBlock(), createElementBlock("div", _hoisted_1$l);
 }
 const EpisodePlaying = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$A], ["__scopeId", "data-v-57e634d6"]]);
 const props$g = {
@@ -45876,7 +44519,6 @@ const _sfc_main$B = {
   }
 };
 function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   return openBlock(), createElementBlock("div", null, [
     createVNode(VBtn, {
       icon: "",
@@ -45926,14 +44568,9 @@ function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
                       ]),
                       _: 2
                     }, 1024),
-                    createVNode(_component_v_list_item_content, null, {
+                    createVNode(VListItemTitle, null, {
                       default: withCtx(() => [
-                        createVNode(VListItemTitle, null, {
-                          default: withCtx(() => [
-                            createTextVNode(toDisplayString(item.title), 1)
-                          ]),
-                          _: 2
-                        }, 1024)
+                        createTextVNode(toDisplayString(item.title), 1)
                       ]),
                       _: 2
                     }, 1024)
@@ -45995,13 +44632,17 @@ const _sfc_main$A = {
     }
   }
 };
-const _hoisted_1$e = {
+const _hoisted_1$k = {
   key: 0,
   class: "caption"
 };
+const _hoisted_2$7 = { class: "d-flex" };
+const _hoisted_3$6 = {
+  class: "d-flex align-center justify-center",
+  style: { width: "40px" }
+};
 function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_quality = resolveComponent("quality");
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   const _component_playing = resolveComponent("playing");
   const _component_watched = resolveComponent("watched");
   const _component_actions = resolveComponent("actions");
@@ -46010,41 +44651,23 @@ function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
     ref: "container",
     onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("click"))
   }, {
-    default: withCtx(() => [
-      createVNode(_component_v_list_item_content, null, {
-        default: withCtx(() => [
-          createVNode(VListItemTitle, {
-            textContent: toDisplayString($options.title),
-            title: $options.title
-          }, null, 8, ["textContent", "title"]),
-          createVNode(VListItemSubtitle, null, {
-            default: withCtx(() => [
-              $options.time ? (openBlock(), createElementBlock("span", _hoisted_1$e, toDisplayString($options.time), 1)) : createCommentVNode("", true),
-              createVNode(_component_quality, normalizeProps(guardReactiveProps({ episode: _ctx.episode })), null, 16)
-            ]),
-            _: 1
-          })
+    prepend: withCtx(() => [
+      createBaseVNode("div", _hoisted_2$7, [
+        createBaseVNode("div", _hoisted_3$6, [
+          _ctx.isPlaying ? (openBlock(), createBlock(_component_playing, { key: 0 })) : (openBlock(), createBlock(_component_watched, normalizeProps(mergeProps({ key: 1 }, { episode: _ctx.episode, release: _ctx.release })), null, 16))
         ]),
-        _: 1
-      }),
-      createVNode(VListItemAction, null, {
+        createVNode(_component_actions, normalizeProps(guardReactiveProps({ episode: _ctx.episode, release: _ctx.release, container: $data.container })), null, 16)
+      ])
+    ]),
+    default: withCtx(() => [
+      createVNode(VListItemTitle, {
+        textContent: toDisplayString($options.title),
+        title: $options.title
+      }, null, 8, ["textContent", "title"]),
+      createVNode(VListItemSubtitle, null, {
         default: withCtx(() => [
-          createVNode(VLayout, null, {
-            default: withCtx(() => [
-              createVNode(VLayout, {
-                "align-center": "",
-                "justify-center": "",
-                style: { width: "40px" }
-              }, {
-                default: withCtx(() => [
-                  _ctx.isPlaying ? (openBlock(), createBlock(_component_playing, { key: 0 })) : (openBlock(), createBlock(_component_watched, normalizeProps(mergeProps({ key: 1 }, { episode: _ctx.episode, release: _ctx.release })), null, 16))
-                ]),
-                _: 1
-              }),
-              createVNode(_component_actions, normalizeProps(guardReactiveProps({ episode: _ctx.episode, release: _ctx.release, container: $data.container })), null, 16)
-            ]),
-            _: 1
-          })
+          $options.time ? (openBlock(), createElementBlock("span", _hoisted_1$k, toDisplayString($options.time), 1)) : createCommentVNode("", true),
+          createVNode(_component_quality, normalizeProps(guardReactiveProps({ episode: _ctx.episode })), null, 16)
         ]),
         _: 1
       })
@@ -46179,7 +44802,6 @@ const _sfc_main$x = {
   }
 };
 function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   return openBlock(), createElementBlock("div", null, [
     createVNode(VBtn, {
       id: "episodes__actions",
@@ -46221,14 +44843,9 @@ function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
                       ]),
                       _: 2
                     }, 1024),
-                    createVNode(_component_v_list_item_content, null, {
+                    createVNode(VListItemTitle, null, {
                       default: withCtx(() => [
-                        createVNode(VListItemTitle, null, {
-                          default: withCtx(() => [
-                            createTextVNode(toDisplayString(item.title), 1)
-                          ]),
-                          _: 2
-                        }, 1024)
+                        createTextVNode(toDisplayString(item.title), 1)
                       ]),
                       _: 2
                     }, 1024)
@@ -46268,20 +44885,18 @@ const _sfc_main$w = {
     Actions: EpisodesToolbarActions
   }
 };
+const _hoisted_1$j = { class: "d-flex align-center" };
 function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_search = resolveComponent("search");
   const _component_sort = resolveComponent("sort");
   const _component_actions = resolveComponent("actions");
-  return openBlock(), createBlock(VLayout, { "align-center": "" }, {
-    default: withCtx(() => [
-      createVNode(_component_search, mergeProps({ search: _ctx.search }, {
-        "onUpdate:search": _cache[0] || (_cache[0] = ($event) => _ctx.$emit("update:search", $event))
-      }), null, 16),
-      createVNode(_component_sort, { class: "mx-2" }),
-      createVNode(_component_actions, normalizeProps(guardReactiveProps({ release: _ctx.release, container: _ctx.container })), null, 16)
-    ]),
-    _: 1
-  });
+  return openBlock(), createElementBlock("div", _hoisted_1$j, [
+    createVNode(_component_search, mergeProps({ search: _ctx.search }, {
+      "onUpdate:search": _cache[0] || (_cache[0] = ($event) => _ctx.$emit("update:search", $event))
+    }), null, 16),
+    createVNode(_component_sort, { class: "mx-2" }),
+    createVNode(_component_actions, normalizeProps(guardReactiveProps({ release: _ctx.release, container: _ctx.container })), null, 16)
+  ]);
 }
 const EpisodesToolbar = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$u]]);
 const props$b = {
@@ -46382,20 +44997,20 @@ const _sfc_main$v = {
     }
   }
 };
-const _hoisted_1$d = { class: "release__progress__description caption white--text font-weight-bold px-4 ellipsis-container" };
-const _hoisted_2$5 = {
+const _hoisted_1$i = { class: "release__progress__description caption white--text font-weight-bold px-4 ellipsis-container" };
+const _hoisted_2$6 = {
   key: 0,
   class: "ellipsis-text"
 };
 const _hoisted_3$5 = { key: 0 };
-const _hoisted_4$2 = { key: 1 };
-const _hoisted_5$1 = {
+const _hoisted_4$4 = { key: 1 };
+const _hoisted_5$2 = {
   key: 1,
   class: "ellipsis-text"
 };
-const _hoisted_6$1 = { key: 0 };
-const _hoisted_7$1 = { key: 1 };
-const _hoisted_8$1 = {
+const _hoisted_6$2 = { key: 0 };
+const _hoisted_7$2 = { key: 1 };
+const _hoisted_8$2 = {
   key: 2,
   class: "ellipsis-text"
 };
@@ -46412,12 +45027,12 @@ function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
     !_ctx.loading && _ctx.showNumbers ? {
       name: "default",
       fn: withCtx(() => [
-        createBaseVNode("div", _hoisted_1$d, [
-          $options.isComplete ? (openBlock(), createElementBlock("span", _hoisted_2$5, [
-            !_ctx.dense ? (openBlock(), createElementBlock("span", _hoisted_3$5, toDisplayString(_ctx.$t("release.progressAllWatched", { total: $options.total })), 1)) : (openBlock(), createElementBlock("span", _hoisted_4$2, toDisplayString(_ctx.$t("release.progressAllWatchedDense", { total: $options.total })), 1))
-          ])) : $options.isUnseen ? (openBlock(), createElementBlock("span", _hoisted_5$1, [
-            !_ctx.dense ? (openBlock(), createElementBlock("span", _hoisted_6$1, toDisplayString(_ctx.$t("release.progressNone", { episodes: _ctx.episodes.length, total: $options.total })), 1)) : (openBlock(), createElementBlock("span", _hoisted_7$1, toDisplayString(_ctx.$t("release.progressNoneDense", { episodes: _ctx.episodes.length, total: $options.total })), 1))
-          ])) : (openBlock(), createElementBlock("span", _hoisted_8$1, [
+        createBaseVNode("div", _hoisted_1$i, [
+          $options.isComplete ? (openBlock(), createElementBlock("span", _hoisted_2$6, [
+            !_ctx.dense ? (openBlock(), createElementBlock("span", _hoisted_3$5, toDisplayString(_ctx.$t("release.progressAllWatched", { total: $options.total })), 1)) : (openBlock(), createElementBlock("span", _hoisted_4$4, toDisplayString(_ctx.$t("release.progressAllWatchedDense", { total: $options.total })), 1))
+          ])) : $options.isUnseen ? (openBlock(), createElementBlock("span", _hoisted_5$2, [
+            !_ctx.dense ? (openBlock(), createElementBlock("span", _hoisted_6$2, toDisplayString(_ctx.$t("release.progressNone", { episodes: _ctx.episodes.length, total: $options.total })), 1)) : (openBlock(), createElementBlock("span", _hoisted_7$2, toDisplayString(_ctx.$t("release.progressNoneDense", { episodes: _ctx.episodes.length, total: $options.total })), 1))
+          ])) : (openBlock(), createElementBlock("span", _hoisted_8$2, [
             !_ctx.dense ? (openBlock(), createElementBlock("span", _hoisted_9$1, toDisplayString(_ctx.$t("release.progressPartial", { watched: $options.watched, episodes: _ctx.episodes.length, total: $options.total })), 1)) : (openBlock(), createElementBlock("span", _hoisted_10$1, toDisplayString(_ctx.$t("release.progressPartialDense", { watched: $options.watched, episodes: _ctx.episodes.length, total: $options.total })), 1))
           ]))
         ])
@@ -49435,33 +48050,18 @@ const _sfc_main$u = {
     _sort() {
       return useSettingsStore().episodes.order;
     },
-    /**
-     * Get playlist
-     *
-     * @return Array
-     */
     playlist() {
       return __orderBy(this.episodes || [], ["id"], [this._sort]);
     },
-    /**
-     * Create searchable entity
-     *
-     * @return Object
-     */
     playlistSearchable() {
       return new Fuse(this.playlist, { keys: ["title"] });
     },
-    /**
-     * Get playlist items
-     *
-     * @return {any}
-     */
     playlistSearched() {
       return this.search ? this.playlistSearchable.search(this.search) : this.playlist;
     }
   }
 };
-const _hoisted_1$c = {
+const _hoisted_1$h = {
   key: 1,
   id: "playlist"
 };
@@ -49470,10 +48070,11 @@ function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_toolbar = resolveComponent("toolbar");
   const _component_release_progress = resolveComponent("release-progress");
   const _component_episode = resolveComponent("episode");
-  return _ctx.loading ? (openBlock(), createBlock(_component_loader, { key: 0 })) : _ctx.loading === false && _ctx.release ? (openBlock(), createElementBlock("div", _hoisted_1$c, [
+  return _ctx.loading ? (openBlock(), createBlock(_component_loader, { key: 0 })) : _ctx.loading === false && _ctx.release ? (openBlock(), createElementBlock("div", _hoisted_1$h, [
     createVNode(_component_toolbar, mergeProps({ release: _ctx.release }, {
       class: "mb-2",
-      search: $data.search
+      search: $data.search,
+      "onUpdate:search": _cache[0] || (_cache[0] = ($event) => $data.search = $event)
     }), null, 16, ["search"]),
     createVNode(_component_release_progress, mergeProps({ release: _ctx.release, episodes: _ctx.episodes }, {
       class: "mb-2",
@@ -49615,14 +48216,14 @@ const _sfc_main$s = {
     this.player.on("playing", () => this.isBuffering = false);
   }
 };
-const _hoisted_1$b = {
+const _hoisted_1$g = {
   key: 0,
   class: "player__buffering"
 };
 function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createBlock(VFadeTransition, { appear: "" }, {
     default: withCtx(() => [
-      $data.isBuffering ? (openBlock(), createElementBlock("div", _hoisted_1$b, [
+      $data.isBuffering ? (openBlock(), createElementBlock("div", _hoisted_1$g, [
         createVNode(VProgressCircular, {
           color: "white",
           indeterminate: "",
@@ -49855,6 +48456,7 @@ const _sfc_main$r = {
     this.video.removeEventListener("dblclick", this.toggleFullscreen);
   }
 };
+const _hoisted_1$f = { class: "d-flex flex-column interface pa-8 pt-0" };
 function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_player_headline = resolveComponent("player-headline");
   const _component_player_timeline = resolveComponent("player-timeline");
@@ -49872,53 +48474,47 @@ function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", null, [
     createVNode(VSlideYReverseTransition, null, {
       default: withCtx(() => [
-        withDirectives(createVNode(VLayout, {
-          column: "",
-          class: "interface pa-8 pt-0"
-        }, {
-          default: withCtx(() => [
-            createVNode(_component_player_headline, mergeProps({ player: _ctx.player, release: _ctx.release, episode: _ctx.episode }, { class: "pb-2" }), null, 16),
-            createVNode(_component_player_timeline, normalizeProps(guardReactiveProps({ player: _ctx.player })), null, 16),
-            createVNode(VRow, {
-              "no-gutters": "",
-              justify: "center"
-            }, {
-              default: withCtx(() => [
-                createVNode(VCol, { "align-self": "center" }, {
-                  default: withCtx(() => [
-                    createVNode(_component_player_links, mergeProps({ release: _ctx.release, source: _ctx.source, player: _ctx.player }, {
-                      upscale: () => _ctx.$refs.upscale,
-                      torrent: () => _ctx.$refs.torrent,
-                      episodes: () => _ctx.$refs.episodes,
-                      "onSet:time": $options.setTime
-                    }), null, 16, ["upscale", "torrent", "episodes", "onSet:time"])
-                  ]),
-                  _: 1
-                }),
-                createVNode(VCol, { "align-self": "center" }, {
-                  default: withCtx(() => [
-                    createVNode(_component_player_play, normalizeProps(guardReactiveProps({ player: _ctx.player, release: _ctx.release, episode: _ctx.episode })), null, 16)
-                  ]),
-                  _: 1
-                }),
-                createVNode(VCol, { "align-self": "center" }, {
-                  default: withCtx(() => [
-                    createVNode(_component_player_controls, mergeProps({ episode: _ctx.episode, source: _ctx.source, player: _ctx.player }, {
-                      "onSet:speed": $options.setSpeed,
-                      "onSet:source": $options.setSource,
-                      "onSet:volume": $options.setVolume,
-                      "onToggle:pip": $options.togglePIP,
-                      "onToggle:fullscreen": $options.toggleFullscreen
-                    }), null, 16, ["onSet:speed", "onSet:source", "onSet:volume", "onToggle:pip", "onToggle:fullscreen"])
-                  ]),
-                  _: 1
-                })
-              ]),
-              _: 1
-            })
-          ]),
-          _: 1
-        }, 512), [
+        withDirectives(createBaseVNode("div", _hoisted_1$f, [
+          createVNode(_component_player_headline, mergeProps({ player: _ctx.player, release: _ctx.release, episode: _ctx.episode }, { class: "pb-2" }), null, 16),
+          createVNode(_component_player_timeline, normalizeProps(guardReactiveProps({ player: _ctx.player })), null, 16),
+          createVNode(VRow, {
+            "no-gutters": "",
+            justify: "center"
+          }, {
+            default: withCtx(() => [
+              createVNode(VCol, { "align-self": "center" }, {
+                default: withCtx(() => [
+                  createVNode(_component_player_links, mergeProps({ release: _ctx.release, source: _ctx.source, player: _ctx.player }, {
+                    upscale: () => _ctx.$refs.upscale,
+                    torrent: () => _ctx.$refs.torrent,
+                    episodes: () => _ctx.$refs.episodes,
+                    "onSet:time": $options.setTime
+                  }), null, 16, ["upscale", "torrent", "episodes", "onSet:time"])
+                ]),
+                _: 1
+              }),
+              createVNode(VCol, { "align-self": "center" }, {
+                default: withCtx(() => [
+                  createVNode(_component_player_play, normalizeProps(guardReactiveProps({ player: _ctx.player, release: _ctx.release, episode: _ctx.episode })), null, 16)
+                ]),
+                _: 1
+              }),
+              createVNode(VCol, { "align-self": "center" }, {
+                default: withCtx(() => [
+                  createVNode(_component_player_controls, mergeProps({ episode: _ctx.episode, source: _ctx.source, player: _ctx.player }, {
+                    "onSet:speed": $options.setSpeed,
+                    "onSet:source": $options.setSource,
+                    "onSet:volume": $options.setVolume,
+                    "onToggle:pip": $options.togglePIP,
+                    "onToggle:fullscreen": $options.toggleFullscreen
+                  }), null, 16, ["onSet:speed", "onSet:source", "onSet:volume", "onToggle:pip", "onToggle:fullscreen"])
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })
+        ], 512), [
           [vShow, $data.visible]
         ])
       ]),
@@ -49952,7 +48548,7 @@ function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
     }), null, 16))
   ]);
 }
-const PlayerInterface = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$p], ["__scopeId", "data-v-2daee8a2"]]);
+const PlayerInterface = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$p], ["__scopeId", "data-v-57636a5c"]]);
 const props$6 = {
   source: {
     type: Object,
@@ -50052,27 +48648,21 @@ const _sfc_main$q = {
     }
   }
 };
-const _hoisted_1$a = {
+const _hoisted_1$e = { class: "d-flex flex-column justify-center fill-height" };
+const _hoisted_2$5 = {
   ref: "player",
   crossorigin: "anonymous",
   autoplay: "",
   preload: "auto"
 };
 function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createBlock(VLayout, {
-    column: "",
-    class: "fill-height",
-    "justify-center": ""
-  }, {
-    default: withCtx(() => [
-      renderSlot(_ctx.$slots, "prepend"),
-      createBaseVNode("video", _hoisted_1$a, [
-        renderSlot(_ctx.$slots, "video")
-      ], 512),
-      $data.player ? renderSlot(_ctx.$slots, "default", normalizeProps(mergeProps({ key: 0 }, { player: $data.player }))) : createCommentVNode("", true)
-    ]),
-    _: 3
-  });
+  return openBlock(), createElementBlock("div", _hoisted_1$e, [
+    renderSlot(_ctx.$slots, "prepend"),
+    createBaseVNode("video", _hoisted_2$5, [
+      renderSlot(_ctx.$slots, "video")
+    ], 512),
+    $data.player ? renderSlot(_ctx.$slots, "default", normalizeProps(mergeProps({ key: 0 }, { player: $data.player }))) : createCommentVNode("", true)
+  ]);
 }
 const PlayerHandler = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$o]]);
 const isFiniteNumber = Number.isFinite || function(value) {
@@ -84001,7 +82591,7 @@ const _sfc_main$n = {
     }
   }
 };
-const _hoisted_1$9 = {
+const _hoisted_1$d = {
   ref: "board",
   width: "1280",
   height: "720"
@@ -84016,7 +82606,7 @@ function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:duration": _cache[3] || (_cache[3] = ($event) => _ctx.$emit("update:duration", $event))
   }), {
     prepend: withCtx(() => [
-      createBaseVNode("canvas", _hoisted_1$9, null, 512)
+      createBaseVNode("canvas", _hoisted_1$d, null, 512)
     ]),
     default: withCtx((context) => [
       renderSlot(_ctx.$slots, "default", normalizeProps(guardReactiveProps(context)), void 0, true)
@@ -84251,43 +82841,40 @@ const _sfc_main$m = {
     }
   }
 };
+const _hoisted_1$c = { class: "d-flex fill-height black" };
 function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_player_interface = resolveComponent("player-interface");
   const _component_video_layout = resolveComponent("video-layout");
   return openBlock(), createBlock(_component_video_layout, { "hide-cursor": $data.cursor_is_hidden }, {
     default: withCtx(() => [
-      createVNode(VLayout, {
-        "fill-height": "",
-        class: "black"
-      }, {
-        default: withCtx(() => [
-          createVNode(VFadeTransition, {
-            mode: "out-in",
-            appear: ""
-          }, {
-            default: withCtx(() => [
-              $data.is_mounted ? (openBlock(), createBlock(resolveDynamicComponent($options.component), mergeProps({ key: 0 }, { sources: $options.sources, source: $options.source }, {
-                key: `video:${$options.key}`,
-                time: $data.time,
-                duration: $data.duration,
-                onError: $options.toBlank
-              }), {
-                default: withCtx(({ player }) => [
-                  (openBlock(), createBlock(_component_player_interface, mergeProps({ player, source: $options.source, release: _ctx.release, episode: _ctx.episode }, {
-                    key: `interface:${$options.key}`,
-                    "onSet:source": $options.setSource,
-                    "onShow:cursor": _cache[0] || (_cache[0] = ($event) => $data.cursor_is_hidden = false),
-                    "onHide:cursor": _cache[1] || (_cache[1] = ($event) => $data.cursor_is_hidden = true)
-                  }), null, 16, ["onSet:source"]))
-                ]),
-                _: 1
-              }, 16, ["time", "duration", "onError"])) : createCommentVNode("", true)
-            ]),
-            _: 1
-          })
-        ]),
-        _: 1
-      })
+      createBaseVNode("div", _hoisted_1$c, [
+        createVNode(VFadeTransition, {
+          mode: "out-in",
+          appear: ""
+        }, {
+          default: withCtx(() => [
+            $data.is_mounted ? (openBlock(), createBlock(resolveDynamicComponent($options.component), mergeProps({ key: 0 }, { sources: $options.sources, source: $options.source }, {
+              key: `video:${$options.key}`,
+              time: $data.time,
+              "onUpdate:time": _cache[2] || (_cache[2] = ($event) => $data.time = $event),
+              duration: $data.duration,
+              "onUpdate:duration": _cache[3] || (_cache[3] = ($event) => $data.duration = $event),
+              onError: $options.toBlank
+            }), {
+              default: withCtx(({ player }) => [
+                (openBlock(), createBlock(_component_player_interface, mergeProps({ player, source: $options.source, release: _ctx.release, episode: _ctx.episode }, {
+                  key: `interface:${$options.key}`,
+                  "onSet:source": $options.setSource,
+                  "onShow:cursor": _cache[0] || (_cache[0] = ($event) => $data.cursor_is_hidden = false),
+                  "onHide:cursor": _cache[1] || (_cache[1] = ($event) => $data.cursor_is_hidden = true)
+                }), null, 16, ["onSet:source"]))
+              ]),
+              _: 1
+            }, 16, ["time", "duration", "onError"])) : createCommentVNode("", true)
+          ]),
+          _: 1
+        })
+      ])
     ]),
     _: 1
   }, 8, ["hide-cursor"]);
@@ -84322,7 +82909,7 @@ const releaseRoutes$1 = [
     path: "/release/:releaseId/:releaseName",
     meta: { layout: { show_scroll: true } },
     props: true,
-    component: () => __vitePreload(() => import("./index-RgnSgJp-.js"), true ? __vite__mapDeps([3,4,5,1,6]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./index-DmalZPSk.js"), true ? __vite__mapDeps([4,5,2,6,1,7]) : void 0, import.meta.url)
   }
 ];
 const catalogRoutes = [
@@ -84331,7 +82918,7 @@ const catalogRoutes = [
     path: "/catalog",
     meta: { layout: { show_scroll: true } },
     props: true,
-    component: () => __vitePreload(() => import("./index-CB0SMNpT.js"), true ? __vite__mapDeps([7,8,4,9]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./index-oLRKaCRS.js"), true ? __vite__mapDeps([8,9,2,5,10]) : void 0, import.meta.url)
   }
 ];
 const accountRoutes = [
@@ -84339,14 +82926,14 @@ const accountRoutes = [
     name: "account.login",
     path: "/account/login",
     meta: { layout: { hide_scroll: true } },
-    component: () => __vitePreload(() => import("./index-BpSoPeWv.js"), true ? [] : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./index-CjBKXaCe.js"), true ? __vite__mapDeps([11,2]) : void 0, import.meta.url)
   }
 ];
 const releaseRoutes = [
   {
     name: "releases",
     path: "/",
-    component: () => __vitePreload(() => import("./index-BFTtupUX.js"), true ? __vite__mapDeps([10,1,4,11]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./index-D2bv2-S0.js"), true ? __vite__mapDeps([12,1,5,2,13]) : void 0, import.meta.url)
   }
 ];
 const favoritesRoutes = [
@@ -84355,7 +82942,7 @@ const favoritesRoutes = [
     path: "/favorites",
     meta: { layout: { show_scroll: true } },
     props: true,
-    component: () => __vitePreload(() => import("./index-B0uS6AUL.js"), true ? __vite__mapDeps([12,13]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./index-BUmOT9IZ.js"), true ? __vite__mapDeps([14,2,15]) : void 0, import.meta.url)
   }
 ];
 const router = createRouter({
@@ -85207,14 +83794,14 @@ var VtCloseButton_default = /* @__PURE__ */ defineComponent$1({
     }
   }
 });
-var _hoisted_1$8 = /* @__PURE__ */ createTextVNode(" × ");
+var _hoisted_1$b = /* @__PURE__ */ createTextVNode(" × ");
 function render2(_ctx, _cache) {
   return openBlock(), createBlock(resolveDynamicComponent(_ctx.buttonComponent), mergeProps({
     "aria-label": _ctx.ariaLabel,
     class: _ctx.classes
   }, _ctx.$attrs), {
     default: withCtx(() => [
-      _hoisted_1$8
+      _hoisted_1$b
     ]),
     _: 1
   }, 16, ["aria-label", "class"]);
@@ -85222,7 +83809,7 @@ function render2(_ctx, _cache) {
 VtCloseButton_default.render = render2;
 var VtCloseButton_default2 = VtCloseButton_default;
 var VtSuccessIcon_default = {};
-var _hoisted_12 = {
+var _hoisted_12$1 = {
   "aria-hidden": "true",
   focusable: "false",
   "data-prefix": "fas",
@@ -85240,12 +83827,12 @@ var _hoisted_3$4 = [
   _hoisted_2$4
 ];
 function render3(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_12, _hoisted_3$4);
+  return openBlock(), createElementBlock("svg", _hoisted_12$1, _hoisted_3$4);
 }
 VtSuccessIcon_default.render = render3;
 var VtSuccessIcon_default2 = VtSuccessIcon_default;
 var VtInfoIcon_default = {};
-var _hoisted_13 = {
+var _hoisted_13$1 = {
   "aria-hidden": "true",
   focusable: "false",
   "data-prefix": "fas",
@@ -85263,12 +83850,12 @@ var _hoisted_32 = [
   _hoisted_22
 ];
 function render4(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_13, _hoisted_32);
+  return openBlock(), createElementBlock("svg", _hoisted_13$1, _hoisted_32);
 }
 VtInfoIcon_default.render = render4;
 var VtInfoIcon_default2 = VtInfoIcon_default;
 var VtWarningIcon_default = {};
-var _hoisted_14 = {
+var _hoisted_14$1 = {
   "aria-hidden": "true",
   focusable: "false",
   "data-prefix": "fas",
@@ -85286,12 +83873,12 @@ var _hoisted_33 = [
   _hoisted_23
 ];
 function render5(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_14, _hoisted_33);
+  return openBlock(), createElementBlock("svg", _hoisted_14$1, _hoisted_33);
 }
 VtWarningIcon_default.render = render5;
 var VtWarningIcon_default2 = VtWarningIcon_default;
 var VtErrorIcon_default = {};
-var _hoisted_15 = {
+var _hoisted_15$1 = {
   "aria-hidden": "true",
   focusable: "false",
   "data-prefix": "fas",
@@ -85309,7 +83896,7 @@ var _hoisted_34 = [
   _hoisted_24
 ];
 function render6(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_15, _hoisted_34);
+  return openBlock(), createElementBlock("svg", _hoisted_15$1, _hoisted_34);
 }
 VtErrorIcon_default.render = render6;
 var VtErrorIcon_default2 = VtErrorIcon_default;
@@ -85558,7 +84145,7 @@ var VtToast_default = /* @__PURE__ */ defineComponent$1({
     }
   }
 });
-var _hoisted_16 = ["role"];
+var _hoisted_16$1 = ["role"];
 function render8(_ctx, _cache) {
   const _component_Icon = resolveComponent("Icon");
   const _component_CloseButton = resolveComponent("CloseButton");
@@ -85585,7 +84172,7 @@ function render8(_ctx, _cache) {
         key: 1,
         "toast-id": _ctx.id
       }, _ctx.hasProp(_ctx.content, "props") ? _ctx.content.props : {}, toHandlers(_ctx.hasProp(_ctx.content, "listeners") ? _ctx.content.listeners : {}), { onCloseToast: _ctx.closeToast }), null, 16, ["toast-id", "onCloseToast"]))
-    ], 10, _hoisted_16),
+    ], 10, _hoisted_16$1),
     !!_ctx.closeButton ? (openBlock(), createBlock(_component_CloseButton, {
       key: 1,
       component: _ctx.closeButton,
@@ -85844,12 +84431,12 @@ var src_default = VueToastificationPlugin;
 const _sfc_main$l = {
   name: "LoaderLogo"
 };
-const _hoisted_1$7 = {
+const _hoisted_1$a = {
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 209 193"
 };
 function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$7, [..._cache[0] || (_cache[0] = [
+  return openBlock(), createElementBlock("svg", _hoisted_1$a, [..._cache[0] || (_cache[0] = [
     createBaseVNode("path", { d: "M0 15.2c8.6-5 17.1-10 25.9-15.2C41.2 24.5 56.5 48.8 72 73.6c4.3-11.2 8.4-21.7 12.4-32.2 5-12.9 9.9-25.8 14.8-38.7.7-1.9 1.5-2.6 3.8-2.5 6.6.1 13.2.1 20.2.1 11.2 34.3 22.2 68.5 33.5 103.3 10.3-6.1 20.4-12 30.8-18.1 3.4 9.5 6.8 18.7 10.2 27.8.7 1.8-.5 2.4-1.7 3.1-8.9 5.3-17.8 10.7-26.7 15.9-2.1 1.2-2.6 2.3-1.8 4.5 1.5 3.8 2.6 7.7 4 12 10.8-6.4 21.4-12.8 32.3-19.2 1.8 4.5 3.5 8.7 5.3 13.1-4.3 2.1-8.3 4.2-12.5 6.3-6.4 3.2-12.8 6.4-19.2 9.5-1.8.9-2.2 1.7-1.6 3.6 3.2 9.2 6 18.5 9.1 27.8.3 1 .5 1.9.9 3.1h-35.2c-1.8-5.9-3.6-11.9-5.5-18.3-12.4 6.1-24.4 12.1-36.8 18.2-.9-1.4-1.7-2.7-2.8-4.3 1.5-.9 2.9-1.9 4.4-2.7 10-6 20-12 30.2-18 1.9-1.1 2.6-2.1 1.8-4.2-1.4-3.9-2.4-7.9-3.8-12.4-13.5 8.1-26.7 16-40.4 24.1-7-11.4-13.8-22.6-21-34.4-.5 1.2-.8 1.9-1 2.6-4.4 15.4-9 30.8-13.3 46.2-.7 2.5-1.7 3.4-4.7 3.3-10.3-.2-20.6-.1-31.3-.1 1.4-3.8 2.8-7.4 4.1-11 8.8-22.9 17.6-45.7 26.5-68.6.9-2.3.5-4-.7-6.1C38 77.7 20 48 1.9 18.3c-.7-.9-1.2-1.9-1.9-3.1zM128.8 120c-7.7-26.1-15.4-52.1-23.2-78.4-.7.7-.9.8-.9.9C99.3 60.8 94 79.3 88.8 97.7c-.3 1.2.2 2.9.9 4 5.8 9.4 11.7 18.8 17.5 28.1.4.7 1 1.3 1.5 2 6.8-3.9 13.3-7.8 20.1-11.8z" }, null, -1)
   ])]);
 }
@@ -85859,20 +84446,14 @@ const _sfc_main$k = {
     LoaderLogo
   }
 };
+const _hoisted_1$9 = { class: "d-flex fill-height align-center justify-center" };
 function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_loader_logo = resolveComponent("loader-logo");
-  return openBlock(), createBlock(VLayout, {
-    "fill-height": "",
-    "align-center": "",
-    "justify-center": ""
-  }, {
-    default: withCtx(() => [
-      createVNode(_component_loader_logo, { class: "app__loader" })
-    ]),
-    _: 1
-  });
+  return openBlock(), createElementBlock("div", _hoisted_1$9, [
+    createVNode(_component_loader_logo, { class: "app__loader" })
+  ]);
 }
-const AppLoader = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$i], ["__scopeId", "data-v-0cde5a97"]]);
+const AppLoader = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$i], ["__scopeId", "data-v-ad510e21"]]);
 const _sfc_main$j = {
   render: () => null,
   created() {
@@ -85929,6 +84510,7 @@ const _sfc_main$i = {
     }
   }
 };
+const _hoisted_1$8 = { class: "d-flex with-divider" };
 function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createBlock(VCard, {
     flat: "",
@@ -85938,16 +84520,13 @@ function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     default: withCtx(() => [
       createVNode(VCardText, { class: "caption" }, {
         default: withCtx(() => [
-          createVNode(VLayout, { class: "with-divider" }, {
-            default: withCtx(() => [
-              createBaseVNode("div", null, toDisplayString(_ctx.$t("settings.credentialsBuild", { version: $options.app.version })), 1),
-              createBaseVNode("a", {
-                href: "#",
-                onClick: _cache[0] || (_cache[0] = withModifiers((...args) => $options.sendAppAboutEvent && $options.sendAppAboutEvent(...args), ["prevent"]))
-              }, toDisplayString(_ctx.$t("settings.about")), 1)
-            ]),
-            _: 1
-          }),
+          createBaseVNode("div", _hoisted_1$8, [
+            createBaseVNode("div", null, toDisplayString(_ctx.$t("settings.credentialsBuild", { version: $options.app.version })), 1),
+            createBaseVNode("a", {
+              href: "#",
+              onClick: _cache[0] || (_cache[0] = withModifiers((...args) => $options.sendAppAboutEvent && $options.sendAppAboutEvent(...args), ["prevent"]))
+            }, toDisplayString(_ctx.$t("settings.about")), 1)
+          ]),
           createBaseVNode("div", null, toDisplayString(_ctx.$t("settings.credentialsDisclaimer")), 1),
           createBaseVNode("div", null, [
             createBaseVNode("a", {
@@ -85962,7 +84541,7 @@ function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   });
 }
-const SettingsCredentials = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-a77a3f91"]]);
+const SettingsCredentials = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-97d23fe2"]]);
 const makeVSwitchProps = propsFactory({
   indeterminate: Boolean,
   inset: Boolean,
@@ -86221,12 +84800,16 @@ const _sfc_main$h = {
     }
   }
 };
-const _hoisted_1$6 = { ref: "settings" };
+const _hoisted_1$7 = { ref: "settings" };
 const _hoisted_2$3 = { class: "pa-4 caption grey--text" };
 const _hoisted_3$3 = { class: "body-1" };
-const _hoisted_4$1 = { class: "pb-2" };
+const _hoisted_4$3 = { class: "pb-2" };
+const _hoisted_5$1 = { class: "mr-2" };
+const _hoisted_6$1 = { class: "mr-2" };
+const _hoisted_7$1 = { class: "mr-2" };
+const _hoisted_8$1 = { class: "mr-2" };
 function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$6, [
+  return openBlock(), createElementBlock("div", _hoisted_1$7, [
     createBaseVNode("div", _hoisted_2$3, [
       createBaseVNode("div", _hoisted_3$3, toDisplayString(_ctx.$t("settings.playbackTitle")), 1),
       createBaseVNode("div", null, toDisplayString(_ctx.$t("settings.playbackDescription")), 1)
@@ -86241,7 +84824,7 @@ function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
         }),
         createVNode(VCardText, { class: "mt-2 caption" }, {
           default: withCtx(() => [
-            createBaseVNode("div", _hoisted_4$1, toDisplayString(_ctx.$t("settings.torrentsDescriptionPrimary")), 1),
+            createBaseVNode("div", _hoisted_4$3, toDisplayString(_ctx.$t("settings.torrentsDescriptionPrimary")), 1),
             createBaseVNode("div", null, toDisplayString(_ctx.$t("settings.torrentsDescriptionSecondary")), 1)
           ]),
           _: 1
@@ -86250,19 +84833,18 @@ function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
           dense: "",
           onClick: _cache[0] || (_cache[0] = ($event) => $options._setTorrentsProcess(!$options._torrents_process))
         }, {
+          prepend: withCtx(() => [
+            createBaseVNode("div", _hoisted_5$1, [
+              createVNode(VSwitch, {
+                "input-value": $options._torrents_process,
+                onChange: $options._setTorrentsProcess
+              }, null, 8, ["input-value", "onChange"])
+            ])
+          ]),
           default: withCtx(() => [
             createVNode(VListItemTitle, null, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(_ctx.$t("settings.torrentsEnabled")), 1)
-              ]),
-              _: 1
-            }),
-            createVNode(VListItemAction, { class: "mr-2" }, {
-              default: withCtx(() => [
-                createVNode(VSwitch, {
-                  "input-value": $options._torrents_process,
-                  onChange: $options._setTorrentsProcess
-                }, null, 8, ["input-value", "onChange"])
               ]),
               _: 1
             })
@@ -86284,19 +84866,18 @@ function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
           dense: "",
           onClick: _cache[1] || (_cache[1] = ($event) => $options._setAutoplayNext(!$options._autoplay_next))
         }, {
+          prepend: withCtx(() => [
+            createBaseVNode("div", _hoisted_6$1, [
+              createVNode(VSwitch, {
+                "input-value": $options._autoplay_next,
+                onChange: $options._setAutoplayNext
+              }, null, 8, ["input-value", "onChange"])
+            ])
+          ]),
           default: withCtx(() => [
             createVNode(VListItemTitle, null, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(_ctx.$t("settings.autoplayNext")), 1)
-              ]),
-              _: 1
-            }),
-            createVNode(VListItemAction, { class: "mr-2" }, {
-              default: withCtx(() => [
-                createVNode(VSwitch, {
-                  "input-value": $options._autoplay_next,
-                  onChange: $options._setAutoplayNext
-                }, null, 8, ["input-value", "onChange"])
               ]),
               _: 1
             })
@@ -86352,19 +84933,18 @@ function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
           dense: "",
           onClick: _cache[3] || (_cache[3] = ($event) => $options._setAutoSkip(!$options._auto_opening_skip))
         }, {
+          prepend: withCtx(() => [
+            createBaseVNode("div", _hoisted_7$1, [
+              createVNode(VSwitch, {
+                "input-value": $options._auto_opening_skip,
+                onChange: $options._setAutoSkip
+              }, null, 8, ["input-value", "onChange"])
+            ])
+          ]),
           default: withCtx(() => [
             createVNode(VListItemTitle, null, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(_ctx.$t("settings.autoSkip")), 1)
-              ]),
-              _: 1
-            }),
-            createVNode(VListItemAction, { class: "mr-2" }, {
-              default: withCtx(() => [
-                createVNode(VSwitch, {
-                  "input-value": $options._auto_opening_skip,
-                  onChange: $options._setAutoSkip
-                }, null, 8, ["input-value", "onChange"])
               ]),
               _: 1
             })
@@ -86416,19 +84996,18 @@ function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
           dense: "",
           onClick: _cache[7] || (_cache[7] = ($event) => $options._setOpeningSkipButton(!$options._opening_skip_button))
         }, {
+          prepend: withCtx(() => [
+            createBaseVNode("div", _hoisted_8$1, [
+              createVNode(VSwitch, {
+                "input-value": $options._opening_skip_button,
+                onChange: $options._setOpeningSkipButton
+              }, null, 8, ["input-value", "onChange"])
+            ])
+          ]),
           default: withCtx(() => [
             createVNode(VListItemTitle, null, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(_ctx.$t("settings.openingSkipButton")), 1)
-              ]),
-              _: 1
-            }),
-            createVNode(VListItemAction, { class: "mr-2" }, {
-              default: withCtx(() => [
-                createVNode(VSwitch, {
-                  "input-value": $options._opening_skip_button,
-                  onChange: $options._setOpeningSkipButton
-                }, null, 8, ["input-value", "onChange"])
               ]),
               _: 1
             })
@@ -86621,7 +85200,7 @@ const _sfc_main$g = {
     }
   }
 };
-const _hoisted_1$5 = { class: "mt-1" };
+const _hoisted_1$6 = { class: "mt-1" };
 function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createBlock(VDialog, {
     modelValue: $data.visible,
@@ -86641,7 +85220,7 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
           createVNode(VCardText, null, {
             default: withCtx(() => [
               createBaseVNode("p", null, toDisplayString(_ctx.$t("dialogs.confirmSnapshotConsent")), 1),
-              createBaseVNode("p", _hoisted_1$5, [
+              createBaseVNode("p", _hoisted_1$6, [
                 createBaseVNode("b", null, toDisplayString(_ctx.$t("dialogs.confirmSnapshotNoPassword")), 1)
               ])
             ]),
@@ -89786,7 +88365,7 @@ const _sfc_main$c = {
     }
   }
 };
-const _hoisted_1$4 = { class: "text-h5" };
+const _hoisted_1$5 = { class: "text-h5" };
 function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", null, [
     createVNode(VDialog, {
@@ -89799,7 +88378,7 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
           default: withCtx(() => [
             createVNode(VCardTitle, null, {
               default: withCtx(() => [
-                createBaseVNode("span", _hoisted_1$4, toDisplayString(_ctx.$t("dialogs.snapshotsListTitle")), 1)
+                createBaseVNode("span", _hoisted_1$5, toDisplayString(_ctx.$t("dialogs.snapshotsListTitle")), 1)
               ]),
               _: 1
             }),
@@ -90637,20 +89216,26 @@ const _sfc_main$b = {
     this.isMounted = true;
   }
 };
-const _hoisted_1$3 = { ref: "settings" };
+const _hoisted_1$4 = { ref: "settings" };
 const _hoisted_2$2 = { class: "pa-4 caption grey--text" };
 const _hoisted_3$2 = { class: "body-1" };
-const _hoisted_4 = { class: "caption" };
+const _hoisted_4$2 = { class: "mr-2" };
 const _hoisted_5 = { class: "caption" };
-const _hoisted_6 = { class: "caption" };
+const _hoisted_6 = { class: "mr-2" };
 const _hoisted_7 = { class: "caption" };
-const _hoisted_8 = { class: "caption" };
-const _hoisted_9 = { class: "caption" };
-const _hoisted_10 = { class: "pa-4 caption grey--text" };
-const _hoisted_11 = { class: "body-1" };
+const _hoisted_8 = { class: "mr-2" };
+const _hoisted_9 = { class: "mr-2" };
+const _hoisted_10 = { class: "caption" };
+const _hoisted_11 = { class: "caption" };
+const _hoisted_12 = { class: "mr-2" };
+const _hoisted_13 = { class: "mr-2" };
+const _hoisted_14 = { class: "caption" };
+const _hoisted_15 = { class: "mr-2" };
+const _hoisted_16 = { class: "caption" };
+const _hoisted_17 = { class: "pa-4 caption grey--text" };
+const _hoisted_18 = { class: "body-1" };
 function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
-  return openBlock(), createElementBlock("div", _hoisted_1$3, [
+  return openBlock(), createElementBlock("div", _hoisted_1$4, [
     createBaseVNode("div", _hoisted_2$2, [
       createBaseVNode("div", _hoisted_3$2, toDisplayString(_ctx.$t("settings.systemTitle")), 1),
       createBaseVNode("div", null, toDisplayString(_ctx.$t("settings.systemDescription")), 1)
@@ -90664,19 +89249,18 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
           dense: "",
           onClick: _cache[0] || (_cache[0] = ($event) => $options._setAppbarRight(!$options._appbar_right))
         }, {
+          prepend: withCtx(() => [
+            createBaseVNode("div", _hoisted_4$2, [
+              createVNode(VSwitch, {
+                "input-value": $options._appbar_right,
+                onChange: $options._setAppbarRight
+              }, null, 8, ["input-value", "onChange"])
+            ])
+          ]),
           default: withCtx(() => [
             createVNode(VListItemTitle, null, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(_ctx.$t("settings.moveWindowButtons")), 1)
-              ]),
-              _: 1
-            }),
-            createVNode(VListItemAction, { class: "mr-2" }, {
-              default: withCtx(() => [
-                createVNode(VSwitch, {
-                  "input-value": $options._appbar_right,
-                  onChange: $options._setAppbarRight
-                }, null, 8, ["input-value", "onChange"])
               ]),
               _: 1
             })
@@ -90685,7 +89269,7 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
         }),
         createVNode(VCardText, { class: "pt-2" }, {
           default: withCtx(() => [
-            createBaseVNode("div", _hoisted_4, toDisplayString(_ctx.$t("settings.moveWindowButtonsHint")), 1)
+            createBaseVNode("div", _hoisted_5, toDisplayString(_ctx.$t("settings.moveWindowButtonsHint")), 1)
           ]),
           _: 1
         })
@@ -90698,19 +89282,18 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
           dense: "",
           onClick: _cache[1] || (_cache[1] = ($event) => $options._setFilterNotify(!_filter_notify))
         }, {
+          prepend: withCtx(() => [
+            createBaseVNode("div", _hoisted_6, [
+              createVNode(VSwitch, {
+                "input-value": $options._filter_notify,
+                onChange: $options._setFilterNotify
+              }, null, 8, ["input-value", "onChange"])
+            ])
+          ]),
           default: withCtx(() => [
             createVNode(VListItemTitle, null, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(_ctx.$t("settings.favoriteNotifications")), 1)
-              ]),
-              _: 1
-            }),
-            createVNode(VListItemAction, { class: "mr-2" }, {
-              default: withCtx(() => [
-                createVNode(VSwitch, {
-                  "input-value": $options._filter_notify,
-                  onChange: $options._setFilterNotify
-                }, null, 8, ["input-value", "onChange"])
               ]),
               _: 1
             })
@@ -90719,7 +89302,7 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
         }),
         createVNode(VCardText, { class: "pt-2" }, {
           default: withCtx(() => [
-            createBaseVNode("div", _hoisted_5, toDisplayString(_ctx.$t("settings.favoriteNotificationsHint")), 1)
+            createBaseVNode("div", _hoisted_7, toDisplayString(_ctx.$t("settings.favoriteNotificationsHint")), 1)
           ]),
           _: 1
         })
@@ -90732,19 +89315,18 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
           dense: "",
           onClick: _cache[2] || (_cache[2] = ($event) => $options._setIgnoreCerts(!$options._ignore_certs))
         }, {
+          prepend: withCtx(() => [
+            createBaseVNode("div", _hoisted_8, [
+              createVNode(VSwitch, {
+                "input-value": $options._ignore_certs,
+                onChange: $options._setIgnoreCerts
+              }, null, 8, ["input-value", "onChange"])
+            ])
+          ]),
           default: withCtx(() => [
             createVNode(VListItemTitle, null, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(_ctx.$t("settings.ignoreCerts")), 1)
-              ]),
-              _: 1
-            }),
-            createVNode(VListItemAction, { class: "mr-2" }, {
-              default: withCtx(() => [
-                createVNode(VSwitch, {
-                  "input-value": $options._ignore_certs,
-                  onChange: $options._setIgnoreCerts
-                }, null, 8, ["input-value", "onChange"])
               ]),
               _: 1
             })
@@ -90766,19 +89348,18 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
           dense: "",
           onClick: $options.toggleOperaProxy
         }, {
+          prepend: withCtx(() => [
+            createBaseVNode("div", _hoisted_9, [
+              createVNode(VSwitch, {
+                "input-value": $options._proxy === "http://opera",
+                onClick: $options.toggleOperaProxy
+              }, null, 8, ["input-value", "onClick"])
+            ])
+          ]),
           default: withCtx(() => [
             createVNode(VListItemTitle, null, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(_ctx.$t("settings.operaProxy")), 1)
-              ]),
-              _: 1
-            }),
-            createVNode(VListItemAction, { class: "mr-2" }, {
-              default: withCtx(() => [
-                createVNode(VSwitch, {
-                  "input-value": $options._proxy === "http://opera",
-                  onClick: $options.toggleOperaProxy
-                }, null, 8, ["input-value", "onClick"])
               ]),
               _: 1
             })
@@ -90801,7 +89382,7 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
               label: _ctx.$t("settings.proxyServer"),
               "persistent-hint": ""
             }, null, 8, ["value", "label"])) : createCommentVNode("", true),
-            createBaseVNode("div", _hoisted_6, [
+            createBaseVNode("div", _hoisted_10, [
               createBaseVNode("div", null, toDisplayString(_ctx.$t("settings.proxyHint")), 1),
               createBaseVNode("div", null, [
                 createBaseVNode("b", null, toDisplayString(_ctx.$t("settings.restartAfterServerChange")), 1)
@@ -90834,7 +89415,7 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
               label: _ctx.$t("settings.staticEndpoint"),
               "persistent-hint": ""
             }, null, 8, ["value", "label"]),
-            createBaseVNode("div", _hoisted_7, [
+            createBaseVNode("div", _hoisted_11, [
               createTextVNode(toDisplayString(_ctx.$t("settings.apiDescription")) + " ", 1),
               createBaseVNode("b", null, toDisplayString(_ctx.$t("settings.restartAfterServerChange")), 1)
             ])
@@ -90850,20 +89431,19 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
           dense: "",
           onClick: _cache[6] || (_cache[6] = ($event) => $options._setDRPC(!$options._drpc_enabled))
         }, {
+          prepend: withCtx(() => [
+            createBaseVNode("div", _hoisted_12, [
+              createVNode(VSwitch, {
+                "input-value": $options._drpc_enabled,
+                onChange: $options._setDRPC
+              }, null, 8, ["input-value", "onChange"])
+            ])
+          ]),
           default: withCtx(() => [
             createVNode(VListItemTitle, null, {
               default: withCtx(() => [..._cache[10] || (_cache[10] = [
                 createTextVNode("Discord Rich Presence", -1)
               ])]),
-              _: 1
-            }),
-            createVNode(VListItemAction, { class: "mr-2" }, {
-              default: withCtx(() => [
-                createVNode(VSwitch, {
-                  "input-value": $options._drpc_enabled,
-                  onChange: $options._setDRPC
-                }, null, 8, ["input-value", "onChange"])
-              ]),
               _: 1
             })
           ]),
@@ -90885,19 +89465,18 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
           dense: "",
           onClick: _cache[7] || (_cache[7] = ($event) => $options._setSystemNotifications(!$options._notifications_system))
         }, {
+          prepend: withCtx(() => [
+            createBaseVNode("div", _hoisted_13, [
+              createVNode(VSwitch, {
+                "input-value": $options._notifications_system,
+                onChange: $options._setSystemNotifications
+              }, null, 8, ["input-value", "onChange"])
+            ])
+          ]),
           default: withCtx(() => [
             createVNode(VListItemTitle, null, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(_ctx.$t("settings.systemNotifications")), 1)
-              ]),
-              _: 1
-            }),
-            createVNode(VListItemAction, { class: "mr-2" }, {
-              default: withCtx(() => [
-                createVNode(VSwitch, {
-                  "input-value": $options._notifications_system,
-                  onChange: $options._setSystemNotifications
-                }, null, 8, ["input-value", "onChange"])
               ]),
               _: 1
             })
@@ -90906,7 +89485,7 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
         }),
         createVNode(VCardText, { class: "pt-2" }, {
           default: withCtx(() => [
-            createBaseVNode("div", _hoisted_8, toDisplayString(_ctx.$t("settings.systemNotificationsHint")), 1)
+            createBaseVNode("div", _hoisted_14, toDisplayString(_ctx.$t("settings.systemNotificationsHint")), 1)
           ]),
           _: 1
         })
@@ -90919,19 +89498,18 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
           dense: "",
           onClick: _cache[8] || (_cache[8] = ($event) => $options._setUpdates(!$options._updates_enabled))
         }, {
+          prepend: withCtx(() => [
+            createBaseVNode("div", _hoisted_15, [
+              createVNode(VSwitch, {
+                "input-value": $options._updates_enabled,
+                onChange: $options._setUpdates
+              }, null, 8, ["input-value", "onChange"])
+            ])
+          ]),
           default: withCtx(() => [
             createVNode(VListItemTitle, null, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(_ctx.$t("settings.autoUpdates")), 1)
-              ]),
-              _: 1
-            }),
-            createVNode(VListItemAction, { class: "mr-2" }, {
-              default: withCtx(() => [
-                createVNode(VSwitch, {
-                  "input-value": $options._updates_enabled,
-                  onChange: $options._setUpdates
-                }, null, 8, ["input-value", "onChange"])
               ]),
               _: 1
             })
@@ -90952,7 +89530,7 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
       default: withCtx(() => [
         createVNode(VCardText, { class: "pb-2" }, {
           default: withCtx(() => [
-            createBaseVNode("div", _hoisted_9, toDisplayString(_ctx.$t("settings.updatesTimeoutHint")), 1)
+            createBaseVNode("div", _hoisted_16, toDisplayString(_ctx.$t("settings.updatesTimeoutHint")), 1)
           ]),
           _: 1
         }),
@@ -90974,8 +89552,8 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
       ]),
       _: 1
     }),
-    withDirectives(createBaseVNode("div", _hoisted_10, [
-      createBaseVNode("div", _hoisted_11, toDisplayString(_ctx.$t("settings.snapshots")), 1),
+    withDirectives(createBaseVNode("div", _hoisted_17, [
+      createBaseVNode("div", _hoisted_18, toDisplayString(_ctx.$t("settings.snapshots")), 1),
       createBaseVNode("div", null, toDisplayString(_ctx.$t("settings.snapshotsHint")), 1)
     ], 512), [
       [vShow, $options._isAuthorized]
@@ -90987,14 +89565,9 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
             createBaseVNode("template", null, [
               createVNode(VListItem, { onClick: $options.snapshots }, {
                 default: withCtx(() => [
-                  createVNode(_component_v_list_item_content, null, {
+                  createVNode(VListItemTitle, null, {
                     default: withCtx(() => [
-                      createVNode(VListItemTitle, null, {
-                        default: withCtx(() => [
-                          createTextVNode(toDisplayString(_ctx.$t("settings.snapshotsList")), 1)
-                        ]),
-                        _: 1
-                      })
+                      createTextVNode(toDisplayString(_ctx.$t("settings.snapshotsList")), 1)
                     ]),
                     _: 1
                   })
@@ -91164,13 +89737,13 @@ const _sfc_main$9 = {
           return { useReleasesStore: useReleasesStore3 };
         }, true ? void 0 : void 0, import.meta.url);
         const { useReleaseStore } = await __vitePreload(async () => {
-          const { useReleaseStore: useReleaseStore2 } = await import("./useReleaseStore-CpQmbHaP.js");
+          const { useReleaseStore: useReleaseStore2 } = await import("./useReleaseStore-ulZOFbhK.js");
           return { useReleaseStore: useReleaseStore2 };
-        }, true ? [] : void 0, import.meta.url);
+        }, true ? __vite__mapDeps([6,2]) : void 0, import.meta.url);
         const { useCatalogStore } = await __vitePreload(async () => {
-          const { useCatalogStore: useCatalogStore2 } = await import("./useCatalogStore-BDR0nl1X.js");
+          const { useCatalogStore: useCatalogStore2 } = await import("./useCatalogStore-CVtj4-lI.js");
           return { useCatalogStore: useCatalogStore2 };
-        }, true ? [] : void 0, import.meta.url);
+        }, true ? __vite__mapDeps([9,2]) : void 0, import.meta.url);
         const { useFavoritesStore: useFavoritesStore2 } = await __vitePreload(async () => {
           const { useFavoritesStore: useFavoritesStore3 } = await Promise.resolve().then(() => useFavoritesStore$1);
           return { useFavoritesStore: useFavoritesStore3 };
@@ -91332,12 +89905,12 @@ const _sfc_main$8 = {
     this.isMounted = true;
   }
 };
-const _hoisted_1$2 = { ref: "settings" };
+const _hoisted_1$3 = { ref: "settings" };
 const _hoisted_2$1 = { class: "pa-4 caption grey--text" };
 const _hoisted_3$1 = { class: "body-1" };
+const _hoisted_4$1 = { class: "text-right" };
 function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
-  return openBlock(), createElementBlock("div", _hoisted_1$2, [
+  return openBlock(), createElementBlock("div", _hoisted_1$3, [
     createBaseVNode("div", _hoisted_2$1, [
       createBaseVNode("div", _hoisted_3$1, toDisplayString(_ctx.$t("settings.actionsTitle")), 1),
       createBaseVNode("div", null, toDisplayString(_ctx.$t("settings.actionsDescription")), 1)
@@ -91352,24 +89925,18 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
                 createVNode(VListItem, {
                   onClick: item.action
                 }, {
+                  append: withCtx(() => [
+                    createBaseVNode("div", _hoisted_4$1, [
+                      createVNode(VListItemSubtitle, {
+                        textContent: toDisplayString(item.value)
+                      }, null, 8, ["textContent"])
+                    ])
+                  ]),
                   default: withCtx(() => [
-                    createVNode(_component_v_list_item_content, null, {
-                      default: withCtx(() => [
-                        createVNode(VListItemTitle, {
-                          textContent: toDisplayString(item.title),
-                          class: normalizeClass(item.classes)
-                        }, null, 8, ["textContent", "class"])
-                      ]),
-                      _: 2
-                    }, 1024),
-                    createVNode(VListItemAction, { class: "text-right" }, {
-                      default: withCtx(() => [
-                        createVNode(VListItemSubtitle, {
-                          textContent: toDisplayString(item.value)
-                        }, null, 8, ["textContent"])
-                      ]),
-                      _: 2
-                    }, 1024)
+                    createVNode(VListItemTitle, {
+                      textContent: toDisplayString(item.title),
+                      class: normalizeClass(item.classes)
+                    }, null, 8, ["textContent", "class"])
                   ]),
                   _: 2
                 }, 1032, ["onClick"])
@@ -91424,12 +89991,12 @@ const _sfc_main$7 = {
     }
   }
 };
-const _hoisted_1$1 = { ref: "settings" };
+const _hoisted_1$2 = { ref: "settings" };
 const _hoisted_2 = { class: "pa-4 caption grey--text" };
 const _hoisted_3 = { class: "body-1" };
+const _hoisted_4 = { class: "text-right" };
 function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
-  return openBlock(), createElementBlock("div", _hoisted_1$1, [
+  return openBlock(), createElementBlock("div", _hoisted_1$2, [
     createBaseVNode("div", _hoisted_2, [
       createBaseVNode("div", _hoisted_3, toDisplayString(_ctx.$t("settings.debugTitle")), 1),
       createBaseVNode("div", null, toDisplayString(_ctx.$t("settings.debugDescription")), 1)
@@ -91444,24 +90011,18 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
                 createVNode(VListItem, {
                   onClick: item.action
                 }, {
+                  append: withCtx(() => [
+                    createBaseVNode("div", _hoisted_4, [
+                      createVNode(VListItemSubtitle, {
+                        textContent: toDisplayString(item.value)
+                      }, null, 8, ["textContent"])
+                    ])
+                  ]),
                   default: withCtx(() => [
-                    createVNode(_component_v_list_item_content, null, {
-                      default: withCtx(() => [
-                        createVNode(VListItemTitle, {
-                          textContent: toDisplayString(item.title),
-                          class: normalizeClass(item.classes)
-                        }, null, 8, ["textContent", "class"])
-                      ]),
-                      _: 2
-                    }, 1024),
-                    createVNode(VListItemAction, { class: "text-right" }, {
-                      default: withCtx(() => [
-                        createVNode(VListItemSubtitle, {
-                          textContent: toDisplayString(item.value)
-                        }, null, 8, ["textContent"])
-                      ]),
-                      _: 2
-                    }, 1024)
+                    createVNode(VListItemTitle, {
+                      textContent: toDisplayString(item.title),
+                      class: normalizeClass(item.classes)
+                    }, null, 8, ["textContent", "class"])
                   ]),
                   _: 2
                 }, 1032, ["onClick"])
@@ -91513,8 +90074,8 @@ const _sfc_main$6 = {
     }
   }
 };
+const _hoisted_1$1 = { class: "text-right" };
 function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   return openBlock(), createBlock(VCard, null, {
     default: withCtx(() => [
       createVNode(VList, { dense: "" }, {
@@ -91525,24 +90086,18 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
               createVNode(VListItem, {
                 onClick: item.action
               }, {
+                append: withCtx(() => [
+                  createBaseVNode("div", _hoisted_1$1, [
+                    createVNode(VListItemSubtitle, {
+                      textContent: toDisplayString(item.value)
+                    }, null, 8, ["textContent"])
+                  ])
+                ]),
                 default: withCtx(() => [
-                  createVNode(_component_v_list_item_content, null, {
-                    default: withCtx(() => [
-                      createVNode(VListItemTitle, {
-                        textContent: toDisplayString(item.title),
-                        class: normalizeClass(item.classes)
-                      }, null, 8, ["textContent", "class"])
-                    ]),
-                    _: 2
-                  }, 1024),
-                  createVNode(VListItemAction, { class: "text-right" }, {
-                    default: withCtx(() => [
-                      createVNode(VListItemSubtitle, {
-                        textContent: toDisplayString(item.value)
-                      }, null, 8, ["textContent"])
-                    ]),
-                    _: 2
-                  }, 1024)
+                  createVNode(VListItemTitle, {
+                    textContent: toDisplayString(item.title),
+                    class: normalizeClass(item.classes)
+                  }, null, 8, ["textContent", "class"])
                 ]),
                 _: 2
               }, 1032, ["onClick"])
@@ -91740,40 +90295,36 @@ const _sfc_main$4 = {
   }
 };
 function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-  return _ctx.is_fullscreen === false ? (openBlock(), createBlock(VLayout, {
+  return _ctx.is_fullscreen === false ? (openBlock(), createElementBlock("div", {
     key: 0,
-    "align-center": "",
-    class: normalizeClass(["black system-bar white--text px-2", { "is-mac--fullscreen": this.isMacOnFullscreen, "right": this.controlsRight }]),
+    class: normalizeClass(["d-flex align-center black system-bar white--text px-2", { "is-mac--fullscreen": this.isMacOnFullscreen, "right": this.controlsRight }]),
     onDblclick: _cache[0] || (_cache[0] = () => $options.maximizeApp())
-  }, {
-    default: withCtx(() => [
-      !this.isMac ? (openBlock(true), createElementBlock(Fragment$1, { key: 0 }, renderList($options.controls, (control, k) => {
-        return openBlock(), createBlock(VBtn, {
-          key: k,
-          icon: "",
-          size: "small",
-          class: "system-bar__button",
-          onClick: control.action
-        }, {
-          default: withCtx(() => [
-            createVNode(VIcon, {
-              size: "small",
-              color: "grey"
-            }, {
-              default: withCtx(() => [
-                createTextVNode(toDisplayString(control.icon), 1)
-              ]),
-              _: 2
-            }, 1024)
-          ]),
-          _: 2
-        }, 1032, ["onClick"]);
-      }), 128)) : createCommentVNode("", true)
-    ]),
-    _: 1
-  }, 8, ["class"])) : createCommentVNode("", true);
+  }, [
+    !this.isMac ? (openBlock(true), createElementBlock(Fragment$1, { key: 0 }, renderList($options.controls, (control, k) => {
+      return openBlock(), createBlock(VBtn, {
+        key: k,
+        icon: "",
+        size: "small",
+        class: "system-bar__button",
+        onClick: control.action
+      }, {
+        default: withCtx(() => [
+          createVNode(VIcon, {
+            size: "small",
+            color: "grey"
+          }, {
+            default: withCtx(() => [
+              createTextVNode(toDisplayString(control.icon), 1)
+            ]),
+            _: 2
+          }, 1024)
+        ]),
+        _: 2
+      }, 1032, ["onClick"]);
+    }), 128)) : createCommentVNode("", true)
+  ], 34)) : createCommentVNode("", true);
 }
-const AppSystemBar = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-216d6c9c"]]);
+const AppSystemBar = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-64a87726"]]);
 const _sfc_main$3 = {
   name: "Layout.Base",
   components: {
@@ -91819,44 +90370,39 @@ const _sfc_main$3 = {
 };
 function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_app_tool_bar = resolveComponent("app-tool-bar");
-  return openBlock(), createBlock(VLayout, {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(["d-flex flex-column fill-height base-layout", { showScroll: $options.showScroll, isOnBlack: $options.isOnBlack }]),
     ref: "container",
-    column: "",
-    "fill-height": "",
-    id: "container",
-    class: normalizeClass(["base-layout", { showScroll: $options.showScroll, isOnBlack: $options.isOnBlack }])
-  }, {
-    default: withCtx(() => [
-      createVNode(_component_app_tool_bar),
-      withDirectives(createVNode(VBtn, {
-        width: "30",
-        height: "30",
-        fab: "",
-        dark: "",
-        fixed: "",
-        bottom: "",
-        right: "",
-        color: "grey darken-3",
-        onClick: $options.toTop
-      }, {
-        default: withCtx(() => [
-          createVNode(VIcon, null, {
-            default: withCtx(() => [..._cache[0] || (_cache[0] = [
-              createTextVNode("mdi-chevron-up", -1)
-            ])]),
-            _: 1
-          })
-        ]),
-        _: 1
-      }, 8, ["onClick"]), [
-        [vShow, $data.fab]
+    id: "container"
+  }, [
+    createVNode(_component_app_tool_bar),
+    withDirectives(createVNode(VBtn, {
+      width: "30",
+      height: "30",
+      fab: "",
+      dark: "",
+      fixed: "",
+      bottom: "",
+      right: "",
+      color: "grey darken-3",
+      onClick: $options.toTop
+    }, {
+      default: withCtx(() => [
+        createVNode(VIcon, null, {
+          default: withCtx(() => [..._cache[0] || (_cache[0] = [
+            createTextVNode("mdi-chevron-up", -1)
+          ])]),
+          _: 1
+        })
       ]),
-      renderSlot(_ctx.$slots, "default", {}, void 0, true)
+      _: 1
+    }, 8, ["onClick"]), [
+      [vShow, $data.fab]
     ]),
-    _: 3
-  }, 8, ["class"]);
+    renderSlot(_ctx.$slots, "default", {}, void 0, true)
+  ], 2);
 }
-const BaseLayout = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__scopeId", "data-v-bf91b88e"]]);
+const BaseLayout = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__scopeId", "data-v-ec036dca"]]);
 const _sfc_main$2 = {
   render: () => null,
   computed: {
@@ -92122,11 +90668,11 @@ const _sfc_main = {
           throw e;
         }
       });
-      if (version$2.includes("beta") && data.beta !== version$2) {
+      if (version$3.includes("beta") && data.beta !== version$3) {
         this.update_notes = data.beta_notes;
         this.$refs.appUpdate.showDialog();
       }
-      if (!version$2.includes("beta") && data.stable !== version$2) {
+      if (!version$3.includes("beta") && data.stable !== version$3) {
         this.update_notes = data.stable_notes;
         this.$refs.appUpdate.showDialog();
       }
@@ -92337,15 +90883,15 @@ export {
   makeComponentProps as H,
   IconValue as I,
   toReleases as J,
-  createBlock as K,
+  createElementBlock as K,
   withCtx as L,
-  VLayout as M,
+  VRow as M,
   openBlock as N,
-  VRow as O,
-  VCol as P,
-  VImg as Q,
-  VCard as R,
-  VCardText as S,
+  VCol as O,
+  VImg as P,
+  VCard as Q,
+  VCardText as R,
+  createBlock as S,
   toDisplayString as T,
   createCommentVNode as U,
   VIcon as V,
@@ -92355,7 +90901,7 @@ export {
   useRender as Z,
   _export_sfc as _,
   computed as a,
-  VSelect as a$,
+  VAvatar as a$,
   VInput as a0,
   VCheckboxBtn as a1,
   forwardRefs as a2,
@@ -92363,102 +90909,99 @@ export {
   omit as a4,
   makeVCheckboxBtnProps as a5,
   makeVInputProps as a6,
-  createElementBlock as a7,
-  VSkeletonLoader as a8,
-  toVideo as a9,
-  watch as aA,
-  withDirectives as aB,
-  PREFERS_REDUCED_MOTION as aC,
-  convertToUnit as aD,
-  nextTick as aE,
-  IN_BROWSER as aF,
-  getScrollParent as aG,
-  shallowRef as aH,
-  provide as aI,
-  inject$1 as aJ,
-  useGroupItem as aK,
-  useSsrBoot as aL,
-  useLazy as aM,
-  vShow as aN,
-  MaybeTransition as aO,
-  makeLazyProps as aP,
-  makeGroupItemProps as aQ,
-  useScopeId as aR,
-  provideDefaults as aS,
-  VSlideGroup as aT,
-  makeVSlideGroupProps as aU,
-  pick as aV,
-  isObject$2 as aW,
-  ReleaseEpisodes as aX,
-  router as aY,
-  VCardActions as aZ,
-  VMenu as a_,
-  __orderBy as aa,
-  resolveComponent as ab,
-  VCardTitle as ac,
-  VCardSubtitle as ad,
-  Fragment$1 as ae,
-  renderList as af,
-  VChip as ag,
-  meta as ah,
-  humanFormat as ai,
-  VListItem as aj,
-  VDivider as ak,
-  VListItemTitle as al,
-  VListItemSubtitle as am,
-  VListItemAction as an,
-  withModifiers as ao,
-  VList as ap,
-  invokeTorrentParse as aq,
-  dayjs as ar,
-  useSettingsStore as as,
-  useBackgroundColor as at,
-  animate as au,
-  standardEasing as av,
-  makeVBtnProps as aw,
-  keys as ax,
-  useRtl as ay,
-  useGroup as az,
+  VSkeletonLoader as a7,
+  toVideo as a8,
+  __orderBy as a9,
+  nextTick as aA,
+  IN_BROWSER as aB,
+  getScrollParent as aC,
+  shallowRef as aD,
+  provide as aE,
+  inject$1 as aF,
+  useGroupItem as aG,
+  useSsrBoot as aH,
+  useLazy as aI,
+  vShow as aJ,
+  MaybeTransition as aK,
+  makeLazyProps as aL,
+  makeGroupItemProps as aM,
+  useScopeId as aN,
+  provideDefaults as aO,
+  makeVSlideGroupProps as aP,
+  pick as aQ,
+  VSlideGroup as aR,
+  isObject$2 as aS,
+  ReleaseEpisodes as aT,
+  toHandlers as aU,
+  resolveDynamicComponent as aV,
+  router as aW,
+  VCardActions as aX,
+  VMenu as aY,
+  withModifiers as aZ,
+  VSelect as a_,
+  resolveComponent as aa,
+  VCardTitle as ab,
+  VCardSubtitle as ac,
+  Fragment$1 as ad,
+  renderList as ae,
+  VChip as af,
+  humanFormat as ag,
+  VListItem as ah,
+  VDivider as ai,
+  VListItemTitle as aj,
+  VListItemSubtitle as ak,
+  VList as al,
+  invokeTorrentParse as am,
+  dayjs as an,
+  useSettingsStore as ao,
+  makeVBtnProps as ap,
+  useBackgroundColor as aq,
+  animate as ar,
+  standardEasing as as,
+  keys as at,
+  useRtl as au,
+  useGroup as av,
+  watch as aw,
+  withDirectives as ax,
+  PREFERS_REDUCED_MOTION as ay,
+  convertToUnit as az,
   provideTheme as b,
-  toHandlers as b0,
-  resolveDynamicComponent as b1,
-  VBadge as b2,
-  VAutocomplete as b3,
-  ReleaseProgress as b4,
-  useWatchStore as b5,
-  normalizeProps as b6,
-  guardReactiveProps as b7,
-  toRelease as b8,
-  VExpandTransition as b9,
-  BaseTransformer as bA,
-  fe as bB,
-  __capitalize as bC,
-  unref as ba,
-  withKeys as bb,
-  useAccountStore as bc,
-  invokeSafeStorageEncrypt as bd,
-  useFavoritesStore as be,
-  electronExports as bf,
-  VTextField as bg,
-  AppKeyboardHandlerMixin as bh,
-  VFadeTransition as bi,
-  useReleasesStore as bj,
-  useAppStore as bk,
-  useDelay as bl,
-  makeDelayProps as bm,
-  stringsPluralize as bn,
-  VSwitch as bo,
-  toLogin as bp,
-  Fuse as bq,
-  defineStore as br,
-  axios$1 as bs,
-  ReleaseProxy as bt,
-  ReleaseTransformer as bu,
-  EpisodesTransformer as bv,
-  showAppError as bw,
-  translate as bx,
-  getLocale as by,
-  BaseProxy as bz,
+  VBadge as b0,
+  VAutocomplete as b1,
+  ReleaseProgress as b2,
+  useWatchStore as b3,
+  normalizeProps as b4,
+  guardReactiveProps as b5,
+  toRelease as b6,
+  VExpandTransition as b7,
+  unref as b8,
+  withKeys as b9,
+  useAccountStore as ba,
+  invokeSafeStorageEncrypt as bb,
+  useFavoritesStore as bc,
+  VTextField as bd,
+  AppKeyboardHandlerMixin as be,
+  VFadeTransition as bf,
+  useReleasesStore as bg,
+  useAppStore as bh,
+  useDelay as bi,
+  makeDelayProps as bj,
+  stringsPluralize as bk,
+  VSwitch as bl,
+  toLogin as bm,
+  Fuse as bn,
+  defineStore as bo,
+  axios$1 as bp,
+  ReleaseProxy as bq,
+  ReleaseTransformer as br,
+  EpisodesTransformer as bs,
+  showAppError as bt,
+  translate as bu,
+  getLocale as bv,
+  BaseProxy as bw,
+  BaseTransformer as bx,
+  fe as by,
+  __capitalize as bz,
   createSimpleFunctional as c,
   useVariant as d,
   useDensity as e,

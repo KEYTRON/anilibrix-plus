@@ -1,5 +1,10 @@
 import { L as LibriaTyan01 } from "./LibriaTyan01-DlPDW3gN.js";
-import { c as createSimpleFunctional, p as propsFactory, a as computed, g as genericComponent, u as useProxiedModel, b as provideTheme, d as useVariant, e as useDensity, f as useLocation, h as usePosition, i as useRounded, j as useTextColor, k as useLocale, l as createVNode, m as genOverlays, n as createBaseVNode, o as normalizeStyle, q as normalizeClass, V as VIcon, r as mergeProps, s as VDefaultsProvider, t as VBtn, v as toRef, w as useDimension, x as useElevation, I as IconValue, y as makeVariantProps, z as makeThemeProps, A as makeTagProps, B as makeRoundedProps, C as makePositionProps, D as makeLocationProps, E as makeElevationProps, F as makeDimensionProps, G as makeDensityProps, H as makeComponentProps, _ as _export_sfc, J as toReleases, K as createBlock, L as withCtx, M as VLayout, N as openBlock, O as VRow, P as VCol, Q as VImg, R as VCard, S as VCardText, T as toDisplayString, U as createCommentVNode, W as createTextVNode } from "./index-BZ1Qg9LU.js";
+import { c as createSimpleFunctional, p as propsFactory, a as computed, g as genericComponent, u as useProxiedModel, b as provideTheme, d as useVariant, e as useDensity, f as useLocation, h as usePosition, i as useRounded, j as useTextColor, k as useLocale, l as createVNode, m as genOverlays, n as createBaseVNode, o as normalizeStyle, q as normalizeClass, V as VIcon, r as mergeProps, s as VDefaultsProvider, t as VBtn, v as toRef, w as useDimension, x as useElevation, I as IconValue, y as makeVariantProps, z as makeThemeProps, A as makeTagProps, B as makeRoundedProps, C as makePositionProps, D as makeLocationProps, E as makeElevationProps, F as makeDimensionProps, G as makeDensityProps, H as makeComponentProps, _ as _export_sfc, J as toReleases, K as createElementBlock, L as withCtx, M as VRow, N as openBlock, O as VCol, P as VImg, Q as VCard, R as VCardText, S as createBlock, T as toDisplayString, U as createCommentVNode, W as createTextVNode } from "./index-CIkHx-EU.js";
+import "./torrents-handler-BtK2vzG6.js";
+import "fs";
+import "path";
+import "stream";
+import "util";
 const VAlertTitle = createSimpleFunctional("v-alert-title");
 const makeIconSizeProps = propsFactory({
   iconSize: [Number, String],
@@ -235,152 +240,146 @@ const _sfc_main = {
     toReleases
   }
 };
-const _hoisted_1 = { class: "d-flex align-center" };
+const _hoisted_1 = { class: "d-flex fill-height align-center justify-center" };
 const _hoisted_2 = { class: "d-flex align-center" };
-const _hoisted_3 = { class: "text-body-1 mb-2" };
-const _hoisted_4 = { class: "text-caption" };
-const _hoisted_5 = { class: "mb-2" };
-const _hoisted_6 = { class: "mt-3 d-flex justify-space-between" };
+const _hoisted_3 = { class: "d-flex align-center" };
+const _hoisted_4 = { class: "text-body-1 mb-2" };
+const _hoisted_5 = { class: "text-caption" };
+const _hoisted_6 = { class: "mb-2" };
+const _hoisted_7 = { class: "mt-3 d-flex justify-space-between" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createBlock(VLayout, {
-    "fill-height": "",
-    "align-center": "",
-    "justify-center": ""
-  }, {
-    default: withCtx(() => [
-      createVNode(VRow, {
-        justify: "center",
-        align: "center"
-      }, {
-        default: withCtx(() => [
-          createVNode(VCol, {
-            cols: "12",
-            sm: "3",
-            "align-self": "center"
-          }, {
-            default: withCtx(() => [
-              createVNode(VImg, {
-                transition: false,
-                class: "image",
-                contain: "",
-                src: $data.image
-              }, null, 8, ["src"])
-            ]),
-            _: 1
-          }),
-          createVNode(VCol, {
-            cols: "12",
-            sm: "6",
-            "align-self": "center"
-          }, {
-            default: withCtx(() => [
-              createVNode(VCard, {
-                flat: "",
-                color: "transparent"
-              }, {
-                default: withCtx(() => [
-                  createVNode(VCardText, { class: "error-message-container" }, {
-                    default: withCtx(() => [
-                      $props.message ? (openBlock(), createBlock(VAlert, {
-                        key: 0,
-                        type: "error",
-                        dense: "",
-                        outlined: "",
-                        class: "mb-4",
-                        transition: "scale-transition"
-                      }, {
-                        default: withCtx(() => [
-                          createBaseVNode("div", _hoisted_1, [
-                            createBaseVNode("span", null, toDisplayString($props.message), 1)
-                          ])
+  return openBlock(), createElementBlock("div", _hoisted_1, [
+    createVNode(VRow, {
+      justify: "center",
+      align: "center"
+    }, {
+      default: withCtx(() => [
+        createVNode(VCol, {
+          cols: "12",
+          sm: "3",
+          "align-self": "center"
+        }, {
+          default: withCtx(() => [
+            createVNode(VImg, {
+              transition: false,
+              class: "image",
+              contain: "",
+              src: $data.image
+            }, null, 8, ["src"])
+          ]),
+          _: 1
+        }),
+        createVNode(VCol, {
+          cols: "12",
+          sm: "6",
+          "align-self": "center"
+        }, {
+          default: withCtx(() => [
+            createVNode(VCard, {
+              flat: "",
+              color: "transparent"
+            }, {
+              default: withCtx(() => [
+                createVNode(VCardText, { class: "error-message-container" }, {
+                  default: withCtx(() => [
+                    $props.message ? (openBlock(), createBlock(VAlert, {
+                      key: 0,
+                      type: "error",
+                      dense: "",
+                      outlined: "",
+                      class: "mb-4",
+                      transition: "scale-transition"
+                    }, {
+                      default: withCtx(() => [
+                        createBaseVNode("div", _hoisted_2, [
+                          createBaseVNode("span", null, toDisplayString($props.message), 1)
+                        ])
+                      ]),
+                      _: 1
+                    })) : createCommentVNode("", true),
+                    $props.error ? (openBlock(), createBlock(VAlert, {
+                      key: 1,
+                      type: "error",
+                      dense: "",
+                      outlined: "",
+                      class: "mb-4",
+                      transition: "scale-transition"
+                    }, {
+                      default: withCtx(() => [
+                        createBaseVNode("div", _hoisted_3, [
+                          createVNode(VIcon, { left: "" }, {
+                            default: withCtx(() => [..._cache[0] || (_cache[0] = [
+                              createTextVNode("mdi-alert", -1)
+                            ])]),
+                            _: 1
+                          }),
+                          createBaseVNode("span", null, toDisplayString($props.error), 1)
+                        ])
+                      ]),
+                      _: 1
+                    })) : createCommentVNode("", true),
+                    createVNode(VCard, {
+                      outlined: "",
+                      color: "red",
+                      class: "pa-4"
+                    }, {
+                      default: withCtx(() => [
+                        createBaseVNode("div", _hoisted_4, [
+                          createVNode(VIcon, {
+                            small: "",
+                            class: "mr-2"
+                          }, {
+                            default: withCtx(() => [..._cache[1] || (_cache[1] = [
+                              createTextVNode("mdi-help-circle", -1)
+                            ])]),
+                            _: 1
+                          }),
+                          createBaseVNode("strong", null, toDisplayString(_ctx.$t("blank.title")), 1)
                         ]),
-                        _: 1
-                      })) : createCommentVNode("", true),
-                      $props.error ? (openBlock(), createBlock(VAlert, {
-                        key: 1,
-                        type: "error",
-                        dense: "",
-                        outlined: "",
-                        class: "mb-4",
-                        transition: "scale-transition"
-                      }, {
-                        default: withCtx(() => [
-                          createBaseVNode("div", _hoisted_2, [
-                            createVNode(VIcon, { left: "" }, {
-                              default: withCtx(() => [..._cache[0] || (_cache[0] = [
-                                createTextVNode("mdi-alert", -1)
-                              ])]),
-                              _: 1
-                            }),
-                            createBaseVNode("span", null, toDisplayString($props.error), 1)
-                          ])
+                        createBaseVNode("div", _hoisted_5, [
+                          createBaseVNode("p", _hoisted_6, toDisplayString(_ctx.$t("blank.subtitle")), 1),
+                          createBaseVNode("p", null, toDisplayString(_ctx.$t("blank.backBug")), 1)
                         ]),
-                        _: 1
-                      })) : createCommentVNode("", true),
-                      createVNode(VCard, {
-                        outlined: "",
-                        color: "red",
-                        class: "pa-4"
-                      }, {
-                        default: withCtx(() => [
-                          createBaseVNode("div", _hoisted_3, [
-                            createVNode(VIcon, {
-                              small: "",
-                              class: "mr-2"
-                            }, {
-                              default: withCtx(() => [..._cache[1] || (_cache[1] = [
-                                createTextVNode("mdi-help-circle", -1)
-                              ])]),
-                              _: 1
-                            }),
-                            createBaseVNode("strong", null, toDisplayString(_ctx.$t("blank.title")), 1)
-                          ]),
-                          createBaseVNode("div", _hoisted_4, [
-                            createBaseVNode("p", _hoisted_5, toDisplayString(_ctx.$t("blank.subtitle")), 1),
-                            createBaseVNode("p", null, toDisplayString(_ctx.$t("blank.backBug")), 1)
-                          ]),
-                          createBaseVNode("div", _hoisted_6, [
-                            createVNode(VBtn, {
-                              small: "",
-                              text: "",
-                              color: "primary",
-                              to: "/"
-                            }, {
-                              default: withCtx(() => [
-                                createVNode(VIcon, {
-                                  left: "",
-                                  small: ""
-                                }, {
-                                  default: withCtx(() => [..._cache[2] || (_cache[2] = [
-                                    createTextVNode("mdi-home", -1)
-                                  ])]),
-                                  _: 1
-                                }),
-                                createTextVNode(" " + toDisplayString(_ctx.$t("common.home")), 1)
-                              ]),
-                              _: 1
-                            })
-                          ])
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    _: 1
-                  })
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          })
-        ]),
-        _: 1
-      })
-    ]),
-    _: 1
-  });
+                        createBaseVNode("div", _hoisted_7, [
+                          createVNode(VBtn, {
+                            small: "",
+                            text: "",
+                            color: "primary",
+                            to: "/"
+                          }, {
+                            default: withCtx(() => [
+                              createVNode(VIcon, {
+                                left: "",
+                                small: ""
+                              }, {
+                                default: withCtx(() => [..._cache[2] || (_cache[2] = [
+                                  createTextVNode("mdi-home", -1)
+                                ])]),
+                                _: 1
+                              }),
+                              createTextVNode(" " + toDisplayString(_ctx.$t("common.home")), 1)
+                            ]),
+                            _: 1
+                          })
+                        ])
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            })
+          ]),
+          _: 1
+        })
+      ]),
+      _: 1
+    })
+  ]);
 }
-const BlankView = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-275bd74c"]]);
+const BlankView = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-9d88cf04"]]);
 export {
   BlankView as default
 };

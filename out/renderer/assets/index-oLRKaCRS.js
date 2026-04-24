@@ -1,79 +1,75 @@
-import { _ as _export_sfc, K as createBlock, L as withCtx, M as VLayout, N as openBlock, l as createVNode, a8 as VSkeletonLoader, t as VBtn, r as mergeProps, V as VIcon, W as createTextVNode, n as createBaseVNode, T as toDisplayString, b2 as VBadge, a$ as VSelect, b3 as VAutocomplete, a7 as createElementBlock, ae as Fragment, af as renderList, ab as resolveComponent, aj as VListItem, al as VListItemTitle, am as VListItemSubtitle, b1 as resolveDynamicComponent, q as normalizeClass, R as VCard, b4 as ReleaseProgress, b5 as useWatchStore, a_ as VMenu, ap as VList, ao as withModifiers, U as createCommentVNode, an as VListItemAction, Q as VImg, ac as VCardTitle, ad as VCardSubtitle, S as VCardText, b6 as normalizeProps, b7 as guardReactiveProps, ag as VChip, b8 as toRelease, aE as nextTick, b9 as VExpandTransition } from "./index-BZ1Qg9LU.js";
-import { useCatalogStore } from "./useCatalogStore-BDR0nl1X.js";
-import { R as ReleaseFavorite } from "./ReleaseFavorite-BSuv1n56.js";
+import { _ as _export_sfc, K as createElementBlock, l as createVNode, n as createBaseVNode, N as openBlock, a7 as VSkeletonLoader, L as withCtx, r as mergeProps, t as VBtn, b0 as VBadge, V as VIcon, W as createTextVNode, T as toDisplayString, S as createBlock, a_ as VSelect, b1 as VAutocomplete, ad as Fragment, ae as renderList, ah as VListItem, aj as VListItemTitle, ak as VListItemSubtitle, aV as resolveDynamicComponent, q as normalizeClass, Q as VCard, b2 as ReleaseProgress, b3 as useWatchStore, aa as resolveComponent, aY as VMenu, al as VList, aZ as withModifiers, U as createCommentVNode, P as VImg, ab as VCardTitle, ac as VCardSubtitle, R as VCardText, b4 as normalizeProps, b5 as guardReactiveProps, af as VChip, b6 as toRelease, b7 as VExpandTransition, aA as nextTick } from "./index-CIkHx-EU.js";
+import { useCatalogStore } from "./useCatalogStore-CVtj4-lI.js";
+import { R as ReleaseFavorite } from "./ReleaseFavorite-BQG4Fd1H.js";
+import "./torrents-handler-BtK2vzG6.js";
+import "fs";
+import "path";
+import "stream";
+import "util";
 const _sfc_main$7 = {};
+const _hoisted_1$3 = { class: "d-flex align-start" };
+const _hoisted_2$1 = { class: "d-flex flex-column ma-4" };
+const _hoisted_3 = { class: "d-flex mt-3" };
 function _sfc_render$7(_ctx, _cache) {
-  return openBlock(), createBlock(VLayout, { "align-start": "" }, {
-    default: withCtx(() => [
+  return openBlock(), createElementBlock("div", _hoisted_1$3, [
+    createVNode(VSkeletonLoader, {
+      boilerplate: "",
+      type: "image",
+      width: "160",
+      height: "240"
+    }),
+    createBaseVNode("div", _hoisted_2$1, [
       createVNode(VSkeletonLoader, {
         boilerplate: "",
-        type: "image",
-        width: "160",
-        height: "240"
+        type: "heading",
+        width: "400px",
+        height: "24px"
       }),
-      createVNode(VLayout, {
-        column: "",
-        class: "ma-4"
-      }, {
-        default: withCtx(() => [
-          createVNode(VSkeletonLoader, {
-            boilerplate: "",
-            type: "heading",
-            width: "400px",
-            height: "24px"
-          }),
-          createVNode(VSkeletonLoader, {
-            boilerplate: "",
-            type: "text",
-            class: "mt-3",
-            width: "140"
-          }),
-          createVNode(VSkeletonLoader, {
-            boilerplate: "",
-            type: "text",
-            class: "mt-1",
-            width: "240"
-          }),
-          createVNode(VLayout, { class: "mt-3" }, {
-            default: withCtx(() => [
-              createVNode(VSkeletonLoader, {
-                boilerplate: "",
-                type: "button",
-                width: "100",
-                class: "mr-1"
-              }),
-              createVNode(VSkeletonLoader, {
-                boilerplate: "",
-                type: "button",
-                width: "65",
-                class: "mr-1"
-              }),
-              createVNode(VSkeletonLoader, {
-                boilerplate: "",
-                type: "button",
-                width: "160",
-                class: "mr-1"
-              }),
-              createVNode(VSkeletonLoader, {
-                boilerplate: "",
-                type: "button",
-                width: "125"
-              })
-            ]),
-            _: 1
-          }),
-          createVNode(VSkeletonLoader, {
-            boilerplate: "",
-            type: "text@3",
-            width: "100%",
-            class: "mt-5"
-          })
-        ]),
-        _: 1
+      createVNode(VSkeletonLoader, {
+        boilerplate: "",
+        type: "text",
+        class: "mt-3",
+        width: "140"
+      }),
+      createVNode(VSkeletonLoader, {
+        boilerplate: "",
+        type: "text",
+        class: "mt-1",
+        width: "240"
+      }),
+      createBaseVNode("div", _hoisted_3, [
+        createVNode(VSkeletonLoader, {
+          boilerplate: "",
+          type: "button",
+          width: "100",
+          class: "mr-1"
+        }),
+        createVNode(VSkeletonLoader, {
+          boilerplate: "",
+          type: "button",
+          width: "65",
+          class: "mr-1"
+        }),
+        createVNode(VSkeletonLoader, {
+          boilerplate: "",
+          type: "button",
+          width: "160",
+          class: "mr-1"
+        }),
+        createVNode(VSkeletonLoader, {
+          boilerplate: "",
+          type: "button",
+          width: "125"
+        })
+      ]),
+      createVNode(VSkeletonLoader, {
+        boilerplate: "",
+        type: "text@3",
+        width: "100%",
+        class: "mt-5"
       })
-    ]),
-    _: 1
-  });
+    ])
+  ]);
 }
 const CatalogLoader = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7]]);
 const props$1 = {
@@ -107,60 +103,58 @@ const _sfc_main$6 = {
     }
   }
 };
+const _hoisted_1$2 = { class: "d-flex shrink" };
 function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createBlock(VLayout, { class: "shrink" }, {
-    default: withCtx(() => [
-      createVNode(VBtn, mergeProps({ loading: _ctx.loading }, {
-        class: "mr-2",
-        height: "48",
-        onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("reload"))
-      }), {
-        default: withCtx(() => [
-          createVNode(VIcon, {
-            small: "",
-            class: "mr-2"
-          }, {
-            default: withCtx(() => [..._cache[2] || (_cache[2] = [
-              createTextVNode("mdi-refresh", -1)
-            ])]),
-            _: 1
-          }),
-          createBaseVNode("span", null, toDisplayString(_ctx.$t("common.reload")), 1)
-        ]),
-        _: 1
-      }, 16),
-      createVNode(VBadge, {
-        dot: "",
-        overlap: "",
-        "offset-x": "10",
-        "offset-y": "10",
-        value: $options.hasFilters
-      }, {
-        default: withCtx(() => [
-          createVNode(VBtn, mergeProps({ loading: _ctx.loading }, {
-            height: "48",
-            onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$emit("update:settings", !_ctx.settings))
-          }), {
-            default: withCtx(() => [
-              createVNode(VIcon, {
-                small: "",
-                class: "mr-2"
-              }, {
-                default: withCtx(() => [..._cache[3] || (_cache[3] = [
-                  createTextVNode("mdi-filter", -1)
-                ])]),
-                _: 1
-              }),
-              createBaseVNode("span", null, toDisplayString(_ctx.$t("common.filters")), 1)
-            ]),
-            _: 1
-          }, 16)
-        ]),
-        _: 1
-      }, 8, ["value"])
-    ]),
-    _: 1
-  });
+  return openBlock(), createElementBlock("div", _hoisted_1$2, [
+    createVNode(VBtn, mergeProps({ loading: _ctx.loading }, {
+      class: "mr-2",
+      height: "48",
+      onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("reload"))
+    }), {
+      default: withCtx(() => [
+        createVNode(VIcon, {
+          small: "",
+          class: "mr-2"
+        }, {
+          default: withCtx(() => [..._cache[2] || (_cache[2] = [
+            createTextVNode("mdi-refresh", -1)
+          ])]),
+          _: 1
+        }),
+        createBaseVNode("span", null, toDisplayString(_ctx.$t("common.reload")), 1)
+      ]),
+      _: 1
+    }, 16),
+    createVNode(VBadge, {
+      dot: "",
+      overlap: "",
+      "offset-x": "10",
+      "offset-y": "10",
+      value: $options.hasFilters
+    }, {
+      default: withCtx(() => [
+        createVNode(VBtn, mergeProps({ loading: _ctx.loading }, {
+          height: "48",
+          onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$emit("update:settings", !_ctx.settings))
+        }), {
+          default: withCtx(() => [
+            createVNode(VIcon, {
+              small: "",
+              class: "mr-2"
+            }, {
+              default: withCtx(() => [..._cache[3] || (_cache[3] = [
+                createTextVNode("mdi-filter", -1)
+              ])]),
+              _: 1
+            }),
+            createBaseVNode("span", null, toDisplayString(_ctx.$t("common.filters")), 1)
+          ]),
+          _: 1
+        }, 16)
+      ]),
+      _: 1
+    }, 8, ["value"])
+  ]);
 }
 const CatalogToolbar = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$6]]);
 const _sfc_main$5 = {
@@ -314,7 +308,6 @@ const _sfc_main$2 = {
   }
 };
 function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   return openBlock(), createElementBlock("div", null, [
     (openBlock(true), createElementBlock(Fragment, null, renderList($options.filters, (filter, k) => {
       return openBlock(), createBlock(VCard, {
@@ -324,18 +317,13 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           createVNode(VListItem, { class: "py-2" }, {
             default: withCtx(() => [
-              createVNode(_component_v_list_item_content, null, {
-                default: withCtx(() => [
-                  createVNode(VListItemTitle, {
-                    textContent: toDisplayString(filter.title)
-                  }, null, 8, ["textContent"]),
-                  createVNode(VListItemSubtitle, {
-                    textContent: toDisplayString(filter.subtitle)
-                  }, null, 8, ["textContent"]),
-                  (openBlock(), createBlock(resolveDynamicComponent(filter.is), { class: "mt-4" }))
-                ]),
-                _: 2
-              }, 1024)
+              createVNode(VListItemTitle, {
+                textContent: toDisplayString(filter.title)
+              }, null, 8, ["textContent"]),
+              createVNode(VListItemSubtitle, {
+                textContent: toDisplayString(filter.subtitle)
+              }, null, 8, ["textContent"]),
+              (openBlock(), createBlock(resolveDynamicComponent(filter.is), { class: "mt-4" }))
             ]),
             _: 2
           }, 1024)
@@ -704,13 +692,12 @@ const _sfc_main$1 = {
 };
 const _hoisted_1$1 = { class: "text-clamp text-clamp--5" };
 function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   const _component_v_list_item_icon = resolveComponent("v-list-item-icon");
   const _component_favorite = resolveComponent("favorite");
   return openBlock(), createBlock(VCard, {
     flat: "",
     color: "transparent",
-    onClick: _cache[4] || (_cache[4] = ($event) => _ctx.$emit("click"))
+    onClick: _cache[5] || (_cache[5] = ($event) => _ctx.$emit("click"))
   }, {
     default: withCtx(() => [
       createVNode(VMenu, {
@@ -739,14 +726,9 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
                       ]),
                       _: 2
                     }, 1024),
-                    createVNode(_component_v_list_item_content, null, {
+                    createVNode(VListItemTitle, null, {
                       default: withCtx(() => [
-                        createVNode(VListItemTitle, null, {
-                          default: withCtx(() => [
-                            createTextVNode(toDisplayString(item.title) + " (" + toDisplayString($options.watched) + " / " + toDisplayString($options.total) + ")", 1)
-                          ]),
-                          _: 2
-                        }, 1024)
+                        createTextVNode(toDisplayString(item.title) + " (" + toDisplayString($options.watched) + " / " + toDisplayString($options.total) + ")", 1)
                       ]),
                       _: 2
                     }, 1024)
@@ -759,23 +741,18 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
                 }, ["stop"]))
               }, {
                 default: withCtx(() => [
-                  createVNode(_component_v_list_item_content, null, {
-                    default: withCtx(() => [
-                      createVNode(VSelect, {
-                        modelValue: $data.selectedDomain,
-                        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.selectedDomain = $event),
-                        items: $data.availableDomains,
-                        onChange: $options.updateShareLinks,
-                        dense: "",
-                        outlined: "",
-                        "hide-details": "",
-                        label: _ctx.$t("catalog.releaseDomain"),
-                        onClick: _cache[1] || (_cache[1] = withModifiers(() => {
-                        }, ["stop"]))
-                      }, null, 8, ["modelValue", "items", "onChange", "label"])
-                    ]),
-                    _: 1
-                  })
+                  createVNode(VSelect, {
+                    modelValue: $data.selectedDomain,
+                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.selectedDomain = $event),
+                    items: $data.availableDomains,
+                    onChange: $options.updateShareLinks,
+                    dense: "",
+                    outlined: "",
+                    "hide-details": "",
+                    label: _ctx.$t("catalog.releaseDomain"),
+                    onClick: _cache[1] || (_cache[1] = withModifiers(() => {
+                    }, ["stop"]))
+                  }, null, 8, ["modelValue", "items", "onChange", "label"])
                 ]),
                 _: 1
               }),
@@ -784,6 +761,37 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
                   key: index,
                   onClick: ($event) => $options.handleShareClick(item)
                 }, {
+                  prepend: withCtx(() => [
+                    createVNode(VBtn, {
+                      icon: "",
+                      small: ""
+                    }, {
+                      default: withCtx(() => [
+                        item.copied ? (openBlock(), createBlock(VIcon, {
+                          key: 0,
+                          color: "success"
+                        }, {
+                          default: withCtx(() => [..._cache[6] || (_cache[6] = [
+                            createTextVNode("mdi-check", -1)
+                          ])]),
+                          _: 1
+                        })) : createCommentVNode("", true),
+                        !item.copied && item.isExternal ? (openBlock(), createBlock(VIcon, { key: 1 }, {
+                          default: withCtx(() => [..._cache[7] || (_cache[7] = [
+                            createTextVNode("mdi-open-in-new", -1)
+                          ])]),
+                          _: 1
+                        })) : createCommentVNode("", true),
+                        !item.copied && !item.isExternal ? (openBlock(), createBlock(VIcon, { key: 2 }, {
+                          default: withCtx(() => [..._cache[8] || (_cache[8] = [
+                            createTextVNode("mdi-content-copy", -1)
+                          ])]),
+                          _: 1
+                        })) : createCommentVNode("", true)
+                      ]),
+                      _: 2
+                    }, 1024)
+                  ]),
                   default: withCtx(() => [
                     createVNode(_component_v_list_item_icon, { class: "mt-4" }, {
                       default: withCtx(() => [
@@ -796,61 +804,22 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
                       ]),
                       _: 2
                     }, 1024),
-                    createVNode(_component_v_list_item_content, null, {
+                    createVNode(VListItemTitle, null, {
                       default: withCtx(() => [
-                        createVNode(VListItemTitle, null, {
-                          default: withCtx(() => [
-                            createTextVNode(toDisplayString(item.title), 1)
-                          ]),
-                          _: 2
-                        }, 1024),
-                        !item.isExternal ? (openBlock(), createBlock(VListItemSubtitle, {
-                          key: 0,
-                          class: "text-truncate",
-                          style: { "max-width": "200px" }
-                        }, {
-                          default: withCtx(() => [
-                            createTextVNode(toDisplayString(item.link), 1)
-                          ]),
-                          _: 2
-                        }, 1024)) : createCommentVNode("", true)
+                        createTextVNode(toDisplayString(item.title), 1)
                       ]),
                       _: 2
                     }, 1024),
-                    createVNode(VListItemAction, null, {
+                    !item.isExternal ? (openBlock(), createBlock(VListItemSubtitle, {
+                      key: 0,
+                      class: "text-truncate",
+                      style: { "max-width": "200px" }
+                    }, {
                       default: withCtx(() => [
-                        createVNode(VBtn, {
-                          icon: "",
-                          small: ""
-                        }, {
-                          default: withCtx(() => [
-                            item.copied ? (openBlock(), createBlock(VIcon, {
-                              key: 0,
-                              color: "success"
-                            }, {
-                              default: withCtx(() => [..._cache[5] || (_cache[5] = [
-                                createTextVNode("mdi-check", -1)
-                              ])]),
-                              _: 1
-                            })) : createCommentVNode("", true),
-                            !item.copied && item.isExternal ? (openBlock(), createBlock(VIcon, { key: 1 }, {
-                              default: withCtx(() => [..._cache[6] || (_cache[6] = [
-                                createTextVNode("mdi-open-in-new", -1)
-                              ])]),
-                              _: 1
-                            })) : createCommentVNode("", true),
-                            !item.copied && !item.isExternal ? (openBlock(), createBlock(VIcon, { key: 2 }, {
-                              default: withCtx(() => [..._cache[7] || (_cache[7] = [
-                                createTextVNode("mdi-content-copy", -1)
-                              ])]),
-                              _: 1
-                            })) : createCommentVNode("", true)
-                          ]),
-                          _: 2
-                        }, 1024)
+                        createTextVNode(toDisplayString(item.link), 1)
                       ]),
                       _: 2
-                    }, 1024)
+                    }, 1024)) : createCommentVNode("", true)
                   ]),
                   _: 2
                 }, 1032, ["onClick"]);
@@ -861,78 +830,75 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
         ]),
         _: 1
       }, 8, ["modelValue", "position-x", "position-y"]),
-      createVNode(VLayout, {
-        onContextmenu: $options.show,
-        "align-start": ""
-      }, {
-        default: withCtx(() => [
-          createVNode(VCard, {
-            width: "160",
-            height: "240",
-            "min-width": "160",
-            "min-height": "240",
-            style: { position: "relative" }
-          }, {
+      createBaseVNode("div", {
+        class: "d-flex align-start",
+        onContextmenu: _cache[4] || (_cache[4] = (...args) => $options.show && $options.show(...args))
+      }, [
+        createVNode(VCard, {
+          width: "160",
+          height: "240",
+          "min-width": "160",
+          "min-height": "240",
+          style: { position: "relative" }
+        }, {
+          default: withCtx(() => [
+            createVNode(VImg, mergeProps({ transition: false }, { src: $options.src }, {
+              width: "160",
+              height: "240"
+            }), null, 16)
+          ]),
+          _: 1
+        }),
+        createBaseVNode("div", null, [
+          createVNode(VCardTitle, {
+            textContent: toDisplayString($options.title)
+          }, null, 8, ["textContent"]),
+          $options.subtitle ? (openBlock(), createBlock(VCardSubtitle, {
+            key: 0,
+            textContent: toDisplayString($options.subtitle),
+            class: "pb-0"
+          }, null, 8, ["textContent"])) : createCommentVNode("", true),
+          $options.genres ? (openBlock(), createBlock(VCardSubtitle, {
+            key: 1,
+            textContent: toDisplayString($options.genres),
+            class: "pt-0"
+          }, null, 8, ["textContent"])) : createCommentVNode("", true),
+          createVNode(VCardText, null, {
             default: withCtx(() => [
-              createVNode(VImg, mergeProps({ transition: false }, { src: $options.src }, {
-                width: "160",
-                height: "240"
-              }), null, 16)
+              createVNode(_component_favorite, normalizeProps(guardReactiveProps({ release: _ctx.release })), null, 16),
+              createVNode(VChip, {
+                textContent: toDisplayString($options.year),
+                label: "",
+                color: "grey darken-4",
+                style: { height: "36px" }
+              }, null, 8, ["textContent"]),
+              createVNode(VChip, {
+                textContent: toDisplayString($options.type),
+                label: "",
+                color: "grey darken-4",
+                style: { height: "36px" }
+              }, null, 8, ["textContent"]),
+              $options.status ? (openBlock(), createBlock(VChip, {
+                key: 0,
+                textContent: toDisplayString($options.status),
+                label: "",
+                color: "grey darken-4",
+                style: { height: "36px" }
+              }, null, 8, ["textContent"])) : createCommentVNode("", true)
             ]),
             _: 1
           }),
-          createBaseVNode("div", null, [
-            createVNode(VCardTitle, {
-              textContent: toDisplayString($options.title)
-            }, null, 8, ["textContent"]),
-            $options.subtitle ? (openBlock(), createBlock(VCardSubtitle, {
-              key: 0,
-              textContent: toDisplayString($options.subtitle),
-              class: "pb-0"
-            }, null, 8, ["textContent"])) : createCommentVNode("", true),
-            $options.genres ? (openBlock(), createBlock(VCardSubtitle, {
-              key: 1,
-              textContent: toDisplayString($options.genres),
-              class: "pt-0"
-            }, null, 8, ["textContent"])) : createCommentVNode("", true),
-            createVNode(VCardText, null, {
-              default: withCtx(() => [
-                createVNode(_component_favorite, normalizeProps(guardReactiveProps({ release: _ctx.release })), null, 16),
-                createVNode(VChip, {
-                  textContent: toDisplayString($options.year),
-                  label: "",
-                  color: "grey darken-4",
-                  style: { height: "36px" }
-                }, null, 8, ["textContent"]),
-                createVNode(VChip, {
-                  textContent: toDisplayString($options.type),
-                  label: "",
-                  color: "grey darken-4",
-                  style: { height: "36px" }
-                }, null, 8, ["textContent"]),
-                $options.status ? (openBlock(), createBlock(VChip, {
-                  key: 0,
-                  textContent: toDisplayString($options.status),
-                  label: "",
-                  color: "grey darken-4",
-                  style: { height: "36px" }
-                }, null, 8, ["textContent"])) : createCommentVNode("", true)
-              ]),
-              _: 1
-            }),
-            $options.description ? (openBlock(), createBlock(VCardText, {
-              key: 2,
-              class: "pt-0 grey--text"
-            }, {
-              default: withCtx(() => [
-                createBaseVNode("div", _hoisted_1$1, toDisplayString($options.description), 1)
-              ]),
-              _: 1
-            })) : createCommentVNode("", true)
-          ])
-        ]),
-        _: 1
-      }, 8, ["onContextmenu"])
+          $options.description ? (openBlock(), createBlock(VCardText, {
+            key: 2,
+            class: "pt-0 grey--text"
+          }, {
+            default: withCtx(() => [
+              createBaseVNode("div", _hoisted_1$1, toDisplayString($options.description), 1)
+            ]),
+            _: 1
+          })) : createCommentVNode("", true)
+        ])
+      ], 32)
     ]),
     _: 1
   });
@@ -1037,82 +1003,81 @@ const _sfc_main = {
     });
   }
 };
-const _hoisted_1 = { class: "my-2" };
+const _hoisted_1 = { class: "d-flex flex-column" };
+const _hoisted_2 = { class: "my-2" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_filters = resolveComponent("filters");
   const _component_toolbar = resolveComponent("toolbar");
   const _component_release = resolveComponent("release");
   const _component_loader = resolveComponent("loader");
-  return openBlock(), createBlock(VLayout, { column: "" }, {
-    default: withCtx(() => [
-      createVNode(VCard, {
-        flat: "",
-        color: "transparent"
-      }, {
-        default: withCtx(() => [
-          createVNode(VCardTitle, null, {
-            default: withCtx(() => [
-              createTextVNode(toDisplayString(_ctx.$t("catalog.title")), 1)
-            ]),
-            _: 1
-          }),
-          createVNode(VCardSubtitle, null, {
-            default: withCtx(() => [
-              createTextVNode(toDisplayString(_ctx.$t("catalog.subtitle")), 1)
-            ]),
-            _: 1
-          })
-        ]),
-        _: 1
-      }),
-      createVNode(VExpandTransition, null, {
-        default: withCtx(() => [
-          $data.settings ? (openBlock(), createBlock(_component_filters, {
-            key: 0,
-            class: "mb-2"
-          })) : createCommentVNode("", true)
-        ]),
-        _: 1
-      }),
-      createVNode(_component_toolbar, {
-        class: "mb-2",
-        settings: $data.settings,
-        onReload: $options.showReleases
-      }, null, 8, ["settings", "onReload"]),
-      createBaseVNode("div", _hoisted_1, [
-        (openBlock(true), createElementBlock(Fragment, null, renderList($options._items, (release) => {
-          return openBlock(), createBlock(_component_release, mergeProps({
-            key: release.id,
-            ref_for: true
-          }, { release, episodes: release.episodes }, {
-            class: "mb-2",
-            ref_for: true,
-            ref: release.id,
-            onClick: ($event) => $options.toRelease(release)
-          }), null, 16, ["onClick"]);
-        }), 128)),
-        $options._loading ? (openBlock(true), createElementBlock(Fragment, { key: 0 }, renderList($options._perPage, (i) => {
-          return openBlock(), createBlock(_component_loader, {
-            class: "mb-2",
-            key: i
-          });
-        }), 128)) : createCommentVNode("", true)
+  return openBlock(), createElementBlock("div", _hoisted_1, [
+    createVNode(VCard, {
+      flat: "",
+      color: "transparent"
+    }, {
+      default: withCtx(() => [
+        createVNode(VCardTitle, null, {
+          default: withCtx(() => [
+            createTextVNode(toDisplayString(_ctx.$t("catalog.title")), 1)
+          ]),
+          _: 1
+        }),
+        createVNode(VCardSubtitle, null, {
+          default: withCtx(() => [
+            createTextVNode(toDisplayString(_ctx.$t("catalog.subtitle")), 1)
+          ]),
+          _: 1
+        })
       ]),
-      $options._items && $options._items.length > 0 && $options.hasMoreItems ? (openBlock(), createBlock(VBtn, {
-        key: 0,
-        block: "",
-        text: "",
-        class: "grey darken-4 shrink",
-        onClick: $options.loadReleases
-      }, {
-        default: withCtx(() => [
-          createTextVNode(toDisplayString(_ctx.$t("common.showMore")), 1)
-        ]),
-        _: 1
-      }, 8, ["onClick"])) : createCommentVNode("", true)
+      _: 1
+    }),
+    createVNode(VExpandTransition, null, {
+      default: withCtx(() => [
+        $data.settings ? (openBlock(), createBlock(_component_filters, {
+          key: 0,
+          class: "mb-2"
+        })) : createCommentVNode("", true)
+      ]),
+      _: 1
+    }),
+    createVNode(_component_toolbar, {
+      class: "mb-2",
+      settings: $data.settings,
+      "onUpdate:settings": _cache[0] || (_cache[0] = ($event) => $data.settings = $event),
+      onReload: $options.showReleases
+    }, null, 8, ["settings", "onReload"]),
+    createBaseVNode("div", _hoisted_2, [
+      (openBlock(true), createElementBlock(Fragment, null, renderList($options._items, (release) => {
+        return openBlock(), createBlock(_component_release, mergeProps({
+          key: release.id,
+          ref_for: true
+        }, { release, episodes: release.episodes }, {
+          class: "mb-2",
+          ref_for: true,
+          ref: release.id,
+          onClick: ($event) => $options.toRelease(release)
+        }), null, 16, ["onClick"]);
+      }), 128)),
+      $options._loading ? (openBlock(true), createElementBlock(Fragment, { key: 0 }, renderList($options._perPage, (i) => {
+        return openBlock(), createBlock(_component_loader, {
+          class: "mb-2",
+          key: i
+        });
+      }), 128)) : createCommentVNode("", true)
     ]),
-    _: 1
-  });
+    $options._items && $options._items.length > 0 && $options.hasMoreItems ? (openBlock(), createBlock(VBtn, {
+      key: 0,
+      block: "",
+      text: "",
+      class: "grey darken-4 shrink",
+      onClick: $options.loadReleases
+    }, {
+      default: withCtx(() => [
+        createTextVNode(toDisplayString(_ctx.$t("common.showMore")), 1)
+      ]),
+      _: 1
+    }, 8, ["onClick"])) : createCommentVNode("", true)
+  ]);
 }
 const CatalogView = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
 export {

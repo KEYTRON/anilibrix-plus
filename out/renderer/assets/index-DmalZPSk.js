@@ -1,7 +1,12 @@
-import { g as genericComponent, u as useProxiedModel, X as useFocus, Y as useId, Z as useRender, $ as filterInputAttrs, a0 as VInput, a1 as VCheckboxBtn, l as createVNode, r as mergeProps, a2 as forwardRefs, a3 as ref, p as propsFactory, a4 as omit, a5 as makeVCheckboxBtnProps, a6 as makeVInputProps, _ as _export_sfc, a7 as createElementBlock, L as withCtx, M as VLayout, N as openBlock, a8 as VSkeletonLoader, a9 as toVideo, aa as __orderBy, K as createBlock, R as VCard, ab as resolveComponent, n as createBaseVNode, t as VBtn, W as createTextVNode, T as toDisplayString, U as createCommentVNode, ac as VCardTitle, ad as VCardSubtitle, ae as Fragment, af as renderList, ag as VChip, S as VCardText, ah as meta, ai as humanFormat, aj as VListItem, ak as VDivider, al as VListItemTitle, am as VListItemSubtitle, V as VIcon, an as VListItemAction, ao as withModifiers, ap as VList, aq as invokeTorrentParse, ar as dayjs, as as useSettingsStore, j as useTextColor, at as useBackgroundColor, o as normalizeStyle, q as normalizeClass, au as animate, av as standardEasing, a as computed, aw as makeVBtnProps, ax as keys, b as provideTheme, ay as useRtl, k as useLocale, az as useGroup, aA as watch, aB as withDirectives, aC as PREFERS_REDUCED_MOTION, aD as convertToUnit, aE as nextTick, z as makeThemeProps, A as makeTagProps, H as makeComponentProps, v as toRef, aF as IN_BROWSER, aG as getScrollParent, aH as shallowRef, aI as provide, aJ as inject, aK as useGroupItem, aL as useSsrBoot, aM as useLazy, aN as vShow, aO as MaybeTransition, aP as makeLazyProps, aQ as makeGroupItemProps, e as useDensity, aR as useScopeId, aS as provideDefaults, aT as VSlideGroup, G as makeDensityProps, aU as makeVSlideGroupProps, aV as pick, aW as isObject, aX as ReleaseEpisodes, aY as router, aZ as VCardActions, a_ as VMenu, a$ as VSelect, b0 as toHandlers, Q as VImg, b1 as resolveDynamicComponent, O as VRow, P as VCol } from "./index-BZ1Qg9LU.js";
-import { R as ReleaseFavorite } from "./ReleaseFavorite-BSuv1n56.js";
-import { useReleaseStore } from "./useReleaseStore-CpQmbHaP.js";
+import { g as genericComponent, u as useProxiedModel, X as useFocus, Y as useId, Z as useRender, $ as filterInputAttrs, a0 as VInput, a1 as VCheckboxBtn, l as createVNode, r as mergeProps, a2 as forwardRefs, a3 as ref, p as propsFactory, a4 as omit, a5 as makeVCheckboxBtnProps, a6 as makeVInputProps, _ as _export_sfc, K as createElementBlock, n as createBaseVNode, N as openBlock, a7 as VSkeletonLoader, a8 as toVideo, a9 as __orderBy, S as createBlock, L as withCtx, Q as VCard, aa as resolveComponent, t as VBtn, W as createTextVNode, T as toDisplayString, U as createCommentVNode, ab as VCardTitle, ac as VCardSubtitle, ad as Fragment, ae as renderList, af as VChip, R as VCardText, ag as humanFormat, ah as VListItem, ai as VDivider, aj as VListItemTitle, ak as VListItemSubtitle, V as VIcon, al as VList, am as invokeTorrentParse, an as dayjs, ao as useSettingsStore, ap as makeVBtnProps, j as useTextColor, aq as useBackgroundColor, o as normalizeStyle, q as normalizeClass, ar as animate, as as standardEasing, a as computed, at as keys, b as provideTheme, au as useRtl, k as useLocale, av as useGroup, aw as watch, ax as withDirectives, ay as PREFERS_REDUCED_MOTION, az as convertToUnit, aA as nextTick, z as makeThemeProps, A as makeTagProps, H as makeComponentProps, v as toRef, aB as IN_BROWSER, aC as getScrollParent, aD as shallowRef, aE as provide, aF as inject, aG as useGroupItem, aH as useSsrBoot, aI as useLazy, aJ as vShow, aK as MaybeTransition, aL as makeLazyProps, aM as makeGroupItemProps, e as useDensity, aN as useScopeId, aO as provideDefaults, G as makeDensityProps, aP as makeVSlideGroupProps, aQ as pick, aR as VSlideGroup, aS as isObject, aT as ReleaseEpisodes, aU as toHandlers, aV as resolveDynamicComponent, M as VRow, aW as router, aX as VCardActions, aY as VMenu, aZ as withModifiers, a_ as VSelect, a$ as VAvatar, P as VImg, O as VCol } from "./index-CIkHx-EU.js";
+import { R as ReleaseFavorite } from "./ReleaseFavorite-BQG4Fd1H.js";
+import { m as meta } from "./torrents-handler-BtK2vzG6.js";
+import { useReleaseStore } from "./useReleaseStore-ulZOFbhK.js";
+import "path";
 import { L as LibriaTyan01 } from "./LibriaTyan01-DlPDW3gN.js";
+import "fs";
+import "stream";
+import "util";
 const makeVCheckboxProps = propsFactory({
   ...omit(makeVInputProps(), ["direction"]),
   ...omit(makeVCheckboxBtnProps(), ["inline"])
@@ -69,71 +74,65 @@ const VCheckbox = genericComponent()({
   }
 });
 const _sfc_main$5 = {};
-const _hoisted_1$3 = { class: "ma-4" };
+const _hoisted_1$4 = { class: "ma-4" };
+const _hoisted_2$3 = { class: "d-flex align-center" };
+const _hoisted_3$3 = { class: "d-flex flex-column" };
+const _hoisted_4$3 = { class: "d-flex shrink mt-4" };
 function _sfc_render$5(_ctx, _cache) {
-  return openBlock(), createElementBlock("div", _hoisted_1$3, [
-    createVNode(VLayout, { "align-center": "" }, {
-      default: withCtx(() => [
+  return openBlock(), createElementBlock("div", _hoisted_1$4, [
+    createBaseVNode("div", _hoisted_2$3, [
+      createVNode(VSkeletonLoader, {
+        boilerplate: "",
+        type: "button",
+        height: "285",
+        width: "200",
+        class: "mr-3"
+      }),
+      createBaseVNode("div", _hoisted_3$3, [
         createVNode(VSkeletonLoader, {
           boilerplate: "",
-          type: "button",
-          height: "285",
-          width: "200",
-          class: "mr-3"
+          type: "heading",
+          height: "40",
+          width: "70%"
         }),
-        createVNode(VLayout, { column: "" }, {
-          default: withCtx(() => [
-            createVNode(VSkeletonLoader, {
-              boilerplate: "",
-              type: "heading",
-              height: "40",
-              width: "70%"
-            }),
-            createVNode(VSkeletonLoader, {
-              boilerplate: "",
-              type: "text",
-              width: "140",
-              class: "mt-5"
-            }),
-            createVNode(VSkeletonLoader, {
-              boilerplate: "",
-              type: "text",
-              width: "260"
-            }),
-            createVNode(VLayout, { class: "shrink mt-4" }, {
-              default: withCtx(() => [
-                createVNode(VSkeletonLoader, {
-                  boilerplate: "",
-                  type: "button",
-                  width: "65",
-                  class: "mr-1"
-                }),
-                createVNode(VSkeletonLoader, {
-                  boilerplate: "",
-                  type: "button",
-                  width: "65",
-                  class: "mr-1"
-                }),
-                createVNode(VSkeletonLoader, {
-                  boilerplate: "",
-                  type: "button",
-                  width: "160",
-                  class: "mr-1"
-                }),
-                createVNode(VSkeletonLoader, {
-                  boilerplate: "",
-                  type: "button",
-                  width: "65"
-                })
-              ]),
-              _: 1
-            })
-          ]),
-          _: 1
-        })
-      ]),
-      _: 1
-    }),
+        createVNode(VSkeletonLoader, {
+          boilerplate: "",
+          type: "text",
+          width: "140",
+          class: "mt-5"
+        }),
+        createVNode(VSkeletonLoader, {
+          boilerplate: "",
+          type: "text",
+          width: "260"
+        }),
+        createBaseVNode("div", _hoisted_4$3, [
+          createVNode(VSkeletonLoader, {
+            boilerplate: "",
+            type: "button",
+            width: "65",
+            class: "mr-1"
+          }),
+          createVNode(VSkeletonLoader, {
+            boilerplate: "",
+            type: "button",
+            width: "65",
+            class: "mr-1"
+          }),
+          createVNode(VSkeletonLoader, {
+            boilerplate: "",
+            type: "button",
+            width: "160",
+            class: "mr-1"
+          }),
+          createVNode(VSkeletonLoader, {
+            boilerplate: "",
+            type: "button",
+            width: "65"
+          })
+        ])
+      ])
+    ]),
     createVNode(VSkeletonLoader, {
       boilerplate: "",
       type: "text@10",
@@ -274,9 +273,14 @@ const _sfc_main$4 = {
     toVideo
   }
 };
-const _hoisted_1$2 = { style: { "display": "flex", "flex-direction": "column" } };
-const _hoisted_2$2 = ["src"];
-const _hoisted_3$2 = {
+const _hoisted_1$3 = {
+  key: 1,
+  class: "d-flex flex-column"
+};
+const _hoisted_2$2 = { class: "d-flex align-center my-4" };
+const _hoisted_3$2 = { style: { "display": "flex", "flex-direction": "column" } };
+const _hoisted_4$2 = ["src"];
+const _hoisted_5$2 = {
   class: "subtitle-2",
   style: { "color": "rgb(184 184 184)" }
 };
@@ -288,122 +292,110 @@ function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     color: "transparent"
   }, {
     default: withCtx(() => [
-      _ctx.loading ? (openBlock(), createBlock(_component_loader, { key: 0 })) : (openBlock(), createBlock(VLayout, {
-        key: 1,
-        column: ""
-      }, {
-        default: withCtx(() => [
-          createVNode(VLayout, {
-            "align-center": "",
-            class: "my-4"
-          }, {
-            default: withCtx(() => [
-              createBaseVNode("div", _hoisted_1$2, [
-                createBaseVNode("img", {
-                  class: "mx-4 rounded-lg",
-                  src: $options.poster,
-                  style: { "width": "230px" }
-                }, null, 8, _hoisted_2$2),
-                !$options.lastWatchedEpisode.ep || $options.lastWatchedEpisode.ep && !$options.lastWatchedEpisode.next ? (openBlock(), createBlock(VBtn, {
-                  key: 0,
-                  label: "",
-                  color: "secondary",
-                  onClick: _cache[0] || (_cache[0] = ($event) => $options.toVideo(_ctx.release, $options.lastWatchedEpisode.first)),
-                  class: "mx-4 my-2 font-weight-black",
-                  style: { "width": "230px" }
-                }, {
-                  default: withCtx(() => [
-                    createTextVNode(toDisplayString(_ctx.$t("release.startWatching")), 1)
-                  ]),
-                  _: 1
-                })) : createCommentVNode("", true),
-                $options.lastWatchedEpisode.ep && $options.lastWatchedEpisode.next ? (openBlock(), createBlock(VBtn, {
-                  key: 1,
-                  label: "",
-                  color: "secondary",
-                  onClick: _cache[1] || (_cache[1] = ($event) => $options.toVideo(_ctx.release, $options.lastWatchedEpisode.next)),
-                  class: "mx-4 my-2 font-weight-black",
-                  style: { "width": "230px" }
-                }, {
-                  default: withCtx(() => [
-                    createTextVNode(toDisplayString(_ctx.$t("release.continueWatching", { episode: $options.lastWatchedEpisode.next.id })), 1)
-                  ]),
-                  _: 1
-                })) : createCommentVNode("", true)
+      _ctx.loading ? (openBlock(), createBlock(_component_loader, { key: 0 })) : (openBlock(), createElementBlock("div", _hoisted_1$3, [
+        createBaseVNode("div", _hoisted_2$2, [
+          createBaseVNode("div", _hoisted_3$2, [
+            createBaseVNode("img", {
+              class: "mx-4 rounded-lg",
+              src: $options.poster,
+              style: { "width": "230px" }
+            }, null, 8, _hoisted_4$2),
+            !$options.lastWatchedEpisode.ep || $options.lastWatchedEpisode.ep && !$options.lastWatchedEpisode.next ? (openBlock(), createBlock(VBtn, {
+              key: 0,
+              label: "",
+              color: "secondary",
+              onClick: _cache[0] || (_cache[0] = ($event) => $options.toVideo(_ctx.release, $options.lastWatchedEpisode.first)),
+              class: "mx-4 my-2 font-weight-black",
+              style: { "width": "230px" }
+            }, {
+              default: withCtx(() => [
+                createTextVNode(toDisplayString(_ctx.$t("release.startWatching")), 1)
               ]),
-              createBaseVNode("div", null, [
-                createVNode(VCardTitle, {
-                  textContent: toDisplayString($options.title),
-                  class: "allow-select display-1 mb-2 font-weight-black",
-                  style: { wordBreak: "break-word" }
-                }, null, 8, ["textContent"]),
-                createVNode(VCardSubtitle, {
-                  textContent: toDisplayString($options.original),
-                  class: "allow-select pb-0"
-                }, null, 8, ["textContent"]),
-                createVNode(VCardSubtitle, {
-                  textContent: toDisplayString($options.genres),
-                  class: "allow-select pt-1"
-                }, null, 8, ["textContent"]),
-                $options.type.length ? (openBlock(true), createElementBlock(Fragment, { key: 0 }, renderList($options.team, (type, prop) => {
-                  return openBlock(), createElementBlock("div", {
-                    style: { "margin-bottom": "-10px" },
-                    key: prop,
-                    class: "pl-4"
-                  }, [
-                    createBaseVNode("span", _hoisted_3$2, toDisplayString($data.teamProps[prop]) + ":", 1),
-                    (openBlock(true), createElementBlock(Fragment, null, renderList(type, (name) => {
-                      return openBlock(), createBlock(VChip, {
-                        key: name,
-                        class: "ma-2",
-                        small: ""
-                      }, {
-                        default: withCtx(() => [
-                          createTextVNode(toDisplayString(name), 1)
-                        ]),
-                        _: 2
-                      }, 1024);
-                    }), 128))
-                  ]);
-                }), 128)) : createCommentVNode("", true),
-                createVNode(VCardText, { class: "mb-1" }, {
-                  default: withCtx(() => [
-                    createVNode(_component_favorite, mergeProps({ release: _ctx.release }, { color: "grey darken-3" }), null, 16),
-                    $options.year ? (openBlock(), createBlock(VChip, {
-                      key: 0,
-                      textContent: toDisplayString($options.year),
-                      label: "",
-                      color: "grey darken-3",
-                      style: { height: "36px" }
-                    }, null, 8, ["textContent"])) : createCommentVNode("", true),
-                    $options.type ? (openBlock(), createBlock(VChip, {
-                      key: 1,
-                      textContent: toDisplayString($options.type),
-                      label: "",
-                      color: "grey darken-3",
-                      style: { height: "36px" }
-                    }, null, 8, ["textContent"])) : createCommentVNode("", true),
-                    $options.status ? (openBlock(), createBlock(VChip, {
-                      key: 2,
-                      textContent: toDisplayString($options.status),
-                      label: "",
-                      color: "grey darken-3",
-                      style: { height: "36px" }
-                    }, null, 8, ["textContent"])) : createCommentVNode("", true)
-                  ]),
-                  _: 1
-                })
-              ])
-            ]),
-            _: 1
-          }),
-          createVNode(VCardText, {
-            textContent: toDisplayString($options.description),
-            class: "white--text"
-          }, null, 8, ["textContent"])
+              _: 1
+            })) : createCommentVNode("", true),
+            $options.lastWatchedEpisode.ep && $options.lastWatchedEpisode.next ? (openBlock(), createBlock(VBtn, {
+              key: 1,
+              label: "",
+              color: "secondary",
+              onClick: _cache[1] || (_cache[1] = ($event) => $options.toVideo(_ctx.release, $options.lastWatchedEpisode.next)),
+              class: "mx-4 my-2 font-weight-black",
+              style: { "width": "230px" }
+            }, {
+              default: withCtx(() => [
+                createTextVNode(toDisplayString(_ctx.$t("release.continueWatching", { episode: $options.lastWatchedEpisode.next.id })), 1)
+              ]),
+              _: 1
+            })) : createCommentVNode("", true)
+          ]),
+          createBaseVNode("div", null, [
+            createVNode(VCardTitle, {
+              textContent: toDisplayString($options.title),
+              class: "allow-select display-1 mb-2 font-weight-black",
+              style: { wordBreak: "break-word" }
+            }, null, 8, ["textContent"]),
+            createVNode(VCardSubtitle, {
+              textContent: toDisplayString($options.original),
+              class: "allow-select pb-0"
+            }, null, 8, ["textContent"]),
+            createVNode(VCardSubtitle, {
+              textContent: toDisplayString($options.genres),
+              class: "allow-select pt-1"
+            }, null, 8, ["textContent"]),
+            $options.type.length ? (openBlock(true), createElementBlock(Fragment, { key: 0 }, renderList($options.team, (type, prop) => {
+              return openBlock(), createElementBlock("div", {
+                style: { "margin-bottom": "-10px" },
+                key: prop,
+                class: "pl-4"
+              }, [
+                createBaseVNode("span", _hoisted_5$2, toDisplayString($data.teamProps[prop]) + ":", 1),
+                (openBlock(true), createElementBlock(Fragment, null, renderList(type, (name) => {
+                  return openBlock(), createBlock(VChip, {
+                    key: name,
+                    class: "ma-2",
+                    small: ""
+                  }, {
+                    default: withCtx(() => [
+                      createTextVNode(toDisplayString(name), 1)
+                    ]),
+                    _: 2
+                  }, 1024);
+                }), 128))
+              ]);
+            }), 128)) : createCommentVNode("", true),
+            createVNode(VCardText, { class: "mb-1" }, {
+              default: withCtx(() => [
+                createVNode(_component_favorite, mergeProps({ release: _ctx.release }, { color: "grey darken-3" }), null, 16),
+                $options.year ? (openBlock(), createBlock(VChip, {
+                  key: 0,
+                  textContent: toDisplayString($options.year),
+                  label: "",
+                  color: "grey darken-3",
+                  style: { height: "36px" }
+                }, null, 8, ["textContent"])) : createCommentVNode("", true),
+                $options.type ? (openBlock(), createBlock(VChip, {
+                  key: 1,
+                  textContent: toDisplayString($options.type),
+                  label: "",
+                  color: "grey darken-3",
+                  style: { height: "36px" }
+                }, null, 8, ["textContent"])) : createCommentVNode("", true),
+                $options.status ? (openBlock(), createBlock(VChip, {
+                  key: 2,
+                  textContent: toDisplayString($options.status),
+                  label: "",
+                  color: "grey darken-3",
+                  style: { height: "36px" }
+                }, null, 8, ["textContent"])) : createCommentVNode("", true)
+              ]),
+              _: 1
+            })
+          ])
         ]),
-        _: 1
-      }))
+        createVNode(VCardText, {
+          textContent: toDisplayString($options.description),
+          class: "white--text"
+        }, null, 8, ["textContent"])
+      ]))
     ]),
     _: 1
   });
@@ -504,22 +496,20 @@ const _sfc_main$3 = {
     if (this.interval) clearInterval(this.interval);
   }
 };
+const _hoisted_1$2 = { class: "d-flex flex-column" };
 function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_webview = resolveComponent("webview");
-  return openBlock(), createBlock(VLayout, { column: "" }, {
-    default: withCtx(() => [
-      $data.visible === false ? (openBlock(), createBlock(VSkeletonLoader, {
-        key: 0,
-        type: "list-item-avatar-three-line@19"
-      })) : createCommentVNode("", true),
-      createVNode(_component_webview, mergeProps($options.configuration, {
-        ref: "comments",
-        class: ["comments", { visible: $data.visible }],
-        style: { height: $data.height }
-      }), null, 16, ["class", "style"])
-    ]),
-    _: 1
-  });
+  return openBlock(), createElementBlock("div", _hoisted_1$2, [
+    $data.visible === false ? (openBlock(), createBlock(VSkeletonLoader, {
+      key: 0,
+      type: "list-item-avatar-three-line@19"
+    })) : createCommentVNode("", true),
+    createVNode(_component_webview, mergeProps($options.configuration, {
+      ref: "comments",
+      class: ["comments", { visible: $data.visible }],
+      style: { height: $data.height }
+    }), null, 16, ["class", "style"])
+  ]);
 }
 const ReleaseComments = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3]]);
 const _sfc_main$2 = {};
@@ -642,10 +632,9 @@ const _hoisted_1$1 = {
 const _hoisted_2$1 = { class: "d-flex justify-center align-center" };
 const _hoisted_3$1 = { class: "d-flex justify-center align-center mr-1" };
 const _hoisted_4$1 = { class: "d-flex justify-center align-center mr-1" };
-const _hoisted_5 = { class: "d-flex justify-center align-center" };
+const _hoisted_5$1 = { class: "d-flex justify-center align-center" };
 function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_loader = resolveComponent("loader");
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   return _ctx.loading || $data.parseLoading ? (openBlock(), createBlock(_component_loader, { key: 0 })) : !_ctx.loading && !$data.parseLoading && $data.torrentsList ? (openBlock(), createElementBlock("div", _hoisted_1$1, [
     $data.torrentsList.length > 0 ? (openBlock(), createBlock(VList, {
       key: 0,
@@ -672,92 +661,82 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
               "two-line": "",
               onClick: ($event) => $options.download(torrent)
             }, {
-              default: withCtx(() => [
-                createVNode(_component_v_list_item_content, null, {
+              prepend: withCtx(() => [
+                createVNode(VBtn, { icon: "" }, {
                   default: withCtx(() => [
-                    createVNode(VListItemTitle, { class: "d-flex justify-space-between" }, {
-                      default: withCtx(() => [
-                        createBaseVNode("span", null, toDisplayString(_ctx.$t("release.torrentSeries", { series: torrent.series })), 1),
-                        createBaseVNode("span", null, toDisplayString($options.formatTimestamp(torrent.ctime)), 1)
-                      ]),
-                      _: 2
-                    }, 1024),
-                    createVNode(VListItemSubtitle, { class: "d-flex justify-space-between caption grey--text text--darken-1" }, {
-                      default: withCtx(() => [
-                        createBaseVNode("span", null, toDisplayString($options.formatSize(torrent.size)) + " | " + toDisplayString(torrent.quality), 1),
-                        createBaseVNode("div", _hoisted_2$1, [
-                          createBaseVNode("span", _hoisted_3$1, [
-                            createBaseVNode("span", null, toDisplayString($options.humanFormat(torrent.seeders)), 1),
-                            createVNode(VIcon, {
-                              dark: "",
-                              small: "",
-                              color: "green"
-                            }, {
-                              default: withCtx(() => [..._cache[1] || (_cache[1] = [
-                                createTextVNode("mdi-arrow-up", -1)
-                              ])]),
-                              _: 1
-                            })
-                          ]),
-                          createBaseVNode("span", _hoisted_4$1, [
-                            createBaseVNode("span", null, toDisplayString($options.humanFormat(torrent.leechers)), 1),
-                            createVNode(VIcon, {
-                              dark: "",
-                              small: "",
-                              color: "red"
-                            }, {
-                              default: withCtx(() => [..._cache[2] || (_cache[2] = [
-                                createTextVNode("mdi-arrow-down", -1)
-                              ])]),
-                              _: 1
-                            })
-                          ]),
-                          createBaseVNode("span", _hoisted_5, [
-                            createBaseVNode("span", null, toDisplayString($options.humanFormat(torrent.completed)), 1),
-                            createVNode(VIcon, {
-                              dark: "",
-                              small: "",
-                              color: "blue"
-                            }, {
-                              default: withCtx(() => [..._cache[3] || (_cache[3] = [
-                                createTextVNode("mdi-download", -1)
-                              ])]),
-                              _: 1
-                            })
-                          ])
-                        ])
-                      ]),
-                      _: 2
-                    }, 1024)
+                    $data.copiedIndex === k ? (openBlock(), createBlock(VIcon, {
+                      key: 0,
+                      color: "success"
+                    }, {
+                      default: withCtx(() => [..._cache[4] || (_cache[4] = [
+                        createTextVNode("mdi-check", -1)
+                      ])]),
+                      _: 1
+                    })) : (openBlock(), createBlock(VIcon, { key: 1 }, {
+                      default: withCtx(() => [..._cache[5] || (_cache[5] = [
+                        createTextVNode("mdi-content-copy", -1)
+                      ])]),
+                      _: 1
+                    }))
+                  ]),
+                  _: 2
+                }, 1024)
+              ]),
+              default: withCtx(() => [
+                createVNode(VListItemTitle, { class: "d-flex justify-space-between" }, {
+                  default: withCtx(() => [
+                    createBaseVNode("span", null, toDisplayString(_ctx.$t("release.torrentSeries", { series: torrent.series })), 1),
+                    createBaseVNode("span", null, toDisplayString($options.formatTimestamp(torrent.ctime)), 1)
                   ]),
                   _: 2
                 }, 1024),
-                createVNode(VListItemAction, {
-                  onClick: withModifiers(($event) => $options.copyToClipboard(torrent.magnet, k), ["stop"])
-                }, {
+                createVNode(VListItemSubtitle, { class: "d-flex justify-space-between caption grey--text text--darken-1" }, {
                   default: withCtx(() => [
-                    createVNode(VBtn, { icon: "" }, {
-                      default: withCtx(() => [
-                        $data.copiedIndex === k ? (openBlock(), createBlock(VIcon, {
-                          key: 0,
-                          color: "success"
+                    createBaseVNode("span", null, toDisplayString($options.formatSize(torrent.size)) + " | " + toDisplayString(torrent.quality), 1),
+                    createBaseVNode("div", _hoisted_2$1, [
+                      createBaseVNode("span", _hoisted_3$1, [
+                        createBaseVNode("span", null, toDisplayString($options.humanFormat(torrent.seeders)), 1),
+                        createVNode(VIcon, {
+                          dark: "",
+                          small: "",
+                          color: "green"
                         }, {
-                          default: withCtx(() => [..._cache[4] || (_cache[4] = [
-                            createTextVNode("mdi-check", -1)
+                          default: withCtx(() => [..._cache[1] || (_cache[1] = [
+                            createTextVNode("mdi-arrow-up", -1)
                           ])]),
                           _: 1
-                        })) : (openBlock(), createBlock(VIcon, { key: 1 }, {
-                          default: withCtx(() => [..._cache[5] || (_cache[5] = [
-                            createTextVNode("mdi-content-copy", -1)
-                          ])]),
-                          _: 1
-                        }))
+                        })
                       ]),
-                      _: 2
-                    }, 1024)
+                      createBaseVNode("span", _hoisted_4$1, [
+                        createBaseVNode("span", null, toDisplayString($options.humanFormat(torrent.leechers)), 1),
+                        createVNode(VIcon, {
+                          dark: "",
+                          small: "",
+                          color: "red"
+                        }, {
+                          default: withCtx(() => [..._cache[2] || (_cache[2] = [
+                            createTextVNode("mdi-arrow-down", -1)
+                          ])]),
+                          _: 1
+                        })
+                      ]),
+                      createBaseVNode("span", _hoisted_5$1, [
+                        createBaseVNode("span", null, toDisplayString($options.humanFormat(torrent.completed)), 1),
+                        createVNode(VIcon, {
+                          dark: "",
+                          small: "",
+                          color: "blue"
+                        }, {
+                          default: withCtx(() => [..._cache[3] || (_cache[3] = [
+                            createTextVNode("mdi-download", -1)
+                          ])]),
+                          _: 1
+                        })
+                      ])
+                    ])
                   ]),
                   _: 2
-                }, 1032, ["onClick"])
+                }, 1024)
               ]),
               _: 2
             }, 1032, ["onClick"])
@@ -1809,387 +1788,363 @@ const _sfc_main = {
     }
   }
 };
-const _hoisted_1 = { class: "text-body-1 mb-2" };
-const _hoisted_2 = { class: "text-caption" };
-const _hoisted_3 = { class: "error-details" };
-const _hoisted_4 = { class: "mt-3 d-flex justify-space-between" };
+const _hoisted_1 = {
+  key: 0,
+  class: "d-flex flex-column"
+};
+const _hoisted_2 = {
+  key: 1,
+  class: "d-flex fill-height align-center justify-center"
+};
+const _hoisted_3 = { class: "text-body-1 mb-2" };
+const _hoisted_4 = { class: "text-caption" };
+const _hoisted_5 = { class: "error-details" };
+const _hoisted_6 = { class: "mt-3 d-flex justify-space-between" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_card = resolveComponent("card");
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   const _component_v_list_item_icon = resolveComponent("v-list-item-icon");
-  const _component_v_list_item_avatar = resolveComponent("v-list-item-avatar");
   return openBlock(), createElementBlock("div", null, [
-    $data.loading || $options._release ? (openBlock(), createBlock(VLayout, {
-      key: 0,
-      column: ""
-    }, {
-      default: withCtx(() => [
-        createVNode(VCard, {
-          class: "mb-2",
-          color: "transparent",
-          flat: ""
-        }, {
-          default: withCtx(() => [
-            createVNode(VCardActions, { class: "pa-0" }, {
-              default: withCtx(() => [
-                createVNode(_component_card, mergeProps({ loading: $data.loading }, {
-                  class: "flex-grow-1",
-                  release: $options.__release
-                }), null, 16, ["release"]),
-                createVNode(VMenu, {
-                  "offset-y": "",
-                  "close-on-content-click": false
-                }, {
-                  activator: withCtx(({ on, attrs }) => [
-                    createVNode(VBtn, mergeProps({
-                      icon: "",
-                      color: "primary"
-                    }, attrs, toHandlers(on)), {
-                      default: withCtx(() => [
-                        createVNode(VIcon, null, {
-                          default: withCtx(() => [..._cache[4] || (_cache[4] = [
-                            createTextVNode("mdi-share-variant", -1)
-                          ])]),
-                          _: 1
-                        })
-                      ]),
-                      _: 1
-                    }, 16)
-                  ]),
-                  default: withCtx(() => [
-                    createVNode(VList, null, {
-                      default: withCtx(() => [
-                        createVNode(VListItem, {
-                          onClick: _cache[2] || (_cache[2] = withModifiers(() => {
-                          }, ["stop"]))
+    $data.loading || $options._release ? (openBlock(), createElementBlock("div", _hoisted_1, [
+      createVNode(VCard, {
+        class: "mb-2",
+        color: "transparent",
+        flat: ""
+      }, {
+        default: withCtx(() => [
+          createVNode(VCardActions, { class: "pa-0" }, {
+            default: withCtx(() => [
+              createVNode(_component_card, mergeProps({ loading: $data.loading }, {
+                class: "flex-grow-1",
+                release: $options.__release
+              }), null, 16, ["release"]),
+              createVNode(VMenu, {
+                "offset-y": "",
+                "close-on-content-click": false
+              }, {
+                activator: withCtx(({ on, attrs }) => [
+                  createVNode(VBtn, mergeProps({
+                    icon: "",
+                    color: "primary"
+                  }, attrs, toHandlers(on)), {
+                    default: withCtx(() => [
+                      createVNode(VIcon, null, {
+                        default: withCtx(() => [..._cache[4] || (_cache[4] = [
+                          createTextVNode("mdi-share-variant", -1)
+                        ])]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }, 16)
+                ]),
+                default: withCtx(() => [
+                  createVNode(VList, null, {
+                    default: withCtx(() => [
+                      createVNode(VListItem, {
+                        onClick: _cache[2] || (_cache[2] = withModifiers(() => {
+                        }, ["stop"]))
+                      }, {
+                        default: withCtx(() => [
+                          createVNode(VSelect, {
+                            modelValue: $data.selectedDomain,
+                            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.selectedDomain = $event),
+                            items: $data.availableDomains,
+                            dense: "",
+                            outlined: "",
+                            "hide-details": "",
+                            label: _ctx.$t("catalog.releaseDomain"),
+                            onChange: $options.updateShareLinks,
+                            onClick: _cache[1] || (_cache[1] = withModifiers(() => {
+                            }, ["stop"]))
+                          }, null, 8, ["modelValue", "items", "label", "onChange"])
+                        ]),
+                        _: 1
+                      }),
+                      createVNode(VDivider),
+                      (openBlock(true), createElementBlock(Fragment, null, renderList($data.shareLinks, (item, index) => {
+                        return openBlock(), createBlock(VListItem, {
+                          key: index,
+                          onClick: ($event) => $options.handleShareClick(item)
                         }, {
-                          default: withCtx(() => [
-                            createVNode(_component_v_list_item_content, null, {
+                          prepend: withCtx(() => [
+                            createVNode(VBtn, {
+                              icon: "",
+                              small: ""
+                            }, {
                               default: withCtx(() => [
-                                createVNode(VSelect, {
-                                  modelValue: $data.selectedDomain,
-                                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.selectedDomain = $event),
-                                  items: $data.availableDomains,
-                                  dense: "",
-                                  outlined: "",
-                                  "hide-details": "",
-                                  label: _ctx.$t("catalog.releaseDomain"),
-                                  onChange: $options.updateShareLinks,
-                                  onClick: _cache[1] || (_cache[1] = withModifiers(() => {
-                                  }, ["stop"]))
-                                }, null, 8, ["modelValue", "items", "label", "onChange"])
+                                item.copied ? (openBlock(), createBlock(VIcon, {
+                                  key: 0,
+                                  color: "success"
+                                }, {
+                                  default: withCtx(() => [..._cache[5] || (_cache[5] = [
+                                    createTextVNode("mdi-check", -1)
+                                  ])]),
+                                  _: 1
+                                })) : createCommentVNode("", true),
+                                !item.copied && item.isExternal ? (openBlock(), createBlock(VIcon, { key: 1 }, {
+                                  default: withCtx(() => [..._cache[6] || (_cache[6] = [
+                                    createTextVNode("mdi-open-in-new", -1)
+                                  ])]),
+                                  _: 1
+                                })) : createCommentVNode("", true),
+                                !item.copied && !item.isExternal ? (openBlock(), createBlock(VIcon, { key: 2 }, {
+                                  default: withCtx(() => [..._cache[7] || (_cache[7] = [
+                                    createTextVNode("mdi-content-copy", -1)
+                                  ])]),
+                                  _: 1
+                                })) : createCommentVNode("", true)
+                              ]),
+                              _: 2
+                            }, 1024)
+                          ]),
+                          default: withCtx(() => [
+                            createVNode(_component_v_list_item_icon, null, {
+                              default: withCtx(() => [
+                                createVNode(VIcon, null, {
+                                  default: withCtx(() => [
+                                    createTextVNode(toDisplayString(item.icon), 1)
+                                  ]),
+                                  _: 2
+                                }, 1024)
+                              ]),
+                              _: 2
+                            }, 1024),
+                            createVNode(VListItemTitle, null, {
+                              default: withCtx(() => [
+                                createTextVNode(toDisplayString(item.title), 1)
+                              ]),
+                              _: 2
+                            }, 1024),
+                            !item.isExternal ? (openBlock(), createBlock(VListItemSubtitle, {
+                              key: 0,
+                              class: "text-truncate",
+                              style: { "max-width": "200px" }
+                            }, {
+                              default: withCtx(() => [
+                                createTextVNode(toDisplayString(item.link), 1)
+                              ]),
+                              _: 2
+                            }, 1024)) : createCommentVNode("", true)
+                          ]),
+                          _: 2
+                        }, 1032, ["onClick"]);
+                      }), 128))
+                    ]),
+                    _: 1
+                  })
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })
+        ]),
+        _: 1
+      }),
+      $options.franchises.length ? (openBlock(), createBlock(VCard, {
+        key: 0,
+        flat: "",
+        color: "transparent",
+        class: "mb-6"
+      }, {
+        default: withCtx(() => [
+          createVNode(VCardTitle, null, {
+            default: withCtx(() => [
+              createTextVNode(toDisplayString(_ctx.$t("common.linked")), 1)
+            ]),
+            _: 1
+          }),
+          createVNode(VList, { "three-line": "" }, {
+            default: withCtx(() => [
+              (openBlock(true), createElementBlock(Fragment, null, renderList($options.franchises, (item, index) => {
+                return openBlock(), createElementBlock(Fragment, { key: index }, [
+                  (openBlock(true), createElementBlock(Fragment, null, renderList(item.releases, (release, index2) => {
+                    return openBlock(), createBlock(VListItem, {
+                      link: true,
+                      onClick: ($event) => $options.router().push("/release/" + release.id + "/" + encodeURIComponent(release.names.en)),
+                      disabled: release.id == _ctx.releaseId,
+                      key: release.id
+                    }, {
+                      prepend: withCtx(() => [
+                        createVNode(VAvatar, null, {
+                          default: withCtx(() => [
+                            createVNode(VImg, {
+                              transition: false,
+                              src: release.poster
+                            }, null, 8, ["src"])
+                          ]),
+                          _: 2
+                        }, 1024)
+                      ]),
+                      default: withCtx(() => [
+                        createVNode(VListItemTitle, null, {
+                          default: withCtx(() => [
+                            createBaseVNode("span", null, toDisplayString(release.names.ru), 1),
+                            release.status ? (openBlock(), createBlock(VChip, {
+                              key: 0,
+                              class: "ma-2",
+                              color: "secondary",
+                              "text-color": "white"
+                            }, {
+                              default: withCtx(() => [
+                                createTextVNode(toDisplayString(release.status), 1)
+                              ]),
+                              _: 2
+                            }, 1024)) : createCommentVNode("", true)
+                          ]),
+                          _: 2
+                        }, 1024),
+                        release.type && release.type !== "null" ? (openBlock(), createBlock(VListItemSubtitle, {
+                          key: 0,
+                          textContent: toDisplayString(release.type)
+                        }, null, 8, ["textContent"])) : createCommentVNode("", true)
+                      ]),
+                      _: 2
+                    }, 1032, ["onClick", "disabled"]);
+                  }), 128))
+                ], 64);
+              }), 128))
+            ]),
+            _: 1
+          })
+        ]),
+        _: 1
+      })) : createCommentVNode("", true),
+      !$data.loading ? (openBlock(), createBlock(VTabs, {
+        key: 1,
+        modelValue: $data.tab,
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.tab = $event),
+        class: "shrink mb-4",
+        "background-color": "transparent"
+      }, {
+        default: withCtx(() => [
+          createVNode(VTab, null, {
+            default: withCtx(() => [
+              createTextVNode(toDisplayString(_ctx.$t("common.episodes")), 1)
+            ]),
+            _: 1
+          }),
+          createVNode(VTab, null, {
+            default: withCtx(() => [
+              createTextVNode(toDisplayString(_ctx.$t("common.comments")), 1)
+            ]),
+            _: 1
+          }),
+          $options.torrents.length > 0 ? (openBlock(), createBlock(VTab, { key: 0 }, {
+            default: withCtx(() => [
+              createTextVNode(toDisplayString(_ctx.$t("common.torrents")), 1)
+            ]),
+            _: 1
+          })) : createCommentVNode("", true)
+        ]),
+        _: 1
+      }, 8, ["modelValue"])) : createCommentVNode("", true),
+      $options.component ? (openBlock(), createBlock(resolveDynamicComponent($options.component.is), mergeProps({ key: 2 }, toHandlers($options.component.events), $options.component.props), null, 16)) : createCommentVNode("", true)
+    ])) : !$data.loading && !$options._release ? (openBlock(), createElementBlock("div", _hoisted_2, [
+      createVNode(VRow, {
+        justify: "center",
+        align: "center"
+      }, {
+        default: withCtx(() => [
+          createVNode(VCol, {
+            cols: "12",
+            sm: "3",
+            "align-self": "center"
+          }, {
+            default: withCtx(() => [
+              createVNode(VImg, {
+                transition: false,
+                class: "image",
+                contain: "",
+                src: $data.image
+              }, null, 8, ["src"])
+            ]),
+            _: 1
+          }),
+          createVNode(VCol, {
+            cols: "12",
+            sm: "6",
+            "align-self": "center"
+          }, {
+            default: withCtx(() => [
+              createVNode(VCard, {
+                flat: "",
+                color: "transparent"
+              }, {
+                default: withCtx(() => [
+                  createVNode(VCardText, { class: "error-message-container" }, {
+                    default: withCtx(() => [
+                      createVNode(VCard, {
+                        outlined: "",
+                        color: "red",
+                        class: "pa-4"
+                      }, {
+                        default: withCtx(() => [
+                          createBaseVNode("div", _hoisted_3, [
+                            createVNode(VIcon, {
+                              small: "",
+                              class: "mr-2"
+                            }, {
+                              default: withCtx(() => [..._cache[8] || (_cache[8] = [
+                                createTextVNode("mdi-help-circle", -1)
+                              ])]),
+                              _: 1
+                            }),
+                            createBaseVNode("strong", null, toDisplayString(_ctx.$t("release.whatHappened")), 1)
+                          ]),
+                          createBaseVNode("div", _hoisted_4, [
+                            createBaseVNode("h3", null, toDisplayString(_ctx.$t("release.missingTitle")), 1),
+                            createBaseVNode("p", null, toDisplayString(_ctx.$t("release.missingBody")), 1),
+                            createBaseVNode("div", _hoisted_5, [
+                              createBaseVNode("strong", null, toDisplayString(_ctx.$t("release.missingReasons")), 1),
+                              createBaseVNode("ul", null, [
+                                createBaseVNode("li", null, toDisplayString(_ctx.$t("release.missingReasonCache")), 1),
+                                createBaseVNode("li", null, toDisplayString(_ctx.$t("release.missingReasonSync")), 1),
+                                createBaseVNode("li", null, toDisplayString(_ctx.$t("release.missingReasonTemporary")), 1)
+                              ])
+                            ])
+                          ]),
+                          createBaseVNode("div", _hoisted_6, [
+                            createVNode(VBtn, {
+                              small: "",
+                              text: "",
+                              color: "primary",
+                              to: "/"
+                            }, {
+                              default: withCtx(() => [
+                                createVNode(VIcon, {
+                                  left: "",
+                                  small: ""
+                                }, {
+                                  default: withCtx(() => [..._cache[9] || (_cache[9] = [
+                                    createTextVNode("mdi-home", -1)
+                                  ])]),
+                                  _: 1
+                                }),
+                                createTextVNode(" " + toDisplayString(_ctx.$t("common.home")), 1)
                               ]),
                               _: 1
                             })
-                          ]),
-                          _: 1
-                        }),
-                        createVNode(VDivider),
-                        (openBlock(true), createElementBlock(Fragment, null, renderList($data.shareLinks, (item, index) => {
-                          return openBlock(), createBlock(VListItem, {
-                            key: index,
-                            onClick: ($event) => $options.handleShareClick(item)
-                          }, {
-                            default: withCtx(() => [
-                              createVNode(_component_v_list_item_icon, null, {
-                                default: withCtx(() => [
-                                  createVNode(VIcon, null, {
-                                    default: withCtx(() => [
-                                      createTextVNode(toDisplayString(item.icon), 1)
-                                    ]),
-                                    _: 2
-                                  }, 1024)
-                                ]),
-                                _: 2
-                              }, 1024),
-                              createVNode(_component_v_list_item_content, null, {
-                                default: withCtx(() => [
-                                  createVNode(VListItemTitle, null, {
-                                    default: withCtx(() => [
-                                      createTextVNode(toDisplayString(item.title), 1)
-                                    ]),
-                                    _: 2
-                                  }, 1024),
-                                  !item.isExternal ? (openBlock(), createBlock(VListItemSubtitle, {
-                                    key: 0,
-                                    class: "text-truncate",
-                                    style: { "max-width": "200px" }
-                                  }, {
-                                    default: withCtx(() => [
-                                      createTextVNode(toDisplayString(item.link), 1)
-                                    ]),
-                                    _: 2
-                                  }, 1024)) : createCommentVNode("", true)
-                                ]),
-                                _: 2
-                              }, 1024),
-                              createVNode(VListItemAction, null, {
-                                default: withCtx(() => [
-                                  createVNode(VBtn, {
-                                    icon: "",
-                                    small: ""
-                                  }, {
-                                    default: withCtx(() => [
-                                      item.copied ? (openBlock(), createBlock(VIcon, {
-                                        key: 0,
-                                        color: "success"
-                                      }, {
-                                        default: withCtx(() => [..._cache[5] || (_cache[5] = [
-                                          createTextVNode("mdi-check", -1)
-                                        ])]),
-                                        _: 1
-                                      })) : createCommentVNode("", true),
-                                      !item.copied && item.isExternal ? (openBlock(), createBlock(VIcon, { key: 1 }, {
-                                        default: withCtx(() => [..._cache[6] || (_cache[6] = [
-                                          createTextVNode("mdi-open-in-new", -1)
-                                        ])]),
-                                        _: 1
-                                      })) : createCommentVNode("", true),
-                                      !item.copied && !item.isExternal ? (openBlock(), createBlock(VIcon, { key: 2 }, {
-                                        default: withCtx(() => [..._cache[7] || (_cache[7] = [
-                                          createTextVNode("mdi-content-copy", -1)
-                                        ])]),
-                                        _: 1
-                                      })) : createCommentVNode("", true)
-                                    ]),
-                                    _: 2
-                                  }, 1024)
-                                ]),
-                                _: 2
-                              }, 1024)
-                            ]),
-                            _: 2
-                          }, 1032, ["onClick"]);
-                        }), 128))
-                      ]),
-                      _: 1
-                    })
-                  ]),
-                  _: 1
-                })
-              ]),
-              _: 1
-            })
-          ]),
-          _: 1
-        }),
-        $options.franchises.length ? (openBlock(), createBlock(VCard, {
-          key: 0,
-          flat: "",
-          color: "transparent",
-          class: "mb-6"
-        }, {
-          default: withCtx(() => [
-            createVNode(VCardTitle, null, {
-              default: withCtx(() => [
-                createTextVNode(toDisplayString(_ctx.$t("common.linked")), 1)
-              ]),
-              _: 1
-            }),
-            createVNode(VList, { "three-line": "" }, {
-              default: withCtx(() => [
-                (openBlock(true), createElementBlock(Fragment, null, renderList($options.franchises, (item, index) => {
-                  return openBlock(), createElementBlock(Fragment, { key: index }, [
-                    (openBlock(true), createElementBlock(Fragment, null, renderList(item.releases, (release, index2) => {
-                      return openBlock(), createBlock(VListItem, {
-                        link: true,
-                        onClick: ($event) => $options.router().push("/release/" + release.id + "/" + encodeURIComponent(release.names.en)),
-                        disabled: release.id == _ctx.releaseId,
-                        key: release.id
-                      }, {
-                        default: withCtx(() => [
-                          createVNode(_component_v_list_item_avatar, null, {
-                            default: withCtx(() => [
-                              createVNode(VImg, {
-                                transition: false,
-                                src: release.poster
-                              }, null, 8, ["src"])
-                            ]),
-                            _: 2
-                          }, 1024),
-                          createVNode(_component_v_list_item_content, null, {
-                            default: withCtx(() => [
-                              createVNode(VListItemTitle, null, {
-                                default: withCtx(() => [
-                                  createBaseVNode("span", null, toDisplayString(release.names.ru), 1),
-                                  release.status ? (openBlock(), createBlock(VChip, {
-                                    key: 0,
-                                    class: "ma-2",
-                                    color: "secondary",
-                                    "text-color": "white"
-                                  }, {
-                                    default: withCtx(() => [
-                                      createTextVNode(toDisplayString(release.status), 1)
-                                    ]),
-                                    _: 2
-                                  }, 1024)) : createCommentVNode("", true)
-                                ]),
-                                _: 2
-                              }, 1024),
-                              release.type && release.type !== "null" ? (openBlock(), createBlock(VListItemSubtitle, {
-                                key: 0,
-                                textContent: toDisplayString(release.type)
-                              }, null, 8, ["textContent"])) : createCommentVNode("", true)
-                            ]),
-                            _: 2
-                          }, 1024)
+                          ])
                         ]),
-                        _: 2
-                      }, 1032, ["onClick", "disabled"]);
-                    }), 128))
-                  ], 64);
-                }), 128))
-              ]),
-              _: 1
-            })
-          ]),
-          _: 1
-        })) : createCommentVNode("", true),
-        !$data.loading ? (openBlock(), createBlock(VTabs, {
-          key: 1,
-          modelValue: $data.tab,
-          "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.tab = $event),
-          class: "shrink mb-4",
-          "background-color": "transparent"
-        }, {
-          default: withCtx(() => [
-            createVNode(VTab, null, {
-              default: withCtx(() => [
-                createTextVNode(toDisplayString(_ctx.$t("common.episodes")), 1)
-              ]),
-              _: 1
-            }),
-            createVNode(VTab, null, {
-              default: withCtx(() => [
-                createTextVNode(toDisplayString(_ctx.$t("common.comments")), 1)
-              ]),
-              _: 1
-            }),
-            $options.torrents.length > 0 ? (openBlock(), createBlock(VTab, { key: 0 }, {
-              default: withCtx(() => [
-                createTextVNode(toDisplayString(_ctx.$t("common.torrents")), 1)
-              ]),
-              _: 1
-            })) : createCommentVNode("", true)
-          ]),
-          _: 1
-        }, 8, ["modelValue"])) : createCommentVNode("", true),
-        $options.component ? (openBlock(), createBlock(resolveDynamicComponent($options.component.is), mergeProps({ key: 2 }, toHandlers($options.component.events), $options.component.props), null, 16)) : createCommentVNode("", true)
-      ]),
-      _: 1
-    })) : !$data.loading && !$options._release ? (openBlock(), createBlock(VLayout, {
-      key: 1,
-      "fill-height": "",
-      "align-center": "",
-      "justify-center": ""
-    }, {
-      default: withCtx(() => [
-        createVNode(VRow, {
-          justify: "center",
-          align: "center"
-        }, {
-          default: withCtx(() => [
-            createVNode(VCol, {
-              cols: "12",
-              sm: "3",
-              "align-self": "center"
-            }, {
-              default: withCtx(() => [
-                createVNode(VImg, {
-                  transition: false,
-                  class: "image",
-                  contain: "",
-                  src: $data.image
-                }, null, 8, ["src"])
-              ]),
-              _: 1
-            }),
-            createVNode(VCol, {
-              cols: "12",
-              sm: "6",
-              "align-self": "center"
-            }, {
-              default: withCtx(() => [
-                createVNode(VCard, {
-                  flat: "",
-                  color: "transparent"
-                }, {
-                  default: withCtx(() => [
-                    createVNode(VCardText, { class: "error-message-container" }, {
-                      default: withCtx(() => [
-                        createVNode(VCard, {
-                          outlined: "",
-                          color: "red",
-                          class: "pa-4"
-                        }, {
-                          default: withCtx(() => [
-                            createBaseVNode("div", _hoisted_1, [
-                              createVNode(VIcon, {
-                                small: "",
-                                class: "mr-2"
-                              }, {
-                                default: withCtx(() => [..._cache[8] || (_cache[8] = [
-                                  createTextVNode("mdi-help-circle", -1)
-                                ])]),
-                                _: 1
-                              }),
-                              createBaseVNode("strong", null, toDisplayString(_ctx.$t("release.whatHappened")), 1)
-                            ]),
-                            createBaseVNode("div", _hoisted_2, [
-                              createBaseVNode("h3", null, toDisplayString(_ctx.$t("release.missingTitle")), 1),
-                              createBaseVNode("p", null, toDisplayString(_ctx.$t("release.missingBody")), 1),
-                              createBaseVNode("div", _hoisted_3, [
-                                createBaseVNode("strong", null, toDisplayString(_ctx.$t("release.missingReasons")), 1),
-                                createBaseVNode("ul", null, [
-                                  createBaseVNode("li", null, toDisplayString(_ctx.$t("release.missingReasonCache")), 1),
-                                  createBaseVNode("li", null, toDisplayString(_ctx.$t("release.missingReasonSync")), 1),
-                                  createBaseVNode("li", null, toDisplayString(_ctx.$t("release.missingReasonTemporary")), 1)
-                                ])
-                              ])
-                            ]),
-                            createBaseVNode("div", _hoisted_4, [
-                              createVNode(VBtn, {
-                                small: "",
-                                text: "",
-                                color: "primary",
-                                to: "/"
-                              }, {
-                                default: withCtx(() => [
-                                  createVNode(VIcon, {
-                                    left: "",
-                                    small: ""
-                                  }, {
-                                    default: withCtx(() => [..._cache[9] || (_cache[9] = [
-                                      createTextVNode("mdi-home", -1)
-                                    ])]),
-                                    _: 1
-                                  }),
-                                  createTextVNode(" " + toDisplayString(_ctx.$t("common.home")), 1)
-                                ]),
-                                _: 1
-                              })
-                            ])
-                          ]),
-                          _: 1
-                        })
-                      ]),
-                      _: 1
-                    })
-                  ]),
-                  _: 1
-                })
-              ]),
-              _: 1
-            })
-          ]),
-          _: 1
-        })
-      ]),
-      _: 1
-    })) : createCommentVNode("", true)
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  })
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })
+        ]),
+        _: 1
+      })
+    ])) : createCommentVNode("", true)
   ]);
 }
-const ReleaseView = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-2879229d"]]);
+const ReleaseView = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-3a64e1fc"]]);
 export {
   ReleaseView as default
 };

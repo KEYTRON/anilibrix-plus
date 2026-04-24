@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex" v-if="loading || releases.length> 0" align-center class="shrink release__slider">
+  <div class="d-flex align-center shrink release__slider" v-if="loading || releases.length > 0">
 
     <!-- Prev -->
     <control v-bind="{loading, value, releases}" left @click="$emit('previous')"/>

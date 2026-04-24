@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex controls" :>
+  <div class="d-flex controls" :class="`controls--${direction}`">
     <v-btn icon :disabled="isDisabled" @click="$emit('click')">
       <v-icon>mdi-arrow-{{ direction }}</v-icon>
     </v-btn>

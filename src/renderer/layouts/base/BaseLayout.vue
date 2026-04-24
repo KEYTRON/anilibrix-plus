@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column fill-height base-layout" ref="container" id="container" :>
+  <div class="d-flex flex-column fill-height base-layout" ref="container" id="container" :class="{ showScroll, isOnBlack }">
 
     <!-- App Toolbar -->
     <!-- Content -->

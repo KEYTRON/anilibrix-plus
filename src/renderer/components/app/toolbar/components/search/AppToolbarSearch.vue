@@ -1,31 +1,31 @@
 <template>
   <v-autocomplete
-    v-bind="{items, loading}"
-    solo
-    dense
+    v-bind="{ items, loading }"
+    variant="solo"
+    density="compact"
     no-filter
     hide-details
     hide-no-data
     return-object
     ref="search"
     item-value="id"
-    item-text="names.ru"
+    item-title="names.ru"
     class="grey darken-2"
     :placeholder="$t('toolbar.searchPlaceholder')"
-    :append-icon="null"
+    :append-inner-icon="undefined"
     v-model:search="search"
     @blur="_setSearching(false)"
     @focus="_setSearching(true)"
-    @input="toRelease">
+    @update:model-value="toRelease">
 
-    <template v-slot:item="{item}">
-      <template v-slot:prepend><v-avatar>
-        <v-img :transition="false" :src="item.poster"/>
-      </v-avatar></template>
-      
-        <v-list-item-title v-text="item.names.ru"/>
-        <v-list-item-subtitle v-text="item.names.original"/>
-      
+    <template v-slot:item="{ item, props }">
+      <v-list-item v-bind="props" :title="item.raw.names.ru" :subtitle="item.raw.names.original">
+        <template v-slot:prepend>
+          <v-avatar>
+            <v-img :src="item.raw.poster"/>
+          </v-avatar>
+        </template>
+      </v-list-item>
     </template>
 
   </v-autocomplete>
@@ -80,16 +80,11 @@ export default {
      */
     toRelease (release) {
       if (release) {
-
-        // Reset input
-        // Go to release page
-        this.$refs.search.setValue(undefined)
-        toRelease(release)
-
-        // Reset items
+        this.search = null
         this.items = []
         this.visible = false
         this._setSearching(false)
+        toRelease(release)
       }
     }
 

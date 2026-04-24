@@ -1,4 +1,9 @@
-import { bz as BaseProxy, bA as BaseTransformer, bB as fe, ai as humanFormat, br as defineStore, bw as showAppError, bx as translate, by as getLocale, bC as __capitalize, bt as ReleaseProxy } from "./index-BZ1Qg9LU.js";
+import { bw as BaseProxy, bx as BaseTransformer, by as fe, ag as humanFormat, bo as defineStore, bt as showAppError, bu as translate, bv as getLocale, bz as __capitalize, bq as ReleaseProxy } from "./index-CIkHx-EU.js";
+import "./torrents-handler-BtK2vzG6.js";
+import "fs";
+import "path";
+import "stream";
+import "util";
 class CatalogProxy extends BaseProxy {
   /**
    * Get catalog genres

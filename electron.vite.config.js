@@ -36,7 +36,17 @@ export default defineConfig({
         input: {
           index: resolve('src/renderer/index.html'),
           webtorrent: resolve('src/renderer/webtorrent.html')
-        }
+        },
+        // Node.js built-ins and heavy node packages used by webtorrent.js
+        // are available at runtime via nodeIntegration:true, so externalize them
+        external: [
+          'webtorrent', 'rimraf', 'matroska-subtitles', 'parse-torrent',
+          'http', 'https', 'path', 'fs', 'fs/promises', 'events', 'stream',
+          'zlib', 'crypto', 'net', 'tls', 'dns', 'os', 'url', 'util',
+          'querystring', 'buffer', 'timers', 'timers/promises',
+          'node:fs', 'node:path', 'node:url', 'node:events', 'node:stream',
+          'node:string_decoder', 'node:fs/promises', 'node:http', 'node:https'
+        ]
       }
     },
     resolve: {

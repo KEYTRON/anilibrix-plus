@@ -1,4 +1,9 @@
-import { g as genericComponent, u as useProxiedModel, bl as useDelay, p as propsFactory, bm as makeDelayProps, _ as _export_sfc, b4 as ReleaseProgress, b5 as useWatchStore, N as openBlock, K as createBlock, L as withCtx, l as createVNode, Q as VImg, a_ as VMenu, ap as VList, a7 as createElementBlock, af as renderList, aj as VListItem, V as VIcon, W as createTextVNode, T as toDisplayString, al as VListItemTitle, ae as Fragment, ao as withModifiers, a$ as VSelect, am as VListItemSubtitle, U as createCommentVNode, an as VListItemAction, t as VBtn, bi as VFadeTransition, n as createBaseVNode, ag as VChip, r as mergeProps, R as VCard, ab as resolveComponent, P as VCol, O as VRow, be as useFavoritesStore, bn as stringsPluralize, ak as VDivider, ac as VCardTitle, ad as VCardSubtitle, a8 as VSkeletonLoader, M as VLayout, bg as VTextField, bo as VSwitch, bp as toLogin, S as VCardText, b8 as toRelease, bq as Fuse, bc as useAccountStore, b9 as VExpandTransition, b1 as resolveDynamicComponent } from "./index-BZ1Qg9LU.js";
+import { g as genericComponent, u as useProxiedModel, bi as useDelay, p as propsFactory, bj as makeDelayProps, _ as _export_sfc, b2 as ReleaseProgress, b3 as useWatchStore, N as openBlock, S as createBlock, L as withCtx, l as createVNode, P as VImg, aY as VMenu, al as VList, K as createElementBlock, ae as renderList, ah as VListItem, V as VIcon, W as createTextVNode, T as toDisplayString, aj as VListItemTitle, ad as Fragment, aZ as withModifiers, a_ as VSelect, ak as VListItemSubtitle, U as createCommentVNode, t as VBtn, bf as VFadeTransition, n as createBaseVNode, af as VChip, r as mergeProps, Q as VCard, aa as resolveComponent, O as VCol, M as VRow, bc as useFavoritesStore, bk as stringsPluralize, ai as VDivider, ab as VCardTitle, ac as VCardSubtitle, a7 as VSkeletonLoader, bd as VTextField, bl as VSwitch, bm as toLogin, R as VCardText, b6 as toRelease, b7 as VExpandTransition, aV as resolveDynamicComponent, bn as Fuse, ba as useAccountStore } from "./index-CIkHx-EU.js";
+import "./torrents-handler-BtK2vzG6.js";
+import "fs";
+import "path";
+import "stream";
+import "util";
 const makeVHoverProps = propsFactory({
   disabled: Boolean,
   modelValue: {
@@ -328,9 +333,9 @@ const _sfc_main$8 = {
     }
   }
 };
-const _hoisted_1 = { class: "body-2 font-weight-bold mb-2" };
-const _hoisted_2 = { class: "flex-grow-1 overflow-hidden" };
-const _hoisted_3 = {
+const _hoisted_1$3 = { class: "body-2 font-weight-bold mb-2" };
+const _hoisted_2$1 = { class: "flex-grow-1 overflow-hidden" };
+const _hoisted_3$1 = {
   class: "caption text-clamp",
   style: { "hyphens": "auto" }
 };
@@ -339,7 +344,6 @@ const _hoisted_4 = {
   class: "d-flex justify-space-between mt-auto py-2"
 };
 function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   const _component_v_list_item_icon = resolveComponent("v-list-item-icon");
   const _component_release_progress = resolveComponent("release-progress");
   return openBlock(), createBlock(VHover, null, {
@@ -381,14 +385,9 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
                               ]),
                               _: 2
                             }, 1024),
-                            createVNode(_component_v_list_item_content, null, {
+                            createVNode(VListItemTitle, null, {
                               default: withCtx(() => [
-                                createVNode(VListItemTitle, null, {
-                                  default: withCtx(() => [
-                                    createTextVNode(toDisplayString(item.title), 1)
-                                  ]),
-                                  _: 2
-                                }, 1024)
+                                createTextVNode(toDisplayString(item.title), 1)
                               ]),
                               _: 2
                             }, 1024)
@@ -401,22 +400,17 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
                         }, ["stop"]))
                       }, {
                         default: withCtx(() => [
-                          createVNode(_component_v_list_item_content, null, {
-                            default: withCtx(() => [
-                              createVNode(VSelect, {
-                                modelValue: $data.selectedDomain,
-                                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.selectedDomain = $event),
-                                items: $data.availableDomains,
-                                dense: "",
-                                outlined: "",
-                                "hide-details": "",
-                                label: _ctx.$t("favorites.releaseDomain"),
-                                onClick: _cache[1] || (_cache[1] = withModifiers(() => {
-                                }, ["stop"]))
-                              }, null, 8, ["modelValue", "items", "label"])
-                            ]),
-                            _: 1
-                          })
+                          createVNode(VSelect, {
+                            modelValue: $data.selectedDomain,
+                            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.selectedDomain = $event),
+                            items: $data.availableDomains,
+                            dense: "",
+                            outlined: "",
+                            "hide-details": "",
+                            label: _ctx.$t("favorites.releaseDomain"),
+                            onClick: _cache[1] || (_cache[1] = withModifiers(() => {
+                            }, ["stop"]))
+                          }, null, 8, ["modelValue", "items", "label"])
                         ]),
                         _: 1
                       }),
@@ -425,6 +419,37 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
                           key: index,
                           onClick: ($event) => $options.handleShareClick(item)
                         }, {
+                          prepend: withCtx(() => [
+                            createVNode(VBtn, {
+                              icon: "",
+                              small: ""
+                            }, {
+                              default: withCtx(() => [
+                                item.copied ? (openBlock(), createBlock(VIcon, {
+                                  key: 0,
+                                  color: "success"
+                                }, {
+                                  default: withCtx(() => [..._cache[6] || (_cache[6] = [
+                                    createTextVNode("mdi-check", -1)
+                                  ])]),
+                                  _: 1
+                                })) : createCommentVNode("", true),
+                                !item.copied && item.isExternal ? (openBlock(), createBlock(VIcon, { key: 1 }, {
+                                  default: withCtx(() => [..._cache[7] || (_cache[7] = [
+                                    createTextVNode("mdi-open-in-new", -1)
+                                  ])]),
+                                  _: 1
+                                })) : createCommentVNode("", true),
+                                !item.copied && !item.isExternal ? (openBlock(), createBlock(VIcon, { key: 2 }, {
+                                  default: withCtx(() => [..._cache[8] || (_cache[8] = [
+                                    createTextVNode("mdi-content-copy", -1)
+                                  ])]),
+                                  _: 1
+                                })) : createCommentVNode("", true)
+                              ]),
+                              _: 2
+                            }, 1024)
+                          ]),
                           default: withCtx(() => [
                             createVNode(_component_v_list_item_icon, { class: "mt-4" }, {
                               default: withCtx(() => [
@@ -437,61 +462,22 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
                               ]),
                               _: 2
                             }, 1024),
-                            createVNode(_component_v_list_item_content, null, {
+                            createVNode(VListItemTitle, null, {
                               default: withCtx(() => [
-                                createVNode(VListItemTitle, null, {
-                                  default: withCtx(() => [
-                                    createTextVNode(toDisplayString(item.title), 1)
-                                  ]),
-                                  _: 2
-                                }, 1024),
-                                !item.isExternal ? (openBlock(), createBlock(VListItemSubtitle, {
-                                  key: 0,
-                                  class: "text-truncate",
-                                  style: { "max-width": "200px" }
-                                }, {
-                                  default: withCtx(() => [
-                                    createTextVNode(toDisplayString(item.link), 1)
-                                  ]),
-                                  _: 2
-                                }, 1024)) : createCommentVNode("", true)
+                                createTextVNode(toDisplayString(item.title), 1)
                               ]),
                               _: 2
                             }, 1024),
-                            createVNode(VListItemAction, null, {
+                            !item.isExternal ? (openBlock(), createBlock(VListItemSubtitle, {
+                              key: 0,
+                              class: "text-truncate",
+                              style: { "max-width": "200px" }
+                            }, {
                               default: withCtx(() => [
-                                createVNode(VBtn, {
-                                  icon: "",
-                                  small: ""
-                                }, {
-                                  default: withCtx(() => [
-                                    item.copied ? (openBlock(), createBlock(VIcon, {
-                                      key: 0,
-                                      color: "success"
-                                    }, {
-                                      default: withCtx(() => [..._cache[6] || (_cache[6] = [
-                                        createTextVNode("mdi-check", -1)
-                                      ])]),
-                                      _: 1
-                                    })) : createCommentVNode("", true),
-                                    !item.copied && item.isExternal ? (openBlock(), createBlock(VIcon, { key: 1 }, {
-                                      default: withCtx(() => [..._cache[7] || (_cache[7] = [
-                                        createTextVNode("mdi-open-in-new", -1)
-                                      ])]),
-                                      _: 1
-                                    })) : createCommentVNode("", true),
-                                    !item.copied && !item.isExternal ? (openBlock(), createBlock(VIcon, { key: 2 }, {
-                                      default: withCtx(() => [..._cache[8] || (_cache[8] = [
-                                        createTextVNode("mdi-content-copy", -1)
-                                      ])]),
-                                      _: 1
-                                    })) : createCommentVNode("", true)
-                                  ]),
-                                  _: 2
-                                }, 1024)
+                                createTextVNode(toDisplayString(item.link), 1)
                               ]),
                               _: 2
-                            }, 1024)
+                            }, 1024)) : createCommentVNode("", true)
                           ]),
                           _: 2
                         }, 1032, ["onClick"]);
@@ -510,9 +496,9 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
                     class: "d-flex flex-column release-card--reveal grey darken-4 pa-4",
                     style: { "padding-bottom": "25px !important" }
                   }, [
-                    createBaseVNode("div", _hoisted_1, toDisplayString($options.title), 1),
-                    createBaseVNode("div", _hoisted_2, [
-                      createBaseVNode("div", _hoisted_3, toDisplayString($options.description), 1)
+                    createBaseVNode("div", _hoisted_1$3, toDisplayString($options.title), 1),
+                    createBaseVNode("div", _hoisted_2$1, [
+                      createBaseVNode("div", _hoisted_3$1, toDisplayString($options.description), 1)
                     ]),
                     $options.status || $options.rating ? (openBlock(), createElementBlock("div", _hoisted_4, [
                       $options.rating ? (openBlock(), createBlock(VChip, {
@@ -560,7 +546,7 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   });
 }
-const FavoritesRelease = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$8], ["__scopeId", "data-v-674885ae"]]);
+const FavoritesRelease = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$8], ["__scopeId", "data-v-e045bd02"]]);
 const props$3 = {
   releases: {
     type: Array,
@@ -824,59 +810,57 @@ const props = {
 const _sfc_main$3 = {
   props
 };
+const _hoisted_1$2 = { class: "d-flex shrink" };
 function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createBlock(VLayout, { class: "shrink" }, {
-    default: withCtx(() => [
-      createVNode(VTextField, {
-        solo: "",
-        clearable: "",
-        "hide-details": "",
-        class: "mr-2",
-        placeholder: _ctx.$t("favorites.searchPlaceholder"),
-        "prepend-inner-icon": "mdi-magnify",
-        value: _ctx.search,
-        onInput: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("update:search", $event))
-      }, null, 8, ["placeholder", "value"]),
-      createVNode(VBtn, mergeProps({ loading: _ctx.loading }, {
-        class: "mr-2",
-        height: "48",
-        onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$emit("reload"))
-      }), {
-        default: withCtx(() => [
-          createVNode(VIcon, {
-            small: "",
-            class: "mr-2"
-          }, {
-            default: withCtx(() => [..._cache[3] || (_cache[3] = [
-              createTextVNode("mdi-refresh", -1)
-            ])]),
-            _: 1
-          }),
-          createBaseVNode("span", null, toDisplayString(_ctx.$t("common.reload")), 1)
-        ]),
-        _: 1
-      }, 16),
-      createVNode(VBtn, mergeProps({ loading: _ctx.loading }, {
-        height: "48",
-        onClick: _cache[2] || (_cache[2] = ($event) => _ctx.$emit("update:settings", !_ctx.settings))
-      }), {
-        default: withCtx(() => [
-          createVNode(VIcon, {
-            small: "",
-            class: "mr-2"
-          }, {
-            default: withCtx(() => [..._cache[4] || (_cache[4] = [
-              createTextVNode("mdi-settings", -1)
-            ])]),
-            _: 1
-          }),
-          createBaseVNode("span", null, toDisplayString(_ctx.$t("common.settings")), 1)
-        ]),
-        _: 1
-      }, 16)
-    ]),
-    _: 1
-  });
+  return openBlock(), createElementBlock("div", _hoisted_1$2, [
+    createVNode(VTextField, {
+      solo: "",
+      clearable: "",
+      "hide-details": "",
+      class: "mr-2",
+      placeholder: _ctx.$t("favorites.searchPlaceholder"),
+      "prepend-inner-icon": "mdi-magnify",
+      value: _ctx.search,
+      onInput: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("update:search", $event))
+    }, null, 8, ["placeholder", "value"]),
+    createVNode(VBtn, mergeProps({ loading: _ctx.loading }, {
+      class: "mr-2",
+      height: "48",
+      onClick: _cache[1] || (_cache[1] = ($event) => _ctx.$emit("reload"))
+    }), {
+      default: withCtx(() => [
+        createVNode(VIcon, {
+          small: "",
+          class: "mr-2"
+        }, {
+          default: withCtx(() => [..._cache[3] || (_cache[3] = [
+            createTextVNode("mdi-refresh", -1)
+          ])]),
+          _: 1
+        }),
+        createBaseVNode("span", null, toDisplayString(_ctx.$t("common.reload")), 1)
+      ]),
+      _: 1
+    }, 16),
+    createVNode(VBtn, mergeProps({ loading: _ctx.loading }, {
+      height: "48",
+      onClick: _cache[2] || (_cache[2] = ($event) => _ctx.$emit("update:settings", !_ctx.settings))
+    }), {
+      default: withCtx(() => [
+        createVNode(VIcon, {
+          small: "",
+          class: "mr-2"
+        }, {
+          default: withCtx(() => [..._cache[4] || (_cache[4] = [
+            createTextVNode("mdi-settings", -1)
+          ])]),
+          _: 1
+        }),
+        createBaseVNode("span", null, toDisplayString(_ctx.$t("common.settings")), 1)
+      ]),
+      _: 1
+    }, 16)
+  ]);
 }
 const FavoritesToolbar = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3]]);
 const _sfc_main$2 = {
@@ -942,7 +926,6 @@ const _sfc_main$2 = {
   }
 };
 function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_list_item_content = resolveComponent("v-list-item-content");
   return openBlock(), createElementBlock("div", null, [
     createVNode(VCard, { class: "mb-2" }, {
       default: withCtx(() => [
@@ -950,30 +933,22 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
           class: "py-2",
           onClick: _cache[0] || (_cache[0] = ($event) => $options._setSettingsShowSeen(!$options._show_seen))
         }, {
+          prepend: withCtx(() => [
+            createVNode(VSwitch, {
+              "input-value": $options._show_seen,
+              onClick: $options._setSettingsShowSeen
+            }, null, 8, ["input-value", "onClick"])
+          ]),
           default: withCtx(() => [
-            createVNode(_component_v_list_item_content, null, {
+            createVNode(VListItemTitle, null, {
               default: withCtx(() => [
-                createVNode(VListItemTitle, null, {
-                  default: withCtx(() => [
-                    createTextVNode(toDisplayString(_ctx.$t("favorites.watchedReleases")), 1)
-                  ]),
-                  _: 1
-                }),
-                createVNode(VListItemSubtitle, null, {
-                  default: withCtx(() => [
-                    createTextVNode(toDisplayString(_ctx.$t("favorites.watchedReleasesHint")), 1)
-                  ]),
-                  _: 1
-                })
+                createTextVNode(toDisplayString(_ctx.$t("favorites.watchedReleases")), 1)
               ]),
               _: 1
             }),
-            createVNode(VListItemAction, null, {
+            createVNode(VListItemSubtitle, null, {
               default: withCtx(() => [
-                createVNode(VSwitch, {
-                  "input-value": $options._show_seen,
-                  onClick: $options._setSettingsShowSeen
-                }, null, 8, ["input-value", "onClick"])
+                createTextVNode(toDisplayString(_ctx.$t("favorites.watchedReleasesHint")), 1)
               ]),
               _: 1
             })
@@ -989,30 +964,22 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
           class: "py-2",
           onClick: _cache[1] || (_cache[1] = ($event) => $options._setSettingsShowCompleted(!$options._show_completed))
         }, {
+          prepend: withCtx(() => [
+            createVNode(VSwitch, {
+              "input-value": $options._show_completed,
+              onClick: $options._setSettingsShowCompleted
+            }, null, 8, ["input-value", "onClick"])
+          ]),
           default: withCtx(() => [
-            createVNode(_component_v_list_item_content, null, {
+            createVNode(VListItemTitle, null, {
               default: withCtx(() => [
-                createVNode(VListItemTitle, null, {
-                  default: withCtx(() => [
-                    createTextVNode(toDisplayString(_ctx.$t("favorites.completedOnly")), 1)
-                  ]),
-                  _: 1
-                }),
-                createVNode(VListItemSubtitle, null, {
-                  default: withCtx(() => [
-                    createTextVNode(toDisplayString(_ctx.$t("favorites.completedOnlyHint")), 1)
-                  ]),
-                  _: 1
-                })
+                createTextVNode(toDisplayString(_ctx.$t("favorites.completedOnly")), 1)
               ]),
               _: 1
             }),
-            createVNode(VListItemAction, null, {
+            createVNode(VListItemSubtitle, null, {
               default: withCtx(() => [
-                createVNode(VSwitch, {
-                  "input-value": $options._show_completed,
-                  onClick: $options._setSettingsShowCompleted
-                }, null, 8, ["input-value", "onClick"])
+                createTextVNode(toDisplayString(_ctx.$t("favorites.completedOnlyHint")), 1)
               ]),
               _: 1
             })
@@ -1026,34 +993,29 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
       default: withCtx(() => [
         createVNode(VListItem, { class: "py-2" }, {
           default: withCtx(() => [
-            createVNode(_component_v_list_item_content, null, {
+            createVNode(VListItemTitle, null, {
               default: withCtx(() => [
-                createVNode(VListItemTitle, null, {
-                  default: withCtx(() => [
-                    createTextVNode(toDisplayString(_ctx.$t("favorites.sorting")), 1)
-                  ]),
-                  _: 1
-                }),
-                createVNode(VListItemSubtitle, null, {
-                  default: withCtx(() => [
-                    createTextVNode(toDisplayString(_ctx.$t("favorites.sortingHint")), 1)
-                  ]),
-                  _: 1
-                }),
-                createVNode(VSelect, {
-                  outlined: "",
-                  "hide-details": "",
-                  class: "mt-4",
-                  "item-text": "title",
-                  "item-value": "value",
-                  placeholder: _ctx.$t("favorites.sorting"),
-                  items: $data.sort,
-                  value: $options._sort,
-                  onInput: $options._setSettingsSort
-                }, null, 8, ["placeholder", "items", "value", "onInput"])
+                createTextVNode(toDisplayString(_ctx.$t("favorites.sorting")), 1)
               ]),
               _: 1
-            })
+            }),
+            createVNode(VListItemSubtitle, null, {
+              default: withCtx(() => [
+                createTextVNode(toDisplayString(_ctx.$t("favorites.sortingHint")), 1)
+              ]),
+              _: 1
+            }),
+            createVNode(VSelect, {
+              outlined: "",
+              "hide-details": "",
+              class: "mt-4",
+              "item-text": "title",
+              "item-value": "value",
+              placeholder: _ctx.$t("favorites.sorting"),
+              items: $data.sort,
+              value: $options._sort,
+              onInput: $options._setSettingsSort
+            }, null, 8, ["placeholder", "items", "value", "onInput"])
           ]),
           _: 1
         })
@@ -1064,34 +1026,29 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
       default: withCtx(() => [
         createVNode(VListItem, { class: "py-2" }, {
           default: withCtx(() => [
-            createVNode(_component_v_list_item_content, null, {
+            createVNode(VListItemTitle, null, {
               default: withCtx(() => [
-                createVNode(VListItemTitle, null, {
-                  default: withCtx(() => [
-                    createTextVNode(toDisplayString(_ctx.$t("favorites.grouping")), 1)
-                  ]),
-                  _: 1
-                }),
-                createVNode(VListItemSubtitle, null, {
-                  default: withCtx(() => [
-                    createTextVNode(toDisplayString(_ctx.$t("favorites.groupingHint")), 1)
-                  ]),
-                  _: 1
-                }),
-                createVNode(VSelect, {
-                  outlined: "",
-                  "hide-details": "",
-                  class: "mt-4",
-                  "item-text": "title",
-                  "item-value": "value",
-                  placeholder: _ctx.$t("favorites.grouping"),
-                  items: $data.group,
-                  value: $options._group,
-                  onInput: $options._setSettingsGroup
-                }, null, 8, ["placeholder", "items", "value", "onInput"])
+                createTextVNode(toDisplayString(_ctx.$t("favorites.grouping")), 1)
               ]),
               _: 1
-            })
+            }),
+            createVNode(VListItemSubtitle, null, {
+              default: withCtx(() => [
+                createTextVNode(toDisplayString(_ctx.$t("favorites.groupingHint")), 1)
+              ]),
+              _: 1
+            }),
+            createVNode(VSelect, {
+              outlined: "",
+              "hide-details": "",
+              class: "mt-4",
+              "item-text": "title",
+              "item-value": "value",
+              placeholder: _ctx.$t("favorites.grouping"),
+              items: $data.group,
+              value: $options._group,
+              onInput: $options._setSettingsGroup
+            }, null, 8, ["placeholder", "items", "value", "onInput"])
           ]),
           _: 1
         })
@@ -1112,80 +1069,67 @@ const _sfc_main$1 = {
     toLogin
   }
 };
+const _hoisted_1$1 = { class: "d-flex fill-height align-center justify-center" };
+const _hoisted_2 = { class: "d-flex align-center justify-center" };
+const _hoisted_3 = { class: "d-flex" };
 function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createBlock(VLayout, {
-    "fill-height": "",
-    "align-center": "",
-    "justify-center": ""
-  }, {
-    default: withCtx(() => [
-      createVNode(VLayout, {
-        "align-center": "",
-        "justify-center": ""
+  return openBlock(), createElementBlock("div", _hoisted_1$1, [
+    createBaseVNode("div", _hoisted_2, [
+      createVNode(VCol, {
+        cols: "12",
+        sm: "3",
+        "align-self": "center"
       }, {
         default: withCtx(() => [
-          createVNode(VCol, {
-            cols: "12",
-            sm: "3",
-            "align-self": "center"
+          createVNode(VImg, {
+            transition: false,
+            class: "image",
+            contain: "",
+            src: $data.image
+          }, null, 8, ["src"])
+        ]),
+        _: 1
+      }),
+      createVNode(VCol, {
+        cols: "12",
+        sm: "6",
+        "align-self": "center"
+      }, {
+        default: withCtx(() => [
+          createVNode(VCard, {
+            flat: "",
+            color: "transparent"
           }, {
             default: withCtx(() => [
-              createVNode(VImg, {
-                transition: false,
-                class: "image",
-                contain: "",
-                src: $data.image
-              }, null, 8, ["src"])
-            ]),
-            _: 1
-          }),
-          createVNode(VCol, {
-            cols: "12",
-            sm: "6",
-            "align-self": "center"
-          }, {
-            default: withCtx(() => [
-              createVNode(VCard, {
-                flat: "",
-                color: "transparent"
-              }, {
+              createVNode(VCardTitle, null, {
                 default: withCtx(() => [
-                  createVNode(VCardTitle, null, {
-                    default: withCtx(() => [
-                      createTextVNode(toDisplayString(_ctx.$t("favorites.title")), 1)
-                    ]),
-                    _: 1
-                  }),
-                  createVNode(VCardText, null, {
-                    default: withCtx(() => [
-                      createBaseVNode("div", null, toDisplayString(_ctx.$t("favorites.subtitle")), 1),
-                      createBaseVNode("div", null, toDisplayString(_ctx.$t("favorites.authorizationHint")), 1)
-                    ]),
-                    _: 1
-                  }),
-                  createVNode(VLayout, null, {
-                    default: withCtx(() => [
-                      createVNode(VBtn, { onClick: $options.toLogin }, {
-                        default: withCtx(() => [
-                          createTextVNode(toDisplayString(_ctx.$t("favorites.authorize")), 1)
-                        ]),
-                        _: 1
-                      }, 8, ["onClick"])
-                    ]),
-                    _: 1
-                  })
+                  createTextVNode(toDisplayString(_ctx.$t("favorites.title")), 1)
                 ]),
                 _: 1
-              })
+              }),
+              createVNode(VCardText, null, {
+                default: withCtx(() => [
+                  createBaseVNode("div", null, toDisplayString(_ctx.$t("favorites.subtitle")), 1),
+                  createBaseVNode("div", null, toDisplayString(_ctx.$t("favorites.authorizationHint")), 1)
+                ]),
+                _: 1
+              }),
+              createBaseVNode("div", _hoisted_3, [
+                createVNode(VBtn, { onClick: $options.toLogin }, {
+                  default: withCtx(() => [
+                    createTextVNode(toDisplayString(_ctx.$t("favorites.authorize")), 1)
+                  ]),
+                  _: 1
+                }, 8, ["onClick"])
+              ])
             ]),
             _: 1
           })
         ]),
         _: 1
       })
-    ]),
-    _: 1
-  });
+    ])
+  ]);
 }
 const FavoritesAuthorization = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1]]);
 const _sfc_main = {
@@ -1281,63 +1225,63 @@ const _sfc_main = {
     toRelease
   }
 };
+const _hoisted_1 = {
+  key: 0,
+  class: "d-flex flex-column"
+};
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_settings = resolveComponent("settings");
   const _component_toolbar = resolveComponent("toolbar");
   const _component_loader = resolveComponent("loader");
   const _component_authorization = resolveComponent("authorization");
-  return $options._isAuthorized ? (openBlock(), createBlock(VLayout, {
-    key: 0,
-    column: ""
-  }, {
-    default: withCtx(() => [
-      createVNode(VCard, {
-        flat: "",
-        color: "transparent"
-      }, {
-        default: withCtx(() => [
-          createVNode(VCardTitle, null, {
-            default: withCtx(() => [
-              createTextVNode(toDisplayString(_ctx.$t("favorites.title")), 1)
-            ]),
-            _: 1
-          }),
-          createVNode(VCardSubtitle, null, {
-            default: withCtx(() => [
-              createTextVNode(toDisplayString(_ctx.$t("favorites.subtitle")), 1)
-            ]),
-            _: 1
-          })
-        ]),
-        _: 1
-      }),
-      createVNode(VExpandTransition, null, {
-        default: withCtx(() => [
-          $data.settings ? (openBlock(), createBlock(_component_settings, {
-            key: 0,
-            class: "mb-2"
-          })) : createCommentVNode("", true)
-        ]),
-        _: 1
-      }),
-      createVNode(_component_toolbar, {
-        class: "mb-2",
-        loading: $options._loading,
-        search: $data.search,
-        settings: $data.settings,
-        onReload: $options._getFavorites
-      }, null, 8, ["loading", "search", "settings", "onReload"]),
-      $options._loading && !$options.releases.length ? (openBlock(), createBlock(_component_loader, {
-        key: 0,
-        class: "my-2"
-      })) : createCommentVNode("", true),
-      !$options._loading || $options.releases.length ? (openBlock(), createBlock(resolveDynamicComponent($options.view), mergeProps({ key: 1 }, { releases: $options.releases }, {
-        class: "my-2",
-        onToRelease: $options.toRelease
-      }), null, 16, ["onToRelease"])) : createCommentVNode("", true)
-    ]),
-    _: 1
-  })) : (openBlock(), createBlock(_component_authorization, { key: 1 }));
+  return $options._isAuthorized ? (openBlock(), createElementBlock("div", _hoisted_1, [
+    createVNode(VCard, {
+      flat: "",
+      color: "transparent"
+    }, {
+      default: withCtx(() => [
+        createVNode(VCardTitle, null, {
+          default: withCtx(() => [
+            createTextVNode(toDisplayString(_ctx.$t("favorites.title")), 1)
+          ]),
+          _: 1
+        }),
+        createVNode(VCardSubtitle, null, {
+          default: withCtx(() => [
+            createTextVNode(toDisplayString(_ctx.$t("favorites.subtitle")), 1)
+          ]),
+          _: 1
+        })
+      ]),
+      _: 1
+    }),
+    createVNode(VExpandTransition, null, {
+      default: withCtx(() => [
+        $data.settings ? (openBlock(), createBlock(_component_settings, {
+          key: 0,
+          class: "mb-2"
+        })) : createCommentVNode("", true)
+      ]),
+      _: 1
+    }),
+    createVNode(_component_toolbar, {
+      class: "mb-2",
+      loading: $options._loading,
+      search: $data.search,
+      "onUpdate:search": _cache[0] || (_cache[0] = ($event) => $data.search = $event),
+      settings: $data.settings,
+      "onUpdate:settings": _cache[1] || (_cache[1] = ($event) => $data.settings = $event),
+      onReload: $options._getFavorites
+    }, null, 8, ["loading", "search", "settings", "onReload"]),
+    $options._loading && !$options.releases.length ? (openBlock(), createBlock(_component_loader, {
+      key: 0,
+      class: "my-2"
+    })) : createCommentVNode("", true),
+    !$options._loading || $options.releases.length ? (openBlock(), createBlock(resolveDynamicComponent($options.view), mergeProps({ key: 1 }, { releases: $options.releases }, {
+      class: "my-2",
+      onToRelease: $options.toRelease
+    }), null, 16, ["onToRelease"])) : createCommentVNode("", true)
+  ])) : (openBlock(), createBlock(_component_authorization, { key: 1 }));
 }
 const FavoritesView = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
 export {

@@ -1,0 +1,98 @@
+<template>
+
+  <!-- Loading -->
+  <loader v-if="loading"/>
+
+  <!-- Playlist -->
+  <div v-else-if="loading === false && release" id="playlist">
+
+    <!-- Release progress -->
+    <!-- Toolbar -->
+    <toolbar v-bind="{release}" class="mb-2" v-model:search="search"/>
+    <release-progress v-bind="{release, episodes}" class="mb-2" color="grey darken-3" height="48"/>
+
+
+    <!-- Playlist Items -->
+    <v-list v-if="playlistSearched.length > 0" dense dark>
+      <template v-for="(episode, k) in playlistSearched" :key="episode.id">
+        <v-divider v-if="k > 0"/>
+        <episode
+          v-bind="{release, episode}"
+          :is-playing="playing && playing.id === episode.id"
+          @click="$emit('episode', episode)">
+        </episode>
+      </template>
+    </v-list>
+
+  </div>
+</template>
+
+<script>
+
+// Episodes
+import Loader from './components/loader'
+import Episode from './components/episode'
+import Toolbar from './components/toolbar'
+
+// Release
+import ReleaseProgress from './../progress'
+
+// Utils
+import Fuse from 'fuse.js'
+import __orderBy from 'lodash/orderBy'
+import { useSettingsStore } from '@store/app/settings/useSettingsStore'
+
+const props = {
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+  release: {
+    type: Object,
+    default: null
+  },
+  episodes: {
+    type: Array,
+    default: null,
+  },
+  playing: {
+    type: Object,
+    default: null
+  }
+}
+
+export default {
+  props,
+  components: {
+    Loader,
+    Episode,
+    Toolbar,
+    ReleaseProgress,
+  },
+
+  data () {
+    return {
+      search: null,
+    }
+  },
+
+  computed: {
+    _sort () { return useSettingsStore().episodes.order },
+
+    playlist () {
+      return __orderBy(this.episodes || [], ['id'], [this._sort])
+    },
+
+    playlistSearchable () {
+      return new Fuse(this.playlist, { keys: ['title'] })
+    },
+
+    playlistSearched () {
+      return this.search
+        ? this.playlistSearchable.search(this.search)
+        : this.playlist
+    },
+
+  }
+}
+</script>

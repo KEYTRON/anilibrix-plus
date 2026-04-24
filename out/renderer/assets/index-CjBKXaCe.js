@@ -1,4 +1,9 @@
-import { ba as unref, _ as _export_sfc, K as createBlock, L as withCtx, bb as withKeys, M as VLayout, bc as useAccountStore, bd as invokeSafeStorageEncrypt, be as useFavoritesStore, bf as electronExports, N as openBlock, l as createVNode, O as VRow, P as VCol, Q as VImg, R as VCard, ac as VCardTitle, W as createTextVNode, T as toDisplayString, S as VCardText, n as createBaseVNode, bg as VTextField, t as VBtn, r as mergeProps, ak as VDivider } from "./index-BZ1Qg9LU.js";
+import { e as electronExports } from "./torrents-handler-BtK2vzG6.js";
+import { b8 as unref, _ as _export_sfc, K as createElementBlock, l as createVNode, L as withCtx, M as VRow, b9 as withKeys, ba as useAccountStore, bb as invokeSafeStorageEncrypt, bc as useFavoritesStore, N as openBlock, O as VCol, P as VImg, Q as VCard, ab as VCardTitle, W as createTextVNode, T as toDisplayString, R as VCardText, n as createBaseVNode, bd as VTextField, t as VBtn, r as mergeProps, ai as VDivider } from "./index-CIkHx-EU.js";
+import "fs";
+import "path";
+import "stream";
+import "util";
 const LibriaTyan03 = "" + new URL("LibriaTyan03-B2NpaqxW.svg", import.meta.url).href;
 const req = (value) => {
   value = unref(value);
@@ -157,133 +162,122 @@ const _sfc_main = {
     }
   }
 };
+const _hoisted_1 = { class: "d-flex py-6 pt-2" };
+const _hoisted_2 = { class: "d-flex" };
+const _hoisted_3 = { class: "d-flex justify-center" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createBlock(VLayout, {
-    "fill-height": "",
-    "align-center": "",
-    "justify-center": "",
-    onKeyup: withKeys($options.authorize, ["enter"])
-  }, {
-    default: withCtx(() => [
-      createVNode(VRow, {
-        justify: "center",
-        align: "center"
-      }, {
-        default: withCtx(() => [
-          createVNode(VCol, {
-            cols: "12",
-            sm: "3",
-            "align-self": "center"
-          }, {
-            default: withCtx(() => [
-              createVNode(VImg, {
-                transition: false,
-                class: "image",
-                contain: "",
-                src: $data.image
-              }, null, 8, ["src"])
-            ]),
-            _: 1
-          }),
-          createVNode(VCol, {
-            cols: "12",
-            sm: "6",
-            "align-self": "center"
-          }, {
-            default: withCtx(() => [
-              createVNode(VCard, {
-                flat: "",
-                color: "transparent"
-              }, {
-                default: withCtx(() => [
-                  createVNode(VCardTitle, null, {
+  return openBlock(), createElementBlock("div", {
+    class: "d-flex fill-height align-center justify-center",
+    onKeyup: _cache[2] || (_cache[2] = withKeys((...args) => $options.authorize && $options.authorize(...args), ["enter"]))
+  }, [
+    createVNode(VRow, {
+      justify: "center",
+      align: "center"
+    }, {
+      default: withCtx(() => [
+        createVNode(VCol, {
+          cols: "12",
+          sm: "3",
+          "align-self": "center"
+        }, {
+          default: withCtx(() => [
+            createVNode(VImg, {
+              transition: false,
+              class: "image",
+              contain: "",
+              src: $data.image
+            }, null, 8, ["src"])
+          ]),
+          _: 1
+        }),
+        createVNode(VCol, {
+          cols: "12",
+          sm: "6",
+          "align-self": "center"
+        }, {
+          default: withCtx(() => [
+            createVNode(VCard, {
+              flat: "",
+              color: "transparent"
+            }, {
+              default: withCtx(() => [
+                createVNode(VCardTitle, null, {
+                  default: withCtx(() => [
+                    createTextVNode(toDisplayString(_ctx.$t("login.title")), 1)
+                  ]),
+                  _: 1
+                }),
+                createVNode(VCardText, null, {
+                  default: withCtx(() => [
+                    createBaseVNode("div", null, toDisplayString(_ctx.$t("login.subtitle")), 1)
+                  ]),
+                  _: 1
+                }),
+                createBaseVNode("div", _hoisted_1, [
+                  createVNode(VTextField, {
+                    modelValue: $data.login,
+                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.login = $event),
+                    outlined: "",
+                    "hide-details": "",
+                    class: "mr-1",
+                    color: "grey",
+                    placeholder: _ctx.$t("login.emailPlaceholder"),
+                    "prepend-inner-icon": "mdi-account"
+                  }, null, 8, ["modelValue", "placeholder"]),
+                  createVNode(VTextField, {
+                    modelValue: $data.password,
+                    "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.password = $event),
+                    outlined: "",
+                    "hide-details": "",
+                    class: "ml-1",
+                    type: "password",
+                    placeholder: _ctx.$t("login.passwordPlaceholder"),
+                    "prepend-inner-icon": "mdi-lock"
+                  }, null, 8, ["modelValue", "placeholder"])
+                ]),
+                createBaseVNode("div", _hoisted_2, [
+                  createVNode(VBtn, mergeProps({ loading: $data.loading }, {
+                    class: "mr-1",
+                    disabled: _ctx.$v.$invalid,
+                    onClick: $options.authorize
+                  }), {
                     default: withCtx(() => [
                       createTextVNode(toDisplayString(_ctx.$t("login.title")), 1)
                     ]),
                     _: 1
-                  }),
-                  createVNode(VCardText, null, {
+                  }, 16, ["disabled", "onClick"]),
+                  createVNode(VBtn, mergeProps({ loading: $data.loading }, {
+                    text: "",
+                    onClick: _ctx.toBack
+                  }), {
                     default: withCtx(() => [
-                      createBaseVNode("div", null, toDisplayString(_ctx.$t("login.subtitle")), 1)
+                      createTextVNode(toDisplayString(_ctx.$t("common.back")), 1)
                     ]),
                     _: 1
-                  }),
-                  createVNode(VLayout, { class: "py-6 pt-2" }, {
-                    default: withCtx(() => [
-                      createVNode(VTextField, {
-                        modelValue: $data.login,
-                        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.login = $event),
-                        outlined: "",
-                        "hide-details": "",
-                        class: "mr-1",
-                        color: "grey",
-                        placeholder: _ctx.$t("login.emailPlaceholder"),
-                        "prepend-inner-icon": "mdi-account"
-                      }, null, 8, ["modelValue", "placeholder"]),
-                      createVNode(VTextField, {
-                        modelValue: $data.password,
-                        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.password = $event),
-                        outlined: "",
-                        "hide-details": "",
-                        class: "ml-1",
-                        type: "password",
-                        placeholder: _ctx.$t("login.passwordPlaceholder"),
-                        "prepend-inner-icon": "mdi-lock"
-                      }, null, 8, ["modelValue", "placeholder"])
-                    ]),
-                    _: 1
-                  }),
-                  createVNode(VLayout, null, {
-                    default: withCtx(() => [
-                      createVNode(VBtn, mergeProps({ loading: $data.loading }, {
-                        class: "mr-1",
-                        disabled: _ctx.$v.$invalid,
-                        onClick: $options.authorize
-                      }), {
-                        default: withCtx(() => [
-                          createTextVNode(toDisplayString(_ctx.$t("login.title")), 1)
-                        ]),
-                        _: 1
-                      }, 16, ["disabled", "onClick"]),
-                      createVNode(VBtn, mergeProps({ loading: $data.loading }, {
-                        text: "",
-                        onClick: _ctx.toBack
-                      }), {
-                        default: withCtx(() => [
-                          createTextVNode(toDisplayString(_ctx.$t("common.back")), 1)
-                        ]),
-                        _: 1
-                      }, 16, ["onClick"])
-                    ]),
-                    _: 1
-                  }),
-                  createVNode(VDivider, { class: "my-6" }),
-                  createVNode(VLayout, { "justify-center": "" }, {
-                    default: withCtx(() => [
-                      createVNode(VBtn, {
-                        color: "blue darken-1",
-                        onClick: $options.authorizeWithVK
-                      }, {
-                        default: withCtx(() => [
-                          createTextVNode(toDisplayString(_ctx.$t("login.vkLogin")), 1)
-                        ]),
-                        _: 1
-                      }, 8, ["onClick"])
-                    ]),
-                    _: 1
-                  })
+                  }, 16, ["onClick"])
                 ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          })
-        ]),
-        _: 1
-      })
-    ]),
-    _: 1
-  }, 8, ["onKeyup"]);
+                createVNode(VDivider, { class: "my-6" }),
+                createBaseVNode("div", _hoisted_3, [
+                  createVNode(VBtn, {
+                    color: "blue darken-1",
+                    onClick: $options.authorizeWithVK
+                  }, {
+                    default: withCtx(() => [
+                      createTextVNode(toDisplayString(_ctx.$t("login.vkLogin")), 1)
+                    ]),
+                    _: 1
+                  }, 8, ["onClick"])
+                ])
+              ]),
+              _: 1
+            })
+          ]),
+          _: 1
+        })
+      ]),
+      _: 1
+    })
+  ], 32);
 }
 const AccountAuthorizationView = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
 export {
