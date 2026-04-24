@@ -1,4 +1,5 @@
 <template>
+  <div>
 
   <!-- Favorites  -->
   <div class="d-flex flex-column" v-if="_isAuthorized">
@@ -36,6 +37,8 @@
 
   <!-- Authorization -->
   <authorization v-else/>
+
+  </div>
 </template>
 
 <script>

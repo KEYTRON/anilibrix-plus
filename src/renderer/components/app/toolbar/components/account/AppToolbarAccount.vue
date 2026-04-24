@@ -1,4 +1,5 @@
 <template>
+  <div>
 
     <!-- Login -->
     <template v-if="!_isAuthorized">
@@ -60,6 +61,8 @@
 
       </v-menu>
     </template>
+
+  </div>
 </template>
 
 <script>

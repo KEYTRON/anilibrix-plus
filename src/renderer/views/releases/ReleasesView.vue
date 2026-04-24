@@ -34,7 +34,7 @@
           @toRelease="toRelease(release)"/>
       </div>
     </div>
-    <error v-else-if="!loading && _has_error"/>
+    <error v-else/>
   </v-fade-transition>
 </template>
 
