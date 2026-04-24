@@ -6,11 +6,10 @@
         <v-card-actions class="pa-0">
           <card v-bind="{loading}" class="flex-grow-1" :release="__release"/>
           <v-menu offset-y :close-on-content-click="false">
-            <template v-slot:activator="{ on, attrs }">
+            <template v-slot:activator="{ props }">
               <v-btn
                 icon
                 color="primary"
-                v-bind="attrs"
                 v-bind="props"
               >
                 <v-icon>mdi-share-variant</v-icon>

@@ -16,13 +16,12 @@
       <v-toolbar-title class="body-1">{{ $t('settings.title') }}</v-toolbar-title>
       <v-spacer/>
       <v-tooltip left>
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-btn
             small
             text
             min-width="48"
             class="font-weight-bold"
-            v-bind="attrs"
             v-bind="props"
             @click="toggleLanguage">
             {{ nextLanguageLabel }}
