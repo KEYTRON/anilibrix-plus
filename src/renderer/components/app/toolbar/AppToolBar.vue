@@ -91,7 +91,7 @@ export default {
       try {
         const {id, name} = await invokeRand()
         if (id === -1) {
-          this.$toasted.show(this.$t('releases.refreshUnsupported'), {type: 'error'})
+          this.$toast.error(this.$t('releases.refreshUnsupported'))
           return
         }
         await this.$router.push('/release/' + id + '/' + name)

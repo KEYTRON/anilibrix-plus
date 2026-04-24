@@ -277,12 +277,12 @@ export default {
 
           if (this._auto_opening_skip_key !== '' && this._auto_opening_skip_key === this.keysDown.join('+')) {
             if (this._auto_opening_skip) {
-              this.$toasted.show(this.$t('player.autoSkipOff'), {
+              this.$toast.info(this.$t('player.autoSkipOff'), {
                 type: 'default',
                 position: 'top-center'
               })
             } else {
-              this.$toasted.show(this.$t('player.autoSkipOn'), {
+              this.$toast.info(this.$t('player.autoSkipOn'), {
                 type: 'success',
                 position: 'top-center'
               })

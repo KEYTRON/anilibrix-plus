@@ -4,8 +4,8 @@
 
       <!-- Previous episode -->
       <v-tooltip left :attach="$refs.play">
-        <template v-slot:activator="{on}">
-          <v-btn v-on="on" icon large :disabled="!previous" @click="toVideo(release, previous, {fromStart: true})">
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" icon large :disabled="!previous" @click="toVideo(release, previous, {fromStart: true})">
             <v-icon>mdi-skip-previous</v-icon>
           </v-btn>
         </template>
@@ -28,8 +28,8 @@
 
       <!-- Next episode -->
       <v-tooltip right :attach="$refs.play">
-        <template v-slot:activator="{on}">
-          <v-btn v-on="on" icon large :disabled="!next" @click="toVideo(release, next, {fromStart: true})">
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" icon large :disabled="!next" @click="toVideo(release, next, {fromStart: true})">
             <v-icon>mdi-skip-next</v-icon>
           </v-btn>
         </template>
@@ -190,7 +190,7 @@ export default {
     })
 
     const noAudio = debounce(() =>
-      this.$toasted.show(this.$t('player.unsupportedAudioTrack'), { type: 'error' }),
+      this.$toast.info(this.$t('player.unsupportedAudioTrack'), { type: 'error' }),
       1500
     )
 

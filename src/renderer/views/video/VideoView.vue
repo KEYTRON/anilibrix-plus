@@ -32,6 +32,7 @@
 import VideoLayout from '@layouts/video'
 import PlayerInterface from '@components/video/interface'
 import { ServerHandler, TorrentHandler, UpscaleHandler } from '@components/video/player/types'
+import { markRaw } from 'vue'
 
 import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 import { useWatchStore } from '@store/app/watch/useWatchStore'
@@ -138,9 +139,9 @@ export default {
      */
     components () {
       return {
-        server: ServerHandler,
-        torrent: TorrentHandler,
-        upscale: UpscaleHandler
+        server: markRaw(ServerHandler),
+        torrent: markRaw(TorrentHandler),
+        upscale: markRaw(UpscaleHandler)
       }
     },
 

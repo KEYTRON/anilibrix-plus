@@ -4,8 +4,8 @@
 
       <!-- Releases -->
       <v-tooltip right :attach="$refs.links">
-        <template v-slot:activator="{on}">
-          <v-btn v-on="on" icon large @click="toReleases">
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" icon large @click="toReleases">
             <v-icon size="24">mdi-view-column</v-icon>
           </v-btn>
         </template>
@@ -14,8 +14,8 @@
 
       <!-- Release -->
       <v-tooltip right :attach="$refs.links">
-        <template v-slot:activator="{on}">
-          <v-btn v-on="on" icon large @click="() => toRelease(release)">
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" icon large @click="() => toRelease(release)">
             <v-avatar size="24">
               <img v-bind="{src}">
             </v-avatar>
@@ -28,8 +28,8 @@
 
       <!-- Catalog -->
       <v-tooltip right :attach="$refs.links">
-        <template v-slot:activator="{on}">
-          <v-btn v-on="on" icon large :to="{name: 'catalog'}">
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" icon large :to="{name: 'catalog'}">
             <v-icon size="24">mdi-folder-text-outline</v-icon>
           </v-btn>
         </template>
@@ -38,8 +38,8 @@
 
       <!-- Favorites -->
       <v-tooltip right :attach="$refs.links">
-        <template v-slot:activator="{on}">
-          <v-btn v-on="on" icon large @click="() => toFavorites()">
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" icon large @click="() => toFavorites()">
             <v-icon size="24">mdi-star</v-icon>
           </v-btn>
         </template>
@@ -48,8 +48,8 @@
 
       <!-- Episodes -->
       <v-tooltip right :attach="$refs.links">
-        <template v-slot:activator="{on}">
-          <v-btn v-on="on" icon large @click="episodes().show()">
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" icon large @click="episodes().show()">
             <v-icon size="24">mdi-playlist-play</v-icon>
           </v-btn>
         </template>
@@ -59,8 +59,8 @@
 
       <!-- Torrent -->
       <v-tooltip v-if="source.type === 'torrent'" right :attach="$refs.links">
-        <template v-slot:activator="{on}">
-          <v-btn v-on="on" icon large @click="torrent().show()">
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" icon large @click="torrent().show()">
             <v-icon size="20">mdi-file-table-box-multiple</v-icon>
           </v-btn>
         </template>
@@ -69,8 +69,8 @@
 
       <!-- Opening skip button -->
       <v-tooltip v-if="_opening_skip_button" right :attach="$refs.links">
-        <template v-slot:activator="{on}">
-          <v-btn v-on="on" icon large @click="skipOpening">
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" icon large @click="skipOpening">
             <span class="caption font-weight-bold">+{{ _opening_skip_time }}</span>
           </v-btn>
         </template>

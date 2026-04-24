@@ -131,16 +131,16 @@ export default {
             if (autoUpdateReleases !== undefined) this._setUpdates(autoUpdateReleases)
             if (autoUpdateInterval !== undefined) this._setUpdatesTimeout(autoUpdateInterval)
 
-            this.$toasted.show(this.$t('dialogs.snapshotApplied'), {
+            this.$toast.info(this.$t('dialogs.snapshotApplied'), {
               type: 'success',
               position: "top-center",
               duration : 2000
             });
 
-          } else this.$toasted.show(error, { type: 'error' })
+          } else this.$toast.error(error)
         })
         .catch((error) => {
-          this.$toasted.show(error, { type: 'error' })
+          this.$toast.error(error)
           throw error
         })
       this.loading = false

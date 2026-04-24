@@ -125,11 +125,11 @@ export default {
     },
 
     didFailLoad () {
-      this.$toasted.error(this.$t('notifications.commentsLoadError'))
+      this.$toast.error(this.$t('notifications.commentsLoadError'))
     },
 
     certError () {
-      this.$toasted.error(this.$t('notifications.commentsLoadCertError'))
+      this.$toast.error(this.$t('notifications.commentsLoadCertError'))
     }
   },
 

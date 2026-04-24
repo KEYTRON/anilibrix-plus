@@ -83,7 +83,7 @@ export default {
     //  * @return void
     //  */
     showToast() {
-      this.$toasted.show(this.$t('player.markSkipped'), {
+      this.$toast.info(this.$t('player.markSkipped'), {
         type: 'info',
         position: 'top-center'
       })

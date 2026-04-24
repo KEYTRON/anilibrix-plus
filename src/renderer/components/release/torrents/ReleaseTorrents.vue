@@ -119,7 +119,7 @@ export default {
 
       } catch (err) {
         console.error(err);
-        this.$toasted.error(this.$t('release.torrentCopyError'));
+        this.$toast.error(this.$t('release.torrentCopyError'));
       }
     },
     humanFormat,
@@ -129,7 +129,7 @@ export default {
         window.open(torrent.magnet, '_blank')
       } else {
         if (torrent.filename === 'fuckyou') {
-          this.$toasted.show(this.$t('release.torrentFetchError'), { type: 'error' })
+          this.$toast.info(this.$t('release.torrentFetchError'), { type: 'error' })
           return
         }
 

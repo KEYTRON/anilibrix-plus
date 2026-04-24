@@ -171,7 +171,7 @@ export default {
           })).sort(function (a, b) {
             return new Date(b.dateRaw) - new Date(a.dateRaw)
           })
-        }).catch((error) => this.$toasted.show(error, { type: 'error' }))
+        }).catch((error) => this.$toast.error(error))
       this.loading = false
     },
     hideDialog () {

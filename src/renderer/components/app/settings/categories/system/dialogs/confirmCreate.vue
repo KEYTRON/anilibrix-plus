@@ -116,7 +116,7 @@ export default {
           if (!success) throw error
           this.hideDialog()
           this.$emit('fetchSnapshots')
-        }).catch((error) => this.$toasted.show(error, { type: 'error' }))
+        }).catch((error) => this.$toast.error(error))
       this.loading = false
     },
     hideDialog () {

@@ -16,8 +16,9 @@ import { clone, cloneDeep } from 'lodash'
 Axios.defaults.withCredentials = true
 Axios.defaults.timeout = 5000
 
-// Create axios
-const axios = Axios.create()
+// Create axios — force XHR adapter so nodeIntegration:true doesn't trigger Node.js http adapter
+// (Node.js http adapter calls data.getHeaders() on FormData, which native FormData doesn't have)
+const axios = Axios.create({ adapter: 'xhr' })
 
 function filterUnderscoredKeys (data) {
   return Object.keys(data).reduce((result, key) => {

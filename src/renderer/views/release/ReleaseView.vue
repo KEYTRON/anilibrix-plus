@@ -11,7 +11,7 @@
                 icon
                 color="primary"
                 v-bind="attrs"
-                v-on="on"
+                v-bind="props"
               >
                 <v-icon>mdi-share-variant</v-icon>
               </v-btn>
@@ -440,10 +440,10 @@ export default {
           });
         }, 2000);
 
-        this.$toasted.success(this.$t('release.copySuccess'));
+        this.$toast.success(this.$t('release.copySuccess'));
       } catch (err) {
         console.error(err);
-        this.$toasted.error(this.$t('release.copyError'));
+        this.$toast.error(this.$t('release.copyError'));
       }
     },
   },

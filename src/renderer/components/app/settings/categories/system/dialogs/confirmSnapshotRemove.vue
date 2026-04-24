@@ -61,9 +61,9 @@ export default {
         .then(({ success, error }) => {
           if (success) {
             return this.$emit('fetchSnapshots')
-          } else this.$toasted.show(error, { type: 'error' })
+          } else this.$toast.error(error)
         })
-        .catch((error) => this.$toasted.show(error, { type: 'error' }))
+        .catch((error) => this.$toast.error(error))
       this.loading = false
       this.hideDialog()
     },

@@ -101,7 +101,7 @@ export default {
         console.error(e)
 
         if (e.response.status === 401) {
-          this.$toasted.error(this.$t('login.userNotRegistered'))
+          this.$toast.error(this.$t('login.userNotRegistered'))
         }
         this.loading = false
       }

@@ -3,7 +3,7 @@
 
     <!-- Quality -->
     <template v-slot:activator="{ on }">
-      <v-btn v-on="on" icon large>
+      <v-btn v-bind="props" icon large>
         <span class="caption font-weight-bold">{{ active.label }}</span>
       </v-btn>
     </template>

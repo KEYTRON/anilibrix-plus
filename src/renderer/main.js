@@ -4,8 +4,11 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 import router from '@router'
 import vuetify from '@plugins/vuetify'
+import lodashPlugin from '@plugins/lodash'
+import plyrPlugin from '@plugins/plyr'
+import vueElectronPlugin from '@plugins/vue-electron'
 
-import Toast from 'vue-toastification'
+import Toast, { useToast } from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 
 import '@assets/scss/style.scss'
@@ -31,11 +34,17 @@ const app = createApp(App)
 app.use(pinia)
 app.use(router)
 app.use(vuetify)
+app.use(lodashPlugin)
+app.use(plyrPlugin)
+app.use(vueElectronPlugin)
 app.use(Toast, {
   position: 'bottom-right',
   timeout: 3000,
   closeOnClick: true
 })
+
+// Register $toast as global property for Options API components
+app.config.globalProperties.$toast = useToast()
 
 installI18n(app)
 

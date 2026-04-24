@@ -23,7 +23,7 @@
             min-width="48"
             class="font-weight-bold"
             v-bind="attrs"
-            v-on="on"
+            v-bind="props"
             @click="toggleLanguage">
             {{ nextLanguageLabel }}
           </v-btn>
