@@ -12,26 +12,20 @@
 
     <!-- Releases -->
     <v-btn variant="text" class="mr-1 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('releases') }" :to="{name: 'releases'}">
-      <span class="toolbar__link-inner">
-        <v-icon size="22">mdi-view-column</v-icon>
-        <span class="toolbar__label">{{ $t('toolbar.releases') }}</span>
-      </span>
+      <v-icon size="22">mdi-view-column</v-icon>
+      <span class="toolbar__label">{{ $t('toolbar.releases') }}</span>
     </v-btn>
 
     <!-- Catalog-->
     <v-btn variant="text" class="mr-1 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('catalog') }" :to="{name: 'catalog'}">
-      <span class="toolbar__link-inner">
-        <v-icon size="22">mdi-folder-text-outline</v-icon>
-        <span class="toolbar__label">{{ $t('toolbar.catalog') }}</span>
-      </span>
+      <v-icon size="22">mdi-folder-text-outline</v-icon>
+      <span class="toolbar__label">{{ $t('toolbar.catalog') }}</span>
     </v-btn>
 
     <!-- Favorite -->
     <v-btn variant="text" class="mr-3 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('favorites') }" :to="{name: 'favorites'}">
-      <span class="toolbar__link-inner">
-        <v-icon size="22">mdi-star</v-icon>
-        <span class="toolbar__label">{{ $t('toolbar.favorites') }}</span>
-      </span>
+      <v-icon size="22">mdi-star</v-icon>
+      <span class="toolbar__label">{{ $t('toolbar.favorites') }}</span>
     </v-btn>
 
     <!-- Search-->
@@ -196,8 +190,10 @@ export default {
     text-decoration: none !important;
 
     :deep(.v-btn__content) {
-      justify-content: center;
-      width: 100%;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 7px !important;
     }
 
     &--active {
@@ -205,16 +201,6 @@ export default {
       color: rgb(var(--v-theme-primary)) !important;
       background: rgba(255, 255, 255, 0.08);
     }
-  }
-
-  &__link-inner {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    line-height: 1;
-    width: 100%;
   }
 
   &__label {
