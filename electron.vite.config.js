@@ -52,6 +52,11 @@ export default defineConfig({
         // Shims for Electron APIs in renderer (nodeIntegration:true, bypasses Vite static analysis)
         'electron': resolve('src/renderer/electronShim.js'),
         '@electron/remote': resolve('src/renderer/electronRemoteShim.js'),
+        // Stubs for main-process-only modules imported by shared handler files
+        // Renderer never calls the main-process functions, so null/noop stubs are safe
+        '@main/utils/windows': resolve('src/renderer/stubs/windows-stub.js'),
+        '@main/utils/safe-storage': resolve('src/renderer/stubs/empty-stub.js'),
+        '@main/utils/power-save-blocker': resolve('src/renderer/stubs/empty-stub.js'),
         '@': resolve('src/renderer'),
         '@renderer': resolve('src/renderer'),
         '@main': resolve('src/main'),
