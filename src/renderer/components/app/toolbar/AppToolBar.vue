@@ -151,6 +151,34 @@ export default {
   flex: 0 0 auto;
   white-space: nowrap;
   margin: 0 0 10px;
+  position: relative;
+  border-radius: 16px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    backdrop-filter: blur(18px) saturate(1.6);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6);
+    filter: url(#glass-distortion);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.07) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+    pointer-events: none;
+  }
+
+  // Content above glass layer
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 
   :deep(.v-btn) {
     text-transform: none;
