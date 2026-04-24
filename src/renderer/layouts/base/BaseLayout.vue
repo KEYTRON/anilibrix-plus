@@ -5,14 +5,11 @@
     <!-- Content -->
     <app-tool-bar/>
     <v-btn
-      width="30"
-      height="30"
+      width="36"
+      height="36"
       v-show="fab"
-      fab
-      dark
-      fixed
-      bottom
-      right
+      icon
+      class="base-layout__to-top"
       color="grey darken-3"
       @click="toTop"
     >
@@ -79,7 +76,7 @@ export default {
 
 .base-layout {
   top: 40px;
-  padding: 15px 5% 30px 5%;
+  padding: 0 5% 30px 5%;
   position: absolute;
   overflow-x: hidden;
   overflow-y: overlay;
@@ -107,6 +104,13 @@ export default {
 
   &.isOnBlack {
     background: black;
+  }
+
+  &__to-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 5;
   }
 }
 

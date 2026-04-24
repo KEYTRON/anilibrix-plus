@@ -150,8 +150,10 @@ export default {
   gap: 0;
   flex: 0 0 auto;
   white-space: nowrap;
-  margin: 0 0 10px;
-  position: relative;
+  margin: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
   border-radius: 14px;
   overflow: hidden;
 

@@ -142,13 +142,7 @@ export default {
 
   methods: {
 
-    /**
-     * Push to login screen
-     * Check to avoid duplicate navigation error
-     *
-     * @return {void}
-     */
-    toLogin,
+    toLogin () { toLogin() },
 
     /**
      * Logout
