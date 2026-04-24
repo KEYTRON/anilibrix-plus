@@ -11,19 +11,19 @@
     </div>
 
     <!-- Releases -->
-    <v-btn variant="text" rounded="pill" class="mr-1 toolbar__link" :class="{ 'toolbar__link--active': isCurrentRoute('releases') }" :to="{name: 'releases'}">
+    <v-btn variant="text" rounded="pill" size="large" class="mr-2 toolbar__link" :class="{ 'toolbar__link--active': isCurrentRoute('releases') }" :to="{name: 'releases'}">
       <v-icon start size="22">mdi-view-column</v-icon>
       {{ $t('toolbar.releases') }}
     </v-btn>
 
     <!-- Catalog-->
-    <v-btn variant="text" rounded="pill" class="mr-1 toolbar__link" :class="{ 'toolbar__link--active': isCurrentRoute('catalog') }" :to="{name: 'catalog'}">
+    <v-btn variant="text" rounded="pill" size="large" class="mr-2 toolbar__link" :class="{ 'toolbar__link--active': isCurrentRoute('catalog') }" :to="{name: 'catalog'}">
       <v-icon start size="22">mdi-folder-text-outline</v-icon>
       {{ $t('toolbar.catalog') }}
     </v-btn>
 
     <!-- Favorite -->
-    <v-btn variant="text" rounded="pill" class="mr-3 toolbar__link" :class="{ 'toolbar__link--active': isCurrentRoute('favorites') }" :to="{name: 'favorites'}">
+    <v-btn variant="text" rounded="pill" size="large" class="mr-4 toolbar__link" :class="{ 'toolbar__link--active': isCurrentRoute('favorites') }" :to="{name: 'favorites'}">
       <v-icon start size="22">mdi-star</v-icon>
       {{ $t('toolbar.favorites') }}
     </v-btn>
