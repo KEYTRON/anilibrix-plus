@@ -11,18 +11,27 @@
     </div>
 
     <!-- Releases -->
-    <v-btn variant="text" prepend-icon="mdi-view-column" class="mr-1 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('releases') }" :to="{name: 'releases'}">
-      <span class="toolbar__label">{{ $t('toolbar.releases') }}</span>
+    <v-btn variant="text" class="mr-1 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('releases') }" :to="{name: 'releases'}">
+      <span class="toolbar__link-inner">
+        <v-icon size="22">mdi-view-column</v-icon>
+        <span class="toolbar__label">{{ $t('toolbar.releases') }}</span>
+      </span>
     </v-btn>
 
     <!-- Catalog-->
-    <v-btn variant="text" prepend-icon="mdi-folder-text-outline" class="mr-1 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('catalog') }" :to="{name: 'catalog'}">
-      <span class="toolbar__label">{{ $t('toolbar.catalog') }}</span>
+    <v-btn variant="text" class="mr-1 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('catalog') }" :to="{name: 'catalog'}">
+      <span class="toolbar__link-inner">
+        <v-icon size="22">mdi-folder-text-outline</v-icon>
+        <span class="toolbar__label">{{ $t('toolbar.catalog') }}</span>
+      </span>
     </v-btn>
 
     <!-- Favorite -->
-    <v-btn variant="text" prepend-icon="mdi-star" class="mr-3 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('favorites') }" :to="{name: 'favorites'}">
-      <span class="toolbar__label">{{ $t('toolbar.favorites') }}</span>
+    <v-btn variant="text" class="mr-3 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('favorites') }" :to="{name: 'favorites'}">
+      <span class="toolbar__link-inner">
+        <v-icon size="22">mdi-star</v-icon>
+        <span class="toolbar__label">{{ $t('toolbar.favorites') }}</span>
+      </span>
     </v-btn>
 
     <!-- Search-->
@@ -186,18 +195,24 @@ export default {
     transition: opacity 0.2s ease, color 0.2s ease, background-color 0.2s ease;
     text-decoration: none !important;
 
-    :deep(.v-btn__prepend) {
-      margin-inline-end: 6px;
-
-      .v-icon {
-        font-size: 22px;
-      }
-    }
-
     &--active {
       opacity: 1;
       color: rgb(var(--v-theme-primary)) !important;
       background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  &__link-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+    line-height: 1;
+
+    .v-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
