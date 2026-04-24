@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <v-btn icon id="toolbar__settings" v-on:click="_setDrawer(!_drawer)">
-      <v-icon>mdi-settings</v-icon>
-    </v-btn>
-
-    <v-tooltip left activator="#toolbar__settings">{{ $t('toolbar.settings') }}</v-tooltip>
-  </div>
+  <v-tooltip location="left" :text="$t('toolbar.settings')">
+    <template #activator="{ props }">
+      <v-btn icon size="small" v-bind="props" @click="_setDrawer(!_drawer)">
+        <v-icon size="18">mdi-cog</v-icon>
+      </v-btn>
+    </template>
+  </v-tooltip>
 </template>
 
 <script>

@@ -3,6 +3,8 @@
     v-bind="{ items, loading }"
     variant="solo"
     density="compact"
+    rounded
+    menu-icon=""
     no-filter
     hide-details
     hide-no-data
@@ -10,7 +12,7 @@
     ref="search"
     item-value="id"
     item-title="names.ru"
-    class="grey darken-2"
+    class="toolbar-search grey darken-2"
     :placeholder="$t('toolbar.searchPlaceholder')"
     :append-inner-icon="undefined"
     v-model:search="search"
@@ -34,7 +36,7 @@
 <script>
 
 import __debounce from 'lodash/debounce'
-import { toRelease } from '@utils/router/views'
+import { toRelease } from '@utils/router/views/routerViews'
 import { useAppStore } from '@store/app/useAppStore'
 import { useReleasesStore } from '@store/releases/useReleasesStore'
 
@@ -116,3 +118,59 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.toolbar-search {
+  width: 208px;
+  min-width: 208px;
+  max-width: 208px;
+  flex: 0 0 208px;
+
+  :deep(.v-input__control) {
+    width: 100%;
+    min-width: 0;
+  }
+
+  :deep(.v-field) {
+    width: 100%;
+  }
+
+  :deep(.v-field__field) {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  :deep(.v-field) {
+    border-radius: 20px;
+    box-shadow: none;
+  }
+
+  :deep(.v-field__append-inner),
+  :deep(.v-field__clearable) {
+    display: none;
+  }
+
+  :deep(.v-field__input) {
+    width: 100%;
+    min-height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-inline: 14px 10px;
+    font-size: 0.82rem;
+  }
+
+  :deep(input) {
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .toolbar-search {
+    width: 184px;
+    min-width: 184px;
+    max-width: 184px;
+    flex-basis: 184px;
+  }
+}
+</style>
