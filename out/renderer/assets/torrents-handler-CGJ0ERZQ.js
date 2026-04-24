@@ -1,7 +1,3 @@
-import require$$0 from "fs";
-import require$$0__default from "path";
-import require$$0$1 from "stream";
-import require$$4 from "util";
 var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
 function getDefaultExportFromCjs(x) {
   return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
@@ -30,6 +26,22 @@ function getAugmentedNamespace(n) {
   });
   return a;
 }
+const version = "2.0.0";
+const repository = { "type": "git", "url": "https://github.com/KEYTRON/anilibrix-plus" };
+const meta = { "name": "AniLibrix", "links": { "donate": "https://www.anilibria.tv/pages/donate.php", "telegram": "tg://resolve?domain=anilibrix", "anilibria": "https://anilibria.tv", "unofficial": "tg://resolve?domain=anilibrix_plus" } };
+const build = { "appId": "com.anilibria.anilibrix" };
+const app = {
+  version,
+  repository,
+  meta,
+  build
+};
+const __viteBrowserExternal = {};
+const __viteBrowserExternal$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: __viteBrowserExternal
+}, Symbol.toStringTag, { value: "Module" }));
+const require$$0 = /* @__PURE__ */ getAugmentedNamespace(__viteBrowserExternal$1);
 var electron;
 var hasRequiredElectron;
 function requireElectron() {
@@ -37,7 +49,7 @@ function requireElectron() {
   hasRequiredElectron = 1;
   var define_process_env_default = {};
   const fs = require$$0;
-  const path = require$$0__default;
+  const path = require$$0;
   const pathFile = path.join(__dirname, "path.txt");
   function getElectronPath() {
     let executablePath;
@@ -57,19 +69,13 @@ function requireElectron() {
   return electron;
 }
 var electronExports = requireElectron();
-const __viteBrowserExternal = {};
-const __viteBrowserExternal$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: __viteBrowserExternal
-}, Symbol.toStringTag, { value: "Module" }));
-const require$$5 = /* @__PURE__ */ getAugmentedNamespace(__viteBrowserExternal$1);
 var polyfills;
 var hasRequiredPolyfills;
 function requirePolyfills() {
   if (hasRequiredPolyfills) return polyfills;
   hasRequiredPolyfills = 1;
   var define_process_env_default = {};
-  var constants = require$$5;
+  var constants = require$$0;
   var origCwd = process.cwd;
   var cwd = null;
   var platform = define_process_env_default.GRACEFUL_FS_PLATFORM || process.platform;
@@ -357,7 +363,7 @@ var hasRequiredLegacyStreams;
 function requireLegacyStreams() {
   if (hasRequiredLegacyStreams) return legacyStreams;
   hasRequiredLegacyStreams = 1;
-  var Stream = require$$0$1.Stream;
+  var Stream = require$$0.Stream;
   legacyStreams = legacy;
   function legacy(fs) {
     return {
@@ -482,7 +488,7 @@ function requireGracefulFs() {
   var polyfills2 = requirePolyfills();
   var legacy = requireLegacyStreams();
   var clone = requireClone();
-  var util = require$$4;
+  var util = require$$0;
   var gracefulQueue;
   var previousSymbol;
   if (typeof Symbol === "function" && typeof Symbol.for === "function") {
@@ -541,7 +547,7 @@ function requireGracefulFs() {
     if (/\bgfs4\b/i.test(define_process_env_default.NODE_DEBUG || "")) {
       process.on("exit", function() {
         debug(fs[gracefulQueue]);
-        require$$5.equal(fs[gracefulQueue].length, 0);
+        require$$0.equal(fs[gracefulQueue].length, 0);
       });
     }
   }
@@ -963,7 +969,7 @@ var hasRequiredMkdirp;
 function requireMkdirp() {
   if (hasRequiredMkdirp) return mkdirp;
   hasRequiredMkdirp = 1;
-  var path = require$$0__default;
+  var path = require$$0;
   var fs = require$$0;
   var _0777 = parseInt("0777", 8);
   mkdirp = mkdirP.mkdirp = mkdirP.mkdirP = mkdirP;
@@ -1052,7 +1058,7 @@ var hasRequiredElectronWindowState;
 function requireElectronWindowState() {
   if (hasRequiredElectronWindowState) return electronWindowState;
   hasRequiredElectronWindowState = 1;
-  const path = require$$0__default;
+  const path = require$$0;
   const electron2 = requireElectron();
   const jsonfile = requireJsonfile();
   const mkdirp2 = requireMkdirp();
@@ -1211,16 +1217,6 @@ function requireElectronWindowState() {
 }
 var electronWindowStateExports = requireElectronWindowState();
 const windowStateKeeper = /* @__PURE__ */ getDefaultExportFromCjs(electronWindowStateExports);
-const version = "2.0.0";
-const repository = { "type": "git", "url": "https://github.com/KEYTRON/anilibrix-plus" };
-const meta = { "name": "AniLibrix", "links": { "donate": "https://www.anilibria.tv/pages/donate.php", "telegram": "tg://resolve?domain=anilibrix", "anilibria": "https://anilibria.tv", "unofficial": "tg://resolve?domain=anilibrix_plus" } };
-const build = { "appId": "com.anilibria.anilibrix" };
-const app = {
-  version,
-  repository,
-  meta,
-  build
-};
 const TORRENT_PARSE = "torrent:parse";
 const TORRENT_CLEAR = "torrent:clear";
 const TORRENT_ERROR = "torrent:error";

@@ -10,7 +10,7 @@ import __capitalize from 'lodash/capitalize'
 import { getLocale, translate } from '@/i18n'
 
 // Handlers
-import { showAppError } from '@main/handlers/notifications/notifications-handler'
+import { showAppError } from '@utils/notifications'
 
 // Mutations
 const SET_INITIALIZED = 'SET_INITIALIZED'

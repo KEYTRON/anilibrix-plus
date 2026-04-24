@@ -1,12 +1,10 @@
 "use strict";
 const electron = require("electron");
 const child_process = require("child_process");
-const path$3 = require("path");
+const path$2 = require("path");
 const windowStateKeeper = require("electron-window-state");
-const contentDispositionAttachment = require("content-disposition-attachment");
-const FormData = require("form-data");
 const lodash = require("lodash");
-const Storage$1 = require("electron-store");
+const Storage = require("electron-store");
 const proxy = require("node-global-proxy");
 const express = require("express");
 const expressProxy = require("express-http-proxy");
@@ -18,6 +16,7 @@ const Fuse = require("fuse.js");
 const AdmZip = require("adm-zip");
 const asyncMutex = require("async-mutex");
 const crypto = require("crypto");
+const FormData$1 = require("form-data");
 const util = require("util");
 const stream = require("logrotate-stream");
 const dns = require("dns");
@@ -39,7 +38,7 @@ function _interopNamespaceDefault(e) {
   n.default = e;
   return Object.freeze(n);
 }
-const path__namespace = /* @__PURE__ */ _interopNamespaceDefault(path$3);
+const path__namespace = /* @__PURE__ */ _interopNamespaceDefault(path$2);
 const dns__namespace = /* @__PURE__ */ _interopNamespaceDefault(dns);
 function applyAppSwitches() {
   electron.app.commandLine.appendSwitch("no-sandbox");
@@ -237,67 +236,249 @@ class TorrentWindow extends Window {
   }
 }
 const Torrent = new TorrentWindow();
-const { powerSaveBlocker } = require("electron");
-let powerSaveBlockId = 0;
-function start() {
-  stop();
-  powerSaveBlockId = powerSaveBlocker.start("prevent-display-sleep");
-  console.log(`powerSaveBlocker.start: ${powerSaveBlockId}`);
-}
-function stop() {
-  if (!powerSaveBlocker.isStarted(powerSaveBlockId)) {
-    return;
-  }
-  powerSaveBlocker.stop(powerSaveBlockId);
-  console.log(`powerSaveBlocker.stop: ${powerSaveBlockId}`);
-}
-const { safeStorage } = require("electron");
-const Storage = require("electron-store");
-const storage$1 = new Storage({
-  name: "anilibrix_safe",
-  clearInvalidConfig: true
+const _main = () => require("@main/utils/windows");
+const _ipcMain$1 = () => require("electron").ipcMain;
+const _app = () => require("electron").app;
+const _shell = () => require("electron").shell;
+const _path = () => require("path");
+const _sleepBlocker = () => require("../../utils/power-save-blocker");
+const _safeStorage = () => require("@main/utils/safe-storage");
+const _catGirlFetch = () => require("@utils/fetch").catGirlFetch;
+const _showAppError = () => require("@main/handlers/notifications/notifications-handler").showAppError;
+const _t = () => require("@main/utils/i18n").t;
+const APP_DISCORD_RICH_PRESENSE = "app:richpresense";
+const APP_ABOUT = "app:about";
+const APP_SYSTEM_SLEEP_DISABLE = "app:system:disable_sleep";
+const APP_SYSTEM_SLEEP_ENABLE = "app:system:enable_sleep";
+const APP_DOCK_NUMBER = "app:dock:number";
+const APP_DEVTOOLS_MAIN = "app:devtools:main";
+const APP_DEVTOOLS_TORRENT = "app:devtools:torrent";
+const APP_SAFE_STORAGE_ENCRYPT_REQUEST = "app:system:safe_storage:encrypt";
+const APP_SHOW_CONFIG = "app:show_config";
+const APP_RAND = "app:rand";
+const APP_TORRENT_PARSE = "app:torrent_parse";
+const APP_UPDATE_PROXY = "app:update_proxy";
+const APP_GET_SYSTEM_LOCALE = "app:get_system_locale";
+const APP_SET_LOCALE = "app:set_locale";
+const _trackers = () => [
+  "aHR0cDovL3RyLmxpYnJpYS5mdW46MjcxMC9hbm5vdW5jZQ==",
+  "dWRwOi8vdHJhY2tlci50b3JyZW50LmV1Lm9yZzo0NTEvYW5ub3VuY2U=",
+  "dWRwOi8vdHJhY2tlci5vcGVudHJhY2tyLm9yZzoxMzM3L2Fubm91bmNl",
+  "dWRwOi8vdHJhY2tlci5vcGVuYml0dG9ycmVudC5jb206Njk2OS9hbm5vdW5jZQ==",
+  "dWRwOi8vdHJhY2tlci50b3JyZW50LmV1Lm9yZzo0NTEvYW5ub3VuY2U="
+].map((value) => atob(value));
+const _m2t = () => new (require("magnet2torrent-js"))({
+  timeout: 30,
+  addTrackersToTorrent: true,
+  trackers: _trackers()
 });
-function setEncrypted(prop, string) {
-  if (!safeStorage.isEncryptionAvailable()) return false;
-  const encryptedString = safeStorage.encryptString(string).toString("base64");
-  storage$1.set(prop, encryptedString);
-  return encryptedString;
-}
-const DOMAIN = "wwnd.space";
-const OLD_IP = "78.46.255.254";
-const NEW_IP = "31.184.217.238";
-let fixWwndChecked = false;
-let fixWwwdNeeded = false;
-async function checkWwnd() {
-  if (fixWwndChecked) return;
-  try {
-    const res = await fetch(`https://cloudflare-dns.com/dns-query?name=${DOMAIN}&type=A`, {
-      headers: { Accept: "application/dns-json" }
-    });
-    const data = await res.json();
-    const answer = data?.Answer?.find((a) => a.type === 1);
-    if (answer?.data === OLD_IP) {
-      fixWwwdNeeded = true;
-      console.log("EU IP OF WWND.SPACE FOUND, ENABLE REWRITE");
+const catchAppAboutEvent = () => _ipcMain$1().on(APP_ABOUT, () => _app().showAboutPanel());
+const catchAppDevtoolsMainEvent = () => _ipcMain$1().on(APP_DEVTOOLS_MAIN, () => _main().Main.showDevTools());
+const catchAppDevtoolsTorrentEvent = () => _ipcMain$1().on(APP_DEVTOOLS_TORRENT, () => _main().Torrent.showDevTools());
+const catchAppDockNumberEvent = () => {
+  _ipcMain$1().on(APP_DOCK_NUMBER, (e, number) => {
+    if (_app().dock) _app().dock.setBadge(number && number > 0 ? number.toString() : "");
+  });
+};
+const catchEnableSystemSleepBlockerEvent = () => {
+  _ipcMain$1().on(APP_SYSTEM_SLEEP_DISABLE, (e) => {
+    _sleepBlocker().start();
+  });
+};
+const catchDisableSystemSleepBlockerEvent = () => {
+  _ipcMain$1().on(APP_SYSTEM_SLEEP_ENABLE, (e) => {
+    _sleepBlocker().stop();
+  });
+};
+const handleSafeStorageEncrypt = () => {
+  _ipcMain$1().handle(APP_SAFE_STORAGE_ENCRYPT_REQUEST, async (event, prop, data) => {
+    return _safeStorage().setEncrypted(prop, data);
+  });
+};
+const handleRichPresense = (setActivity2) => {
+  _ipcMain$1().handle(APP_DISCORD_RICH_PRESENSE, async (event, data) => {
+    return setActivity2(data);
+  });
+};
+const handleShowConfig = () => {
+  _ipcMain$1().handle(APP_SHOW_CONFIG, async (event, data) => {
+    return _shell().showItemInFolder(_path().join(_app().getPath("userData"), "anilibrix.json"));
+  });
+};
+const handleRand = () => {
+  _ipcMain$1().handle(APP_RAND, async (event) => {
+    await new Promise((r) => setTimeout(r, Math.random() * 1e3 + 500));
+    try {
+      const apiUrl = `http://localhost:${global.internalServerPort}/public/api/index.php`;
+      const randomReleaseFormData = new FormData();
+      randomReleaseFormData.append("query", "random_release");
+      const randomResponse = await _catGirlFetch()(apiUrl, {
+        method: "POST",
+        body: randomReleaseFormData
+      });
+      if (!randomResponse.ok) {
+        throw new Error(`Failed to fetch random release: ${randomResponse.status}`);
+      }
+      const { data: randomData } = await randomResponse.json();
+      if (!randomData?.id) {
+        throw new Error("Invalid response: missing release ID");
+      }
+      const releaseFormData = new FormData();
+      releaseFormData.append("query", "release");
+      releaseFormData.append("id", randomData.id);
+      const releaseResponse = await _catGirlFetch()(apiUrl, {
+        method: "POST",
+        body: releaseFormData
+      });
+      if (!releaseResponse.ok) {
+        throw new Error(`Failed to fetch release details: ${releaseResponse.status}`);
+      }
+      const releaseData = await releaseResponse.json();
+      const { id, names } = releaseData.data;
+      const name = names.pop();
+      return { id, name };
+    } catch (error) {
+      console.error("Error in handleRand:", error);
+      throw new Error(`Random release fetch failed: ${error.message}`);
     }
-  } catch (e) {
-  }
-  fixWwndChecked = true;
+  });
+};
+const handleUpdateProxy = (cb) => {
+  _ipcMain$1().handle(APP_UPDATE_PROXY, async (event, url2) => {
+    return cb(url2);
+  });
+};
+const handleGetSystemLocale = (cb) => {
+  _ipcMain$1().handle(APP_GET_SYSTEM_LOCALE, async () => cb());
+};
+const handleSetAppLocale = (cb) => {
+  _ipcMain$1().handle(APP_SET_LOCALE, async (event, locale) => cb(locale));
+};
+const showTorrentError = lodash.debounce(
+  () => _showAppError()(_t()("errors.torrentFileExpired")),
+  1e3
+);
+const handleTorrentParse = () => {
+  _ipcMain$1().handle(APP_TORRENT_PARSE, async (event, url2) => {
+    url2 = new URL("https://" + global.upstreamDomainV1Tv + url2);
+    const abortCtrl = new AbortController();
+    console.log("Downloading torrent file", url2.toString());
+    const timer = setTimeout(() => {
+      abortCtrl.abort();
+    }, 5e3);
+    const torrent = await _catGirlFetch()(url2, { signal: abortCtrl.signal }).then(async (x) => {
+      clearTimeout(timer);
+      return {
+        name: parse(x.headers.get("content-disposition")).filename || "unknown.torrent",
+        file: Buffer.from(await x.arrayBuffer()),
+        url: url2
+      };
+    }).catch(() => {
+      clearTimeout(timer);
+    });
+    const magnet = global.apiCacheService.torrentsRaw.get(+url2.searchParams.get("id"))?.magnet;
+    if (!torrent?.name || torrent?.name === "unknown.torrent") {
+      try {
+        console.log("Resolve magnet via torrent net", magnet);
+        const t2 = await _m2t().getTorrent(magnet);
+        console.log("Resolved successfully via torrent net", t2.name, t2.infoHash);
+        const file = t2.toTorrentFile();
+        return {
+          file: file.toString("base64"),
+          name: t2.name,
+          magnet
+        };
+      } catch (e) {
+        showTorrentError();
+      }
+    }
+    return {
+      file: torrent?.file ? torrent.file.toString("base64") : "",
+      name: torrent?.name || "fuckyou",
+      magnet
+    };
+  });
+};
+const _windows$1 = () => require("@main/utils/windows");
+const _ipcMain = () => require("electron").ipcMain;
+const TORRENT_CLEAR = "torrent:clear";
+const TORRENT_ERROR = "torrent:error";
+const TORRENT_START = "torrent:start";
+const TORRENT_SERVER = "torrent:server";
+const TORRENT_DESTROY = "torrent:destroy";
+const TORRENT_DOWNLOAD = "torrent:download";
+const broadcastTorrentEvents = () => {
+  const { Main: Main2, Torrent: Torrent2 } = _windows$1();
+  const ipcMain = _ipcMain();
+  const communications = [
+    { channel: TORRENT_CLEAR, window: () => Main2 },
+    { channel: TORRENT_ERROR, window: () => Main2 },
+    { channel: TORRENT_START, window: () => Torrent2 },
+    { channel: TORRENT_SERVER, window: () => Main2 },
+    { channel: TORRENT_DESTROY, window: () => Torrent2 },
+    { channel: TORRENT_DOWNLOAD, window: () => Main2 }
+  ];
+  communications.forEach((communication) => {
+    ipcMain.on(
+      communication.channel,
+      (e, payload) => communication.window().sendToWindow(communication.channel, payload)
+    );
+  });
+};
+const storage = new Storage({ name: "anilibrix", clearInvalidConfig: true });
+const _mem = {
+  session: null,
+  releases: []
+};
+electron.ipcMain.on("store:sync", (event, payload) => {
+  if (payload.session !== void 0) _mem.session = payload.session;
+  if (payload.releases !== void 0) _mem.releases = payload.releases;
+});
+function getSetting(path2, defaultValue = null) {
+  return storage.get(`settings.${path2}`, defaultValue);
 }
-async function catGirlFetch(url2, init = {}) {
-  await checkWwnd();
-  const u = new URL(url2);
-  if (fixWwwdNeeded && u.host === DOMAIN) {
-    url2 = url2.replace(DOMAIN, NEW_IP);
-    if (!init.headers) init.headers = {};
-    init.headers.Host = DOMAIN;
-    console.log("FIX WWND.SPACE REQUEST");
+const store = {
+  state: {
+    app: {
+      settings: {
+        system: {
+          get proxy() {
+            return getSetting("system.proxy", "");
+          },
+          get drpc_enabled() {
+            return getSetting("system.drpc_enabled", true);
+          },
+          get ignore_certs() {
+            return getSetting("system.ignore_certs", false);
+          },
+          get staticEndpoint() {
+            return getSetting("system.staticEndpoint", "https://static.anilibria.tv");
+          }
+        }
+      },
+      account: {
+        get session() {
+          return _mem.session;
+        }
+      }
+    },
+    releases: {
+      get data() {
+        return _mem.releases;
+      }
+    }
+  },
+  getters: {
+    "app/settings/system/staticEndpoint"() {
+      return getSetting("system.staticEndpoint", "https://static.anilibria.tv");
+    }
+  },
+  // Stub for dispatch — main should use IPC to trigger renderer actions
+  dispatch(action, ...args) {
+    console.warn("[store-compat] dispatch called from main process:", action, "— use IPC instead");
+    return Promise.resolve();
   }
-  init.redirect = "follow";
-  return fetch(url2, init);
-}
-const APP_ERROR = "app:error";
-const showAppError = (error) => Main.sendToWindow(APP_ERROR, error);
+};
 const en = {
   common: {
     appTitle: "AniLibrix Plus",
@@ -991,257 +1172,6 @@ function t(key, params = {}, locale = currentLocale) {
 function getFacts(locale = currentLocale) {
   return messages[locale]?.facts || messages[DEFAULT_LOCALE].facts;
 }
-const { shell } = require("electron");
-const path$2 = require("path");
-const Magnet2torrent = require("magnet2torrent-js");
-const APP_DISCORD_RICH_PRESENSE = "app:richpresense";
-const APP_ABOUT = "app:about";
-const APP_SYSTEM_SLEEP_DISABLE = "app:system:disable_sleep";
-const APP_SYSTEM_SLEEP_ENABLE = "app:system:enable_sleep";
-const APP_DOCK_NUMBER = "app:dock:number";
-const APP_DEVTOOLS_MAIN = "app:devtools:main";
-const APP_DEVTOOLS_TORRENT = "app:devtools:torrent";
-const APP_SAFE_STORAGE_ENCRYPT_REQUEST = "app:system:safe_storage:encrypt";
-const APP_SHOW_CONFIG = "app:show_config";
-const APP_RAND = "app:rand";
-const APP_TORRENT_PARSE = "app:torrent_parse";
-const APP_UPDATE_PROXY = "app:update_proxy";
-const APP_GET_SYSTEM_LOCALE = "app:get_system_locale";
-const APP_SET_LOCALE = "app:set_locale";
-const trackers = [
-  "aHR0cDovL3RyLmxpYnJpYS5mdW46MjcxMC9hbm5vdW5jZQ==",
-  "dWRwOi8vdHJhY2tlci50b3JyZW50LmV1Lm9yZzo0NTEvYW5ub3VuY2U=",
-  "dWRwOi8vdHJhY2tlci5vcGVudHJhY2tyLm9yZzoxMzM3L2Fubm91bmNl",
-  "dWRwOi8vdHJhY2tlci5vcGVuYml0dG9ycmVudC5jb206Njk2OS9hbm5vdW5jZQ==",
-  "dWRwOi8vdHJhY2tlci50b3JyZW50LmV1Lm9yZzo0NTEvYW5ub3VuY2U="
-].map((value) => atob(value));
-console.log(trackers);
-const m2t = new Magnet2torrent({
-  timeout: 30,
-  addTrackersToTorrent: true,
-  trackers
-});
-const catchAppAboutEvent = () => electron.ipcMain.on(APP_ABOUT, () => electron.app.showAboutPanel());
-const catchAppDevtoolsMainEvent = () => electron.ipcMain.on(APP_DEVTOOLS_MAIN, () => Main.showDevTools());
-const catchAppDevtoolsTorrentEvent = () => electron.ipcMain.on(APP_DEVTOOLS_TORRENT, () => Torrent.showDevTools());
-const catchAppDockNumberEvent = () => {
-  electron.ipcMain.on(APP_DOCK_NUMBER, (e, number) => {
-    if (electron.app.dock) electron.app.dock.setBadge(number && number > 0 ? number.toString() : "");
-  });
-};
-const catchEnableSystemSleepBlockerEvent = () => {
-  electron.ipcMain.on(APP_SYSTEM_SLEEP_DISABLE, (e) => {
-    start();
-  });
-};
-const catchDisableSystemSleepBlockerEvent = () => {
-  electron.ipcMain.on(APP_SYSTEM_SLEEP_ENABLE, (e) => {
-    stop();
-  });
-};
-const handleSafeStorageEncrypt = () => {
-  electron.ipcMain.handle(APP_SAFE_STORAGE_ENCRYPT_REQUEST, async (event, prop, data) => {
-    return setEncrypted(prop, data);
-  });
-};
-const handleRichPresense = (setActivity2) => {
-  electron.ipcMain.handle(APP_DISCORD_RICH_PRESENSE, async (event, data) => {
-    return setActivity2(data);
-  });
-};
-const handleShowConfig = () => {
-  electron.ipcMain.handle(APP_SHOW_CONFIG, async (event, data) => {
-    return shell.showItemInFolder(path$2.join(electron.app.getPath("userData"), "anilibrix.json"));
-  });
-};
-const handleRand = () => {
-  electron.ipcMain.handle(APP_RAND, async (event) => {
-    await new Promise((r) => setTimeout(r, Math.random() * 1e3 + 500));
-    try {
-      const apiUrl = `http://localhost:${global.internalServerPort}/public/api/index.php`;
-      const randomReleaseFormData = new FormData();
-      randomReleaseFormData.append("query", "random_release");
-      const randomResponse = await catGirlFetch(apiUrl, {
-        method: "POST",
-        body: randomReleaseFormData
-      });
-      if (!randomResponse.ok) {
-        throw new Error(`Failed to fetch random release: ${randomResponse.status}`);
-      }
-      const { data: randomData } = await randomResponse.json();
-      if (!randomData?.id) {
-        throw new Error("Invalid response: missing release ID");
-      }
-      const releaseFormData = new FormData();
-      releaseFormData.append("query", "release");
-      releaseFormData.append("id", randomData.id);
-      const releaseResponse = await catGirlFetch(apiUrl, {
-        method: "POST",
-        body: releaseFormData
-      });
-      if (!releaseResponse.ok) {
-        throw new Error(`Failed to fetch release details: ${releaseResponse.status}`);
-      }
-      const releaseData = await releaseResponse.json();
-      const { id, names } = releaseData.data;
-      const name = names.pop();
-      return { id, name };
-    } catch (error) {
-      console.error("Error in handleRand:", error);
-      throw new Error(`Random release fetch failed: ${error.message}`);
-    }
-  });
-};
-const handleUpdateProxy = (cb) => {
-  electron.ipcMain.handle(APP_UPDATE_PROXY, async (event, url2) => {
-    return cb(url2);
-  });
-};
-const handleGetSystemLocale = (cb) => {
-  electron.ipcMain.handle(APP_GET_SYSTEM_LOCALE, async () => cb());
-};
-const handleSetAppLocale = (cb) => {
-  electron.ipcMain.handle(APP_SET_LOCALE, async (event, locale) => cb(locale));
-};
-const showTorrentError = lodash.debounce(
-  () => showAppError(t("errors.torrentFileExpired")),
-  1e3
-);
-const handleTorrentParse = () => {
-  electron.ipcMain.handle(APP_TORRENT_PARSE, async (event, url2) => {
-    url2 = new URL("https://" + global.upstreamDomainV1Tv + url2);
-    const abortCtrl = new AbortController();
-    console.log("Downloading torrent file", url2.toString());
-    const timer = setTimeout(() => {
-      abortCtrl.abort();
-    }, 5e3);
-    const torrent = await catGirlFetch(url2, { signal: abortCtrl.signal }).then(async (x) => {
-      clearTimeout(timer);
-      return {
-        name: contentDispositionAttachment.parse(x.headers.get("content-disposition")).filename || "unknown.torrent",
-        file: Buffer.from(await x.arrayBuffer()),
-        url: url2
-      };
-    }).catch(() => {
-      clearTimeout(timer);
-    });
-    const magnet = global.apiCacheService.torrentsRaw.get(+url2.searchParams.get("id"))?.magnet;
-    if (!torrent?.name || torrent?.name === "unknown.torrent") {
-      try {
-        console.log("Resolve magnet via torrent net", magnet);
-        const t2 = await m2t.getTorrent(magnet);
-        console.log("Resolved successfully via torrent net", t2.name, t2.infoHash);
-        const file = t2.toTorrentFile();
-        return {
-          file: file.toString("base64"),
-          name: t2.name,
-          magnet
-        };
-      } catch (e) {
-        showTorrentError();
-      }
-    }
-    return {
-      file: torrent?.file ? torrent.file.toString("base64") : "",
-      name: torrent?.name || "fuckyou",
-      magnet
-    };
-  });
-};
-const TORRENT_CLEAR = "torrent:clear";
-const TORRENT_ERROR = "torrent:error";
-const TORRENT_START = "torrent:start";
-const TORRENT_SERVER = "torrent:server";
-const TORRENT_DESTROY = "torrent:destroy";
-const TORRENT_DOWNLOAD = "torrent:download";
-const broadcastTorrentEvents = () => {
-  const communications = [
-    {
-      channel: TORRENT_CLEAR,
-      window: () => Main
-    },
-    {
-      channel: TORRENT_ERROR,
-      window: () => Main
-    },
-    {
-      channel: TORRENT_START,
-      window: () => Torrent
-    },
-    {
-      channel: TORRENT_SERVER,
-      window: () => Main
-    },
-    {
-      channel: TORRENT_DESTROY,
-      window: () => Torrent
-    },
-    {
-      channel: TORRENT_DOWNLOAD,
-      window: () => Main
-    }
-  ];
-  communications.forEach((communication) => {
-    electron.ipcMain.on(
-      communication.channel,
-      (e, payload) => communication.window().sendToWindow(communication.channel, payload)
-    );
-  });
-};
-const storage = new Storage$1({ name: "anilibrix", clearInvalidConfig: true });
-const _mem = {
-  session: null,
-  releases: []
-};
-electron.ipcMain.on("store:sync", (event, payload) => {
-  if (payload.session !== void 0) _mem.session = payload.session;
-  if (payload.releases !== void 0) _mem.releases = payload.releases;
-});
-function getSetting(path2, defaultValue = null) {
-  return storage.get(`settings.${path2}`, defaultValue);
-}
-const store = {
-  state: {
-    app: {
-      settings: {
-        system: {
-          get proxy() {
-            return getSetting("system.proxy", "");
-          },
-          get drpc_enabled() {
-            return getSetting("system.drpc_enabled", true);
-          },
-          get ignore_certs() {
-            return getSetting("system.ignore_certs", false);
-          },
-          get staticEndpoint() {
-            return getSetting("system.staticEndpoint", "https://static.anilibria.tv");
-          }
-        }
-      },
-      account: {
-        get session() {
-          return _mem.session;
-        }
-      }
-    },
-    releases: {
-      get data() {
-        return _mem.releases;
-      }
-    }
-  },
-  getters: {
-    "app/settings/system/staticEndpoint"() {
-      return getSetting("system.staticEndpoint", "https://static.anilibria.tv");
-    }
-  },
-  // Stub for dispatch — main should use IPC to trigger renderer actions
-  dispatch(action, ...args) {
-    console.warn("[store-compat] dispatch called from main process:", action, "— use IPC instead");
-    return Promise.resolve();
-  }
-};
 const createAboutTemplate = () => [
   {
     role: "about",
@@ -1570,6 +1500,39 @@ async function initProxy(windows) {
   }
   await setProxy(proxyServer);
 }
+const DOMAIN = "wwnd.space";
+const OLD_IP = "78.46.255.254";
+const NEW_IP = "31.184.217.238";
+let fixWwndChecked = false;
+let fixWwwdNeeded = false;
+async function checkWwnd() {
+  if (fixWwndChecked) return;
+  try {
+    const res = await fetch(`https://cloudflare-dns.com/dns-query?name=${DOMAIN}&type=A`, {
+      headers: { Accept: "application/dns-json" }
+    });
+    const data = await res.json();
+    const answer = data?.Answer?.find((a) => a.type === 1);
+    if (answer?.data === OLD_IP) {
+      fixWwwdNeeded = true;
+      console.log("EU IP OF WWND.SPACE FOUND, ENABLE REWRITE");
+    }
+  } catch (e) {
+  }
+  fixWwndChecked = true;
+}
+async function catGirlFetch(url2, init = {}) {
+  await checkWwnd();
+  const u = new URL(url2);
+  if (fixWwwdNeeded && u.host === DOMAIN) {
+    url2 = url2.replace(DOMAIN, NEW_IP);
+    if (!init.headers) init.headers = {};
+    init.headers.Host = DOMAIN;
+    console.log("FIX WWND.SPACE REQUEST");
+  }
+  init.redirect = "follow";
+  return fetch(url2, init);
+}
 class APICacheService {
   constructor(cachePath) {
     this.cachePath = cachePath;
@@ -1590,28 +1553,28 @@ class APICacheService {
     });
   }
   async setCacheKey(key, value) {
-    const metadataPath = path$3.join(this.cachePath, `${key}.json`);
+    const metadataPath = path$2.join(this.cachePath, `${key}.json`);
     this.cache.set(key, value);
     await fs.writeFile(metadataPath, JSON.stringify(value));
   }
   async getCacheKey(key) {
     if (this.cache.has(key)) return this.cache.get(key);
-    const metadataPath = path$3.join(this.cachePath, `${key}.json`);
+    const metadataPath = path$2.join(this.cachePath, `${key}.json`);
     const metadataContent = await fs.readFile(metadataPath, "utf8");
     const value = JSON.parse(metadataContent);
     this.cache.set(key, value);
     return value;
   }
   async loadCacheMetadata() {
-    const activeCachePrefix = await fs.readFile(path$3.join(this.cachePath, "active.cache"), "utf8");
-    const metadataPath = path$3.join(this.cachePath, activeCachePrefix + "_metadata");
+    const activeCachePrefix = await fs.readFile(path$2.join(this.cachePath, "active.cache"), "utf8");
+    const metadataPath = path$2.join(this.cachePath, activeCachePrefix + "_metadata");
     const metadataContent = await fs.readFile(metadataPath, "utf8");
     return JSON.parse(metadataContent);
   }
   async loadJsonFiles(filePrefix, count, withoutIndex) {
     const filesData = await Promise.all(
       Array.from({ length: count }, async (_, index) => {
-        const filePath = path$3.join(this.cachePath, `${filePrefix}${withoutIndex ? "" : index}.json`);
+        const filePath = path$2.join(this.cachePath, `${filePrefix}${withoutIndex ? "" : index}.json`);
         const content = await fs.readFile(filePath, "utf8");
         return JSON.parse(content);
       })
@@ -1637,7 +1600,7 @@ class APICacheService {
           writeStream.end();
         }
         writeStream.on("finish", () => {
-          console.log(`File downloaded successfully: ${path$3.basename(filePath)}`);
+          console.log(`File downloaded successfully: ${path$2.basename(filePath)}`);
           resolve();
         });
         writeStream.on("error", (error) => {
@@ -1650,7 +1613,7 @@ class APICacheService {
   }
   async downloadCache() {
     try {
-      const activeCachePrefix = await fs.readFile(path$3.join(this.cachePath, "active.cache"), "utf8").catch((e) => {
+      const activeCachePrefix = await fs.readFile(path$2.join(this.cachePath, "active.cache"), "utf8").catch((e) => {
         if (e.code === "ENOENT") {
           console.log("Active cache not found");
           return null;
@@ -1658,8 +1621,8 @@ class APICacheService {
         throw e;
       });
       const uuid = crypto.randomUUID();
-      const pathToHashes = path$3.join(this.cachePath, activeCachePrefix + "_hashes.json");
-      const pathToHashesTmp = path$3.join(this.cachePath, "hashes.json");
+      const pathToHashes = path$2.join(this.cachePath, activeCachePrefix + "_hashes.json");
+      const pathToHashesTmp = path$2.join(this.cachePath, "hashes.json");
       const hashes = await fs.readFile(pathToHashes, "utf8").catch((e) => {
         if (e.code === "ENOENT") {
           return null;
@@ -1705,7 +1668,7 @@ class APICacheService {
       } catch (e) {
         console.log("can't download hashes file", e);
       }
-      const pathToZip = path$3.join(this.cachePath, "main.zip");
+      const pathToZip = path$2.join(this.cachePath, "main.zip");
       await this.downloadFile(global.cacheURL, pathToZip);
       const zip = new AdmZip(pathToZip);
       const entries = zip.getEntries();
@@ -1715,23 +1678,23 @@ class APICacheService {
       const [prefix] = cacheFiles[0].entryName.split("/");
       for (const entry of cacheFiles) {
         const relativePath = entry.entryName.replaceAll(prefix + "/cache/", "");
-        const outputPath = path$3.join(this.cachePath, relativePath);
-        const dir = path$3.dirname(outputPath);
+        const outputPath = path$2.join(this.cachePath, relativePath);
+        const dir = path$2.dirname(outputPath);
         if (!fs$1.existsSync(dir)) {
           await fs.mkdir(dir, { recursive: true });
         }
-        const newOutputPath = path$3.join(dir, `${uuid}_${path$3.basename(outputPath)}`);
+        const newOutputPath = path$2.join(dir, `${uuid}_${path$2.basename(outputPath)}`);
         await fs.writeFile(newOutputPath, entry.getData());
       }
       if (newHashesFileContent) {
-        await fs.writeFile(path$3.join(this.cachePath, `${uuid}_hashes.json`), newHashesFileContent);
+        await fs.writeFile(path$2.join(this.cachePath, `${uuid}_hashes.json`), newHashesFileContent);
       }
       await fs.unlink(pathToZip).catch(console.error);
-      await fs.writeFile(path$3.join(this.cachePath, "active.cache"), uuid);
+      await fs.writeFile(path$2.join(this.cachePath, "active.cache"), uuid);
       if (activeCachePrefix !== null) {
         const files = await fs.readdir(this.cachePath);
         await Promise.all(
-          files.filter((file) => !file.startsWith(uuid) && !["active.cache", "user.json", "favorites.json"].includes(file)).map((file) => fs.unlink(path$3.join(this.cachePath, file)).catch(console.error))
+          files.filter((file) => !file.startsWith(uuid) && !["active.cache", "user.json", "favorites.json"].includes(file)).map((file) => fs.unlink(path$2.join(this.cachePath, file)).catch(console.error))
         );
       }
       console.log("Cache downloaded successfully and old cache deleted");
@@ -1741,7 +1704,7 @@ class APICacheService {
     }
   }
   async processCache() {
-    const activeCachePrefix = await fs.readFile(path$3.join(this.cachePath, "active.cache"), "utf8");
+    const activeCachePrefix = await fs.readFile(path$2.join(this.cachePath, "active.cache"), "utf8");
     const { countEpisodes, countReleases } = await this.loadCacheMetadata();
     const [releasesData, episodesData, franchisesData, torrentsData] = await Promise.all([
       this.loadJsonFiles(activeCachePrefix + "_releases", countReleases),
@@ -2037,7 +2000,7 @@ class APIController {
     }
   }
   createFormData(extra) {
-    const formData = new FormData();
+    const formData = new FormData$1();
     for (const [key, value] of Object.entries(extra || {})) {
       formData.append(key, value);
     }
@@ -2219,7 +2182,7 @@ class CacheManager {
   }
   async getCache(cacheName, originalUrl) {
     try {
-      const filePath = path$3.join(this.cachePath, `${cacheName}.dat`);
+      const filePath = path$2.join(this.cachePath, `${cacheName}.dat`);
       const file = await fs$1.promises.readFile(filePath);
       const metaLength = file.readUInt32BE(0);
       const metaEnd = 4 + metaLength;
@@ -2272,7 +2235,7 @@ class CacheManager {
       const header = Buffer.alloc(4);
       header.writeUInt32BE(metaBuffer.length, 0);
       await fs$1.promises.writeFile(
-        path$3.join(this.cachePath, `${cacheName}.dat`),
+        path$2.join(this.cachePath, `${cacheName}.dat`),
         Buffer.concat([header, metaBuffer, data])
       );
     } catch (err) {
@@ -2405,8 +2368,8 @@ function proxyStatic(cacheManager2) {
 }
 const server = express();
 server.disable("x-powered-by");
-const mediaCachePath = path$3.join(electron.app.getPath("userData"), "media-cache");
-const apiCachePath = path$3.join(electron.app.getPath("userData"), "api-cache");
+const mediaCachePath = path$2.join(electron.app.getPath("userData"), "media-cache");
+const apiCachePath = path$2.join(electron.app.getPath("userData"), "api-cache");
 const cacheManager = new CacheManager(mediaCachePath);
 const cacheService = new APICacheService(apiCachePath);
 global.apiCacheService = cacheService;
@@ -2557,7 +2520,7 @@ async function resolveTxtRecordAdGuardSecure(domain) {
 }
 async function initGlobals() {
   try {
-    const defaults = await fs.readFile(path$3.join(electron.app.getPath("userData"), "defaults.json"), "utf-8");
+    const defaults = await fs.readFile(path$2.join(electron.app.getPath("userData"), "defaults.json"), "utf-8");
     const parsedDefaults = JSON.parse(defaults);
     defaultsValues.cacheURL = parsedDefaults.cacheURL;
     defaultsValues.upstreamDomainV1Tv = parsedDefaults.upstreamDomainV1Tv;
@@ -2964,7 +2927,7 @@ function discordActivity() {
   };
 }
 consoleLogToFile({
-  logFilePath: path$3.join(electron.app.getPath("userData") + "/anilibrix.log")
+  logFilePath: path$2.join(electron.app.getPath("userData") + "/anilibrix.log")
 });
 applyAppSwitches();
 const {
@@ -2979,7 +2942,7 @@ function resolveSystemLocale() {
   return preferred || electron.app.getLocale();
 }
 if (process.env.NODE_ENV !== "development") {
-  global.__static = path$3.join(__dirname, "/static").replace(/\\/g, "\\\\");
+  global.__static = path$2.join(__dirname, "/static").replace(/\\/g, "\\\\");
 }
 process.on("uncaughtException", (error) => console.log("Unhandled Error", error));
 process.on("unhandledRejection", (error) => console.log("Unhandled Promise Rejection", error));
@@ -3064,7 +3027,13 @@ if (!gotTheLock) {
     console.log("Internal server listens", global.internalServerPort);
     mWindowInstance.loadUrl();
     tWindowInstance.loadUrl();
-    if (process.env.NODE_ENV === "development") mainWindow.webContents.openDevTools();
+    if (process.env.NODE_ENV === "development") {
+      mainWindow.webContents.openDevTools();
+      mainWindow.webContents.on("console-message", (e, level, msg, line, src) => {
+        const prefix = ["[r:log]", "[r:dbg]", "[r:warn]", "[r:err]"][level] || "[r:?]";
+        console.log(prefix, msg, src ? `(${src}:${line})` : "");
+      });
+    }
     remoteMain.enable(mainWindow.webContents);
     remoteMain.enable(torrentWindow.webContents);
     mainWindow.once("ready-to-show", () => {
@@ -3077,9 +3046,9 @@ if (!gotTheLock) {
     });
     menuController.setWindows(mainWindow, torrentWindow).init();
     trayController.createTrayIcon({
-      iconPath: path$3.join(__dirname, "../../build/icons/tray/icon.png")
+      iconPath: path$2.join(__dirname, "../../build/icons/tray/icon.png")
     }).setTooltip(meta.name);
-    const appStorage = new Storage$1({ name: "anilibrix", clearInvalidConfig: true });
+    const appStorage = new Storage({ name: "anilibrix", clearInvalidConfig: true });
     electron.app.on("certificate-error", (event, webContents, url2, error, certificate, callback) => {
       const ignoreCerts = appStorage.get("settings.system.ignore_certs", false);
       if (ignoreCerts) {

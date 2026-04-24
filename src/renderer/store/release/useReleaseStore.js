@@ -10,7 +10,7 @@ import axios from 'axios'
 import { getLocale, translate } from '@/i18n'
 
 // Handlers
-import { showAppError } from '@main/handlers/notifications/notifications-handler'
+import { showAppError } from '@utils/notifications'
 
 import { defineStore } from 'pinia'
 

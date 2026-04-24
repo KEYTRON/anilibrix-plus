@@ -45,11 +45,11 @@
   height: 100%;
   opacity: 0.25;
   transition: 0.3s ease;
-}.play__tooltip[data-v-fe36f1d6] {
+}.play__tooltip[data-v-7542f969] {
   line-height: 1;
   z-index: 1000000;
 }
-.play__tooltip > div[data-v-fe36f1d6] {
+.play__tooltip > div[data-v-7542f969] {
   line-height: 1;
 }.player__next[data-v-c3bcc883] {
   position: absolute;

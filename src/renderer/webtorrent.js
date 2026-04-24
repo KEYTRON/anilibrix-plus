@@ -10,17 +10,14 @@ import { catchTorrentDestroy, catchTorrentParse, catchTorrentStart, sendTorrentC
 import { parse, stringify } from 'flatted'
 import { ipcRenderer } from 'electron'
 import parseTorrentData from 'parse-torrent'
-import http from 'http'
-import nodePath from 'path'
-import { rimraf } from 'rimraf'
-import WebTorrent from 'webtorrent'
-import { SubtitleParser } from 'matroska-subtitles'
 import remoteRenderer from '@electron/remote'
+// http, path, rimraf, WebTorrent, SubtitleParser loaded via require() at call sites
+// (nodeIntegration:true makes Node.js require available at runtime)
 
 // Create WebTorrentClient
 // Connect to the WebTorrent and BitTorrent networks. WebTorrent Desktop is a hybrid
 // client, as explained here: https://webtorrent.io/faq
-const torrentClient = new WebTorrent()
+const torrentClient = new (require('webtorrent'))()
 
 // Create local store for torrents
 const store = {
@@ -35,7 +32,7 @@ const store = {
  *
  * @type {string}
  */
-const torrentPath = nodePath.join(remoteRenderer.app.getPath('temp'), app.build.appId)
+const torrentPath = require('path').join(remoteRenderer.app.getPath('temp'), app.build.appId)
 
 /**
  * Start torrent from provided source
@@ -172,7 +169,7 @@ const destroyTorrent = async ({ torrentId }) => {
     if (store.torrents[torrentId]) {
       const torrentFilePath = store.torrents[torrentId].path
 
-      await rimraf(torrentFilePath)
+      await require('rimraf').rimraf(torrentFilePath)
 
       console.log('Destroy Torrent', { torrentId, path: torrentFilePath })
 
@@ -201,11 +198,12 @@ const _startServer = ({
 }) => {
   return new Promise((resolve, reject) => {
     try {
+      const { SubtitleParser } = require('matroska-subtitles')
       const parser = new SubtitleParser()
 
       // Create new server
       const server = torrent.createServer()
-      const vttServer = http.createServer(async (req, res) => {
+      const vttServer = require('http').createServer(async (req, res) => {
         const url = req.url.slice(1, -4)
         const {
           host,
@@ -218,7 +216,7 @@ const _startServer = ({
         // afterwards each subtitle is emitted
         // parser.once('tracks', (tracks) => console.log(tracks))
         parser.on('subtitle', (subtitle, trackNumber) => console.log('Track ' + trackNumber + ':', subtitle))
-        http.get(fileUrl, stream => stream.pipe(parser).pipe(res))
+        require('http').get(fileUrl, stream => stream.pipe(parser).pipe(res))
       })
 
       // Save server instance to store

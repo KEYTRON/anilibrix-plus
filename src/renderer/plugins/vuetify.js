@@ -1,6 +1,6 @@
 import { createVuetify } from 'vuetify'
 import { en, ru } from 'vuetify/locale'
-import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import '@mdi/font/css/materialdesignicons.css'
 
 import { DEFAULT_LOCALE } from '@shared/i18n/locales'

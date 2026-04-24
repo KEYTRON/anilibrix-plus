@@ -1,11 +1,7 @@
 import { L as LibriaTyan01 } from "./LibriaTyan01-DlPDW3gN.js";
-import { _ as _export_sfc, K as createElementBlock, l as createVNode, L as withCtx, M as VRow, N as openBlock, O as VCol, P as VImg, Q as VCard, ab as VCardTitle, W as createTextVNode, T as toDisplayString, R as VCardText, n as createBaseVNode, t as VBtn, ad as Fragment, ae as renderList, a7 as VSkeletonLoader, S as createBlock, q as normalizeClass, r as mergeProps, U as createCommentVNode, V as VIcon, aR as VSlideGroup, aa as resolveComponent, af as VChip, b6 as toRelease, a8 as toVideo, be as AppKeyboardHandlerMixin, bf as VFadeTransition, bg as useReleasesStore, bh as useAppStore } from "./index-CIkHx-EU.js";
-import { R as ReleaseFavorite } from "./ReleaseFavorite-BQG4Fd1H.js";
-import "./torrents-handler-BtK2vzG6.js";
-import "fs";
-import "path";
-import "stream";
-import "util";
+import { _ as _export_sfc, K as createElementBlock, l as createVNode, L as withCtx, M as VRow, N as openBlock, O as VCol, P as VImg, Q as VCard, ab as VCardTitle, W as createTextVNode, T as toDisplayString, R as VCardText, n as createBaseVNode, t as VBtn, ad as Fragment, ae as renderList, a7 as VSkeletonLoader, S as createBlock, q as normalizeClass, r as mergeProps, U as createCommentVNode, V as VIcon, aR as VSlideGroup, aa as resolveComponent, af as VChip, b6 as toRelease, a8 as toVideo, be as AppKeyboardHandlerMixin, bf as VFadeTransition, bg as useReleasesStore, bh as useAppStore } from "./index-YF3Wcouz.js";
+import { R as ReleaseFavorite } from "./ReleaseFavorite-BZxiNVAx.js";
+import "./torrents-handler-CGJ0ERZQ.js";
 const _sfc_main$9 = {
   data() {
     return {

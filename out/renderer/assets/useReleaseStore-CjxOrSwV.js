@@ -1,9 +1,5 @@
-import { bo as defineStore, bp as axios, bq as ReleaseProxy, br as ReleaseTransformer, bs as EpisodesTransformer, bt as showAppError, bu as translate, bv as getLocale } from "./index-CIkHx-EU.js";
-import "./torrents-handler-BtK2vzG6.js";
-import "fs";
-import "path";
-import "stream";
-import "util";
+import { bo as defineStore, bp as axios, bq as ReleaseProxy, br as ReleaseTransformer, bs as EpisodesTransformer, bt as showAppError, bu as translate, bv as getLocale } from "./index-YF3Wcouz.js";
+import "./torrents-handler-CGJ0ERZQ.js";
 let REQUEST = null;
 const useReleaseStore = defineStore("release", {
   state: () => ({

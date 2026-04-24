@@ -1,9 +1,5 @@
-import { e as electronExports } from "./torrents-handler-BtK2vzG6.js";
-import { b8 as unref, _ as _export_sfc, K as createElementBlock, l as createVNode, L as withCtx, M as VRow, b9 as withKeys, ba as useAccountStore, bb as invokeSafeStorageEncrypt, bc as useFavoritesStore, N as openBlock, O as VCol, P as VImg, Q as VCard, ab as VCardTitle, W as createTextVNode, T as toDisplayString, R as VCardText, n as createBaseVNode, bd as VTextField, t as VBtn, r as mergeProps, ai as VDivider } from "./index-CIkHx-EU.js";
-import "fs";
-import "path";
-import "stream";
-import "util";
+import { e as electronExports } from "./torrents-handler-CGJ0ERZQ.js";
+import { b8 as unref, _ as _export_sfc, K as createElementBlock, l as createVNode, L as withCtx, M as VRow, b9 as withKeys, ba as useAccountStore, bb as invokeSafeStorageEncrypt, bc as useFavoritesStore, N as openBlock, O as VCol, P as VImg, Q as VCard, ab as VCardTitle, W as createTextVNode, T as toDisplayString, R as VCardText, n as createBaseVNode, bd as VTextField, t as VBtn, r as mergeProps, ai as VDivider } from "./index-YF3Wcouz.js";
 const LibriaTyan03 = "" + new URL("LibriaTyan03-B2NpaqxW.svg", import.meta.url).href;
 const req = (value) => {
   value = unref(value);

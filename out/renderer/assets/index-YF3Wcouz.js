@@ -1,9 +1,5 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./index-CpTflkF2.js","./LibriaTyan01-DlPDW3gN.js","./torrents-handler-BtK2vzG6.js","./index-UQx4FiJu.css","./index-DmalZPSk.js","./ReleaseFavorite-BQG4Fd1H.js","./useReleaseStore-ulZOFbhK.js","./index-CcKD2dQw.css","./index-oLRKaCRS.js","./useCatalogStore-CVtj4-lI.js","./index-CBsYWYd5.css","./index-CjBKXaCe.js","./index-D2bv2-S0.js","./index-ChaTFX2r.css","./index-BUmOT9IZ.js","./index-BMYueNlg.css"])))=>i.map(i=>d[i]);
-import { c as commonjsGlobal, g as getDefaultExportFromCjs$1, w as windowStateKeeper, e as electronExports, m as meta, v as version$3, a as catchTorrentDownload, b as catchTorrentError, s as sendTorrentDestroy, d as catchTorrentClear, f as sendTorrentStart, h as catchTorrentServer, i as app$1, r as repository } from "./torrents-handler-BtK2vzG6.js";
-import * as require$$0 from "path";
-import "fs";
-import "stream";
-import "util";
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./index-Dpq3yOQv.js","./LibriaTyan01-DlPDW3gN.js","./torrents-handler-CGJ0ERZQ.js","./index-UQx4FiJu.css","./index-DnE2OLDc.js","./ReleaseFavorite-BZxiNVAx.js","./useReleaseStore-CjxOrSwV.js","./index-CcKD2dQw.css","./index-CWXnO_UO.js","./useCatalogStore-bWvfKkUg.js","./index-CBsYWYd5.css","./index-DeZFuIRW.js","./index-k_GIVUOw.js","./index-ChaTFX2r.css","./index-DAbcn-nI.js","./index-BMYueNlg.css"])))=>i.map(i=>d[i]);
+import { c as commonjsGlobal, g as getDefaultExportFromCjs$1, m as meta, v as version$3, w as windowStateKeeper, e as electronExports, a as catchTorrentDownload, b as catchTorrentError, s as sendTorrentDestroy, d as catchTorrentClear, f as sendTorrentStart, h as catchTorrentServer, i as app$1, r as repository } from "./torrents-handler-CGJ0ERZQ.js";
 /**
 * @vue/shared v3.5.32
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
@@ -10643,1241 +10639,6 @@ function requireGet() {
 }
 var getExports = requireGet();
 const get$1 = /* @__PURE__ */ getDefaultExportFromCjs$1(getExports);
-var setCookie = { exports: {} };
-var hasRequiredSetCookie;
-function requireSetCookie() {
-  if (hasRequiredSetCookie) return setCookie.exports;
-  hasRequiredSetCookie = 1;
-  var defaultParseOptions = {
-    decodeValues: true,
-    map: false,
-    silent: false
-  };
-  function isForbiddenKey(key) {
-    return typeof key !== "string" || key in {};
-  }
-  function createNullObj() {
-    return /* @__PURE__ */ Object.create(null);
-  }
-  function isNonEmptyString2(str) {
-    return typeof str === "string" && !!str.trim();
-  }
-  function parseString(setCookieValue, options) {
-    var parts = setCookieValue.split(";").filter(isNonEmptyString2);
-    var nameValuePairStr = parts.shift();
-    var parsed = parseNameValuePair(nameValuePairStr);
-    var name = parsed.name;
-    var value = parsed.value;
-    options = options ? Object.assign({}, defaultParseOptions, options) : defaultParseOptions;
-    if (isForbiddenKey(name)) {
-      return null;
-    }
-    try {
-      value = options.decodeValues ? decodeURIComponent(value) : value;
-    } catch (e) {
-      console.error(
-        "set-cookie-parser: failed to decode cookie value. Set options.decodeValues=false to disable decoding.",
-        e
-      );
-    }
-    var cookie = createNullObj();
-    cookie.name = name;
-    cookie.value = value;
-    parts.forEach(function(part) {
-      var sides = part.split("=");
-      var key = sides.shift().trimLeft().toLowerCase();
-      if (isForbiddenKey(key)) {
-        return;
-      }
-      var value2 = sides.join("=");
-      if (key === "expires") {
-        cookie.expires = new Date(value2);
-      } else if (key === "max-age") {
-        var n = parseInt(value2, 10);
-        if (!Number.isNaN(n)) cookie.maxAge = n;
-      } else if (key === "secure") {
-        cookie.secure = true;
-      } else if (key === "httponly") {
-        cookie.httpOnly = true;
-      } else if (key === "samesite") {
-        cookie.sameSite = value2;
-      } else if (key === "partitioned") {
-        cookie.partitioned = true;
-      } else if (key) {
-        cookie[key] = value2;
-      }
-    });
-    return cookie;
-  }
-  function parseNameValuePair(nameValuePairStr) {
-    var name = "";
-    var value = "";
-    var nameValueArr = nameValuePairStr.split("=");
-    if (nameValueArr.length > 1) {
-      name = nameValueArr.shift();
-      value = nameValueArr.join("=");
-    } else {
-      value = nameValuePairStr;
-    }
-    return { name, value };
-  }
-  function parse2(input, options) {
-    options = options ? Object.assign({}, defaultParseOptions, options) : defaultParseOptions;
-    if (!input) {
-      if (!options.map) {
-        return [];
-      } else {
-        return createNullObj();
-      }
-    }
-    if (input.headers) {
-      if (typeof input.headers.getSetCookie === "function") {
-        input = input.headers.getSetCookie();
-      } else if (input.headers["set-cookie"]) {
-        input = input.headers["set-cookie"];
-      } else {
-        var sch = input.headers[Object.keys(input.headers).find(function(key) {
-          return key.toLowerCase() === "set-cookie";
-        })];
-        if (!sch && input.headers.cookie && !options.silent) {
-          console.warn(
-            "Warning: set-cookie-parser appears to have been called on a request object. It is designed to parse Set-Cookie headers from responses, not Cookie headers from requests. Set the option {silent: true} to suppress this warning."
-          );
-        }
-        input = sch;
-      }
-    }
-    if (!Array.isArray(input)) {
-      input = [input];
-    }
-    if (!options.map) {
-      return input.filter(isNonEmptyString2).map(function(str) {
-        return parseString(str, options);
-      }).filter(Boolean);
-    } else {
-      var cookies2 = createNullObj();
-      return input.filter(isNonEmptyString2).reduce(function(cookies3, str) {
-        var cookie = parseString(str, options);
-        if (cookie && !isForbiddenKey(cookie.name)) {
-          cookies3[cookie.name] = cookie;
-        }
-        return cookies3;
-      }, cookies2);
-    }
-  }
-  function splitCookiesString(cookiesString) {
-    if (Array.isArray(cookiesString)) {
-      return cookiesString;
-    }
-    if (typeof cookiesString !== "string") {
-      return [];
-    }
-    var cookiesStrings = [];
-    var pos = 0;
-    var start;
-    var ch;
-    var lastComma;
-    var nextStart;
-    var cookiesSeparatorFound;
-    function skipWhitespace() {
-      while (pos < cookiesString.length && /\s/.test(cookiesString.charAt(pos))) {
-        pos += 1;
-      }
-      return pos < cookiesString.length;
-    }
-    function notSpecialChar() {
-      ch = cookiesString.charAt(pos);
-      return ch !== "=" && ch !== ";" && ch !== ",";
-    }
-    while (pos < cookiesString.length) {
-      start = pos;
-      cookiesSeparatorFound = false;
-      while (skipWhitespace()) {
-        ch = cookiesString.charAt(pos);
-        if (ch === ",") {
-          lastComma = pos;
-          pos += 1;
-          skipWhitespace();
-          nextStart = pos;
-          while (pos < cookiesString.length && notSpecialChar()) {
-            pos += 1;
-          }
-          if (pos < cookiesString.length && cookiesString.charAt(pos) === "=") {
-            cookiesSeparatorFound = true;
-            pos = nextStart;
-            cookiesStrings.push(cookiesString.substring(start, lastComma));
-            start = pos;
-          } else {
-            pos = lastComma + 1;
-          }
-        } else {
-          pos += 1;
-        }
-      }
-      if (!cookiesSeparatorFound || pos >= cookiesString.length) {
-        cookiesStrings.push(cookiesString.substring(start, cookiesString.length));
-      }
-    }
-    return cookiesStrings;
-  }
-  setCookie.exports = parse2;
-  setCookie.exports.parse = parse2;
-  setCookie.exports.parseString = parseString;
-  setCookie.exports.splitCookiesString = splitCookiesString;
-  return setCookie.exports;
-}
-var setCookieExports = /* @__PURE__ */ requireSetCookie();
-const cookieParser = /* @__PURE__ */ getDefaultExportFromCjs$1(setCookieExports);
-const en$3 = {
-  common: {
-    appTitle: "AniLibrix Plus",
-    noData: "No data",
-    back: "Back",
-    close: "Close",
-    cancel: "Cancel",
-    reload: "Reload",
-    settings: "Settings",
-    filters: "Filters",
-    saveLogs: "Save logs",
-    restart: "Restart",
-    loading: "Saving...",
-    logsSaved: "Logs saved",
-    showMore: "Show more",
-    home: "Home",
-    episodes: "Episodes",
-    comments: "Comments",
-    torrents: "Torrents",
-    linked: "Related",
-    release: "Release",
-    releaseLink: "Release link",
-    shareVk: "Share on VK",
-    shareTelegram: "Share on Telegram",
-    shareTwitter: "Share on Twitter",
-    login: "Log in",
-    logout: "Log out",
-    minutesShort: "min",
-    secondsShort: "sec"
-  },
-  toolbar: {
-    releases: "Releases",
-    catalog: "Catalog",
-    favorites: "Favorites",
-    randomRelease: "Random release",
-    settings: "App settings",
-    searchPlaceholder: "Search release...",
-    refreshTitle: "Refresh latest releases",
-    refreshedAt: "Updated at {datetime}",
-    login: "Log in",
-    notificationsWeek: "Latest notifications this week",
-    notificationsEmptyTitle: "There are no notifications here yet",
-    notificationsEmptySubtitle: "Maybe something interesting will be released soon...",
-    notificationEpisode: "Episode {episodeNumber} is out",
-    accountFavorites: "In favorites",
-    accountWatched: "Watched",
-    accountSpent: "Time spent watching"
-  },
-  language: {
-    switchToEnglish: "Switch interface to English",
-    switchToRussian: "Переключить интерфейс на русский"
-  },
-  update: {
-    title: "Update available",
-    github: "Download from GitHub",
-    telegram: "Download from Telegram"
-  },
-  settings: {
-    title: "App settings",
-    playbackTitle: "Release playback settings",
-    playbackDescription: "Here you can configure torrent playback support and other playback settings.",
-    systemTitle: "App settings",
-    systemDescription: "Here you can configure automatic release updates, system notifications, and other application settings.",
-    torrentsTitle: "Torrents",
-    torrentsDescriptionPrimary: "You can enable torrents that will automatically be linked to release episodes and made available for playback.",
-    torrentsDescriptionSecondary: "Torrents do not require an external player or client and are available online in the quality selection menu.",
-    torrentsEnabled: "Play torrents",
-    torrentsHint: "Using torrents requires more connection and parsing time, which can negatively affect release data loading speed, especially when using a proxy server.",
-    autoplayNext: "Autoplay next episode",
-    autoplayNextHint: "After an episode ends, the player will automatically start the next episode in the release if it is available.",
-    bufferTitle: "Video buffer size",
-    bufferHint: "Buffered preload size. Default is 5 minutes.",
-    bufferLabel: "Buffer size in seconds",
-    bufferDescription: "Defines the amount of buffer the player keeps in memory and preloads while watching.",
-    autoSkip: "Auto-skip opening",
-    autoSkipHint: "If opening skip markers are available, the opening will be skipped automatically.",
-    autoSkipHotkey: "Hotkey to toggle auto-skip",
-    openingSkipButton: "Opening skip button",
-    openingSkipButtonHint: "An extra button will appear in the player UI and seek forward by the specified number of seconds.",
-    openingSkipButtonHintExtra: "This button does not guarantee an accurate opening skip.",
-    openingSkipButtonHotkey: "Hotkey for the opening skip button",
-    hotkeyInput: "Press a key combination here",
-    openingSkipTimeHint: "You can set how many seconds to skip for the opening.",
-    openingSkipTimeLabel: "Opening skip time in seconds",
-    moveWindowButtons: "Move window controls to the right",
-    moveWindowButtonsHint: "Moves the window control buttons (minimize, close, maximize) to the right.",
-    favoriteNotifications: "Filter notifications by favorites",
-    favoriteNotificationsHint: "Shows notifications only for releases in favorites.",
-    ignoreCerts: "Ignore certificate errors",
-    ignoreCertsHint: "Ignore trusted certificate validation errors.",
-    operaProxy: "Use Opera Proxy",
-    proxyServer: "Proxy server",
-    proxyHint: "Proxy used for static and API servers. HTTP and HTTPS are supported.",
-    restartAfterServerChange: "Restarting the app after changing servers is recommended.",
-    apiEndpoint: "API server address (select one or enter your own)",
-    staticEndpoint: "Static server address (select one or enter your own)",
-    apiDescription: "You can use the main server if it is not blocked by your provider, or use additional servers. You can also enter your own API and static server addresses.",
-    richPresenceHint: "The app will show information about the currently watched release in Discord Rich Presence.",
-    systemNotifications: "Show system notifications",
-    systemNotificationsHint: "If the app detects an updated release while loading the latest releases, it will show a system notification about the new episode.",
-    autoUpdates: "Automatic release updates",
-    autoUpdatesHint: "The app will refresh latest releases in the background even when minimized.",
-    updatesTimeoutHint: "You can set how often the app refreshes releases in the background.",
-    updatesTimeoutLabel: "Release update interval",
-    snapshots: "Snapshots",
-    snapshotsHint: "You can create backups of app data linked to your account.",
-    snapshotsList: "Snapshots list",
-    credentialsBuild: "Unofficial build {version}",
-    about: "About",
-    debugTools: "Debug tools",
-    credentialsDisclaimer: "All materials in the app are provided for personal preview viewing only.",
-    actionsTitle: "System commands",
-    actionsDescription: "Useful commands for managing the application",
-    reloadApp: "Reload application",
-    showConfig: "Show config file location",
-    minimizeApp: "Minimize application",
-    closeApp: "Close application",
-    resetCache: "Reset app cache and settings",
-    debugTitle: "Debug tools",
-    debugDescription: "A list of debugging tools for the application, mainly intended for developers",
-    appConsole: "Application console",
-    torrentConsole: "Torrent server console",
-    addNotification: "Add notification to store",
-    logStore: "Print store data to console"
-  },
-  releases: {
-    pageTitle: "Latest releases",
-    refreshUnsupported: "This feature is not supported by the selected API server"
-  },
-  catalog: {
-    pageTitle: "Catalog",
-    title: "Release catalog",
-    subtitle: "You can choose genres and years to fine-tune the release list.",
-    sort: "Sorting",
-    sortNew: "Newest first",
-    sortPopular: "Most popular",
-    genres: "Genres",
-    genresSubtitle: "Filter the release list by selected genres.",
-    years: "Period",
-    yearsSubtitle: "Filter the release list by release years.",
-    sortSubtitle: "Sort the release list by popularity or novelty.",
-    yearsPlaceholder: "Years",
-    genresPlaceholder: "Select genres",
-    releaseDomain: "Link domain"
-  },
-  favorites: {
-    pageTitle: "Favorites",
-    title: "Favorite releases",
-    subtitle: "List of your favorite releases",
-    searchPlaceholder: "Search favorite releases...",
-    watchedReleases: "Watched releases",
-    watchedReleasesHint: "Show or hide releases you already watched.",
-    completedOnly: "Completed only",
-    completedOnlyHint: "Show or hide unfinished releases.",
-    sorting: "Sorting",
-    sortingHint: "Choose how releases are sorted.",
-    grouping: "Grouping",
-    groupingHint: "Choose how releases are grouped.",
-    noGrouping: "No grouping",
-    yearsGrouping: "By year",
-    sortTitle: "By title",
-    sortPopularity: "By popularity",
-    sortFavoriteDate: "By favorite date",
-    sortUpdates: "By update date",
-    authorizationHint: "You need to log in to view this section.",
-    authorize: "Log in",
-    releaseDomain: "Link domain"
-  },
-  release: {
-    missingTitle: "Release not found",
-    missingBody: "This content is unavailable in the local app storage.",
-    missingReasons: "Possible reasons:",
-    missingReasonCache: "Outdated app cache",
-    missingReasonSync: "Server synchronization issues",
-    missingReasonTemporary: "Temporary data outage",
-    whatHappened: "What happened?",
-    startWatching: "Start watching",
-    continueWatching: "Continue from episode {episode}",
-    voicedBy: "Voiced by",
-    creditsOther: "Translation, design, subtitles, timing",
-    copySuccess: "Link copied to clipboard",
-    copyError: "Failed to copy the link",
-    shareText: 'Watch "{title}" on {domain}',
-    torrentMagnet: "Use magnet links",
-    torrentSeries: "Episode {series}",
-    torrentCopyError: "Failed to copy the link",
-    torrentFetchError: "Unable to get the torrent file from the server. Check your connection or use Magnet.",
-    progressAllWatched: "All episodes watched {total}",
-    progressAllWatchedDense: "All episodes {total}",
-    progressNone: "No episodes watched out of {episodes} {total}",
-    progressNoneDense: "None out of {episodes} {total}",
-    progressPartial: "Watched {watched} out of {episodes} {total}",
-    progressPartialDense: "{watched} of {episodes} {total}",
-    markEpisodeSeen: "Mark episode as watched",
-    unmarkEpisodeSeen: "Remove watched mark",
-    markAllSeen: "Mark all episodes as watched",
-    unmarkAllSeen: "Remove all watched marks"
-  },
-  player: {
-    noSourceData: "No playback data available",
-    autoSkipOff: "Auto-skip opening disabled",
-    autoSkipOn: "Auto-skip opening enabled",
-    unsupportedAudioTrack: "Audio track is not supported",
-    skip: "Skip",
-    watch: "Watch",
-    markSkipped: "Marker skipped",
-    nextCancel: "Cancel",
-    toReleases: "Back to releases",
-    toCatalog: "Catalog",
-    toFavorites: "Favorites",
-    toEpisodes: "Episodes",
-    toTorrent: "Torrent",
-    openingSeek: "Opening seek",
-    torrentTitle: "Torrent",
-    torrentSubtitle: "Information about the current torrent and connection",
-    torrentWarning: "A low number of seeders and leechers may negatively affect download speed and cause playback buffering.",
-    torrentName: "Torrent name",
-    torrentCreatedAt: "Torrent created at",
-    torrentSeeders: "Seeders",
-    torrentLeechers: "Leechers",
-    torrentFile: "Playing file",
-    torrentSize: "File size",
-    torrentDownloadSpeed: "Download speed",
-    torrentUploadSpeed: "Upload speed",
-    torrentProgress: "Progress"
-  },
-  notifications: {
-    commentsLoadError: "Failed to load comments",
-    commentsLoadCertError: "Failed to load comments. Certificate error."
-  },
-  login: {
-    title: "Log in",
-    subtitle: "Enter the credentials you used on the AniLibria website.",
-    emailPlaceholder: "Email or login",
-    passwordPlaceholder: "Password",
-    vkLogin: "Sign in with VK",
-    userNotRegistered: "User is not registered"
-  },
-  blank: {
-    title: "What happened?",
-    subtitle: "The issue may be related to an internal API error or a navigation error in the app.",
-    backBug: "If you see this after pressing Back, this is a known issue that has not been fixed yet.",
-    defaultError: "An error occurred while loading the episode"
-  },
-  dialogs: {
-    exitTitle: "Exit",
-    exitSubtitle: "Do you really want to exit the application?",
-    exitConfirm: "Exit",
-    cacheTitle: "Application cache",
-    cacheSubtitle: "Do you really want to reset the app cache and settings?",
-    cacheConfirm: "Reset",
-    warning: "WARNING",
-    confirmSnapshotConsent: "Consent is required to transfer session data to a third-party server to work with snapshots",
-    confirmSnapshotNoPassword: "Your account password is never exposed or transferred in any form",
-    confirmAccept: "I agree",
-    confirmDecline: "No, thanks",
-    createSnapshotTitle: "Create snapshot",
-    createSnapshotQuestion: "Do you really want to create a snapshot?",
-    yes: "Yes",
-    removeSnapshotQuestion: "Do you really want to delete the snapshot?",
-    restoreSnapshotQuestion: "Do you really want to restore data from the snapshot?",
-    restoreSnapshotWarning: "This action cannot be undone. Current data will be replaced with snapshot data.",
-    snapshotsListTitle: "Snapshots list",
-    newSnapshot: "New snapshot",
-    createdAt: "Created at",
-    actions: "Actions",
-    snapshotApplied: "Snapshot data applied"
-  },
-  releasesView: {
-    errorTitle: "Failed to load releases",
-    errorSubtitlePrimary: "The problem may be related to your connection or the API server",
-    errorSubtitleSecondary: "Try changing connection settings or try again later",
-    retry: "Retry",
-    watch: "Watch"
-  },
-  main: {
-    about: "About",
-    telegram: "Telegram channel",
-    sourceCode: "Source code on GitHub",
-    anilibria: "AniLibria",
-    unofficial: "Unofficial releases channel",
-    donate: "Support the project",
-    minimize: "Minimize app",
-    quit: "Quit app",
-    debug: "Debug",
-    appConsole: "App console",
-    torrentConsole: "Torrent server console",
-    addNotification: "Add notification to store",
-    logStore: "Print store data to console",
-    forceReload: "Reload app",
-    window: "Window",
-    saveLogsDialog: "Save logs",
-    splashStartTitle: "Starting Anilibrix Plus..."
-  },
-  errors: {
-    genericLoadReleases: "Failed to load releases",
-    genericSearchReleases: "Failed to search releases",
-    genericLoadGenres: "Failed to load genre filters",
-    genericLoadYears: "Failed to load year filters",
-    genericLoadRelease: "Failed to load release",
-    genericLoadFavorites: "Failed to load favorite releases",
-    requestFailed: "Request failed",
-    sessionUndefined: "Session is not defined",
-    serverError: "Server error",
-    authFailed: "Authorization failed",
-    torrentFileExpired: "Failed to get the torrent file. The link expired or the torrent does not exist.",
-    torrentNoSource: "Failed to determine playback source",
-    torrentConnectFailed: "Failed to connect to the playback source",
-    torrentInitFailed: "An error occurred while initializing the torrent file",
-    torrentNotFound: "Torrent not found",
-    torrentStopFailed: "An error occurred while stopping and destroying the torrent file"
-  },
-  generated: {
-    episode: "Episode {number}",
-    shareThisRelease: "this release"
-  },
-  facts: [
-    "Fact #1: About 60 percent of all animation on Earth is Japanese anime.",
-    "Fact #2: The first anime to become famous outside Japan was Astro Boy in 1963.",
-    "Fact #3: The first anime shown in the USSR was “The Flying Phantom Ship”.",
-    "Fact #4: The anime hair and body drawing style was developed in Japan, and the eye style was inspired by Walt Disney.",
-    "Fact #5: By unspoken anime law, the more important a character is, the more detailed their eyes are.",
-    "Fact #6: In Japan, more paper is used to print comics than to make toilet paper rolls.",
-    "Fact #8: In Japan, the term “otaku” often has a negative meaning for people obsessed with something.",
-    "Fact #9: There is a rule with no exceptions yet: if an anime adaptation is released for a manga, its sales increase by at least 10 percent.",
-    "Fact #10: The longest-running anime series is “Sazae-san”, airing since 1969 with more than 7,000 episodes."
-  ],
-  units: {
-    release: ["release", "releases"],
-    episode: ["episode", "episodes"],
-    hour: ["hour", "hours"]
-  }
-};
-const ru$3 = {
-  common: {
-    appTitle: "AniLibrix Plus",
-    noData: "Нет данных",
-    back: "Назад",
-    close: "Закрыть",
-    cancel: "Отмена",
-    reload: "Обновить",
-    settings: "Настройки",
-    filters: "Фильтры",
-    saveLogs: "Сохранить логи",
-    restart: "Перезапустить",
-    loading: "Сохранение...",
-    logsSaved: "Логи сохранены",
-    showMore: "Показать еще",
-    home: "На главную",
-    episodes: "Эпизоды",
-    comments: "Комментарии",
-    torrents: "Торренты",
-    linked: "Связанное",
-    release: "Релиз",
-    releaseLink: "Ссылка на релиз",
-    shareVk: "Поделиться в VK",
-    shareTelegram: "Поделиться в Telegram",
-    shareTwitter: "Поделиться в Twitter",
-    login: "Авторизация",
-    logout: "Выход",
-    minutesShort: "мин",
-    secondsShort: "сек"
-  },
-  toolbar: {
-    releases: "Релизы",
-    catalog: "Каталог",
-    favorites: "Избранное",
-    randomRelease: "Случайный релиз",
-    settings: "Настройки приложения",
-    searchPlaceholder: "Поиск релиза ...",
-    refreshTitle: "Обновить последние релизы",
-    refreshedAt: "Обновлено в {datetime}",
-    login: "Авторизация",
-    notificationsWeek: "Последние уведомления за неделю",
-    notificationsEmptyTitle: "Пока что здесь нет ни одного уведомления",
-    notificationsEmptySubtitle: "Возможно скоро выйдет что-то интересное ...",
-    notificationEpisode: "Вышла {episodeNumber} серия",
-    accountFavorites: "В избранном",
-    accountWatched: "Просмотрено",
-    accountSpent: "Потрачено на просмотр"
-  },
-  language: {
-    switchToEnglish: "Switch interface to English",
-    switchToRussian: "Переключить интерфейс на русский"
-  },
-  update: {
-    title: "Доступно обновление",
-    github: "Скачать Github",
-    telegram: "Скачать Telegram"
-  },
-  settings: {
-    title: "Настройки приложения",
-    playbackTitle: "Настройки воспроизведения релизов",
-    playbackDescription: "В данном разделе вы можете настроить возможность смотреть релизы, используя торренты, а также другие настройки воспроизведения",
-    systemTitle: "Настройки приложения",
-    systemDescription: "В данном разделе вы можете настроить автоматическое обновление релизов, системные уведомления и другие параметры приложения",
-    torrentsTitle: "Торренты",
-    torrentsDescriptionPrimary: "Вы можете подключить торренты, которые автоматически будут связаны с эпизодами релизов и доступны для просмотра.",
-    torrentsDescriptionSecondary: "Торренты не требуют стороннего плеера или клиента и доступны онлайн, в меню выбора качества воспроизведения релиза.",
-    torrentsEnabled: "Воспроизводить торренты",
-    torrentsHint: "Использование торрентов требует большего времени подключения и парсинга, что может негативно сказаться на скорости загрузки данных по релизам, особенно при использовании прокси-сервера",
-    autoplayNext: "Автовоспроизведение следующего эпизода",
-    autoplayNextHint: "После окончания эпизода плеер автоматически начнет воспроизведение следующего эпизода в релизе, при его наличии",
-    bufferTitle: "Размер видео буфера",
-    bufferHint: "Величина буфера подгрузки видео, по умолчанию 5 минут",
-    bufferLabel: "Размер буфера в секундах",
-    bufferDescription: "Указывает величину буфера, который плеер держит в памяти и предзагружает видео во время просмотра",
-    autoSkip: "Автоматический пропуск опенинга",
-    autoSkipHint: "При наличии меток пропуска опенинга, он будет автоматически пропускаться",
-    autoSkipHotkey: "Горячая клавиша включения и выключения авто пропуска",
-    openingSkipButton: "Кнопка пропуска опенинга",
-    openingSkipButtonHint: "В интерфейсе плеера появится дополнительная кнопка, которая перемотает плеер на указанное количество секунд",
-    openingSkipButtonHintExtra: "Данная кнопка не гарантирует корректный пропуск опенинга",
-    openingSkipButtonHotkey: "Горячая клавиша кнопки пропуска опенинга",
-    hotkeyInput: "Нажми тут сочетание клавиш",
-    openingSkipTimeHint: "Вы можете указать на сколько секунд пропускать опенинг",
-    openingSkipTimeLabel: "Количество секунд для пропуска опенинга",
-    moveWindowButtons: "Переместить кнопки контроля вправо",
-    moveWindowButtonsHint: "Перемещает кнопки управления окном (свернуть, закрыть и развернуть) вправо",
-    favoriteNotifications: "Фильтровать уведомления по избранному",
-    favoriteNotificationsHint: "Включает показ уведомлений только для избранных релизов",
-    ignoreCerts: "Игнорировать ошибки сертификатов",
-    ignoreCertsHint: "Игнорирование проверки доверенных сертификатов",
-    operaProxy: "Использовать Opera Proxy",
-    proxyServer: "Прокси сервер",
-    proxyHint: "Прокси для подключения к серверам статики и API. Поддерживаются HTTP и HTTPS",
-    restartAfterServerChange: "После изменения серверов рекомендуется перезагрузить приложение",
-    apiEndpoint: "Адрес сервера API (выберите или впишите свой)",
-    staticEndpoint: "Адрес сервера статики (выберите или впишите свой)",
-    apiDescription: "Вы можете использовать основной сервер, если он не заблокирован вашим провайдером, или использовать дополнительные сервера. Также вы можете ввести свои адреса серверов API и статики в соответствующие поля.",
-    richPresenceHint: "Приложение будет выводить информацию о просматриваемом релизе в Discord Rich Presence",
-    systemNotifications: "Показывать системные уведомления",
-    systemNotificationsHint: "Если при загрузке последних релизов приложение обнаружит обновленный релиз, то оно покажет системное уведомление о новом эпизоде",
-    autoUpdates: "Автоматическое обновление релизов",
-    autoUpdatesHint: "Приложение будет в фоне обновлять последние релизы, даже если оно свернуто",
-    updatesTimeoutHint: "Вы можете указать с какой периодичностью приложение будет обновлять релизы в фоновом режиме",
-    updatesTimeoutLabel: "Периодичность обновления релизов",
-    snapshots: "Снапшоты",
-    snapshotsHint: "Вы можете создавать резервные копии данных приложения, привязанные к вашему аккаунту",
-    snapshotsList: "Список снапшотов",
-    credentialsBuild: "Не официальная сборка {version}",
-    about: "О приложении",
-    debugTools: "Инструменты отладки",
-    credentialsDisclaimer: "Весь материал в приложении представлен исключительно для домашнего ознакомительного просмотра.",
-    actionsTitle: "Системные команды",
-    actionsDescription: "Некоторые полезные команды для управления приложением",
-    reloadApp: "Перезагрузить приложение",
-    showConfig: "Показать расположение конфиг файла",
-    minimizeApp: "Свернуть приложение",
-    closeApp: "Закрыть приложение",
-    resetCache: "Сбросить кеш и настройки приложения",
-    debugTitle: "Инструменты отладки",
-    debugDescription: "Список инструментов для отладки приложения. Предназначены, в основном, для разработчиков",
-    appConsole: "Консоль приложения",
-    torrentConsole: "Консоль торрент-сервера",
-    addNotification: "Добавить уведомление в хранилище",
-    logStore: "Показать данные хранилища в консоли"
-  },
-  releases: {
-    pageTitle: "Последние релизы",
-    refreshUnsupported: "Функция не поддерживается выбранным API сервером"
-  },
-  catalog: {
-    pageTitle: "Каталог",
-    title: "Каталог релизов",
-    subtitle: "Вы можете выбрать жанры и года для более тонкой настройки списка релизов",
-    sort: "Сортировка",
-    sortNew: "По новизне",
-    sortPopular: "По популярности",
-    genres: "Жанры",
-    genresSubtitle: "Вы можете отфильтровать список релизов по указанным жанрам",
-    years: "Период",
-    yearsSubtitle: "Вы можете отфильтровать список релизов по годам выпуска",
-    sortSubtitle: "Вы можете отсортировть список релизов по популярности или новизне",
-    yearsPlaceholder: "Года",
-    genresPlaceholder: "Выбрать жанры",
-    releaseDomain: "Домен для ссылки"
-  },
-  favorites: {
-    pageTitle: "Избранное",
-    title: "Избранные релизы",
-    subtitle: "Список ваших избранных релизов",
-    searchPlaceholder: "Поиск по избранным релизам ...",
-    watchedReleases: "Просмотренные релизы",
-    watchedReleasesHint: "Вы можете показать или скрыть уже просмотренные релизы",
-    completedOnly: "Только завершенные",
-    completedOnlyHint: "Вы можете показать или скрыть незаконченные релизы",
-    sorting: "Сортировка",
-    sortingHint: "Вы можете настроить способ сортировки релизов",
-    grouping: "Группировка",
-    groupingHint: "Вы можете настроить способ группровки релизов",
-    noGrouping: "Без группировки",
-    yearsGrouping: "По годам",
-    sortTitle: "По названию",
-    sortPopularity: "По популярности",
-    sortFavoriteDate: "По дате добавления в избранное",
-    sortUpdates: "По дате обновления релизов",
-    authorizationHint: "Для просмотра необходимо авторизоваться в приложении",
-    authorize: "Авторизоваться",
-    releaseDomain: "Домен для ссылки"
-  },
-  release: {
-    missingTitle: "Релиз не найден",
-    missingBody: "Данный контент недоступен в локальном хранилище приложения.",
-    missingReasons: "Возможные причины:",
-    missingReasonCache: "Устаревший кеш приложения",
-    missingReasonSync: "Проблемы синхронизации с сервером",
-    missingReasonTemporary: "Временная недоступность данных",
-    whatHappened: "Что произошло?",
-    startWatching: "Начать смотреть",
-    continueWatching: "Смотреть с {episode} серии",
-    voicedBy: "Озвучили",
-    creditsOther: "Перевод, оформление, субтитры, тайминг",
-    copySuccess: "Ссылка скопирована в буфер",
-    copyError: "Не удалось скопировать ссылку",
-    shareText: 'Смотри "{title}" на {domain}',
-    torrentMagnet: "Использовать magnet ссылки",
-    torrentSeries: "Серия {series}",
-    torrentCopyError: "Не удалось скопировать ссылку",
-    torrentFetchError: "Невозможно получить файл торрента с сервера, проверьте подключение к интернету или воспользуйтесь Magnet",
-    progressAllWatched: "Просмотрены все эпизоды {total}",
-    progressAllWatchedDense: "Все эпизоды {total}",
-    progressNone: "Не просмотрено ни одного эпизода из {episodes} {total}",
-    progressNoneDense: "Ни одного эпизода из {episodes} {total}",
-    progressPartial: "Просмотрено {watched} из {episodes} {total}",
-    progressPartialDense: "{watched} из {episodes} {total}",
-    markEpisodeSeen: "Отметить серию как просмотренную",
-    unmarkEpisodeSeen: "Снять отметку о просмотре",
-    markAllSeen: "Отметить все серии как просмотренные",
-    unmarkAllSeen: "Снять все отметки о просмотре"
-  },
-  player: {
-    noSourceData: "Нет данных для воспроизведения",
-    autoSkipOff: "Авто пропуск опенинга выключен",
-    autoSkipOn: "Авто пропуск опенинга включен",
-    unsupportedAudioTrack: "Аудио дорожка не поддерживается",
-    skip: "Пропустить",
-    watch: "Смотреть",
-    markSkipped: "Метка пропущена",
-    nextCancel: "Отмена",
-    toReleases: "К списку релизов",
-    toCatalog: "Каталог",
-    toFavorites: "Избранное",
-    toEpisodes: "Эпизоды",
-    toTorrent: "Торрент",
-    openingSeek: "Перемотка опенинга",
-    torrentTitle: "Торрент",
-    torrentSubtitle: "Данные по воспроизводимому торренту и соединению",
-    torrentWarning: "Малое количество сидеров и личеров может негативно сказаться на скорости загрузки и привести к буфферизации воспроизведения",
-    torrentName: "Название торрента",
-    torrentCreatedAt: "Дата создания торрента",
-    torrentSeeders: "Количество сидеров",
-    torrentLeechers: "Количество личеров",
-    torrentFile: "Воспроизводимый файл",
-    torrentSize: "Размер файла",
-    torrentDownloadSpeed: "Скорость загрузки",
-    torrentUploadSpeed: "Скорость раздачи",
-    torrentProgress: "Прогресс"
-  },
-  notifications: {
-    commentsLoadError: "Произошла ошибка при загрузке комментариев",
-    commentsLoadCertError: "Произошла ошибка при загрузке комментариев. Ошибка с сертификатом"
-  },
-  login: {
-    title: "Авторизация",
-    subtitle: "Укажите данные, с которыми вы зарегистрировались на сайте Анилибрии",
-    emailPlaceholder: "Email или логин",
-    passwordPlaceholder: "Пароль",
-    vkLogin: "Вход через VK",
-    userNotRegistered: "Пользователь не зарегистрирован"
-  },
-  blank: {
-    title: "Что произошло?",
-    subtitle: "Возможно, проблема связана с внутренней ошибкой API или ошибкой навигации в приложении.",
-    backBug: 'Если вы видите эту ошибку после нажатия кнопки "Назад", это известная проблема, которую мы ещё не исправили.',
-    defaultError: "При загрузке эпизода произошла ошибка"
-  },
-  dialogs: {
-    exitTitle: "Выход",
-    exitSubtitle: "Вы действительно хотите выйти из приложения?",
-    exitConfirm: "Выйти",
-    cacheTitle: "Кэш приложения",
-    cacheSubtitle: "Вы действительно хотите сбросить кеш и настройки приложения?",
-    cacheConfirm: "Сбросить",
-    warning: "ПРЕДУПРЕЖДЕНИЕ",
-    confirmSnapshotConsent: "Требуется согласие на передачу данных (сессионного идентификатора) на сторонний сервер для работы со снапшотами",
-    confirmSnapshotNoPassword: "Пароль учетной записи не раскрывается и не передается ни в каком виде",
-    confirmAccept: "Я согласен",
-    confirmDecline: "Нет, спасибо",
-    createSnapshotTitle: "Создание снапшота",
-    createSnapshotQuestion: "Вы действительно хотите создать снапшот?",
-    yes: "Да",
-    removeSnapshotQuestion: "Вы действительно хотите удалить снапшот?",
-    restoreSnapshotQuestion: "Вы действительно хотите восстановить данные из снапшота?",
-    restoreSnapshotWarning: "Данное действие нельзя отменить, текущие данные будут заменены данными из снапшота",
-    snapshotsListTitle: "Список снапшотов",
-    newSnapshot: "Новый снапшот",
-    createdAt: "Дата и время создания",
-    actions: "Действия",
-    snapshotApplied: "Данные из снапшота применены"
-  },
-  releasesView: {
-    errorTitle: "Ошибка при загрузке релизов",
-    errorSubtitlePrimary: "Возможно проблема связана с вашим соединением или API сервера",
-    errorSubtitleSecondary: "Попробуйте изменить настройки соединения или попробуйте позже",
-    retry: "Повторить",
-    watch: "Смотреть"
-  },
-  main: {
-    about: "О приложении",
-    telegram: "Telegram-канал",
-    sourceCode: "Исходный код на GitHub",
-    anilibria: "Анилибрия",
-    unofficial: "Канал не официальных релизов",
-    donate: "Поддержать проект",
-    minimize: "Свернуть приложение",
-    quit: "Закрыть приложение",
-    debug: "Отладка",
-    appConsole: "Консоль приложения",
-    torrentConsole: "Консоль торрент-сервер",
-    addNotification: "Добавить уведомление в хранилище",
-    logStore: "Показать данные хранилища в консоли",
-    forceReload: "Перезагрузить приложение",
-    window: "Окно",
-    saveLogsDialog: "Save logs",
-    splashStartTitle: "Starting Anilibrix Plus..."
-  },
-  errors: {
-    genericLoadReleases: "Произошла ошибка при загрузке релизов",
-    genericSearchReleases: "Произошла ошибка при поиске релизов",
-    genericLoadGenres: "Произошла ошибка при загрузке фильтров по жанрам",
-    genericLoadYears: "Произошла ошибка при загрузке фильтров по годам",
-    genericLoadRelease: "Произошла ошибка при загрузке релиза",
-    genericLoadFavorites: "Произошла ошибка при загрузке избранных релизов",
-    requestFailed: "Ошибка при запросе",
-    sessionUndefined: "Сессия не определена",
-    serverError: "Ошибка сервера",
-    authFailed: "Произошла ошибка при авторизации",
-    torrentFileExpired: "Ошибка получения файла торрента, ссылка просрочена или торрент не существует",
-    torrentNoSource: "Не удалось определить источник воспроизведения",
-    torrentConnectFailed: "Не удалось подключиться к источнику воспроизведения",
-    torrentInitFailed: "Произошла ошибка при инициализации торрент-файла",
-    torrentNotFound: "Торрент не найден",
-    torrentStopFailed: "Произошла ошибка при остановке и уничтожении торрент-файла"
-  },
-  generated: {
-    episode: "Серия {number}",
-    shareThisRelease: "этот релиз"
-  },
-  facts: [
-    "Факт №1: 60 процентов всей анимации, что существует на нашей планете, это японское аниме.",
-    "Факт №2: Первым аниме, которое прославилось за пределами Японии, был сериал Astro Boy 1963 года.",
-    "Факт №3: Первое аниме, которое показали в СССР, был «Летающий корабль-призрак».",
-    "Факт №4: Рисовку волос и тела в аниме придумали японцы, а стиль глаз был скопирован у Уолта Диснея.",
-    "Факт №5: По негласному закону аниме, чем важнее герой, тем детальнее ему прорисовывают глаза.",
-    "Факт №6: В Японии на печать комиксов тратится больше бумаги, чем на производство туалетных рулонов.",
-    "Факт №8: В Японии термин «отаку» используется в негативном ключе для описания людей, которые чем-то одержимы.",
-    "Факт №9: Существует правило, из которого ещё не было исключений: если по манге выходит аниме, продажи первой возрастают как минимум на 10 процентов.",
-    "Факт №10: Самый длинный аниме-сериал это «Садзаэ-сан», который выходит с 1969 года по сей день. В нем больше 7 тысяч серий."
-  ],
-  units: {
-    release: ["релиз", "релиза", "релизов"],
-    episode: ["эпизод", "эпизода", "эпизодов"],
-    hour: ["час", "часа", "часов"]
-  }
-};
-const SUPPORTED_LOCALES = ["ru", "en"];
-const DEFAULT_LOCALE = "en";
-const messages$1 = { en: en$3, ru: ru$3 };
-const state = /* @__PURE__ */ reactive({
-  locale: DEFAULT_LOCALE
-});
-function getValue$2(source, path) {
-  return path.split(".").reduce((value, key) => value && value[key] !== void 0 ? value[key] : void 0, source);
-}
-function interpolate$1(value, params = {}) {
-  if (typeof value !== "string") {
-    return value;
-  }
-  return value.replace(/\{(\w+)\}/g, (match, key) => params[key] !== void 0 ? params[key] : match);
-}
-function translate(key, params = {}, locale = state.locale) {
-  const localized = getValue$2(messages$1[locale] || messages$1[DEFAULT_LOCALE], key);
-  const fallback = localized !== void 0 ? localized : getValue$2(messages$1[DEFAULT_LOCALE], key);
-  if (fallback === void 0) {
-    return key;
-  }
-  return interpolate$1(fallback, params);
-}
-function setLocale(locale) {
-  state.locale = locale || DEFAULT_LOCALE;
-}
-function getLocale() {
-  return state.locale;
-}
-function installI18n(app2) {
-  app2.config.globalProperties.$t = (key, params = {}) => translate(key, params, state.locale);
-  app2.config.globalProperties.$setLocale = setLocale;
-  Object.defineProperty(app2.config.globalProperties, "$locale", {
-    get() {
-      return state.locale;
-    }
-  });
-}
-class AccountProxy extends BaseProxy {
-  /**
-   * Login
-   *
-   * @param login
-   * @param password
-   * @return {Promise<*>}
-   */
-  async login({
-    login,
-    password
-  }) {
-    const data = this.getFormDataObject({
-      mail: login,
-      passwd: password,
-      fa2code: ""
-    });
-    const params = {
-      data,
-      headers: data.getHeaders()
-    };
-    try {
-      const response = await this.submit("POST", this.getApiLoginEndpoint(), params);
-      const status2 = get$1(response, "data.err");
-      if (status2 === "ok") {
-        const headerCookies = get$1(response, "headers.set-cookie", null);
-        const cookies2 = cookieParser(headerCookies, { map: true });
-        const session = get$1(cookies2, "PHPSESSID.value", null);
-        if (session && session.length > 0) {
-          return session;
-        } else {
-          throw new Error(translate("errors.sessionUndefined", {}, getLocale()));
-        }
-      } else {
-        throw new Error(get$1(response, "data.mes", translate("errors.serverError", {}, getLocale())));
-      }
-    } catch (e) {
-      if (!e.code) {
-        throw e;
-      }
-      throw new Error(`${translate("errors.authFailed", {}, getLocale())}: ${e.message}`);
-    }
-  }
-  /**
-   * Logout
-   *
-   * @return {Promise<*>}
-   */
-  async logout() {
-    return await this.submit("POST", this.getApiLogoutEndpoint());
-  }
-  /**
-   * Get profile
-   *
-   * @return {Promise<*>}
-   */
-  async getProfile() {
-    const data = this.getFormDataObject({ query: "user" });
-    const params = {
-      data,
-      headers: data.getHeaders()
-    };
-    const response = await this.submit("POST", this.getApiEndpoint(), params);
-    return this.handleResponse(response.data);
-  }
-  /**
-   * Get profile avatar
-   *
-   * @param src
-   * @return {string|null}
-   */
-  getAvatarPath(src) {
-    return src ? this.getStaticEndpoint() + src : null;
-  }
-}
-let Window$1 = class Window2 {
-  /**
-   * Constructor
-   *
-   * @return Window
-   */
-  constructor() {
-    this._window = null;
-  }
-  /**
-   * Get window configuration
-   *
-   * @return Object
-   */
-  getWindowConfiguration() {
-    return {};
-  }
-  /**
-   * Get window url
-   *
-   * @return String|null
-   */
-  getWindowUrl() {
-    return null;
-  }
-  /**
-   * Get window
-   *
-   * @return {BrowserWindow|null}
-   */
-  getWindow() {
-    return this._window;
-  }
-  /**
-   * Create window
-   *
-   * @return this
-   */
-  createWindow(configuration) {
-    const windowsConfig = this.getWindowConfiguration();
-    let opts = { ...windowsConfig, ...configuration };
-    const mainWindowState = windowStateKeeper({
-      file: "window-state.json",
-      defaultWidth: opts.width,
-      defaultHeight: opts.height,
-      fullScreen: false
-    });
-    if (this.isMain === true) {
-      opts = Object.assign(opts, {
-        x: mainWindowState.x,
-        y: mainWindowState.y,
-        width: mainWindowState.width,
-        height: mainWindowState.height
-      });
-      this._window = new electronExports.BrowserWindow(opts);
-      this._window.on("show", () => {
-        mainWindowState.manage(this._window);
-      });
-    } else {
-      this._window = new electronExports.BrowserWindow(opts);
-    }
-    return this;
-  }
-  /**
-   * Load window url
-   *
-   * @return this
-   */
-  loadUrl() {
-    const window2 = this.getWindow();
-    const windowUrl = this.getWindowUrl();
-    if (window2 && windowUrl) {
-      window2.loadURL(windowUrl);
-    }
-    return this;
-  }
-  /**
-   * Send to window
-   *
-   * @param channel
-   * @param payload
-   */
-  sendToWindow(channel, payload) {
-    const window2 = this.getWindow();
-    if (window2) {
-      window2.webContents.send(channel, payload);
-    }
-    return this;
-  }
-  /**
-   * Show devtools
-   *
-   * @return void
-   */
-  showDevTools() {
-    this.getWindow().openDevTools({ mode: "detach" });
-  }
-};
-class MainWindow extends Window$1 {
-  /**
-   * Get window configuration
-   *
-   * @return Object
-   */
-  getWindowConfiguration() {
-    const width = 1120;
-    const height = 720;
-    const minWidth = 820;
-    const minHeight = 520;
-    return {
-      height,
-      width,
-      minWidth,
-      minHeight,
-      show: false,
-      frame: false,
-      darkTheme: true,
-      icon: electronExports.nativeImage.createFromPath(
-        require$$0.join(process.resourcesPath, "icons", "icon.png")
-      ),
-      titleBarStyle: "hiddenInset",
-      useContentSize: true,
-      webPreferences: {
-        webgl: true,
-        webviewTag: true,
-        webSecurity: false,
-        autoplayPolicy: "no-user-gesture-required",
-        nodeIntegration: true,
-        contextIsolation: false,
-        enableRemoteModule: true,
-        experimentalFeatures: true,
-        allowRunningInsecureContent: true
-      },
-      backgroundColor: "#121212"
-    };
-  }
-  get isMain() {
-    return true;
-  }
-  /**
-   * Get window url
-   *
-   * @return {string}
-   */
-  getWindowUrl() {
-    return `file://${__dirname}/index.html`;
-  }
-}
-const Main = new MainWindow();
-const APP_ERROR = "app:error";
-const APP_NOTIFICATION_RELEASE = "app:notification:release";
-const showAppError = (error) => Main.sendToWindow(APP_ERROR, error);
-const sendReleaseNotification = (release) => Main.sendToWindow(APP_NOTIFICATION_RELEASE, release);
-const catchReleaseNotification = (callback) => electronExports.ipcRenderer.on(APP_NOTIFICATION_RELEASE, (e, release) => callback(release));
-const { safeStorage } = require("electron");
-const Storage = require("electron-store");
-const storage = new Storage({
-  name: "anilibrix_safe",
-  clearInvalidConfig: true
-});
-function remove(prop) {
-  storage.delete(prop);
-}
-function getDecrypted(prop) {
-  if (!safeStorage.isEncryptionAvailable()) return false;
-  const data = storage.get(prop);
-  if (data === void 0) return false;
-  const encryptedString = Buffer.from(
-    data,
-    "base64"
-  );
-  return safeStorage.decryptString(encryptedString);
-}
-const uuid$1 = () => crypto.randomUUID();
-const useAccountStore = /* @__PURE__ */ defineStore("account", {
-  state: () => ({
-    userId: null,
-    session: null,
-    profile: {
-      id: null,
-      login: null,
-      avatar: null
-    }
-  }),
-  getters: {
-    /**
-     * Check if user is authorized
-     */
-    isAuthorized: (s) => !!(s.session !== null && s.profile.id !== null)
-  },
-  actions: {
-    /**
-     * Try to login with provided credentials
-     */
-    async login({ login, password }) {
-      try {
-        this.setSession(null);
-        this.setProfile(null);
-        return await new AccountProxy().login({ login, password });
-      } catch (error) {
-        showAppError(error);
-      }
-    },
-    /**
-     * Logout user
-     */
-    async logout() {
-      try {
-        await new AccountProxy().logout();
-      } catch (error) {
-        throw error;
-      } finally {
-        this.setSession(null);
-        this.setProfile(null);
-        remove("user.login");
-        remove("user.password");
-      }
-    },
-    /**
-     * Get profile data
-     */
-    async getProfile() {
-      const getProfileData = async () => {
-        const profile = await new AccountProxy().getProfile();
-        const id = get$1(profile, "id");
-        const login = get$1(profile, "login");
-        const avatar = new AccountProxy().getAvatarPath(get$1(profile, "avatar"));
-        this.setProfile({ id, login, avatar });
-      };
-      try {
-        await getProfileData();
-      } catch (error) {
-        const login = getDecrypted("user.login");
-        const password = getDecrypted("user.password");
-        if (login !== false && password !== false) {
-          const session = await this.login({ login, password });
-          this.setSession(session);
-          await getProfileData();
-          return;
-        }
-        this.setSession(null);
-        this.setProfile(null);
-        throw error;
-      }
-    },
-    /**
-     * Set account id — generate random uuid if not set yet
-     */
-    setUserId() {
-      if (this.userId === null) this.userId = uuid$1();
-    },
-    /**
-     * Set session value
-     */
-    setSession(session = null) {
-      this.session = session || null;
-    },
-    /**
-     * Set profile data
-     */
-    setProfile(profile = null) {
-      this.profile.id = get$1(profile, "id") || null;
-      this.profile.login = get$1(profile, "login") || null;
-      this.profile.avatar = get$1(profile, "avatar") || null;
-    }
-  }
-});
-const useAccountStore$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  useAccountStore
-}, Symbol.toStringTag, { value: "Module" }));
 function bind(fn, thisArg) {
   return function wrap() {
     return fn.apply(thisArg, arguments);
@@ -20066,6 +18827,710 @@ const responseErrorHandler = async (error) => {
   return Promise.reject(error);
 };
 axios.interceptors.response.use((request) => request, responseErrorHandler);
+const en$3 = {
+  common: {
+    appTitle: "AniLibrix Plus",
+    noData: "No data",
+    back: "Back",
+    close: "Close",
+    cancel: "Cancel",
+    reload: "Reload",
+    settings: "Settings",
+    filters: "Filters",
+    saveLogs: "Save logs",
+    restart: "Restart",
+    loading: "Saving...",
+    logsSaved: "Logs saved",
+    showMore: "Show more",
+    home: "Home",
+    episodes: "Episodes",
+    comments: "Comments",
+    torrents: "Torrents",
+    linked: "Related",
+    release: "Release",
+    releaseLink: "Release link",
+    shareVk: "Share on VK",
+    shareTelegram: "Share on Telegram",
+    shareTwitter: "Share on Twitter",
+    login: "Log in",
+    logout: "Log out",
+    minutesShort: "min",
+    secondsShort: "sec"
+  },
+  toolbar: {
+    releases: "Releases",
+    catalog: "Catalog",
+    favorites: "Favorites",
+    randomRelease: "Random release",
+    settings: "App settings",
+    searchPlaceholder: "Search release...",
+    refreshTitle: "Refresh latest releases",
+    refreshedAt: "Updated at {datetime}",
+    login: "Log in",
+    notificationsWeek: "Latest notifications this week",
+    notificationsEmptyTitle: "There are no notifications here yet",
+    notificationsEmptySubtitle: "Maybe something interesting will be released soon...",
+    notificationEpisode: "Episode {episodeNumber} is out",
+    accountFavorites: "In favorites",
+    accountWatched: "Watched",
+    accountSpent: "Time spent watching"
+  },
+  language: {
+    switchToEnglish: "Switch interface to English",
+    switchToRussian: "Переключить интерфейс на русский"
+  },
+  update: {
+    title: "Update available",
+    github: "Download from GitHub",
+    telegram: "Download from Telegram"
+  },
+  settings: {
+    title: "App settings",
+    playbackTitle: "Release playback settings",
+    playbackDescription: "Here you can configure torrent playback support and other playback settings.",
+    systemTitle: "App settings",
+    systemDescription: "Here you can configure automatic release updates, system notifications, and other application settings.",
+    torrentsTitle: "Torrents",
+    torrentsDescriptionPrimary: "You can enable torrents that will automatically be linked to release episodes and made available for playback.",
+    torrentsDescriptionSecondary: "Torrents do not require an external player or client and are available online in the quality selection menu.",
+    torrentsEnabled: "Play torrents",
+    torrentsHint: "Using torrents requires more connection and parsing time, which can negatively affect release data loading speed, especially when using a proxy server.",
+    autoplayNext: "Autoplay next episode",
+    autoplayNextHint: "After an episode ends, the player will automatically start the next episode in the release if it is available.",
+    bufferTitle: "Video buffer size",
+    bufferHint: "Buffered preload size. Default is 5 minutes.",
+    bufferLabel: "Buffer size in seconds",
+    bufferDescription: "Defines the amount of buffer the player keeps in memory and preloads while watching.",
+    autoSkip: "Auto-skip opening",
+    autoSkipHint: "If opening skip markers are available, the opening will be skipped automatically.",
+    autoSkipHotkey: "Hotkey to toggle auto-skip",
+    openingSkipButton: "Opening skip button",
+    openingSkipButtonHint: "An extra button will appear in the player UI and seek forward by the specified number of seconds.",
+    openingSkipButtonHintExtra: "This button does not guarantee an accurate opening skip.",
+    openingSkipButtonHotkey: "Hotkey for the opening skip button",
+    hotkeyInput: "Press a key combination here",
+    openingSkipTimeHint: "You can set how many seconds to skip for the opening.",
+    openingSkipTimeLabel: "Opening skip time in seconds",
+    moveWindowButtons: "Move window controls to the right",
+    moveWindowButtonsHint: "Moves the window control buttons (minimize, close, maximize) to the right.",
+    favoriteNotifications: "Filter notifications by favorites",
+    favoriteNotificationsHint: "Shows notifications only for releases in favorites.",
+    ignoreCerts: "Ignore certificate errors",
+    ignoreCertsHint: "Ignore trusted certificate validation errors.",
+    operaProxy: "Use Opera Proxy",
+    proxyServer: "Proxy server",
+    proxyHint: "Proxy used for static and API servers. HTTP and HTTPS are supported.",
+    restartAfterServerChange: "Restarting the app after changing servers is recommended.",
+    apiEndpoint: "API server address (select one or enter your own)",
+    staticEndpoint: "Static server address (select one or enter your own)",
+    apiDescription: "You can use the main server if it is not blocked by your provider, or use additional servers. You can also enter your own API and static server addresses.",
+    richPresenceHint: "The app will show information about the currently watched release in Discord Rich Presence.",
+    systemNotifications: "Show system notifications",
+    systemNotificationsHint: "If the app detects an updated release while loading the latest releases, it will show a system notification about the new episode.",
+    autoUpdates: "Automatic release updates",
+    autoUpdatesHint: "The app will refresh latest releases in the background even when minimized.",
+    updatesTimeoutHint: "You can set how often the app refreshes releases in the background.",
+    updatesTimeoutLabel: "Release update interval",
+    snapshots: "Snapshots",
+    snapshotsHint: "You can create backups of app data linked to your account.",
+    snapshotsList: "Snapshots list",
+    credentialsBuild: "Unofficial build {version}",
+    about: "About",
+    debugTools: "Debug tools",
+    credentialsDisclaimer: "All materials in the app are provided for personal preview viewing only.",
+    actionsTitle: "System commands",
+    actionsDescription: "Useful commands for managing the application",
+    reloadApp: "Reload application",
+    showConfig: "Show config file location",
+    minimizeApp: "Minimize application",
+    closeApp: "Close application",
+    resetCache: "Reset app cache and settings",
+    debugTitle: "Debug tools",
+    debugDescription: "A list of debugging tools for the application, mainly intended for developers",
+    appConsole: "Application console",
+    torrentConsole: "Torrent server console",
+    addNotification: "Add notification to store",
+    logStore: "Print store data to console"
+  },
+  releases: {
+    pageTitle: "Latest releases",
+    refreshUnsupported: "This feature is not supported by the selected API server"
+  },
+  catalog: {
+    pageTitle: "Catalog",
+    title: "Release catalog",
+    subtitle: "You can choose genres and years to fine-tune the release list.",
+    sort: "Sorting",
+    sortNew: "Newest first",
+    sortPopular: "Most popular",
+    genres: "Genres",
+    genresSubtitle: "Filter the release list by selected genres.",
+    years: "Period",
+    yearsSubtitle: "Filter the release list by release years.",
+    sortSubtitle: "Sort the release list by popularity or novelty.",
+    yearsPlaceholder: "Years",
+    genresPlaceholder: "Select genres",
+    releaseDomain: "Link domain"
+  },
+  favorites: {
+    pageTitle: "Favorites",
+    title: "Favorite releases",
+    subtitle: "List of your favorite releases",
+    searchPlaceholder: "Search favorite releases...",
+    watchedReleases: "Watched releases",
+    watchedReleasesHint: "Show or hide releases you already watched.",
+    completedOnly: "Completed only",
+    completedOnlyHint: "Show or hide unfinished releases.",
+    sorting: "Sorting",
+    sortingHint: "Choose how releases are sorted.",
+    grouping: "Grouping",
+    groupingHint: "Choose how releases are grouped.",
+    noGrouping: "No grouping",
+    yearsGrouping: "By year",
+    sortTitle: "By title",
+    sortPopularity: "By popularity",
+    sortFavoriteDate: "By favorite date",
+    sortUpdates: "By update date",
+    authorizationHint: "You need to log in to view this section.",
+    authorize: "Log in",
+    releaseDomain: "Link domain"
+  },
+  release: {
+    missingTitle: "Release not found",
+    missingBody: "This content is unavailable in the local app storage.",
+    missingReasons: "Possible reasons:",
+    missingReasonCache: "Outdated app cache",
+    missingReasonSync: "Server synchronization issues",
+    missingReasonTemporary: "Temporary data outage",
+    whatHappened: "What happened?",
+    startWatching: "Start watching",
+    continueWatching: "Continue from episode {episode}",
+    voicedBy: "Voiced by",
+    creditsOther: "Translation, design, subtitles, timing",
+    copySuccess: "Link copied to clipboard",
+    copyError: "Failed to copy the link",
+    shareText: 'Watch "{title}" on {domain}',
+    torrentMagnet: "Use magnet links",
+    torrentSeries: "Episode {series}",
+    torrentCopyError: "Failed to copy the link",
+    torrentFetchError: "Unable to get the torrent file from the server. Check your connection or use Magnet.",
+    progressAllWatched: "All episodes watched {total}",
+    progressAllWatchedDense: "All episodes {total}",
+    progressNone: "No episodes watched out of {episodes} {total}",
+    progressNoneDense: "None out of {episodes} {total}",
+    progressPartial: "Watched {watched} out of {episodes} {total}",
+    progressPartialDense: "{watched} of {episodes} {total}",
+    markEpisodeSeen: "Mark episode as watched",
+    unmarkEpisodeSeen: "Remove watched mark",
+    markAllSeen: "Mark all episodes as watched",
+    unmarkAllSeen: "Remove all watched marks"
+  },
+  player: {
+    noSourceData: "No playback data available",
+    autoSkipOff: "Auto-skip opening disabled",
+    autoSkipOn: "Auto-skip opening enabled",
+    unsupportedAudioTrack: "Audio track is not supported",
+    skip: "Skip",
+    watch: "Watch",
+    markSkipped: "Marker skipped",
+    nextCancel: "Cancel",
+    toReleases: "Back to releases",
+    toCatalog: "Catalog",
+    toFavorites: "Favorites",
+    toEpisodes: "Episodes",
+    toTorrent: "Torrent",
+    openingSeek: "Opening seek",
+    torrentTitle: "Torrent",
+    torrentSubtitle: "Information about the current torrent and connection",
+    torrentWarning: "A low number of seeders and leechers may negatively affect download speed and cause playback buffering.",
+    torrentName: "Torrent name",
+    torrentCreatedAt: "Torrent created at",
+    torrentSeeders: "Seeders",
+    torrentLeechers: "Leechers",
+    torrentFile: "Playing file",
+    torrentSize: "File size",
+    torrentDownloadSpeed: "Download speed",
+    torrentUploadSpeed: "Upload speed",
+    torrentProgress: "Progress"
+  },
+  notifications: {
+    commentsLoadError: "Failed to load comments",
+    commentsLoadCertError: "Failed to load comments. Certificate error."
+  },
+  login: {
+    title: "Log in",
+    subtitle: "Enter the credentials you used on the AniLibria website.",
+    emailPlaceholder: "Email or login",
+    passwordPlaceholder: "Password",
+    vkLogin: "Sign in with VK",
+    userNotRegistered: "User is not registered"
+  },
+  blank: {
+    title: "What happened?",
+    subtitle: "The issue may be related to an internal API error or a navigation error in the app.",
+    backBug: "If you see this after pressing Back, this is a known issue that has not been fixed yet.",
+    defaultError: "An error occurred while loading the episode"
+  },
+  dialogs: {
+    exitTitle: "Exit",
+    exitSubtitle: "Do you really want to exit the application?",
+    exitConfirm: "Exit",
+    cacheTitle: "Application cache",
+    cacheSubtitle: "Do you really want to reset the app cache and settings?",
+    cacheConfirm: "Reset",
+    warning: "WARNING",
+    confirmSnapshotConsent: "Consent is required to transfer session data to a third-party server to work with snapshots",
+    confirmSnapshotNoPassword: "Your account password is never exposed or transferred in any form",
+    confirmAccept: "I agree",
+    confirmDecline: "No, thanks",
+    createSnapshotTitle: "Create snapshot",
+    createSnapshotQuestion: "Do you really want to create a snapshot?",
+    yes: "Yes",
+    removeSnapshotQuestion: "Do you really want to delete the snapshot?",
+    restoreSnapshotQuestion: "Do you really want to restore data from the snapshot?",
+    restoreSnapshotWarning: "This action cannot be undone. Current data will be replaced with snapshot data.",
+    snapshotsListTitle: "Snapshots list",
+    newSnapshot: "New snapshot",
+    createdAt: "Created at",
+    actions: "Actions",
+    snapshotApplied: "Snapshot data applied"
+  },
+  releasesView: {
+    errorTitle: "Failed to load releases",
+    errorSubtitlePrimary: "The problem may be related to your connection or the API server",
+    errorSubtitleSecondary: "Try changing connection settings or try again later",
+    retry: "Retry",
+    watch: "Watch"
+  },
+  main: {
+    about: "About",
+    telegram: "Telegram channel",
+    sourceCode: "Source code on GitHub",
+    anilibria: "AniLibria",
+    unofficial: "Unofficial releases channel",
+    donate: "Support the project",
+    minimize: "Minimize app",
+    quit: "Quit app",
+    debug: "Debug",
+    appConsole: "App console",
+    torrentConsole: "Torrent server console",
+    addNotification: "Add notification to store",
+    logStore: "Print store data to console",
+    forceReload: "Reload app",
+    window: "Window",
+    saveLogsDialog: "Save logs",
+    splashStartTitle: "Starting Anilibrix Plus..."
+  },
+  errors: {
+    genericLoadReleases: "Failed to load releases",
+    genericSearchReleases: "Failed to search releases",
+    genericLoadGenres: "Failed to load genre filters",
+    genericLoadYears: "Failed to load year filters",
+    genericLoadRelease: "Failed to load release",
+    genericLoadFavorites: "Failed to load favorite releases",
+    requestFailed: "Request failed",
+    sessionUndefined: "Session is not defined",
+    serverError: "Server error",
+    authFailed: "Authorization failed",
+    torrentFileExpired: "Failed to get the torrent file. The link expired or the torrent does not exist.",
+    torrentNoSource: "Failed to determine playback source",
+    torrentConnectFailed: "Failed to connect to the playback source",
+    torrentInitFailed: "An error occurred while initializing the torrent file",
+    torrentNotFound: "Torrent not found",
+    torrentStopFailed: "An error occurred while stopping and destroying the torrent file"
+  },
+  generated: {
+    episode: "Episode {number}",
+    shareThisRelease: "this release"
+  },
+  facts: [
+    "Fact #1: About 60 percent of all animation on Earth is Japanese anime.",
+    "Fact #2: The first anime to become famous outside Japan was Astro Boy in 1963.",
+    "Fact #3: The first anime shown in the USSR was “The Flying Phantom Ship”.",
+    "Fact #4: The anime hair and body drawing style was developed in Japan, and the eye style was inspired by Walt Disney.",
+    "Fact #5: By unspoken anime law, the more important a character is, the more detailed their eyes are.",
+    "Fact #6: In Japan, more paper is used to print comics than to make toilet paper rolls.",
+    "Fact #8: In Japan, the term “otaku” often has a negative meaning for people obsessed with something.",
+    "Fact #9: There is a rule with no exceptions yet: if an anime adaptation is released for a manga, its sales increase by at least 10 percent.",
+    "Fact #10: The longest-running anime series is “Sazae-san”, airing since 1969 with more than 7,000 episodes."
+  ],
+  units: {
+    release: ["release", "releases"],
+    episode: ["episode", "episodes"],
+    hour: ["hour", "hours"]
+  }
+};
+const ru$3 = {
+  common: {
+    appTitle: "AniLibrix Plus",
+    noData: "Нет данных",
+    back: "Назад",
+    close: "Закрыть",
+    cancel: "Отмена",
+    reload: "Обновить",
+    settings: "Настройки",
+    filters: "Фильтры",
+    saveLogs: "Сохранить логи",
+    restart: "Перезапустить",
+    loading: "Сохранение...",
+    logsSaved: "Логи сохранены",
+    showMore: "Показать еще",
+    home: "На главную",
+    episodes: "Эпизоды",
+    comments: "Комментарии",
+    torrents: "Торренты",
+    linked: "Связанное",
+    release: "Релиз",
+    releaseLink: "Ссылка на релиз",
+    shareVk: "Поделиться в VK",
+    shareTelegram: "Поделиться в Telegram",
+    shareTwitter: "Поделиться в Twitter",
+    login: "Авторизация",
+    logout: "Выход",
+    minutesShort: "мин",
+    secondsShort: "сек"
+  },
+  toolbar: {
+    releases: "Релизы",
+    catalog: "Каталог",
+    favorites: "Избранное",
+    randomRelease: "Случайный релиз",
+    settings: "Настройки приложения",
+    searchPlaceholder: "Поиск релиза ...",
+    refreshTitle: "Обновить последние релизы",
+    refreshedAt: "Обновлено в {datetime}",
+    login: "Авторизация",
+    notificationsWeek: "Последние уведомления за неделю",
+    notificationsEmptyTitle: "Пока что здесь нет ни одного уведомления",
+    notificationsEmptySubtitle: "Возможно скоро выйдет что-то интересное ...",
+    notificationEpisode: "Вышла {episodeNumber} серия",
+    accountFavorites: "В избранном",
+    accountWatched: "Просмотрено",
+    accountSpent: "Потрачено на просмотр"
+  },
+  language: {
+    switchToEnglish: "Switch interface to English",
+    switchToRussian: "Переключить интерфейс на русский"
+  },
+  update: {
+    title: "Доступно обновление",
+    github: "Скачать Github",
+    telegram: "Скачать Telegram"
+  },
+  settings: {
+    title: "Настройки приложения",
+    playbackTitle: "Настройки воспроизведения релизов",
+    playbackDescription: "В данном разделе вы можете настроить возможность смотреть релизы, используя торренты, а также другие настройки воспроизведения",
+    systemTitle: "Настройки приложения",
+    systemDescription: "В данном разделе вы можете настроить автоматическое обновление релизов, системные уведомления и другие параметры приложения",
+    torrentsTitle: "Торренты",
+    torrentsDescriptionPrimary: "Вы можете подключить торренты, которые автоматически будут связаны с эпизодами релизов и доступны для просмотра.",
+    torrentsDescriptionSecondary: "Торренты не требуют стороннего плеера или клиента и доступны онлайн, в меню выбора качества воспроизведения релиза.",
+    torrentsEnabled: "Воспроизводить торренты",
+    torrentsHint: "Использование торрентов требует большего времени подключения и парсинга, что может негативно сказаться на скорости загрузки данных по релизам, особенно при использовании прокси-сервера",
+    autoplayNext: "Автовоспроизведение следующего эпизода",
+    autoplayNextHint: "После окончания эпизода плеер автоматически начнет воспроизведение следующего эпизода в релизе, при его наличии",
+    bufferTitle: "Размер видео буфера",
+    bufferHint: "Величина буфера подгрузки видео, по умолчанию 5 минут",
+    bufferLabel: "Размер буфера в секундах",
+    bufferDescription: "Указывает величину буфера, который плеер держит в памяти и предзагружает видео во время просмотра",
+    autoSkip: "Автоматический пропуск опенинга",
+    autoSkipHint: "При наличии меток пропуска опенинга, он будет автоматически пропускаться",
+    autoSkipHotkey: "Горячая клавиша включения и выключения авто пропуска",
+    openingSkipButton: "Кнопка пропуска опенинга",
+    openingSkipButtonHint: "В интерфейсе плеера появится дополнительная кнопка, которая перемотает плеер на указанное количество секунд",
+    openingSkipButtonHintExtra: "Данная кнопка не гарантирует корректный пропуск опенинга",
+    openingSkipButtonHotkey: "Горячая клавиша кнопки пропуска опенинга",
+    hotkeyInput: "Нажми тут сочетание клавиш",
+    openingSkipTimeHint: "Вы можете указать на сколько секунд пропускать опенинг",
+    openingSkipTimeLabel: "Количество секунд для пропуска опенинга",
+    moveWindowButtons: "Переместить кнопки контроля вправо",
+    moveWindowButtonsHint: "Перемещает кнопки управления окном (свернуть, закрыть и развернуть) вправо",
+    favoriteNotifications: "Фильтровать уведомления по избранному",
+    favoriteNotificationsHint: "Включает показ уведомлений только для избранных релизов",
+    ignoreCerts: "Игнорировать ошибки сертификатов",
+    ignoreCertsHint: "Игнорирование проверки доверенных сертификатов",
+    operaProxy: "Использовать Opera Proxy",
+    proxyServer: "Прокси сервер",
+    proxyHint: "Прокси для подключения к серверам статики и API. Поддерживаются HTTP и HTTPS",
+    restartAfterServerChange: "После изменения серверов рекомендуется перезагрузить приложение",
+    apiEndpoint: "Адрес сервера API (выберите или впишите свой)",
+    staticEndpoint: "Адрес сервера статики (выберите или впишите свой)",
+    apiDescription: "Вы можете использовать основной сервер, если он не заблокирован вашим провайдером, или использовать дополнительные сервера. Также вы можете ввести свои адреса серверов API и статики в соответствующие поля.",
+    richPresenceHint: "Приложение будет выводить информацию о просматриваемом релизе в Discord Rich Presence",
+    systemNotifications: "Показывать системные уведомления",
+    systemNotificationsHint: "Если при загрузке последних релизов приложение обнаружит обновленный релиз, то оно покажет системное уведомление о новом эпизоде",
+    autoUpdates: "Автоматическое обновление релизов",
+    autoUpdatesHint: "Приложение будет в фоне обновлять последние релизы, даже если оно свернуто",
+    updatesTimeoutHint: "Вы можете указать с какой периодичностью приложение будет обновлять релизы в фоновом режиме",
+    updatesTimeoutLabel: "Периодичность обновления релизов",
+    snapshots: "Снапшоты",
+    snapshotsHint: "Вы можете создавать резервные копии данных приложения, привязанные к вашему аккаунту",
+    snapshotsList: "Список снапшотов",
+    credentialsBuild: "Не официальная сборка {version}",
+    about: "О приложении",
+    debugTools: "Инструменты отладки",
+    credentialsDisclaimer: "Весь материал в приложении представлен исключительно для домашнего ознакомительного просмотра.",
+    actionsTitle: "Системные команды",
+    actionsDescription: "Некоторые полезные команды для управления приложением",
+    reloadApp: "Перезагрузить приложение",
+    showConfig: "Показать расположение конфиг файла",
+    minimizeApp: "Свернуть приложение",
+    closeApp: "Закрыть приложение",
+    resetCache: "Сбросить кеш и настройки приложения",
+    debugTitle: "Инструменты отладки",
+    debugDescription: "Список инструментов для отладки приложения. Предназначены, в основном, для разработчиков",
+    appConsole: "Консоль приложения",
+    torrentConsole: "Консоль торрент-сервера",
+    addNotification: "Добавить уведомление в хранилище",
+    logStore: "Показать данные хранилища в консоли"
+  },
+  releases: {
+    pageTitle: "Последние релизы",
+    refreshUnsupported: "Функция не поддерживается выбранным API сервером"
+  },
+  catalog: {
+    pageTitle: "Каталог",
+    title: "Каталог релизов",
+    subtitle: "Вы можете выбрать жанры и года для более тонкой настройки списка релизов",
+    sort: "Сортировка",
+    sortNew: "По новизне",
+    sortPopular: "По популярности",
+    genres: "Жанры",
+    genresSubtitle: "Вы можете отфильтровать список релизов по указанным жанрам",
+    years: "Период",
+    yearsSubtitle: "Вы можете отфильтровать список релизов по годам выпуска",
+    sortSubtitle: "Вы можете отсортировть список релизов по популярности или новизне",
+    yearsPlaceholder: "Года",
+    genresPlaceholder: "Выбрать жанры",
+    releaseDomain: "Домен для ссылки"
+  },
+  favorites: {
+    pageTitle: "Избранное",
+    title: "Избранные релизы",
+    subtitle: "Список ваших избранных релизов",
+    searchPlaceholder: "Поиск по избранным релизам ...",
+    watchedReleases: "Просмотренные релизы",
+    watchedReleasesHint: "Вы можете показать или скрыть уже просмотренные релизы",
+    completedOnly: "Только завершенные",
+    completedOnlyHint: "Вы можете показать или скрыть незаконченные релизы",
+    sorting: "Сортировка",
+    sortingHint: "Вы можете настроить способ сортировки релизов",
+    grouping: "Группировка",
+    groupingHint: "Вы можете настроить способ группровки релизов",
+    noGrouping: "Без группировки",
+    yearsGrouping: "По годам",
+    sortTitle: "По названию",
+    sortPopularity: "По популярности",
+    sortFavoriteDate: "По дате добавления в избранное",
+    sortUpdates: "По дате обновления релизов",
+    authorizationHint: "Для просмотра необходимо авторизоваться в приложении",
+    authorize: "Авторизоваться",
+    releaseDomain: "Домен для ссылки"
+  },
+  release: {
+    missingTitle: "Релиз не найден",
+    missingBody: "Данный контент недоступен в локальном хранилище приложения.",
+    missingReasons: "Возможные причины:",
+    missingReasonCache: "Устаревший кеш приложения",
+    missingReasonSync: "Проблемы синхронизации с сервером",
+    missingReasonTemporary: "Временная недоступность данных",
+    whatHappened: "Что произошло?",
+    startWatching: "Начать смотреть",
+    continueWatching: "Смотреть с {episode} серии",
+    voicedBy: "Озвучили",
+    creditsOther: "Перевод, оформление, субтитры, тайминг",
+    copySuccess: "Ссылка скопирована в буфер",
+    copyError: "Не удалось скопировать ссылку",
+    shareText: 'Смотри "{title}" на {domain}',
+    torrentMagnet: "Использовать magnet ссылки",
+    torrentSeries: "Серия {series}",
+    torrentCopyError: "Не удалось скопировать ссылку",
+    torrentFetchError: "Невозможно получить файл торрента с сервера, проверьте подключение к интернету или воспользуйтесь Magnet",
+    progressAllWatched: "Просмотрены все эпизоды {total}",
+    progressAllWatchedDense: "Все эпизоды {total}",
+    progressNone: "Не просмотрено ни одного эпизода из {episodes} {total}",
+    progressNoneDense: "Ни одного эпизода из {episodes} {total}",
+    progressPartial: "Просмотрено {watched} из {episodes} {total}",
+    progressPartialDense: "{watched} из {episodes} {total}",
+    markEpisodeSeen: "Отметить серию как просмотренную",
+    unmarkEpisodeSeen: "Снять отметку о просмотре",
+    markAllSeen: "Отметить все серии как просмотренные",
+    unmarkAllSeen: "Снять все отметки о просмотре"
+  },
+  player: {
+    noSourceData: "Нет данных для воспроизведения",
+    autoSkipOff: "Авто пропуск опенинга выключен",
+    autoSkipOn: "Авто пропуск опенинга включен",
+    unsupportedAudioTrack: "Аудио дорожка не поддерживается",
+    skip: "Пропустить",
+    watch: "Смотреть",
+    markSkipped: "Метка пропущена",
+    nextCancel: "Отмена",
+    toReleases: "К списку релизов",
+    toCatalog: "Каталог",
+    toFavorites: "Избранное",
+    toEpisodes: "Эпизоды",
+    toTorrent: "Торрент",
+    openingSeek: "Перемотка опенинга",
+    torrentTitle: "Торрент",
+    torrentSubtitle: "Данные по воспроизводимому торренту и соединению",
+    torrentWarning: "Малое количество сидеров и личеров может негативно сказаться на скорости загрузки и привести к буфферизации воспроизведения",
+    torrentName: "Название торрента",
+    torrentCreatedAt: "Дата создания торрента",
+    torrentSeeders: "Количество сидеров",
+    torrentLeechers: "Количество личеров",
+    torrentFile: "Воспроизводимый файл",
+    torrentSize: "Размер файла",
+    torrentDownloadSpeed: "Скорость загрузки",
+    torrentUploadSpeed: "Скорость раздачи",
+    torrentProgress: "Прогресс"
+  },
+  notifications: {
+    commentsLoadError: "Произошла ошибка при загрузке комментариев",
+    commentsLoadCertError: "Произошла ошибка при загрузке комментариев. Ошибка с сертификатом"
+  },
+  login: {
+    title: "Авторизация",
+    subtitle: "Укажите данные, с которыми вы зарегистрировались на сайте Анилибрии",
+    emailPlaceholder: "Email или логин",
+    passwordPlaceholder: "Пароль",
+    vkLogin: "Вход через VK",
+    userNotRegistered: "Пользователь не зарегистрирован"
+  },
+  blank: {
+    title: "Что произошло?",
+    subtitle: "Возможно, проблема связана с внутренней ошибкой API или ошибкой навигации в приложении.",
+    backBug: 'Если вы видите эту ошибку после нажатия кнопки "Назад", это известная проблема, которую мы ещё не исправили.',
+    defaultError: "При загрузке эпизода произошла ошибка"
+  },
+  dialogs: {
+    exitTitle: "Выход",
+    exitSubtitle: "Вы действительно хотите выйти из приложения?",
+    exitConfirm: "Выйти",
+    cacheTitle: "Кэш приложения",
+    cacheSubtitle: "Вы действительно хотите сбросить кеш и настройки приложения?",
+    cacheConfirm: "Сбросить",
+    warning: "ПРЕДУПРЕЖДЕНИЕ",
+    confirmSnapshotConsent: "Требуется согласие на передачу данных (сессионного идентификатора) на сторонний сервер для работы со снапшотами",
+    confirmSnapshotNoPassword: "Пароль учетной записи не раскрывается и не передается ни в каком виде",
+    confirmAccept: "Я согласен",
+    confirmDecline: "Нет, спасибо",
+    createSnapshotTitle: "Создание снапшота",
+    createSnapshotQuestion: "Вы действительно хотите создать снапшот?",
+    yes: "Да",
+    removeSnapshotQuestion: "Вы действительно хотите удалить снапшот?",
+    restoreSnapshotQuestion: "Вы действительно хотите восстановить данные из снапшота?",
+    restoreSnapshotWarning: "Данное действие нельзя отменить, текущие данные будут заменены данными из снапшота",
+    snapshotsListTitle: "Список снапшотов",
+    newSnapshot: "Новый снапшот",
+    createdAt: "Дата и время создания",
+    actions: "Действия",
+    snapshotApplied: "Данные из снапшота применены"
+  },
+  releasesView: {
+    errorTitle: "Ошибка при загрузке релизов",
+    errorSubtitlePrimary: "Возможно проблема связана с вашим соединением или API сервера",
+    errorSubtitleSecondary: "Попробуйте изменить настройки соединения или попробуйте позже",
+    retry: "Повторить",
+    watch: "Смотреть"
+  },
+  main: {
+    about: "О приложении",
+    telegram: "Telegram-канал",
+    sourceCode: "Исходный код на GitHub",
+    anilibria: "Анилибрия",
+    unofficial: "Канал не официальных релизов",
+    donate: "Поддержать проект",
+    minimize: "Свернуть приложение",
+    quit: "Закрыть приложение",
+    debug: "Отладка",
+    appConsole: "Консоль приложения",
+    torrentConsole: "Консоль торрент-сервер",
+    addNotification: "Добавить уведомление в хранилище",
+    logStore: "Показать данные хранилища в консоли",
+    forceReload: "Перезагрузить приложение",
+    window: "Окно",
+    saveLogsDialog: "Save logs",
+    splashStartTitle: "Starting Anilibrix Plus..."
+  },
+  errors: {
+    genericLoadReleases: "Произошла ошибка при загрузке релизов",
+    genericSearchReleases: "Произошла ошибка при поиске релизов",
+    genericLoadGenres: "Произошла ошибка при загрузке фильтров по жанрам",
+    genericLoadYears: "Произошла ошибка при загрузке фильтров по годам",
+    genericLoadRelease: "Произошла ошибка при загрузке релиза",
+    genericLoadFavorites: "Произошла ошибка при загрузке избранных релизов",
+    requestFailed: "Ошибка при запросе",
+    sessionUndefined: "Сессия не определена",
+    serverError: "Ошибка сервера",
+    authFailed: "Произошла ошибка при авторизации",
+    torrentFileExpired: "Ошибка получения файла торрента, ссылка просрочена или торрент не существует",
+    torrentNoSource: "Не удалось определить источник воспроизведения",
+    torrentConnectFailed: "Не удалось подключиться к источнику воспроизведения",
+    torrentInitFailed: "Произошла ошибка при инициализации торрент-файла",
+    torrentNotFound: "Торрент не найден",
+    torrentStopFailed: "Произошла ошибка при остановке и уничтожении торрент-файла"
+  },
+  generated: {
+    episode: "Серия {number}",
+    shareThisRelease: "этот релиз"
+  },
+  facts: [
+    "Факт №1: 60 процентов всей анимации, что существует на нашей планете, это японское аниме.",
+    "Факт №2: Первым аниме, которое прославилось за пределами Японии, был сериал Astro Boy 1963 года.",
+    "Факт №3: Первое аниме, которое показали в СССР, был «Летающий корабль-призрак».",
+    "Факт №4: Рисовку волос и тела в аниме придумали японцы, а стиль глаз был скопирован у Уолта Диснея.",
+    "Факт №5: По негласному закону аниме, чем важнее герой, тем детальнее ему прорисовывают глаза.",
+    "Факт №6: В Японии на печать комиксов тратится больше бумаги, чем на производство туалетных рулонов.",
+    "Факт №8: В Японии термин «отаку» используется в негативном ключе для описания людей, которые чем-то одержимы.",
+    "Факт №9: Существует правило, из которого ещё не было исключений: если по манге выходит аниме, продажи первой возрастают как минимум на 10 процентов.",
+    "Факт №10: Самый длинный аниме-сериал это «Садзаэ-сан», который выходит с 1969 года по сей день. В нем больше 7 тысяч серий."
+  ],
+  units: {
+    release: ["релиз", "релиза", "релизов"],
+    episode: ["эпизод", "эпизода", "эпизодов"],
+    hour: ["час", "часа", "часов"]
+  }
+};
+const SUPPORTED_LOCALES = ["ru", "en"];
+const DEFAULT_LOCALE = "en";
+const messages$1 = { en: en$3, ru: ru$3 };
+const state = /* @__PURE__ */ reactive({
+  locale: DEFAULT_LOCALE
+});
+function getValue$2(source, path) {
+  return path.split(".").reduce((value, key) => value && value[key] !== void 0 ? value[key] : void 0, source);
+}
+function interpolate$1(value, params = {}) {
+  if (typeof value !== "string") {
+    return value;
+  }
+  return value.replace(/\{(\w+)\}/g, (match, key) => params[key] !== void 0 ? params[key] : match);
+}
+function translate(key, params = {}, locale = state.locale) {
+  const localized = getValue$2(messages$1[locale] || messages$1[DEFAULT_LOCALE], key);
+  const fallback = localized !== void 0 ? localized : getValue$2(messages$1[DEFAULT_LOCALE], key);
+  if (fallback === void 0) {
+    return key;
+  }
+  return interpolate$1(fallback, params);
+}
+function setLocale(locale) {
+  state.locale = locale || DEFAULT_LOCALE;
+}
+function getLocale() {
+  return state.locale;
+}
+function installI18n(app2) {
+  app2.config.globalProperties.$t = (key, params = {}) => translate(key, params, state.locale);
+  app2.config.globalProperties.$setLocale = setLocale;
+  Object.defineProperty(app2.config.globalProperties, "$locale", {
+    get() {
+      return state.locale;
+    }
+  });
+}
 class BaseProxy {
   /**
    * The method used to perform an AJAX-request.
@@ -20077,7 +19542,7 @@ class BaseProxy {
    * @returns {Promise} The result in a promise.
    */
   async submit(method, url, parameters = {}) {
-    const headers = { ...parameters.headers, ...this.getRequestHeaders() };
+    const headers = { ...parameters.headers, ...await this.getRequestHeaders() };
     return await axios.request({
       url,
       method,
@@ -20143,10 +19608,14 @@ class BaseProxy {
    *
    * @return {{}}
    */
-  getRequestHeaders() {
+  async getRequestHeaders() {
     const headers = {};
     headers["user-agent"] = `${meta.name}/${version$3}`;
-    const session = useAccountStore().session;
+    const { useAccountStore: useAccountStore2 } = await __vitePreload(async () => {
+      const { useAccountStore: useAccountStore3 } = await Promise.resolve().then(() => useAccountStore$1);
+      return { useAccountStore: useAccountStore3 };
+    }, true ? void 0 : void 0, import.meta.url);
+    const session = useAccountStore2().session;
     if (session && session.length > 0) {
       headers.Cookie = `PHPSESSID=${session}; Path=/; Secure; HttpOnly`;
     }
@@ -22938,6 +22407,160 @@ class EpisodesTransformer extends BaseTransformer {
     return null;
   }
 }
+let Window$1 = class Window2 {
+  /**
+   * Constructor
+   *
+   * @return Window
+   */
+  constructor() {
+    this._window = null;
+  }
+  /**
+   * Get window configuration
+   *
+   * @return Object
+   */
+  getWindowConfiguration() {
+    return {};
+  }
+  /**
+   * Get window url
+   *
+   * @return String|null
+   */
+  getWindowUrl() {
+    return null;
+  }
+  /**
+   * Get window
+   *
+   * @return {BrowserWindow|null}
+   */
+  getWindow() {
+    return this._window;
+  }
+  /**
+   * Create window
+   *
+   * @return this
+   */
+  createWindow(configuration) {
+    const windowsConfig = this.getWindowConfiguration();
+    let opts = { ...windowsConfig, ...configuration };
+    const mainWindowState = windowStateKeeper({
+      file: "window-state.json",
+      defaultWidth: opts.width,
+      defaultHeight: opts.height,
+      fullScreen: false
+    });
+    if (this.isMain === true) {
+      opts = Object.assign(opts, {
+        x: mainWindowState.x,
+        y: mainWindowState.y,
+        width: mainWindowState.width,
+        height: mainWindowState.height
+      });
+      this._window = new electronExports.BrowserWindow(opts);
+      this._window.on("show", () => {
+        mainWindowState.manage(this._window);
+      });
+    } else {
+      this._window = new electronExports.BrowserWindow(opts);
+    }
+    return this;
+  }
+  /**
+   * Load window url
+   *
+   * @return this
+   */
+  loadUrl() {
+    const window2 = this.getWindow();
+    const windowUrl = this.getWindowUrl();
+    if (window2 && windowUrl) {
+      window2.loadURL(windowUrl);
+    }
+    return this;
+  }
+  /**
+   * Send to window
+   *
+   * @param channel
+   * @param payload
+   */
+  sendToWindow(channel, payload) {
+    const window2 = this.getWindow();
+    if (window2) {
+      window2.webContents.send(channel, payload);
+    }
+    return this;
+  }
+  /**
+   * Show devtools
+   *
+   * @return void
+   */
+  showDevTools() {
+    this.getWindow().openDevTools({ mode: "detach" });
+  }
+};
+class MainWindow extends Window$1 {
+  /**
+   * Get window configuration
+   *
+   * @return Object
+   */
+  getWindowConfiguration() {
+    const width = 1120;
+    const height = 720;
+    const minWidth = 820;
+    const minHeight = 520;
+    return {
+      height,
+      width,
+      minWidth,
+      minHeight,
+      show: false,
+      frame: false,
+      darkTheme: true,
+      icon: electronExports.nativeImage.createFromPath(
+        (void 0)(process.resourcesPath, "icons", "icon.png")
+      ),
+      titleBarStyle: "hiddenInset",
+      useContentSize: true,
+      webPreferences: {
+        webgl: true,
+        webviewTag: true,
+        webSecurity: false,
+        autoplayPolicy: "no-user-gesture-required",
+        nodeIntegration: true,
+        contextIsolation: false,
+        enableRemoteModule: true,
+        experimentalFeatures: true,
+        allowRunningInsecureContent: true
+      },
+      backgroundColor: "#121212"
+    };
+  }
+  get isMain() {
+    return true;
+  }
+  /**
+   * Get window url
+   *
+   * @return {string}
+   */
+  getWindowUrl() {
+    return `file://${__dirname}/index.html`;
+  }
+}
+const Main = new MainWindow();
+const APP_ERROR = "app:error";
+const APP_NOTIFICATION_RELEASE = "app:notification:release";
+const showAppError = (error) => Main.sendToWindow(APP_ERROR, error);
+const sendReleaseNotification = (release) => Main.sendToWindow(APP_NOTIFICATION_RELEASE, release);
+const catchReleaseNotification = (callback) => electronExports.ipcRenderer.on(APP_NOTIFICATION_RELEASE, (e, release) => callback(release));
 let REQUEST_FOR_SEARCH = null;
 let REQUEST_FOR_RELEASES = null;
 async function transformAndProcessReleases(items) {
@@ -36438,6 +36061,383 @@ const stringsPluralize = (count, words) => {
   const value = words[count % 100 > 4 && count % 100 < 20 ? 2 : cases[Math.min(count % 10, 5)]];
   return `${count} ${value}`;
 };
+var setCookie = { exports: {} };
+var hasRequiredSetCookie;
+function requireSetCookie() {
+  if (hasRequiredSetCookie) return setCookie.exports;
+  hasRequiredSetCookie = 1;
+  var defaultParseOptions = {
+    decodeValues: true,
+    map: false,
+    silent: false
+  };
+  function isForbiddenKey(key) {
+    return typeof key !== "string" || key in {};
+  }
+  function createNullObj() {
+    return /* @__PURE__ */ Object.create(null);
+  }
+  function isNonEmptyString2(str) {
+    return typeof str === "string" && !!str.trim();
+  }
+  function parseString(setCookieValue, options) {
+    var parts = setCookieValue.split(";").filter(isNonEmptyString2);
+    var nameValuePairStr = parts.shift();
+    var parsed = parseNameValuePair(nameValuePairStr);
+    var name = parsed.name;
+    var value = parsed.value;
+    options = options ? Object.assign({}, defaultParseOptions, options) : defaultParseOptions;
+    if (isForbiddenKey(name)) {
+      return null;
+    }
+    try {
+      value = options.decodeValues ? decodeURIComponent(value) : value;
+    } catch (e) {
+      console.error(
+        "set-cookie-parser: failed to decode cookie value. Set options.decodeValues=false to disable decoding.",
+        e
+      );
+    }
+    var cookie = createNullObj();
+    cookie.name = name;
+    cookie.value = value;
+    parts.forEach(function(part) {
+      var sides = part.split("=");
+      var key = sides.shift().trimLeft().toLowerCase();
+      if (isForbiddenKey(key)) {
+        return;
+      }
+      var value2 = sides.join("=");
+      if (key === "expires") {
+        cookie.expires = new Date(value2);
+      } else if (key === "max-age") {
+        var n = parseInt(value2, 10);
+        if (!Number.isNaN(n)) cookie.maxAge = n;
+      } else if (key === "secure") {
+        cookie.secure = true;
+      } else if (key === "httponly") {
+        cookie.httpOnly = true;
+      } else if (key === "samesite") {
+        cookie.sameSite = value2;
+      } else if (key === "partitioned") {
+        cookie.partitioned = true;
+      } else if (key) {
+        cookie[key] = value2;
+      }
+    });
+    return cookie;
+  }
+  function parseNameValuePair(nameValuePairStr) {
+    var name = "";
+    var value = "";
+    var nameValueArr = nameValuePairStr.split("=");
+    if (nameValueArr.length > 1) {
+      name = nameValueArr.shift();
+      value = nameValueArr.join("=");
+    } else {
+      value = nameValuePairStr;
+    }
+    return { name, value };
+  }
+  function parse2(input, options) {
+    options = options ? Object.assign({}, defaultParseOptions, options) : defaultParseOptions;
+    if (!input) {
+      if (!options.map) {
+        return [];
+      } else {
+        return createNullObj();
+      }
+    }
+    if (input.headers) {
+      if (typeof input.headers.getSetCookie === "function") {
+        input = input.headers.getSetCookie();
+      } else if (input.headers["set-cookie"]) {
+        input = input.headers["set-cookie"];
+      } else {
+        var sch = input.headers[Object.keys(input.headers).find(function(key) {
+          return key.toLowerCase() === "set-cookie";
+        })];
+        if (!sch && input.headers.cookie && !options.silent) {
+          console.warn(
+            "Warning: set-cookie-parser appears to have been called on a request object. It is designed to parse Set-Cookie headers from responses, not Cookie headers from requests. Set the option {silent: true} to suppress this warning."
+          );
+        }
+        input = sch;
+      }
+    }
+    if (!Array.isArray(input)) {
+      input = [input];
+    }
+    if (!options.map) {
+      return input.filter(isNonEmptyString2).map(function(str) {
+        return parseString(str, options);
+      }).filter(Boolean);
+    } else {
+      var cookies2 = createNullObj();
+      return input.filter(isNonEmptyString2).reduce(function(cookies3, str) {
+        var cookie = parseString(str, options);
+        if (cookie && !isForbiddenKey(cookie.name)) {
+          cookies3[cookie.name] = cookie;
+        }
+        return cookies3;
+      }, cookies2);
+    }
+  }
+  function splitCookiesString(cookiesString) {
+    if (Array.isArray(cookiesString)) {
+      return cookiesString;
+    }
+    if (typeof cookiesString !== "string") {
+      return [];
+    }
+    var cookiesStrings = [];
+    var pos = 0;
+    var start;
+    var ch;
+    var lastComma;
+    var nextStart;
+    var cookiesSeparatorFound;
+    function skipWhitespace() {
+      while (pos < cookiesString.length && /\s/.test(cookiesString.charAt(pos))) {
+        pos += 1;
+      }
+      return pos < cookiesString.length;
+    }
+    function notSpecialChar() {
+      ch = cookiesString.charAt(pos);
+      return ch !== "=" && ch !== ";" && ch !== ",";
+    }
+    while (pos < cookiesString.length) {
+      start = pos;
+      cookiesSeparatorFound = false;
+      while (skipWhitespace()) {
+        ch = cookiesString.charAt(pos);
+        if (ch === ",") {
+          lastComma = pos;
+          pos += 1;
+          skipWhitespace();
+          nextStart = pos;
+          while (pos < cookiesString.length && notSpecialChar()) {
+            pos += 1;
+          }
+          if (pos < cookiesString.length && cookiesString.charAt(pos) === "=") {
+            cookiesSeparatorFound = true;
+            pos = nextStart;
+            cookiesStrings.push(cookiesString.substring(start, lastComma));
+            start = pos;
+          } else {
+            pos = lastComma + 1;
+          }
+        } else {
+          pos += 1;
+        }
+      }
+      if (!cookiesSeparatorFound || pos >= cookiesString.length) {
+        cookiesStrings.push(cookiesString.substring(start, cookiesString.length));
+      }
+    }
+    return cookiesStrings;
+  }
+  setCookie.exports = parse2;
+  setCookie.exports.parse = parse2;
+  setCookie.exports.parseString = parseString;
+  setCookie.exports.splitCookiesString = splitCookiesString;
+  return setCookie.exports;
+}
+var setCookieExports = /* @__PURE__ */ requireSetCookie();
+const cookieParser = /* @__PURE__ */ getDefaultExportFromCjs$1(setCookieExports);
+class AccountProxy extends BaseProxy {
+  /**
+   * Login
+   *
+   * @param login
+   * @param password
+   * @return {Promise<*>}
+   */
+  async login({
+    login,
+    password
+  }) {
+    const data = this.getFormDataObject({
+      mail: login,
+      passwd: password,
+      fa2code: ""
+    });
+    const params = {
+      data,
+      headers: data.getHeaders()
+    };
+    try {
+      const response = await this.submit("POST", this.getApiLoginEndpoint(), params);
+      const status2 = get$1(response, "data.err");
+      if (status2 === "ok") {
+        const headerCookies = get$1(response, "headers.set-cookie", null);
+        const cookies2 = cookieParser(headerCookies, { map: true });
+        const session = get$1(cookies2, "PHPSESSID.value", null);
+        if (session && session.length > 0) {
+          return session;
+        } else {
+          throw new Error(translate("errors.sessionUndefined", {}, getLocale()));
+        }
+      } else {
+        throw new Error(get$1(response, "data.mes", translate("errors.serverError", {}, getLocale())));
+      }
+    } catch (e) {
+      if (!e.code) {
+        throw e;
+      }
+      throw new Error(`${translate("errors.authFailed", {}, getLocale())}: ${e.message}`);
+    }
+  }
+  /**
+   * Logout
+   *
+   * @return {Promise<*>}
+   */
+  async logout() {
+    return await this.submit("POST", this.getApiLogoutEndpoint());
+  }
+  /**
+   * Get profile
+   *
+   * @return {Promise<*>}
+   */
+  async getProfile() {
+    const data = this.getFormDataObject({ query: "user" });
+    const params = {
+      data,
+      headers: data.getHeaders()
+    };
+    const response = await this.submit("POST", this.getApiEndpoint(), params);
+    return this.handleResponse(response.data);
+  }
+  /**
+   * Get profile avatar
+   *
+   * @param src
+   * @return {string|null}
+   */
+  getAvatarPath(src) {
+    return src ? this.getStaticEndpoint() + src : null;
+  }
+}
+const { safeStorage } = require("electron");
+const Storage = require("electron-store");
+const storage = new Storage({
+  name: "anilibrix_safe",
+  clearInvalidConfig: true
+});
+function remove(prop) {
+  storage.delete(prop);
+}
+function getDecrypted(prop) {
+  if (!safeStorage.isEncryptionAvailable()) return false;
+  const data = storage.get(prop);
+  if (data === void 0) return false;
+  const encryptedString = Buffer.from(
+    data,
+    "base64"
+  );
+  return safeStorage.decryptString(encryptedString);
+}
+const uuid$1 = () => crypto.randomUUID();
+const useAccountStore = /* @__PURE__ */ defineStore("account", {
+  state: () => ({
+    userId: null,
+    session: null,
+    profile: {
+      id: null,
+      login: null,
+      avatar: null
+    }
+  }),
+  getters: {
+    /**
+     * Check if user is authorized
+     */
+    isAuthorized: (s) => !!(s.session !== null && s.profile.id !== null)
+  },
+  actions: {
+    /**
+     * Try to login with provided credentials
+     */
+    async login({ login, password }) {
+      try {
+        this.setSession(null);
+        this.setProfile(null);
+        return await new AccountProxy().login({ login, password });
+      } catch (error) {
+        showAppError(error);
+      }
+    },
+    /**
+     * Logout user
+     */
+    async logout() {
+      try {
+        await new AccountProxy().logout();
+      } catch (error) {
+        throw error;
+      } finally {
+        this.setSession(null);
+        this.setProfile(null);
+        remove("user.login");
+        remove("user.password");
+      }
+    },
+    /**
+     * Get profile data
+     */
+    async getProfile() {
+      const getProfileData = async () => {
+        const profile = await new AccountProxy().getProfile();
+        const id = get$1(profile, "id");
+        const login = get$1(profile, "login");
+        const avatar = new AccountProxy().getAvatarPath(get$1(profile, "avatar"));
+        this.setProfile({ id, login, avatar });
+      };
+      try {
+        await getProfileData();
+      } catch (error) {
+        const login = getDecrypted("user.login");
+        const password = getDecrypted("user.password");
+        if (login !== false && password !== false) {
+          const session = await this.login({ login, password });
+          this.setSession(session);
+          await getProfileData();
+          return;
+        }
+        this.setSession(null);
+        this.setProfile(null);
+        throw error;
+      }
+    },
+    /**
+     * Set account id — generate random uuid if not set yet
+     */
+    setUserId() {
+      if (this.userId === null) this.userId = uuid$1();
+    },
+    /**
+     * Set session value
+     */
+    setSession(session = null) {
+      this.session = session || null;
+    },
+    /**
+     * Set profile data
+     */
+    setProfile(profile = null) {
+      this.profile.id = get$1(profile, "id") || null;
+      this.profile.login = get$1(profile, "login") || null;
+      this.profile.avatar = get$1(profile, "avatar") || null;
+    }
+  }
+});
+const useAccountStore$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  useAccountStore
+}, Symbol.toStringTag, { value: "Module" }));
 class FavoritesProxy extends BaseProxy {
   /**
    * Get favorites
@@ -39860,7 +39860,7 @@ const blankRoutes = [
         hide_toolbar: true
       }
     },
-    component: () => __vitePreload(() => import("./index-CpTflkF2.js"), true ? __vite__mapDeps([0,1,2,3]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./index-Dpq3yOQv.js"), true ? __vite__mapDeps([0,1,2,3]) : void 0, import.meta.url)
   }
 ];
 const props$A = {
@@ -40067,8 +40067,6 @@ const humanTime = (secs) => {
   const seconds = secNum % 60;
   return [hours, minutes, seconds].map((v2) => v2 < 10 ? "0" + v2 : v2).filter((v2, i) => v2 !== "00" || i > 0).join(":");
 };
-var capitalizeExports = requireCapitalize();
-const __capitalize = /* @__PURE__ */ getDefaultExportFromCjs$1(capitalizeExports);
 var define_process_env_default$4 = {};
 const props$y = {
   player: {
@@ -40299,7 +40297,7 @@ function _sfc_render$R(_ctx, _cache, $props, $setup, $data, $options) {
     ], 64)) : createCommentVNode("", true)
   ], 512);
 }
-const PlayerPlay = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$R], ["__scopeId", "data-v-fe36f1d6"]]);
+const PlayerPlay = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$R], ["__scopeId", "data-v-7542f969"]]);
 const props$x = {
   player: {
     type: Object,
@@ -82909,7 +82907,7 @@ const releaseRoutes$1 = [
     path: "/release/:releaseId/:releaseName",
     meta: { layout: { show_scroll: true } },
     props: true,
-    component: () => __vitePreload(() => import("./index-DmalZPSk.js"), true ? __vite__mapDeps([4,5,2,6,1,7]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./index-DnE2OLDc.js"), true ? __vite__mapDeps([4,5,2,6,1,7]) : void 0, import.meta.url)
   }
 ];
 const catalogRoutes = [
@@ -82918,7 +82916,7 @@ const catalogRoutes = [
     path: "/catalog",
     meta: { layout: { show_scroll: true } },
     props: true,
-    component: () => __vitePreload(() => import("./index-oLRKaCRS.js"), true ? __vite__mapDeps([8,9,2,5,10]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./index-CWXnO_UO.js"), true ? __vite__mapDeps([8,9,2,5,10]) : void 0, import.meta.url)
   }
 ];
 const accountRoutes = [
@@ -82926,14 +82924,14 @@ const accountRoutes = [
     name: "account.login",
     path: "/account/login",
     meta: { layout: { hide_scroll: true } },
-    component: () => __vitePreload(() => import("./index-CjBKXaCe.js"), true ? __vite__mapDeps([11,2]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./index-DeZFuIRW.js"), true ? __vite__mapDeps([11,2]) : void 0, import.meta.url)
   }
 ];
 const releaseRoutes = [
   {
     name: "releases",
     path: "/",
-    component: () => __vitePreload(() => import("./index-D2bv2-S0.js"), true ? __vite__mapDeps([12,1,5,2,13]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./index-k_GIVUOw.js"), true ? __vite__mapDeps([12,1,5,2,13]) : void 0, import.meta.url)
   }
 ];
 const favoritesRoutes = [
@@ -82942,7 +82940,7 @@ const favoritesRoutes = [
     path: "/favorites",
     meta: { layout: { show_scroll: true } },
     props: true,
-    component: () => __vitePreload(() => import("./index-BUmOT9IZ.js"), true ? __vite__mapDeps([14,2,15]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./index-DAbcn-nI.js"), true ? __vite__mapDeps([14,2,15]) : void 0, import.meta.url)
   }
 ];
 const router = createRouter({
@@ -82971,7 +82969,7 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
-const aliases$1 = {
+const aliases = {
   collapse: "mdi-chevron-up",
   complete: "mdi-check",
   cancel: "mdi-close-circle",
@@ -83038,7 +83036,7 @@ const aliases$1 = {
   volumeOff: "mdi-volume-variant-off",
   search: "mdi-magnify"
 };
-const mdi$1 = {
+const mdi = {
   // Not using mergeProps here, functional components merge props by default (?)
   component: (props2) => h(VClassIcon, {
     ...props2,
@@ -83059,13 +83057,13 @@ function createIcons(options) {
   const sets = genDefaults();
   const defaultSet = options?.defaultSet ?? "mdi";
   if (defaultSet === "mdi" && !sets.mdi) {
-    sets.mdi = mdi$1;
+    sets.mdi = mdi;
   }
   return mergeDeep({
     defaultSet,
     sets,
     aliases: {
-      ...aliases$1,
+      ...aliases,
       /* eslint-disable max-len */
       vuetify: ["M8.2241 14.2009L12 21L22 3H14.4459L8.2241 14.2009Z", ["M7.26303 12.4733L7.00113 12L2 3H12.5261C12.5261 3 12.5261 3 12.5261 3L7.26303 12.4733Z", 0.6]],
       "vuetify-outline": "svg:M7.26 12.47 12.53 3H2L7.26 12.47ZM14.45 3 8.22 14.2 12 21 22 3H14.45ZM18.6 5 12 16.88 10.51 14.2 15.62 5ZM7.26 8.35 5.4 5H9.13L7.26 8.35Z",
@@ -83364,76 +83362,6 @@ const ru$2 = {
       changeFormat: "Изменить формат цвета"
     }
   }
-};
-const aliases = {
-  collapse: "svg:M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z",
-  complete: "svg:M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z",
-  cancel: "svg:M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z",
-  close: "svg:M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z",
-  delete: "svg:M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z",
-  // delete (e.g. v-chip close)
-  clear: "svg:M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z",
-  success: "svg:M12,2C17.52,2 22,6.48 22,12C22,17.52 17.52,22 12,22C6.48,22 2,17.52 2,12C2,6.48 6.48,2 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z",
-  info: "svg:M13,9H11V7H13M13,17H11V11H13M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2Z",
-  warning: "svg:M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z",
-  error: "svg:M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z",
-  prev: "svg:M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z",
-  next: "svg:M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z",
-  checkboxOn: "svg:M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M19,3H5C3.89,3 3,3.89 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.89 20.1,3 19,3Z",
-  checkboxOff: "svg:M19,3H5C3.89,3 3,3.89 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.89 20.1,3 19,3M19,5V19H5V5H19Z",
-  checkboxIndeterminate: "svg:M17,13H7V11H17M19,3H5C3.89,3 3,3.89 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.89 20.1,3 19,3Z",
-  delimiter: "svg:M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2Z",
-  // for carousel
-  sortAsc: "svg:M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z",
-  sortDesc: "svg:M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z",
-  expand: "svg:M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z",
-  menu: "svg:M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z",
-  subgroup: "svg:M7,10L12,15L17,10H7Z",
-  dropdown: "svg:M7,10L12,15L17,10H7Z",
-  radioOn: "svg:M12,20C7.58,20 4,16.42 4,12C4,7.58 7.58,4 12,4C16.42,4 20,7.58 20,12C20,16.42 16.42,20 12,20M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M12,7C9.24,7 7,9.24 7,12C7,14.76 9.24,17 12,17C14.76,17 17,14.76 17,12C17,9.24 14.76,7 12,7Z",
-  radioOff: "svg:M12,20C7.58,20 4,16.42 4,12C4,7.58 7.58,4 12,4C16.42,4 20,7.58 20,12C20,16.42 16.42,20 12,20M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2Z",
-  edit: "svg:M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z",
-  ratingEmpty: "svg:M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z",
-  ratingFull: "svg:M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z",
-  ratingHalf: "svg:M12,15.4V6.1L13.71,10.13L18.09,10.5L14.77,13.39L15.76,17.67M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z",
-  loading: "svg:M19,8L15,12H18C18,15.31 15.31,18 12,18C11,18 10.03,17.75 9.2,17.3L7.74,18.76C8.97,19.54 10.43,20 12,20C16.42,20 20,16.42 20,12H23M6,12C6,8.69 8.69,6 12,6C13,6 13.97,6.25 14.8,6.7L16.26,5.24C15.03,4.46 13.57,4 12,4C7.58,4 4,7.58 4,12H1L5,16L9,12",
-  first: "svg:M18.41,16.59L13.82,12L18.41,7.41L17,6L11,12L17,18L18.41,16.59M6,6H8V18H6V6Z",
-  last: "svg:M5.59,7.41L10.18,12L5.59,16.59L7,18L13,12L7,6L5.59,7.41M16,6H18V18H16V6Z",
-  unfold: "svg:M12,18.17L8.83,15L7.42,16.41L12,21L16.59,16.41L15.17,15M12,5.83L15.17,9L16.58,7.59L12,3L7.41,7.59L8.83,9L12,5.83Z",
-  file: "svg:M16.5,6V17.5C16.5,19.71 14.71,21.5 12.5,21.5C10.29,21.5 8.5,19.71 8.5,17.5V5C8.5,3.62 9.62,2.5 11,2.5C12.38,2.5 13.5,3.62 13.5,5V15.5C13.5,16.05 13.05,16.5 12.5,16.5C11.95,16.5 11.5,16.05 11.5,15.5V6H10V15.5C10,16.88 11.12,18 12.5,18C13.88,18 15,16.88 15,15.5V5C15,2.79 13.21,1 11,1C8.79,1 7,2.79 7,5V17.5C7,20.54 9.46,23 12.5,23C15.54,23 18,20.54 18,17.5V6H16.5Z",
-  plus: "svg:M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z",
-  minus: "svg:M19,13H5V11H19V13Z",
-  calendar: "svg:M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z",
-  treeviewCollapse: "svg:M7,10L12,15L17,10H7Z",
-  treeviewExpand: "svg:M10,17L15,12L10,7V17Z",
-  tableGroupExpand: "svg:M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z",
-  tableGroupCollapse: "svg:M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z",
-  eyeDropper: "svg:M19.35,11.72L17.22,13.85L15.81,12.43L8.1,20.14L3.5,22L2,20.5L3.86,15.9L11.57,8.19L10.15,6.78L12.28,4.65L19.35,11.72M16.76,3C17.93,1.83 19.83,1.83 21,3C22.17,4.17 22.17,6.07 21,7.24L19.08,9.16L14.84,4.92L16.76,3M5.56,17.03L4.5,19.5L6.97,18.44L14.4,11L13,9.6L5.56,17.03Z",
-  upload: "svg:M11 20H6.5q-2.28 0-3.89-1.57Q1 16.85 1 14.58q0-1.95 1.17-3.48q1.18-1.53 3.08-1.95q.63-2.3 2.5-3.72Q9.63 4 12 4q2.93 0 4.96 2.04Q19 8.07 19 11q1.73.2 2.86 1.5q1.14 1.28 1.14 3q0 1.88-1.31 3.19T18.5 20H13v-7.15l1.6 1.55L16 13l-4-4l-4 4l1.4 1.4l1.6-1.55Z",
-  color: "svg:M17.5 12a1.5 1.5 0 0 1-1.5-1.5A1.5 1.5 0 0 1 17.5 9a1.5 1.5 0 0 1 1.5 1.5a1.5 1.5 0 0 1-1.5 1.5m-3-4A1.5 1.5 0 0 1 13 6.5A1.5 1.5 0 0 1 14.5 5A1.5 1.5 0 0 1 16 6.5A1.5 1.5 0 0 1 14.5 8m-5 0A1.5 1.5 0 0 1 8 6.5A1.5 1.5 0 0 1 9.5 5A1.5 1.5 0 0 1 11 6.5A1.5 1.5 0 0 1 9.5 8m-3 4A1.5 1.5 0 0 1 5 10.5A1.5 1.5 0 0 1 6.5 9A1.5 1.5 0 0 1 8 10.5A1.5 1.5 0 0 1 6.5 12M12 3a9 9 0 0 0-9 9a9 9 0 0 0 9 9a1.5 1.5 0 0 0 1.5-1.5c0-.39-.15-.74-.39-1c-.23-.27-.38-.62-.38-1a1.5 1.5 0 0 1 1.5-1.5H16a5 5 0 0 0 5-5c0-4.42-4.03-8-9-8",
-  command: "svg:M6,2A4,4 0 0,1 10,6V8H14V6A4,4 0 0,1 18,2A4,4 0 0,1 22,6A4,4 0 0,1 18,10H16V14H18A4,4 0 0,1 22,18A4,4 0 0,1 18,22A4,4 0 0,1 14,18V16H10V18A4,4 0 0,1 6,22A4,4 0 0,1 2,18A4,4 0 0,1 6,14H8V10H6A4,4 0 0,1 2,6A4,4 0 0,1 6,2M16,18A2,2 0 0,0 18,20A2,2 0 0,0 20,18A2,2 0 0,0 18,16H16V18M14,10H10V14H14V10M6,16A2,2 0 0,0 4,18A2,2 0 0,0 6,20A2,2 0 0,0 8,18V16H6M8,6A2,2 0 0,0 6,4A2,2 0 0,0 4,6A2,2 0 0,0 6,8H8V6M18,8A2,2 0 0,0 20,6A2,2 0 0,0 18,4A2,2 0 0,0 16,6V8H18Z",
-  ctrl: "svg:M19.78,11.78L18.36,13.19L12,6.83L5.64,13.19L4.22,11.78L12,4L19.78,11.78Z",
-  space: "svg:M3 15H5V19H19V15H21V19C21 20.1 20.1 21 19 21H5C3.9 21 3 20.1 3 19V15Z",
-  shift: "svg:M15 18v-6h2.17L12 6.83L6.83 12H9v6zM12 4l10 10h-5v6H7v-6H2z",
-  alt: "svg:M3 4h6.11l7.04 14H21v2h-6.12L7.84 6H3zm11 0h7v2h-7z",
-  enter: "svg:M19 7v4H5.83l3.58-3.59L8 6l-6 6l6 6l1.41-1.42L5.83 13H21V7z",
-  arrowup: "svg:M13 20h-2V8l-5.5 5.5l-1.42-1.42L12 4.16l7.92 7.92l-1.42 1.42L13 8z",
-  arrowdown: "svg:M11 4h2v12l5.5-5.5l1.42 1.42L12 19.84l-7.92-7.92L5.5 10.5L11 16z",
-  arrowleft: "svg:M20 11v2H8l5.5 5.5l-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5L8 11z",
-  arrowright: "svg:M4 11v2h12l-5.5 5.5l1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5L16 11z",
-  backspace: "svg:M19 15.59L17.59 17L14 13.41L10.41 17L9 15.59L12.59 12L9 8.41L10.41 7L14 10.59L17.59 7L19 8.41L15.41 12zM22 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7c-.69 0-1.23-.36-1.59-.89L0 12l5.41-8.12C5.77 3.35 6.31 3 7 3zm0 2H7l-4.72 7L7 19h15z",
-  play: "svg:M8,5.14V19.14L19,12.14L8,5.14Z",
-  pause: "svg:M14,19H18V5H14M6,19H10V5H6V19Z",
-  fullscreen: "svg:M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z",
-  fullscreenExit: "svg:M14,14H19V16H16V19H14V14M5,14H10V19H8V16H5V14M8,5H10V10H5V8H8V5M19,8V10H14V5H16V8H19Z",
-  volumeHigh: "svg:M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z",
-  volumeMedium: "svg:M5,9V15H9L14,20V4L9,9M18.5,12C18.5,10.23 17.5,8.71 16,7.97V16C17.5,15.29 18.5,13.76 18.5,12Z",
-  volumeLow: "svg:M7,9V15H11L16,20V4L11,9H7Z",
-  volumeOff: "svg:M5.64,3.64L21.36,19.36L19.95,20.78L16,16.83V20L11,15H7V9H8.17L4.22,5.05L5.64,3.64M16,4V11.17L12.41,7.58L16,4Z",
-  search: "svg:M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
-};
-const mdi = {
-  component: VSvgIcon
 };
 let vuetifyInstance = null;
 function setVuetifyLocale(locale) {
@@ -89737,11 +89665,11 @@ const _sfc_main$9 = {
           return { useReleasesStore: useReleasesStore3 };
         }, true ? void 0 : void 0, import.meta.url);
         const { useReleaseStore } = await __vitePreload(async () => {
-          const { useReleaseStore: useReleaseStore2 } = await import("./useReleaseStore-ulZOFbhK.js");
+          const { useReleaseStore: useReleaseStore2 } = await import("./useReleaseStore-CjxOrSwV.js");
           return { useReleaseStore: useReleaseStore2 };
         }, true ? __vite__mapDeps([6,2]) : void 0, import.meta.url);
         const { useCatalogStore } = await __vitePreload(async () => {
-          const { useCatalogStore: useCatalogStore2 } = await import("./useCatalogStore-CVtj4-lI.js");
+          const { useCatalogStore: useCatalogStore2 } = await import("./useCatalogStore-bWvfKkUg.js");
           return { useCatalogStore: useCatalogStore2 };
         }, true ? __vite__mapDeps([9,2]) : void 0, import.meta.url);
         const { useFavoritesStore: useFavoritesStore2 } = await __vitePreload(async () => {
@@ -91001,7 +90929,7 @@ export {
   BaseProxy as bw,
   BaseTransformer as bx,
   fe as by,
-  __capitalize as bz,
+  requireCapitalize as bz,
   createSimpleFunctional as c,
   useVariant as d,
   useDensity as e,

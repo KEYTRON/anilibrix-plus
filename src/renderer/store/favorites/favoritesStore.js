@@ -10,7 +10,7 @@ import EpisodesTransformer from '@transformers/episode'
 import axios from 'axios'
 import { getLocale, translate } from '@/i18n'
 
-import { showAppError } from '@main/handlers/notifications/notifications-handler'
+import { showAppError } from '@utils/notifications'
 
 // Mutations
 const ADD_ITEM = 'ADD_ITEM'

@@ -1,10 +1,6 @@
 import { L as LibriaTyan01 } from "./LibriaTyan01-DlPDW3gN.js";
-import { c as createSimpleFunctional, p as propsFactory, a as computed, g as genericComponent, u as useProxiedModel, b as provideTheme, d as useVariant, e as useDensity, f as useLocation, h as usePosition, i as useRounded, j as useTextColor, k as useLocale, l as createVNode, m as genOverlays, n as createBaseVNode, o as normalizeStyle, q as normalizeClass, V as VIcon, r as mergeProps, s as VDefaultsProvider, t as VBtn, v as toRef, w as useDimension, x as useElevation, I as IconValue, y as makeVariantProps, z as makeThemeProps, A as makeTagProps, B as makeRoundedProps, C as makePositionProps, D as makeLocationProps, E as makeElevationProps, F as makeDimensionProps, G as makeDensityProps, H as makeComponentProps, _ as _export_sfc, J as toReleases, K as createElementBlock, L as withCtx, M as VRow, N as openBlock, O as VCol, P as VImg, Q as VCard, R as VCardText, S as createBlock, T as toDisplayString, U as createCommentVNode, W as createTextVNode } from "./index-CIkHx-EU.js";
-import "./torrents-handler-BtK2vzG6.js";
-import "fs";
-import "path";
-import "stream";
-import "util";
+import { c as createSimpleFunctional, p as propsFactory, a as computed, g as genericComponent, u as useProxiedModel, b as provideTheme, d as useVariant, e as useDensity, f as useLocation, h as usePosition, i as useRounded, j as useTextColor, k as useLocale, l as createVNode, m as genOverlays, n as createBaseVNode, o as normalizeStyle, q as normalizeClass, V as VIcon, r as mergeProps, s as VDefaultsProvider, t as VBtn, v as toRef, w as useDimension, x as useElevation, I as IconValue, y as makeVariantProps, z as makeThemeProps, A as makeTagProps, B as makeRoundedProps, C as makePositionProps, D as makeLocationProps, E as makeElevationProps, F as makeDimensionProps, G as makeDensityProps, H as makeComponentProps, _ as _export_sfc, J as toReleases, K as createElementBlock, L as withCtx, M as VRow, N as openBlock, O as VCol, P as VImg, Q as VCard, R as VCardText, S as createBlock, T as toDisplayString, U as createCommentVNode, W as createTextVNode } from "./index-YF3Wcouz.js";
+import "./torrents-handler-CGJ0ERZQ.js";
 const VAlertTitle = createSimpleFunctional("v-alert-title");
 const makeIconSizeProps = propsFactory({
   iconSize: [Number, String],

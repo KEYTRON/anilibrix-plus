@@ -49,7 +49,6 @@ import { toVideo } from '@utils/router/views'
 import { ActivityBuilder } from '@utils/activityBuilder'
 import humanTime from "@utils/strings/human-time";
 import {debounce} from "lodash";
-import store from "@store";
 
 const props = {
   player: {

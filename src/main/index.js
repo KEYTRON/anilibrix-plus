@@ -175,7 +175,13 @@ if (!gotTheLock) {
       mWindowInstance.loadUrl()
       tWindowInstance.loadUrl()
 
-      if (process.env.NODE_ENV === 'development') mainWindow.webContents.openDevTools()
+      if (process.env.NODE_ENV === 'development') {
+        mainWindow.webContents.openDevTools()
+        mainWindow.webContents.on('console-message', (e, level, msg, line, src) => {
+          const prefix = ['[r:log]','[r:dbg]','[r:warn]','[r:err]'][level] || '[r:?]'
+          console.log(prefix, msg, src ? `(${src}:${line})` : '')
+        })
+      }
 
       remoteMain.enable(mainWindow.webContents)
       remoteMain.enable(torrentWindow.webContents)

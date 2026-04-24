@@ -6,7 +6,7 @@ import __get from 'lodash/get'
 const uuid = () => crypto.randomUUID()
 
 // Handlers
-import { showAppError } from '@main/handlers/notifications/notifications-handler'
+import { showAppError } from '@utils/notifications'
 import * as safeStorage from '@main/utils/safe-storage'
 
 import { defineStore } from 'pinia'

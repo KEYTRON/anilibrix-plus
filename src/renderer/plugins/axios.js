@@ -11,7 +11,6 @@
  */
 import Axios from 'axios'
 import { clone, cloneDeep } from 'lodash'
-import FormData from 'form-data'
 
 // Set cookies
 Axios.defaults.withCredentials = true

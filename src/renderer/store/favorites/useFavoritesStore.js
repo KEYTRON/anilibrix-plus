@@ -9,7 +9,7 @@ import EpisodesTransformer from '@transformers/episode'
 // Utils
 import axios from 'axios'
 import { getLocale, translate } from '@/i18n'
-import { showAppError } from '@main/handlers/notifications/notifications-handler'
+import { showAppError } from '@utils/notifications'
 
 import { defineStore } from 'pinia'
 import { useAccountStore } from '../app/account/useAccountStore'

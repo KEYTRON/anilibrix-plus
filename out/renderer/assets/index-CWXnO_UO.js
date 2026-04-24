@@ -1,11 +1,7 @@
-import { _ as _export_sfc, K as createElementBlock, l as createVNode, n as createBaseVNode, N as openBlock, a7 as VSkeletonLoader, L as withCtx, r as mergeProps, t as VBtn, b0 as VBadge, V as VIcon, W as createTextVNode, T as toDisplayString, S as createBlock, a_ as VSelect, b1 as VAutocomplete, ad as Fragment, ae as renderList, ah as VListItem, aj as VListItemTitle, ak as VListItemSubtitle, aV as resolveDynamicComponent, q as normalizeClass, Q as VCard, b2 as ReleaseProgress, b3 as useWatchStore, aa as resolveComponent, aY as VMenu, al as VList, aZ as withModifiers, U as createCommentVNode, P as VImg, ab as VCardTitle, ac as VCardSubtitle, R as VCardText, b4 as normalizeProps, b5 as guardReactiveProps, af as VChip, b6 as toRelease, b7 as VExpandTransition, aA as nextTick } from "./index-CIkHx-EU.js";
-import { useCatalogStore } from "./useCatalogStore-CVtj4-lI.js";
-import { R as ReleaseFavorite } from "./ReleaseFavorite-BQG4Fd1H.js";
-import "./torrents-handler-BtK2vzG6.js";
-import "fs";
-import "path";
-import "stream";
-import "util";
+import { _ as _export_sfc, K as createElementBlock, l as createVNode, n as createBaseVNode, N as openBlock, a7 as VSkeletonLoader, L as withCtx, r as mergeProps, t as VBtn, b0 as VBadge, V as VIcon, W as createTextVNode, T as toDisplayString, S as createBlock, a_ as VSelect, b1 as VAutocomplete, ad as Fragment, ae as renderList, ah as VListItem, aj as VListItemTitle, ak as VListItemSubtitle, aV as resolveDynamicComponent, q as normalizeClass, Q as VCard, b2 as ReleaseProgress, b3 as useWatchStore, aa as resolveComponent, aY as VMenu, al as VList, aZ as withModifiers, U as createCommentVNode, P as VImg, ab as VCardTitle, ac as VCardSubtitle, R as VCardText, b4 as normalizeProps, b5 as guardReactiveProps, af as VChip, b6 as toRelease, b7 as VExpandTransition, aA as nextTick } from "./index-YF3Wcouz.js";
+import { useCatalogStore } from "./useCatalogStore-bWvfKkUg.js";
+import { R as ReleaseFavorite } from "./ReleaseFavorite-BZxiNVAx.js";
+import "./torrents-handler-CGJ0ERZQ.js";
 const _sfc_main$7 = {};
 const _hoisted_1$3 = { class: "d-flex align-start" };
 const _hoisted_2$1 = { class: "d-flex flex-column ma-4" };

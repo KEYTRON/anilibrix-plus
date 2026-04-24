@@ -1,17 +1,19 @@
-import { Main, Torrent } from '@main/utils/windows'
-import { app, ipcMain, ipcRenderer } from 'electron'
-import { start as startSystemSleepBlocker, stop as stopSystemSleepBlocker } from '../../utils/power-save-blocker'
-import { setEncrypted } from '@main/utils/safe-storage'
-import { catGirlFetch } from '@utils/fetch';
-import { parse } from 'content-disposition-attachment';
-import FormData from 'form-data'
-import { showAppError } from '@main/handlers/notifications/notifications-handler';
+// Only ipcRenderer is needed renderer-side; everything else is lazy-loaded in handler (main-process) functions
+import { ipcRenderer } from 'electron'
 import { debounce } from 'lodash';
-import { t } from '@main/utils/i18n'
 
-const { shell } = require('electron')
-const path = require('path')
-const Magnet2torrent = require('magnet2torrent-js');
+// Lazy getters — loaded only when handler functions are called (main process only)
+const _main = () => require('@main/utils/windows')
+const _ipcMain = () => require('electron').ipcMain
+const _app = () => require('electron').app
+const _shell = () => require('electron').shell
+const _path = () => require('path')
+const _sleepBlocker = () => require('../../utils/power-save-blocker')
+const _safeStorage = () => require('@main/utils/safe-storage')
+const _catGirlFetch = () => require('@utils/fetch').catGirlFetch
+const _parse = () => require('content-disposition-attachment').parse
+const _showAppError = () => require('@main/handlers/notifications/notifications-handler').showAppError
+const _t = () => require('@main/utils/i18n').t
 
 export const APP_DISCORD_RICH_PRESENSE = 'app:richpresense'
 export const APP_ABOUT = 'app:about'
@@ -28,7 +30,7 @@ export const APP_UPDATE_PROXY = 'app:update_proxy'
 export const APP_GET_SYSTEM_LOCALE = 'app:get_system_locale'
 export const APP_SET_LOCALE = 'app:set_locale'
 
-const trackers = [
+const _trackers = () => [
   'aHR0cDovL3RyLmxpYnJpYS5mdW46MjcxMC9hbm5vdW5jZQ==',
   'dWRwOi8vdHJhY2tlci50b3JyZW50LmV1Lm9yZzo0NTEvYW5ub3VuY2U=',
   'dWRwOi8vdHJhY2tlci5vcGVudHJhY2tyLm9yZzoxMzM3L2Fubm91bmNl',
@@ -36,13 +38,11 @@ const trackers = [
   'dWRwOi8vdHJhY2tlci50b3JyZW50LmV1Lm9yZzo0NTEvYW5ub3VuY2U='
 ].map((value) => atob(value))
 
-console.log(trackers)
-
-const m2t = new Magnet2torrent({
+const _m2t = () => new (require('magnet2torrent-js'))({
   timeout: 30,
   addTrackersToTorrent: true,
-  trackers: trackers
-});
+  trackers: _trackers()
+})
 
 /**
  * Send app about event
@@ -56,7 +56,7 @@ export const sendAppAboutEvent = () => ipcRenderer.send(APP_ABOUT)
  *
  * @return {Electron.IpcMain}
  */
-export const catchAppAboutEvent = () => ipcMain.on(APP_ABOUT, () => app.showAboutPanel())
+export const catchAppAboutEvent = () => _ipcMain().on(APP_ABOUT, () => _app().showAboutPanel())
 
 /**
  * Send app devtools main event
@@ -70,7 +70,7 @@ export const sendAppDevtoolsMainEvent = () => ipcRenderer.send(APP_DEVTOOLS_MAIN
  *
  * @return {Electron.IpcMain}
  */
-export const catchAppDevtoolsMainEvent = () => ipcMain.on(APP_DEVTOOLS_MAIN, () => Main.showDevTools())
+export const catchAppDevtoolsMainEvent = () => _ipcMain().on(APP_DEVTOOLS_MAIN, () => _main().Main.showDevTools())
 
 /**
  * Send app devtools torrent event
@@ -84,7 +84,7 @@ export const sendAppDevtoolsTorrentEvent = () => ipcRenderer.send(APP_DEVTOOLS_T
  *
  * @return {Electron.IpcMain}
  */
-export const catchAppDevtoolsTorrentEvent = () => ipcMain.on(APP_DEVTOOLS_TORRENT, () => Torrent.showDevTools())
+export const catchAppDevtoolsTorrentEvent = () => _ipcMain().on(APP_DEVTOOLS_TORRENT, () => _main().Torrent.showDevTools())
 
 /**
  * Send app docker number event
@@ -101,8 +101,8 @@ export const sendAppDockNumberEvent = (number) => ipcRenderer.send(APP_DOCK_NUMB
  */
 
 export const catchAppDockNumberEvent = () => {
-  ipcMain.on(APP_DOCK_NUMBER, (e, number) => {
-    if (app.dock) app.dock.setBadge(number && number > 0 ? number.toString() : '')
+  _ipcMain().on(APP_DOCK_NUMBER, (e, number) => {
+    if (_app().dock) _app().dock.setBadge(number && number > 0 ? number.toString() : '')
   })
 }
 
@@ -120,8 +120,8 @@ export const sendEnableSystemSleepBlockerEvent = (number) => ipcRenderer.send(AP
  * @return {void}
  */
 export const catchEnableSystemSleepBlockerEvent = () => {
-  ipcMain.on(APP_SYSTEM_SLEEP_DISABLE, (e) => {
-    startSystemSleepBlocker()
+  _ipcMain().on(APP_SYSTEM_SLEEP_DISABLE, (e) => {
+    _sleepBlocker().start()
   })
 }
 
@@ -139,8 +139,8 @@ export const sendDisableSystemSleepBlockerEvent = (number) => ipcRenderer.send(A
  * @return {void}
  */
 export const catchDisableSystemSleepBlockerEvent = () => {
-  ipcMain.on(APP_SYSTEM_SLEEP_ENABLE, (e) => {
-    stopSystemSleepBlocker()
+  _ipcMain().on(APP_SYSTEM_SLEEP_ENABLE, (e) => {
+    _sleepBlocker().stop()
   })
 }
 
@@ -159,8 +159,8 @@ export const invokeSafeStorageEncrypt = (prop, data) => ipcRenderer.invoke(APP_S
  * @return {void}
  */
 export const handleSafeStorageEncrypt = () => {
-  ipcMain.handle(APP_SAFE_STORAGE_ENCRYPT_REQUEST, async (event, prop, data) => {
-    return setEncrypted(prop, data)
+  _ipcMain().handle(APP_SAFE_STORAGE_ENCRYPT_REQUEST, async (event, prop, data) => {
+    return _safeStorage().setEncrypted(prop, data)
   })
 }
 
@@ -178,7 +178,7 @@ export const invokeRichPresense = (data) => ipcRenderer.invoke(APP_DISCORD_RICH_
  * @return {void}
  */
 export const handleRichPresense = (setActivity) => {
-  ipcMain.handle(APP_DISCORD_RICH_PRESENSE, async (event, data) => {
+  _ipcMain().handle(APP_DISCORD_RICH_PRESENSE, async (event, data) => {
     return setActivity(data)
   })
 }
@@ -197,8 +197,8 @@ export const invokeShowConfig = () => ipcRenderer.invoke(APP_SHOW_CONFIG)
  * @return {void}
  */
 export const handleShowConfig = () => {
-  ipcMain.handle(APP_SHOW_CONFIG, async (event, data) => {
-    return shell.showItemInFolder(path.join(app.getPath('userData'), 'anilibrix.json'))
+  _ipcMain().handle(APP_SHOW_CONFIG, async (event, data) => {
+    return _shell().showItemInFolder(_path().join(_app().getPath('userData'), 'anilibrix.json'))
   })
 }
 
@@ -216,7 +216,7 @@ export const invokeRand = () => ipcRenderer.invoke(APP_RAND)
  * @return {void}
  */
 export const handleRand = () => {
-  ipcMain.handle(APP_RAND, async (event) => {
+  _ipcMain().handle(APP_RAND, async (event) => {
     // delay 500 - 1.5 sec
     await new Promise((r) => setTimeout(r, Math.random() * 1000 + 500))
 
@@ -226,7 +226,7 @@ export const handleRand = () => {
       const randomReleaseFormData = new FormData();
       randomReleaseFormData.append('query', 'random_release');
 
-      const randomResponse = await catGirlFetch(apiUrl, {
+      const randomResponse = await _catGirlFetch()(apiUrl, {
         method: 'POST',
         body: randomReleaseFormData
       })
@@ -245,7 +245,7 @@ export const handleRand = () => {
       releaseFormData.append('query', 'release');
       releaseFormData.append('id', randomData.id);
 
-      const releaseResponse = await catGirlFetch(apiUrl, {
+      const releaseResponse = await _catGirlFetch()(apiUrl, {
         method: 'POST',
         body: releaseFormData
       });
@@ -269,30 +269,30 @@ export const handleRand = () => {
 
 export const invokeUpdateProxy = (url) => ipcRenderer.invoke(APP_UPDATE_PROXY, url)
 export const handleUpdateProxy = (cb) => {
-  ipcMain.handle(APP_UPDATE_PROXY, async (event, url) => {
+  _ipcMain().handle(APP_UPDATE_PROXY, async (event, url) => {
     return cb(url)
   })
 }
 
 export const invokeGetSystemLocale = () => ipcRenderer.invoke(APP_GET_SYSTEM_LOCALE)
 export const handleGetSystemLocale = (cb) => {
-  ipcMain.handle(APP_GET_SYSTEM_LOCALE, async () => cb())
+  _ipcMain().handle(APP_GET_SYSTEM_LOCALE, async () => cb())
 }
 
 export const invokeSetAppLocale = (locale) => ipcRenderer.invoke(APP_SET_LOCALE, locale)
 export const handleSetAppLocale = (cb) => {
-  ipcMain.handle(APP_SET_LOCALE, async (event, locale) => cb(locale))
+  _ipcMain().handle(APP_SET_LOCALE, async (event, locale) => cb(locale))
 }
 
 export const invokeTorrentParse = (url) => ipcRenderer.invoke(APP_TORRENT_PARSE, url)
 
 const showTorrentError = debounce(
-  () => showAppError(t('errors.torrentFileExpired')),
+  () => _showAppError()(_t()('errors.torrentFileExpired')),
   1000
 )
 
 export const handleTorrentParse = () => {
-  ipcMain.handle(APP_TORRENT_PARSE, async (event, url) => {
+  _ipcMain().handle(APP_TORRENT_PARSE, async (event, url) => {
     url = new URL('https://' + global.upstreamDomainV1Tv + url)
 
     const abortCtrl = new AbortController()
@@ -303,7 +303,7 @@ export const handleTorrentParse = () => {
       abortCtrl.abort()
     }, 5000)
 
-    const torrent = await catGirlFetch(url, { signal: abortCtrl.signal })
+    const torrent = await _catGirlFetch()(url, { signal: abortCtrl.signal })
       .then(async x => {
         clearTimeout(timer)
         return {
@@ -321,7 +321,7 @@ export const handleTorrentParse = () => {
     if (!torrent?.name || torrent?.name === 'unknown.torrent') {
       try {
         console.log('Resolve magnet via torrent net', magnet)
-        const t = await m2t.getTorrent(magnet)
+        const t = await _m2t().getTorrent(magnet)
         console.log('Resolved successfully via torrent net', t.name, t.infoHash)
 
         const file = t.toTorrentFile()

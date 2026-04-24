@@ -1,9 +1,5 @@
-import { g as genericComponent, u as useProxiedModel, bi as useDelay, p as propsFactory, bj as makeDelayProps, _ as _export_sfc, b2 as ReleaseProgress, b3 as useWatchStore, N as openBlock, S as createBlock, L as withCtx, l as createVNode, P as VImg, aY as VMenu, al as VList, K as createElementBlock, ae as renderList, ah as VListItem, V as VIcon, W as createTextVNode, T as toDisplayString, aj as VListItemTitle, ad as Fragment, aZ as withModifiers, a_ as VSelect, ak as VListItemSubtitle, U as createCommentVNode, t as VBtn, bf as VFadeTransition, n as createBaseVNode, af as VChip, r as mergeProps, Q as VCard, aa as resolveComponent, O as VCol, M as VRow, bc as useFavoritesStore, bk as stringsPluralize, ai as VDivider, ab as VCardTitle, ac as VCardSubtitle, a7 as VSkeletonLoader, bd as VTextField, bl as VSwitch, bm as toLogin, R as VCardText, b6 as toRelease, b7 as VExpandTransition, aV as resolveDynamicComponent, bn as Fuse, ba as useAccountStore } from "./index-CIkHx-EU.js";
-import "./torrents-handler-BtK2vzG6.js";
-import "fs";
-import "path";
-import "stream";
-import "util";
+import { g as genericComponent, u as useProxiedModel, bi as useDelay, p as propsFactory, bj as makeDelayProps, _ as _export_sfc, b2 as ReleaseProgress, b3 as useWatchStore, N as openBlock, S as createBlock, L as withCtx, l as createVNode, P as VImg, aY as VMenu, al as VList, K as createElementBlock, ae as renderList, ah as VListItem, V as VIcon, W as createTextVNode, T as toDisplayString, aj as VListItemTitle, ad as Fragment, aZ as withModifiers, a_ as VSelect, ak as VListItemSubtitle, U as createCommentVNode, t as VBtn, bf as VFadeTransition, n as createBaseVNode, af as VChip, r as mergeProps, Q as VCard, aa as resolveComponent, O as VCol, M as VRow, bc as useFavoritesStore, bk as stringsPluralize, ai as VDivider, ab as VCardTitle, ac as VCardSubtitle, a7 as VSkeletonLoader, bd as VTextField, bl as VSwitch, bm as toLogin, R as VCardText, b6 as toRelease, b7 as VExpandTransition, aV as resolveDynamicComponent, bn as Fuse, ba as useAccountStore } from "./index-YF3Wcouz.js";
+import "./torrents-handler-CGJ0ERZQ.js";
 const makeVHoverProps = propsFactory({
   disabled: Boolean,
   modelValue: {

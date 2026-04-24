@@ -11,7 +11,7 @@ import axios from 'axios'
 import { getLocale, translate } from '@/i18n'
 
 // Handlers
-import { sendReleaseNotification, showAppError } from '@main/handlers/notifications/notifications-handler'
+import { showAppError, sendReleaseNotification } from '@utils/notifications'
 
 import { defineStore } from 'pinia'
 
@@ -100,7 +100,7 @@ export const useReleasesStore = defineStore('releases', {
         this.loading = true
         this.has_error = false
 
-        if (await global.apiCacheService.initialize() === 'already_initialized') {
+        if (global.apiCacheService && await global.apiCacheService.initialize() === 'already_initialized') {
           await global.apiCacheService.downloadCache()
           await global.apiCacheService.processCache()
         }

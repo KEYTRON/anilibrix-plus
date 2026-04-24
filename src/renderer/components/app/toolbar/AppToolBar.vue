@@ -57,7 +57,7 @@ import Account from './components/account'
 import Settings from './components/settings'
 import Notifications from './components/notifications'
 import { invokeRand } from '@main/handlers/app/app-handlers'
-import {showAppError} from "@main/handlers/notifications/notifications-handler";
+import { showAppError } from '@utils/notifications'
 
 export default {
   components: {

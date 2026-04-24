@@ -1,9 +1,5 @@
-import { bw as BaseProxy, bx as BaseTransformer, by as fe, ag as humanFormat, bo as defineStore, bt as showAppError, bu as translate, bv as getLocale, bz as __capitalize, bq as ReleaseProxy } from "./index-CIkHx-EU.js";
-import "./torrents-handler-BtK2vzG6.js";
-import "fs";
-import "path";
-import "stream";
-import "util";
+import { bw as BaseProxy, bx as BaseTransformer, by as fe, ag as humanFormat, bz as requireCapitalize, bo as defineStore, bt as showAppError, bu as translate, bv as getLocale, bq as ReleaseProxy } from "./index-YF3Wcouz.js";
+import { g as getDefaultExportFromCjs } from "./torrents-handler-CGJ0ERZQ.js";
 class CatalogProxy extends BaseProxy {
   /**
    * Get catalog genres
@@ -111,6 +107,8 @@ class CatalogTransformer extends BaseTransformer {
     return { count: rating, text: humanFormat(rating) };
   }
 }
+var capitalizeExports = requireCapitalize();
+const __capitalize = /* @__PURE__ */ getDefaultExportFromCjs(capitalizeExports);
 const useCatalogStore = defineStore("catalog", {
   state: () => ({
     items: {

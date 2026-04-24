@@ -1,7 +1,5 @@
 import __get from 'lodash/get'
-import { useAccountStore } from '@store/app/account/useAccountStore'
 import axios from '@plugins/axios'
-import FormData from 'form-data'
 import { meta, version } from '@package'
 import { getLocale, translate } from '@/i18n'
 
@@ -18,7 +16,7 @@ export default class BaseProxy {
   async submit (method, url, parameters = {}) {
     // Set headers
     // Add user-agent
-    const headers = { ...parameters.headers, ...this.getRequestHeaders() }
+    const headers = { ...parameters.headers, ...await this.getRequestHeaders() }
 
     // Make request
     // eslint-disable-next-line no-return-await
@@ -102,7 +100,7 @@ export default class BaseProxy {
    *
    * @return {{}}
    */
-  getRequestHeaders () {
+  async getRequestHeaders () {
     // Create headers
     const headers = {}
 
@@ -111,6 +109,7 @@ export default class BaseProxy {
 
     // Set header session
     // Set session in cookies
+    const { useAccountStore } = await import('@store/app/account/useAccountStore')
     const session = useAccountStore().session
     if (session && session.length > 0) {
       headers.Cookie = `PHPSESSID=${session}; Path=/; Secure; HttpOnly`

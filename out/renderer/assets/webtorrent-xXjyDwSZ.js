@@ -1,13 +1,5 @@
-import { c as commonjsGlobal, j as requireElectron, g as getDefaultExportFromCjs, i as app, k as catchTorrentParse, l as catchTorrentStart, n as catchTorrentDestroy, e as electronExports, o as sendTorrentServer, p as sendTorrentDownload, q as sendTorrentClear, t as sendTorrentError } from "./torrents-handler-BtK2vzG6.js";
+import { c as commonjsGlobal, j as requireElectron, g as getDefaultExportFromCjs, i as app, k as catchTorrentParse, l as catchTorrentStart, n as catchTorrentDestroy, e as electronExports, o as sendTorrentServer, p as sendTorrentDownload, q as sendTorrentClear, t as sendTorrentError } from "./torrents-handler-CGJ0ERZQ.js";
 import parseTorrentData from "parse-torrent";
-import http from "http";
-import require$$0__default from "path";
-import { rimraf } from "rimraf";
-import WebTorrent from "webtorrent";
-import { SubtitleParser } from "matroska-subtitles";
-import "fs";
-import "stream";
-import "util";
 const { parse: $parse, stringify: $stringify } = JSON;
 const { keys } = Object;
 const Primitive = String;
@@ -729,7 +721,7 @@ function requireRenderer() {
 }
 var rendererExports = requireRenderer();
 const remoteRenderer = /* @__PURE__ */ getDefaultExportFromCjs(rendererExports);
-const torrentClient = new WebTorrent();
+const torrentClient = new (require("webtorrent"))();
 const store = {
   servers: {},
   // servers instances for torrents
@@ -739,7 +731,7 @@ const store = {
   handlers: {}
   // update handlers
 };
-const torrentPath = require$$0__default.join(remoteRenderer.app.getPath("temp"), app.build.appId);
+const torrentPath = require("path").join(remoteRenderer.app.getPath("temp"), app.build.appId);
 const startTorrent = async ({
   torrentId,
   fileIndex = 0
@@ -833,7 +825,7 @@ const destroyTorrent = async ({ torrentId }) => {
     }
     if (store.torrents[torrentId]) {
       const torrentFilePath = store.torrents[torrentId].path;
-      await rimraf(torrentFilePath);
+      await require("rimraf").rimraf(torrentFilePath);
       console.log("Destroy Torrent", { torrentId, path: torrentFilePath });
       store.torrents[torrentId].destroy();
       store.torrents[torrentId] = null;
@@ -853,9 +845,10 @@ const _startServer = ({
 }) => {
   return new Promise((resolve, reject) => {
     try {
+      const { SubtitleParser } = require("matroska-subtitles");
       const parser = new SubtitleParser();
       const server = torrent.createServer();
-      const vttServer = http.createServer(async (req, res) => {
+      const vttServer = require("http").createServer(async (req, res) => {
         const url = req.url.slice(1, -4);
         const {
           host,
@@ -864,7 +857,7 @@ const _startServer = ({
         } = JSON.parse(decodeURIComponent(url));
         const fileUrl = `${host}/${fileIndex}/${fileName}`;
         parser.on("subtitle", (subtitle, trackNumber) => console.log("Track " + trackNumber + ":", subtitle));
-        http.get(fileUrl, (stream) => stream.pipe(parser).pipe(res));
+        require("http").get(fileUrl, (stream) => stream.pipe(parser).pipe(res));
       });
       store.servers[torrentId] = server;
       store.vttServers[torrentId] = vttServer;

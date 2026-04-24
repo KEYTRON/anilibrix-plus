@@ -1,4 +1,4 @@
-import { _ as _export_sfc, bc as useFavoritesStore, ba as useAccountStore, S as createBlock, L as withCtx, aZ as withModifiers, t as VBtn, U as createCommentVNode, N as openBlock, V as VIcon, W as createTextVNode, K as createElementBlock, T as toDisplayString } from "./index-CIkHx-EU.js";
+import { _ as _export_sfc, bc as useFavoritesStore, ba as useAccountStore, S as createBlock, L as withCtx, aZ as withModifiers, t as VBtn, U as createCommentVNode, N as openBlock, V as VIcon, W as createTextVNode, K as createElementBlock, T as toDisplayString } from "./index-YF3Wcouz.js";
 const props = {
   release: {
     type: Object,

@@ -37,21 +37,21 @@ export default defineConfig({
           index: resolve('src/renderer/index.html'),
           webtorrent: resolve('src/renderer/webtorrent.html')
         },
-        // Node.js built-ins and heavy node packages used by webtorrent.js
-        // are available at runtime via nodeIntegration:true, so externalize them
-        external: [
-          'webtorrent', 'rimraf', 'matroska-subtitles', 'parse-torrent',
-          'http', 'https', 'path', 'fs', 'fs/promises', 'events', 'stream',
-          'zlib', 'crypto', 'net', 'tls', 'dns', 'os', 'url', 'util',
-          'querystring', 'buffer', 'timers', 'timers/promises',
-          'node:fs', 'node:path', 'node:url', 'node:events', 'node:stream',
-          'node:string_decoder', 'node:fs/promises', 'node:http', 'node:https'
-        ]
+        // Packages loaded at runtime via nodeIntegration:true — don't bundle them
+        external: ['webtorrent', 'matroska-subtitles', 'parse-torrent']
       }
+    },
+    optimizeDeps: {
+      // Exclude packages that use Node.js built-ins — they work at runtime via nodeIntegration:true
+      // but Vite can't bundle them as browser code
+      exclude: ['electron-window-state', 'electron-store', '@electron/remote', 'electron-promise-ipc']
     },
     resolve: {
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
       alias: {
+        // Shims for Electron APIs in renderer (nodeIntegration:true, bypasses Vite static analysis)
+        'electron': resolve('src/renderer/electronShim.js'),
+        '@electron/remote': resolve('src/renderer/electronRemoteShim.js'),
         '@': resolve('src/renderer'),
         '@renderer': resolve('src/renderer'),
         '@main': resolve('src/main'),

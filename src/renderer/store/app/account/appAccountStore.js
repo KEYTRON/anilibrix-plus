@@ -6,7 +6,7 @@ import __get from 'lodash/get'
 import { randomUUID as uuid } from 'crypto'
 
 // Handlers
-import { showAppError } from '@main/handlers/notifications/notifications-handler'
+import { showAppError } from '@utils/notifications'
 import * as safeStorage from '@main/utils/safe-storage'
 
 const SET_USER_ID = 'SET_USER_ID'

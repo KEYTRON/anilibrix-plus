@@ -1,5 +1,6 @@
-import { Main, Torrent } from '@main/utils/windows'
-import { ipcMain, ipcRenderer } from 'electron'
+import { ipcRenderer } from 'electron'
+const _windows = () => require('@main/utils/windows')
+const _ipcMain = () => require('electron').ipcMain
 
 export const TORRENT_PARSE = 'torrent:parse'
 export const TORRENT_CLEAR = 'torrent:clear'
@@ -16,33 +17,16 @@ export const TORRENT_PARSED_DATA = 'torrent:data'
  * @return {void}
  */
 export const broadcastTorrentEvents = () => {
+  const { Main, Torrent } = _windows()
+  const ipcMain = _ipcMain()
   const communications = [
-    {
-      channel: TORRENT_CLEAR,
-      window: () => Main
-    },
-    {
-      channel: TORRENT_ERROR,
-      window: () => Main
-    },
-    {
-      channel: TORRENT_START,
-      window: () => Torrent
-    },
-    {
-      channel: TORRENT_SERVER,
-      window: () => Main
-    },
-    {
-      channel: TORRENT_DESTROY,
-      window: () => Torrent
-    },
-    {
-      channel: TORRENT_DOWNLOAD,
-      window: () => Main
-    }
+    { channel: TORRENT_CLEAR, window: () => Main },
+    { channel: TORRENT_ERROR, window: () => Main },
+    { channel: TORRENT_START, window: () => Torrent },
+    { channel: TORRENT_SERVER, window: () => Main },
+    { channel: TORRENT_DESTROY, window: () => Torrent },
+    { channel: TORRENT_DOWNLOAD, window: () => Main }
   ]
-
   communications.forEach(communication => {
     ipcMain.on(communication.channel, (e, payload) =>
       communication.window().sendToWindow(communication.channel, payload)
@@ -58,10 +42,7 @@ export const broadcastTorrentEvents = () => {
  * @param blob
  */
 // eslint-disable-next-line camelcase
-export const sendTorrentParse = (torrent_id, blob) => Torrent.sendToWindow(TORRENT_PARSE, {
-  torrent_id,
-  blob
-})
+export const sendTorrentParse = (torrent_id, blob) => _windows().Torrent.sendToWindow(TORRENT_PARSE, { torrent_id, blob })
 
 /**
  * Catch torrent parse
@@ -89,7 +70,7 @@ export const sendTorrentParsedData = (torrent_id, data) => ipcRenderer.send(`${T
  * @param callback
  */
 // eslint-disable-next-line camelcase
-export const catchTorrentParsedData = (torrent_id, callback) => ipcMain.on(`${TORRENT_PARSED_DATA}:${torrent_id}`, (e, data) => callback(JSON.parse(data)))
+export const catchTorrentParsedData = (torrent_id, callback) => _ipcMain().on(`${TORRENT_PARSED_DATA}:${torrent_id}`, (e, data) => callback(JSON.parse(data)))
 
 /**
  * Send torrent server
