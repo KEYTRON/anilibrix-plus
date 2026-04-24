@@ -154,7 +154,6 @@ export default {
   position: sticky;
   top: 0;
   z-index: 10;
-  border-radius: 14px;
   overflow: hidden;
 
   &::before {
@@ -162,8 +161,8 @@ export default {
     position: absolute;
     inset: 0;
     z-index: 0;
-    backdrop-filter: blur(20px) saturate(1.8) brightness(1.1);
-    -webkit-backdrop-filter: blur(20px) saturate(1.8) brightness(1.1);
+    backdrop-filter: blur(20px) saturate(1.8) brightness(1.05);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8) brightness(1.05);
     filter: url(#glass-distortion);
     background:
       linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 100%);
