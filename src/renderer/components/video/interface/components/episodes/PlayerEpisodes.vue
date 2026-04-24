@@ -30,7 +30,7 @@ import Episodes from '@components/release/episodes'
 import AppSystemBarPlaceholder from '@components/app/systembar/placeholder'
 
 import { AppPlatformMixin } from '@mixins/app'
-import { toVideo } from '@utils/router/views'
+import { toVideo } from '@utils/router/views/routerViews'
 
 const props = {
   release: {
@@ -87,7 +87,7 @@ export default {
      * @param episode
      * @param release
      */
-    toVideo,
+    toVideo (release, episode) { toVideo(release, episode) },
 
   }
 

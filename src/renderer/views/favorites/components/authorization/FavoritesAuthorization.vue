@@ -26,7 +26,7 @@
 <script>
 
 // Utils
-import { toLogin } from '@utils/router/views'
+import { toLogin } from '@utils/router/views/routerViews'
 
 // Image
 import LibriaTyan02 from '@assets/images/libria-tyan/LibriaTyan02.svg'
@@ -38,7 +38,7 @@ export default {
     }
   },
   methods: {
-    toLogin,
+    toLogin () { toLogin() },
   }
 }
 

@@ -49,7 +49,8 @@ import Settings from './components/settings'
 import Authorization from './components/authorization'
 
 import Fuse from 'fuse.js'
-import { toLogin, toRelease } from '@utils/router/views'
+import { markRaw } from 'vue'
+import { toLogin, toRelease } from '@utils/router/views/routerViews'
 import { useAccountStore } from '@store/app/account/useAccountStore'
 import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
 import { useWatchStore } from '@store/app/watch/useWatchStore'
@@ -84,11 +85,10 @@ export default {
      * @return {*}
      */
     view () {
-
       const group = this.$__get(this._settings, 'group')
-
-      if (group === 'original') return FlowView
-      if (group === 'years') return YearsView
+      if (group === 'original') return markRaw(FlowView)
+      if (group === 'years') return markRaw(YearsView)
+      return markRaw(FlowView)
     },
 
     /**
@@ -159,9 +159,8 @@ export default {
 
   methods: {
     _getFavorites () { return useFavoritesStore().getFavorites() },
-
-    toLogin,
-    toRelease,
+    toLogin () { toLogin() },
+    toRelease (release) { toRelease(release) },
   },
 
 }

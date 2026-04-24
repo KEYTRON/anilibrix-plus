@@ -127,17 +127,8 @@ export default {
   methods: {
     _setIndex (index) { useReleasesStore().setIndex(index) },
 
-    /**
-     * Push to video
-     *
-     */
-    toVideo,
-
-    /**
-     * Push to release
-     *
-     */
-    toRelease,
+    toVideo (release, episode) { toVideo(release, episode) },
+    toRelease (release) { toRelease(release) },
 
     /**
      * Listen keyboard event

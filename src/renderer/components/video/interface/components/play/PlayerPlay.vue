@@ -45,7 +45,7 @@
 
 <script>
 import { invokeRichPresense, sendDisableSystemSleepBlockerEvent, sendEnableSystemSleepBlockerEvent } from '@main/handlers/app/app-handlers'
-import { toVideo } from '@utils/router/views'
+import { toVideo } from '@utils/router/views/routerViews'
 import { ActivityBuilder } from '@utils/activityBuilder'
 import humanTime from "@utils/strings/human-time";
 import {debounce} from "lodash";
@@ -126,7 +126,7 @@ export default {
      * @param release
      * @param episode
      */
-    toVideo,
+    toVideo (release, episode) { toVideo(release, episode) },
 
   },
 

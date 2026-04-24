@@ -37,7 +37,7 @@
 
 <script>
 
-import { toVideo } from '@utils/router/views'
+import { toVideo } from '@utils/router/views/routerViews'
 import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 
 const props = {
@@ -117,7 +117,7 @@ export default {
      *
      * @return void
      */
-    toVideo,
+    toVideo (release, episode) { toVideo(release, episode) },
 
     /**
      * Start autoplay

@@ -44,7 +44,7 @@ import Toolbar from './components/toolbar'
 import Filters from './components/filters'
 import Release from './components/release'
 
-import { toRelease } from '@utils/router/views'
+import { toRelease } from '@utils/router/views/routerViews'
 import { useCatalogStore } from '@store/catalog/useCatalogStore'
 import {nextTick} from "vue";
 
@@ -91,12 +91,7 @@ export default {
     _setPaginationPage (page) { return useCatalogStore().setPaginationPage(page) },
     _clearCatalogReleases () { return useCatalogStore().clearCatalogReleases() },
 
-    /**
-     * Go to release
-     *
-     * @return void
-     */
-    toRelease,
+    toRelease (release) { toRelease(release) },
 
     /**
      * Show releases

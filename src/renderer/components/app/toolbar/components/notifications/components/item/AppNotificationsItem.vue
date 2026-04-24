@@ -17,7 +17,8 @@
 
 <script>
 
-import { toVideo } from '@utils/router/views'
+import { toVideo } from '@utils/router/views/routerViews'
+import { getInternalServerUrl } from '@utils/internalServer'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.extend(relativeTime)
@@ -62,7 +63,7 @@ export default {
         const u = url.searchParams.get('url')
         const { pathname } = new URL(u)
 
-        return `http://localhost:${global.internalServerPort}/proxy-static?url=` + pathname
+        return getInternalServerUrl(`/proxy-static?url=${pathname}`)
       }
     },
 
@@ -96,7 +97,7 @@ export default {
   },
 
   methods: {
-    toVideo,
+    toVideo (release, episode) { toVideo(release, episode) },
   }
 }
 </script>
