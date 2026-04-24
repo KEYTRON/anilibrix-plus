@@ -132,8 +132,9 @@ export default {
 
   :deep(.v-field) {
     width: 100%;
-    border-radius: 20px;
+    border-radius: 20px !important;
     box-shadow: none;
+    overflow: hidden;
   }
 
   :deep(.v-field__field) {

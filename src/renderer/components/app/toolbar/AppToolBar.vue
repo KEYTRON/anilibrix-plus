@@ -12,19 +12,19 @@
 
     <!-- Releases -->
     <v-btn variant="text" class="mr-1 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('releases') }" :to="{name: 'releases'}">
-      <v-icon size="22" class="mr-2">mdi-view-column</v-icon>
+      <v-icon size="22">mdi-view-column</v-icon>
       <span class="toolbar__label">{{ $t('toolbar.releases') }}</span>
     </v-btn>
 
     <!-- Catalog-->
     <v-btn variant="text" class="mr-1 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('catalog') }" :to="{name: 'catalog'}">
-      <v-icon size="22" class="mr-2">mdi-folder-text-outline</v-icon>
+      <v-icon size="22">mdi-folder-text-outline</v-icon>
       <span class="toolbar__label">{{ $t('toolbar.catalog') }}</span>
     </v-btn>
 
     <!-- Favorite -->
     <v-btn variant="text" class="mr-3 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('favorites') }" :to="{name: 'favorites'}">
-      <v-icon size="22" class="mr-2">mdi-star</v-icon>
+      <v-icon size="22">mdi-star</v-icon>
       <span class="toolbar__label">{{ $t('toolbar.favorites') }}</span>
     </v-btn>
 
@@ -188,6 +188,21 @@ export default {
     border-radius: 21px !important;
     transition: opacity 0.2s ease, color 0.2s ease, background-color 0.2s ease;
     text-decoration: none !important;
+
+    :deep(.v-btn__content) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 100%;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    // reset icon's own margin since we use gap
+    :deep(.v-icon) {
+      margin-right: 0 !important;
+    }
 
     &--active {
       opacity: 1;
