@@ -1,23 +1,39 @@
 <template>
-  <div class="d-flex release__data">
-    <loader v-if="loading"/>
-    <div v-else :style="{maxWidth: '100%'}">
+  <div class="release__data">
+    <loader v-if="loading || !release"/>
+    <div v-else class="release__content">
 
       <!-- Release Data -->
-      <div class="allow-select display-2 font-weight-black text-truncate">{{ title }}</div>
-      <div class="allow-select subtitle-1">{{ subtitle }}</div>
-      <div class="body-2">{{ genres }}</div>
+      <div class="release__title allow-select">{{ title }}</div>
+      <div class="release__subtitle allow-select">{{ subtitle }}</div>
+      <div class="release__genres">{{ genres }}</div>
 
       <!-- Episode -->
       <!-- Favorite action -->
-      <div class="d-flex my-3">
+      <div class="release__meta">
         <favorite v-bind="{release}" class="mr-1"/>
-        <v-chip v-text="episode.title" label color="secondary" class="font-weight-black mr-1" :style="{height: '36px'}"/>
-        <v-chip v-text="type" label color="grey darken-4" :style="{height: '36px'}"/>
+        <v-chip
+          v-if="rating"
+          label
+          class="release__chip release__chip--rating">
+          <v-icon size="13" start>mdi-star</v-icon>
+          {{ rating }}
+        </v-chip>
+        <v-chip
+          v-if="episode"
+          v-text="episodeTitle"
+          label
+          color="secondary"
+          class="release__chip release__chip--episode"/>
+        <v-chip
+          v-if="type"
+          v-text="type"
+          label
+          class="release__chip release__chip--type"/>
       </div>
 
       <!-- Description -->
-      <div class="allow-select my-3 grey--text lighten-1 text-clamp">{{ description }}</div>
+      <div class="release__description allow-select">{{ description }}</div>
 
     </div>
   </div>
@@ -88,12 +104,33 @@ export default {
     },
 
     /**
+     * Get episode title
+     *
+     * @return {string|null}
+     */
+    episodeTitle () {
+      return this.$__get(this.episode, 'title')
+        || this.$__get(this.episode, 'name')
+        || null
+    },
+
+    /**
     * Get release type
     *
     * @return {*}
     */
     type () {
       return this.$__get(this.release, 'type')
+    },
+
+    /**
+     * Get favorite rating text (only if count > 0)
+     *
+     * @return {string|null}
+     */
+    rating () {
+      const count = this.$__get(this.release, 'favoriteRating.count')
+      return count > 0 ? this.$__get(this.release, 'favoriteRating.text') : null
     }
 
   }
@@ -105,8 +142,87 @@ export default {
 
 .release {
   &__data {
-    max-height: 230px;
+    width: 100%;
     user-select: none;
+    display: flex;
+  }
+
+  &__content {
+    max-width: min(1120px, 100%);
+  }
+
+  &__title {
+    font-size: clamp(1.85rem, 3.15vw, 2.95rem);
+    line-height: 0.98;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    margin-bottom: 6px;
+  }
+
+  &__subtitle {
+    font-size: 1.05rem;
+    line-height: 1.25;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 4px;
+  }
+
+  &__genres {
+    font-size: 0.92rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  &__chip {
+    min-height: 36px;
+    font-weight: 700;
+  }
+
+  &__chip--type {
+    background: #1f1f1f;
+    color: #fff;
+  }
+
+  &__chip--rating {
+    background: #1f1f1f;
+    color: #ffd54f;
+  }
+
+  &__description {
+    max-width: min(1040px, 100%);
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 0.97rem;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 960px) {
+  .release {
+    &__title {
+      font-size: 1.7rem;
+      line-height: 1;
+    }
+
+    &__subtitle {
+      font-size: 1rem;
+    }
+
+    &__genres,
+    &__description {
+      font-size: 0.95rem;
+    }
   }
 }
 

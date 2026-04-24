@@ -1,20 +1,38 @@
 <template>
   <v-fade-transition appear mode="out-in">
-    <div class="d-flex flex-column justify-center releases" v-if="loading || !_has_error">
+    <div class="releases" v-if="loading || !_has_error">
+      <div class="releases__hero">
+        <transition name="releases-backdrop">
+          <img
+            v-if="release && !loading"
+            :key="release.id"
+            :src="release.poster"
+            class="releases__backdrop"
+            alt=""
+          />
+        </transition>
 
-      <slider
-        v-bind="{loading}"
-        v-model="index"
-        class="mb-4"
-        :releases="_releases"
-        @next="next"
-        @previous="previous"
-        @toVideo="toVideo(release, episode)">
-      </slider>
+        <slider
+          v-bind="{loading}"
+          v-model="index"
+          class="releases__slider"
+          :releases="_releases"
+          @next="next"
+          @previous="previous"
+          @toVideo="toVideo(release, episode)">
+        </slider>
 
-      <release v-bind="{loading, release, episode}" class="mb-4" :key="release ? release.id : null"/>
-      <actions v-bind="{loading, release}" @toVideo="toVideo(release, episode)" @toRelease="toRelease(release)"/>
+        <release
+          v-bind="{loading, release, episode}"
+          class="releases__release"
+          :key="release ? release.id : null"/>
 
+        <actions
+          v-bind="{loading, release}"
+          class="releases__actions"
+          @toVideo="toVideo(release, episode)"
+          @toRelease="toRelease(release)"/>
+      </div>
     </div>
     <error v-else-if="!loading && _has_error"/>
   </v-fade-transition>
@@ -27,7 +45,7 @@ import Slider from './components/slider'
 import Release from './components/release'
 import Actions from './components/actions'
 
-import { toRelease, toVideo } from '@utils/router/views'
+import { toRelease, toVideo } from '@utils/router/views/routerViews'
 import { useAppStore } from '@store/app/useAppStore'
 import { useReleasesStore } from '@store/releases/useReleasesStore'
 import { AppKeyboardHandlerMixin } from '@mixins/app'
@@ -188,15 +206,77 @@ export default {
 <style lang="scss" scoped>
 
 .releases {
-  &::-webkit-scrollbar-thumb {
-    background-color: red;
+  display: flex;
+  width: 100%;
+  flex: 1 1 auto;
+  padding-top: 8px;
+
+  &__hero {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
   }
 
-  &::-webkit-scrollbar {
-    width: 9px;
-    background-color: red;
+  &__backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 58%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.25) 18%,
+      rgba(0, 0, 0, 0.7) 45%,
+      #000 75%
+    );
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
   }
 
+  &__slider,
+  &__release,
+  &__actions {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.releases-backdrop-enter-active,
+.releases-backdrop-leave-active {
+  transition: opacity 0.4s ease;
+}
+.releases-backdrop-enter-from,
+.releases-backdrop-leave-to {
+  opacity: 0;
+}
+
+@media (max-width: 960px) {
+  .releases {
+    padding-top: 4px;
+
+    &__hero {
+      gap: 12px;
+    }
+
+    &__backdrop {
+      width: 70%;
+      mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.2) 12%,
+        rgba(0, 0, 0, 0.65) 40%,
+        #000 70%
+      );
+    }
+  }
 }
 
 </style>
