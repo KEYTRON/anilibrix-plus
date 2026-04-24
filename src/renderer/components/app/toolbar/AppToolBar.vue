@@ -190,18 +190,14 @@ export default {
     text-decoration: none !important;
 
     :deep(.v-btn__content) {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
-      height: 100%;
-      padding-top: 0;
-      padding-bottom: 0;
     }
 
-    // reset icon's own margin since we use gap
     :deep(.v-icon) {
-      margin-right: 0 !important;
+      flex-shrink: 0;
+      line-height: 1;
     }
 
     &--active {
@@ -217,6 +213,7 @@ export default {
     letter-spacing: 0.04em;
     text-transform: uppercase;
     text-decoration: none !important;
+    line-height: 1;
   }
 
   &__actions {
