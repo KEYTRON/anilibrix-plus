@@ -150,7 +150,7 @@ export default {
   gap: 0;
   flex: 0 0 auto;
   white-space: nowrap;
-  margin: 10px 0;
+  margin: 0 0 10px;
   position: sticky;
   top: 0;
   z-index: 10;
