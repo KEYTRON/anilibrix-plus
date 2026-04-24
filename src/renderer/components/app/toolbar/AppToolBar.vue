@@ -11,21 +11,21 @@
     </div>
 
     <!-- Releases -->
-    <v-btn variant="text" class="mr-1 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('releases') }" :to="{name: 'releases'}">
-      <v-icon size="22">mdi-view-column</v-icon>
-      <span class="toolbar__label">{{ $t('toolbar.releases') }}</span>
+    <v-btn variant="text" rounded="pill" class="mr-1 toolbar__link" :class="{ 'toolbar__link--active': isCurrentRoute('releases') }" :to="{name: 'releases'}">
+      <v-icon start size="22">mdi-view-column</v-icon>
+      {{ $t('toolbar.releases') }}
     </v-btn>
 
     <!-- Catalog-->
-    <v-btn variant="text" class="mr-1 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('catalog') }" :to="{name: 'catalog'}">
-      <v-icon size="22">mdi-folder-text-outline</v-icon>
-      <span class="toolbar__label">{{ $t('toolbar.catalog') }}</span>
+    <v-btn variant="text" rounded="pill" class="mr-1 toolbar__link" :class="{ 'toolbar__link--active': isCurrentRoute('catalog') }" :to="{name: 'catalog'}">
+      <v-icon start size="22">mdi-folder-text-outline</v-icon>
+      {{ $t('toolbar.catalog') }}
     </v-btn>
 
     <!-- Favorite -->
-    <v-btn variant="text" class="mr-3 toolbar__link" height="42" :class="{ 'toolbar__link--active': isCurrentRoute('favorites') }" :to="{name: 'favorites'}">
-      <v-icon size="22">mdi-star</v-icon>
-      <span class="toolbar__label">{{ $t('toolbar.favorites') }}</span>
+    <v-btn variant="text" rounded="pill" class="mr-3 toolbar__link" :class="{ 'toolbar__link--active': isCurrentRoute('favorites') }" :to="{name: 'favorites'}">
+      <v-icon start size="22">mdi-star</v-icon>
+      {{ $t('toolbar.favorites') }}
     </v-btn>
 
     <!-- Search-->
@@ -180,36 +180,19 @@ export default {
 
   &__link {
     flex: 0 0 auto;
-    white-space: nowrap;
     opacity: 0.74;
-    min-width: 0;
-    padding-left: 12px;
-    padding-right: 12px;
-    border-radius: 21px !important;
-    transition: opacity 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     text-decoration: none !important;
-
-    :deep(.v-btn__content) {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      gap: 7px !important;
-    }
+    transition: opacity 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 
     &--active {
       opacity: 1;
       color: rgb(var(--v-theme-primary)) !important;
       background: rgba(255, 255, 255, 0.08);
     }
-  }
-
-  &__label {
-    font-size: 0.92rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    text-decoration: none !important;
-    line-height: 1;
   }
 
   &__actions {
