@@ -1,27 +1,25 @@
 <template>
-  <v-menu v-bind="{attach}" top nudge-left="60" nudge-top="45">
+  <v-menu location="top">
 
     <!-- Quality -->
-    <template v-slot:activator="{ on }">
-      <v-btn v-bind="props" icon large>
-        <v-icon size="24">{{ getSourceIcon(source) }}</v-icon>
+    <template v-slot:activator="{ props: menuProps }">
+      <v-btn v-bind="menuProps" icon variant="text" size="large" :title="$t('player.quality') || 'Качество'">
+        <v-icon size="24">{{ getSourceIcon(source) || 'mdi-quality-high' }}</v-icon>
       </v-btn>
     </template>
 
     <!-- Qualities -->
-    <v-list dense>
-      <template v-for="(s, k) in sortedSources" :key="k">
-        <v-list-item
-          :input-value="s.alias === source.alias"
-          @click="$emit('click', s)">
-
+    <v-list density="compact" bg-color="#1e1e1e">
+      <v-list-item
+        v-for="(s, k) in sortedSources"
+        :key="k"
+        :active="s.alias === source.alias"
+        @click="$emit('click', s)">
+        <template v-slot:prepend>
           <v-icon class="mr-2" color="grey">{{ getSourceIcon(s) }}</v-icon>
-          
-            <v-list-item-subtitle v-text="s.label"/>
-          
-
-        </v-list-item>
-      </template>
+        </template>
+        <v-list-item-title>{{ s.label }}</v-list-item-title>
+      </v-list-item>
     </v-list>
 
   </v-menu>
@@ -46,6 +44,7 @@ const props = {
 
 export default {
   props,
+  emits: ['click'],
   computed: {
 
     /**

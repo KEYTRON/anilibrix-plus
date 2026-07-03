@@ -228,7 +228,8 @@ export const handleRand = () => {
 
       const randomResponse = await catGirlFetch(apiUrl, {
         method: 'POST',
-        body: randomReleaseFormData
+        body: randomReleaseFormData.getBuffer(),
+        headers: randomReleaseFormData.getHeaders()
       })
 
       if (!randomResponse.ok) {
@@ -247,7 +248,8 @@ export const handleRand = () => {
 
       const releaseResponse = await catGirlFetch(apiUrl, {
         method: 'POST',
-        body: releaseFormData
+        body: releaseFormData.getBuffer(),
+        headers: releaseFormData.getHeaders()
       });
 
       if (!releaseResponse.ok) {

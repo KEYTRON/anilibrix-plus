@@ -1,7 +1,11 @@
 import { APIResponseTransformer } from './api-release-transformer'
 import store from '@store';
 import FormData from 'form-data'
-import {catGirlFetch} from "@utils/fetch";
+import { net } from 'electron'
+
+// Use Electron's net.fetch (Chromium net stack) — same fingerprint as
+// curl/browser, avoids Node undici TLS/HTTP2 quirks that cause ECONNRESET.
+const catGirlFetch = (url, init) => net.fetch(url, init)
 
 export class APIController {
   constructor(cacheService) {
@@ -13,9 +17,9 @@ export class APIController {
     this.endpoint = 'https://' + global.upstreamDomainV1Tv;
   }
 
-  async handleFavoritesProxy(action, id) {
+  async handleFavoritesProxy(action, id, sessionOverride = null) {
     const apiUrl = `${this.endpoint}/public/api/index.php`;
-    const session = store?.state?.app?.account?.session;
+    const session = sessionOverride || store?.state?.app?.account?.session;
 
     const formData = this.createFormData({
       action,
@@ -28,9 +32,10 @@ export class APIController {
     try {
       const response = await catGirlFetch(apiUrl, {
         method: 'POST',
-        body: formData,
+        body: formData.getBuffer(),
         signal: controller.signal,
         headers: {
+          ...formData.getHeaders(),
           Cookie: this.buildCookieHeader(session)
         }
       });
@@ -48,16 +53,18 @@ export class APIController {
     }
   }
 
-  async handleProxyWithCache(query, extra) {
+  async handleProxyWithCache(query, extra, sessionOverride = null) {
     const apiUrl = `${this.endpoint}/public/api/index.php`;
-    const session = store?.state?.app?.account?.session;
+    const session = sessionOverride || store?.state?.app?.account?.session;
 
     if (!query) {
       throw new Error('Query parameter is required');
     }
 
     try {
+      console.log('[handleProxyWithCache] →', apiUrl, 'session=', session ? session.slice(0,8)+'...' : 'NONE')
       const response = await this.makeApiRequest(apiUrl, session, extra);
+      console.log('[handleProxyWithCache] ← status=', response.status, 'ok=', response.ok)
 
       if (response.ok) {
         const data = await response.json();
@@ -67,7 +74,7 @@ export class APIController {
 
       await this.handleErrorResponse(response);
     } catch (error) {
-      console.error('Request', query, 'failed, fallback to cache', error)
+      console.error('Request', query, 'failed:', error?.message || error)
       return this.handleFallbackToCache(query, error);
     }
   }
@@ -80,9 +87,10 @@ export class APIController {
     try {
       return await catGirlFetch(apiUrl, {
         method: 'POST',
-        body: formData,
+        body: formData.getBuffer(),
         signal: controller.signal,
         headers: {
+          ...formData.getHeaders(),
           Cookie: this.buildCookieHeader(session)
         }
       });
@@ -103,8 +111,9 @@ export class APIController {
 
   buildCookieHeader(session) {
     if (!session) return '';
-
-    return `PHPSESSID=${session}; Path=/; Secure; HttpOnly`;
+    // Request Cookie header — just name=value pairs, NO Path/Secure/HttpOnly
+    // (those are Set-Cookie attributes only).
+    return `PHPSESSID=${session}`;
   }
 
   async handleErrorResponse(response) {

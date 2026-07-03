@@ -1,6 +1,13 @@
 import { defineStore } from 'pinia'
 
+const DEFAULT_API_ENDPOINT = 'https://anilibriaqt.anilib.top'
+const DEFAULT_STATIC_ENDPOINT = 'https://anilibriaqt.anilib.top'
+
 function normalizeEndpoint (endpoint) {
+  if (!endpoint || typeof endpoint !== 'string') {
+    return ''
+  }
+
   if (endpoint.endsWith('/')) {
     return endpoint.slice(0, -1).trim()
   }
@@ -44,8 +51,8 @@ export const useSettingsStore = defineStore('settings', {
       timeout: 10
     },
     api: {
-      _endpoint: process.env.API_ENDPOINT_URL,
-      _static_endpoint: process.env.STATIC_ENDPOINT_URL
+      _endpoint: process.env.API_ENDPOINT_URL || DEFAULT_API_ENDPOINT,
+      _static_endpoint: process.env.STATIC_ENDPOINT_URL || DEFAULT_STATIC_ENDPOINT
     },
     notifications: {
       system: true
@@ -59,10 +66,10 @@ export const useSettingsStore = defineStore('settings', {
 
   getters: {
     apiEndpoint: state => {
-      return normalizeEndpoint(state.api?._endpoint || process.env.API_ENDPOINT_URL)
+      return normalizeEndpoint(state.api?._endpoint || process.env.API_ENDPOINT_URL || DEFAULT_API_ENDPOINT)
     },
     staticEndpoint: state => {
-      return normalizeEndpoint(state.api?._static_endpoint || process.env.STATIC_ENDPOINT_URL)
+      return normalizeEndpoint(state.api?._static_endpoint || process.env.STATIC_ENDPOINT_URL || DEFAULT_STATIC_ENDPOINT)
     }
   },
 

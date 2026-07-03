@@ -1,11 +1,19 @@
-import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
+import { defineConfig, externalizeDepsPlugin, loadEnv } from 'electron-vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import { resolve } from 'path'
 
+// Load .env vars and expose them as process.env.* in renderer
+// (renderer uses process.env.X in many places — keep that working in Vite)
+const env = loadEnv('development', process.cwd(), '')
+const envDefine = Object.fromEntries(
+  Object.entries(env).map(([key, value]) => [`process.env.${key}`, JSON.stringify(value)])
+)
+
 export default defineConfig({
   main: {
     plugins: [externalizeDepsPlugin()],
+    define: envDefine,
     resolve: {
       alias: {
         '@main': resolve('src/main'),
@@ -18,17 +26,28 @@ export default defineConfig({
     }
   },
   preload: {
-    plugins: [externalizeDepsPlugin()]
+    plugins: [externalizeDepsPlugin()],
+    define: envDefine
   },
   renderer: {
     root: 'src/renderer',
+    define: envDefine,
+    server: {
+      host: '127.0.0.1',
+      port: 5173,
+      strictPort: true
+    },
     plugins: [
       vue({
-        template: { transformAssetUrls }
+        template: {
+          transformAssetUrls,
+          compilerOptions: {
+            isCustomElement: (tag) => tag === 'webview'
+          }
+        }
       }),
       vuetify({
-        autoImport: true,
-        styles: 'none'
+        autoImport: true
       })
     ],
     build: {

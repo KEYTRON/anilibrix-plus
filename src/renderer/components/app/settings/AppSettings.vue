@@ -8,11 +8,8 @@
     width="400"
     class="settings">
 
-    <!-- System bar offset -->
-    <system-bar-placeholder fixed/>
-
     <!-- Header -->
-    <v-toolbar flat class="shrink" color="#363636" :class="{'mt-9': !this.isMacOnFullscreen}">
+    <v-toolbar flat class="shrink" color="#363636">
       <v-toolbar-title class="body-1">{{ $t('settings.title') }}</v-toolbar-title>
       <v-spacer/>
       <v-tooltip left>
@@ -50,6 +47,7 @@
 </template>
 
 <script>
+import { markRaw } from 'vue'
 
 import Credentials from './components/credentials'
 import PlayerSettings from './categories/player'
@@ -59,17 +57,18 @@ import ActionsSettings from './categories/actions'
 import DevtoolsSettings from './categories/devtools'
 import AnilibriaSettings from './categories/app'
 
-import SystemBarPlaceholder from './../systembar/placeholder'
-
-import { AppPlatformMixin } from '@mixins/app'
 import { useAppStore } from '@store/app/useAppStore'
 import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 
+const PLAYER_SETTINGS = markRaw(PlayerSettings)
+const SYSTEM_SETTINGS = markRaw(SystemSettings)
+const ACTIONS_SETTINGS = markRaw(ActionsSettings)
+const ANILIBRIA_SETTINGS = markRaw(AnilibriaSettings)
+const DEVTOOLS_SETTINGS = markRaw(DevtoolsSettings)
+
 export default {
-  mixins: [AppPlatformMixin],
   components: {
     Credentials,
-    SystemBarPlaceholder
   },
   computed: {
     /**
@@ -80,11 +79,11 @@ export default {
     categories () {
       const settingsStore = useSettingsStore()
       return [
-        PlayerSettings,
-        SystemSettings,
-        ActionsSettings,
-        AnilibriaSettings,
-        settingsStore.devtools ? DevtoolsSettings : null
+        PLAYER_SETTINGS,
+        SYSTEM_SETTINGS,
+        ACTIONS_SETTINGS,
+        ANILIBRIA_SETTINGS,
+        settingsStore.devtools ? DEVTOOLS_SETTINGS : null
       ].filter(category => category)
     },
 

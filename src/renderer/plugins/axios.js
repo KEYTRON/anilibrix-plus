@@ -29,6 +29,18 @@ function filterUnderscoredKeys (data) {
   }, {})
 }
 
+function isSilentProfileProbeRequest (error) {
+  const url = error?.config?.url || ''
+  const status = error?.response?.status
+  const data = error?.config?.data
+
+  if (!url.includes('/public/api/index.php') || ![400, 401].includes(status)) {
+    return false
+  }
+
+  return data instanceof FormData && typeof data.get === 'function' && data.get('query') === 'user'
+}
+
 /**
  * Error handler function
  *
@@ -37,7 +49,9 @@ function filterUnderscoredKeys (data) {
  */
 const responseErrorHandler = async error => {
   if (error && error.response) {
-    if (error.response.status !== 401) {
+    const isSilentProfileProbe = isSilentProfileProbeRequest(error)
+
+    if (error.response.status !== 401 && !isSilentProfileProbe) {
 
       let headersList = {}
       if (error.config.headers) {
@@ -93,7 +107,7 @@ const responseErrorHandler = async error => {
 
   if (error && error.response) {
     // If server responded with not authorized:
-    if (error.response.status === 401) {
+    if (error.response.status === 401 || isSilentProfileProbeRequest(error)) {
       const { useAccountStore } = await import('@store/app/account/useAccountStore')
       const accountStore = useAccountStore()
       accountStore.setSession(null)

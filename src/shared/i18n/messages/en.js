@@ -1,6 +1,7 @@
 export default {
   common: {
     appTitle: 'AniLibrix Plus',
+    search: 'Search',
     noData: 'No data',
     back: 'Back',
     close: 'Close',

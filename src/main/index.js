@@ -23,6 +23,10 @@ import { setMainLocale } from '@main/utils/i18n'
 import { discordActivity } from './utils/discord'
 import remoteMain from '@electron/remote/main'
 
+if (process.env.NODE_ENV === 'development') {
+  process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
+}
+
 consoleLogToFile({
   logFilePath: path.join(app.getPath('userData') + '/anilibrix.log')
 })

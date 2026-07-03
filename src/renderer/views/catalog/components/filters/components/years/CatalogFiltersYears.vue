@@ -44,7 +44,7 @@ export default {
 .filter {
   ::v-deep {
     .v-chip {
-      border-radius: 4px;
+      border-radius: 8px;
     }
   }
 }

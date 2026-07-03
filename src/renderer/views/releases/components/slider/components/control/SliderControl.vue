@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex controls" :class="`controls--${direction}`">
-    <v-btn icon :disabled="isDisabled" @click="$emit('click')">
-      <v-icon>mdi-arrow-{{ direction }}</v-icon>
+    <v-btn icon variant="text" size="small" :disabled="isDisabled" class="controls__button" @click="$emit('click')">
+      <v-icon size="28">mdi-chevron-{{ direction }}</v-icon>
     </v-btn>
   </div>
 </template>
@@ -33,6 +33,7 @@ const props = {
 
 export default {
   props,
+  emits: ['click'],
   computed: {
 
     /**
@@ -72,15 +73,34 @@ export default {
 
 .controls {
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
 
   &--left {
     left: 0;
-    margin-left: -43px;
+    margin-left: 0;
   }
 
   &--right {
     right: 0;
-    margin-right: -43px;
+    margin-right: 0;
+  }
+
+  &__button {
+    color: rgba(255, 255, 255, 0.92);
+  }
+}
+
+@media (max-width: 960px) {
+  .controls {
+    &--left {
+      margin-left: 0;
+    }
+
+    &--right {
+      margin-right: 0;
+    }
   }
 }
 

@@ -1,10 +1,11 @@
 <template>
-  <v-btn v-if="isSeen" icon color="grey">
-    <v-icon>mdi-check</v-icon>
-  </v-btn>
+  <v-icon v-if="isSeen" color="success">mdi-check-circle</v-icon>
+  <v-icon v-else color="grey darken-2">mdi-circle-outline</v-icon>
 </template>
 
 <script>
+
+import { useWatchStore } from '@store/app/watch/useWatchStore'
 
 const props = {
   release: {
@@ -28,7 +29,6 @@ export default {
      */
     watch () {
       if (this.release && this.episode) {
-        const { useWatchStore } = require('@store/app/watch/useWatchStore')
         const release_id = this.release.id
         const episode_id = this.episode.id
         return useWatchStore().getWatchedEpisode({ release_id, episode_id })

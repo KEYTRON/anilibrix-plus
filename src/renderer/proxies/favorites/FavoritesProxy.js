@@ -15,7 +15,7 @@ export default class FavoritesProxy extends BaseProxy {
     })
     const params = {
       data,
-      headers: data.getHeaders(), ...parameters
+      ...parameters
     }
     const response = await this.submit('POST', this.getApiEndpoint(), params)
 
@@ -37,7 +37,7 @@ export default class FavoritesProxy extends BaseProxy {
     })
     const params = {
       data,
-      headers: data.getHeaders(), ...parameters
+      ...parameters
     }
     const response = await this.submit('POST', this.getApiEndpoint(), params)
 
@@ -59,7 +59,7 @@ export default class FavoritesProxy extends BaseProxy {
     })
     const params = {
       data,
-      headers: data.getHeaders(), ...parameters
+      ...parameters
     }
     const response = await this.submit('POST', this.getApiEndpoint(), params)
 

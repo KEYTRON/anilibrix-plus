@@ -2,16 +2,6 @@
   <v-fade-transition appear mode="out-in">
     <div class="releases" v-if="loading || !_has_error">
       <div class="releases__hero">
-        <transition name="releases-backdrop">
-          <img
-            v-if="release && !loading"
-            :key="release.id"
-            :src="release.poster"
-            class="releases__backdrop"
-            alt=""
-          />
-        </transition>
-
         <slider
           v-bind="{loading}"
           v-model="index"
@@ -30,8 +20,8 @@
         <actions
           v-bind="{loading, release}"
           class="releases__actions"
-          @toVideo="toVideo(release, episode)"
-          @toRelease="toRelease(release)"/>
+          @toVideo="handleToVideo"
+          @toRelease="handleToRelease"/>
       </div>
     </div>
     <error v-else/>
@@ -130,6 +120,14 @@ export default {
     toVideo (release, episode) { toVideo(release, episode) },
     toRelease (release) { toRelease(release) },
 
+    handleToVideo () {
+      this.toVideo(this.release, this.episode)
+    },
+
+    handleToRelease () {
+      this.toRelease(this.release)
+    },
+
     /**
      * Listen keyboard event
      *
@@ -142,7 +140,7 @@ export default {
       // space || enter
       if (code === 32 || code === 13) {
         if (this._drawer === false && this._is_searching === false) {
-          this.toVideo()
+          this.handleToVideo()
         }
       }
 
@@ -208,45 +206,7 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    position: relative;
-    overflow: hidden;
   }
-
-  &__backdrop {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 58%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      rgba(0, 0, 0, 0.25) 18%,
-      rgba(0, 0, 0, 0.7) 45%,
-      #000 75%
-    );
-    z-index: 0;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  &__slider,
-  &__release,
-  &__actions {
-    position: relative;
-    z-index: 1;
-  }
-}
-
-.releases-backdrop-enter-active,
-.releases-backdrop-leave-active {
-  transition: opacity 0.4s ease;
-}
-.releases-backdrop-enter-from,
-.releases-backdrop-leave-to {
-  opacity: 0;
 }
 
 @media (max-width: 960px) {
@@ -255,17 +215,6 @@ export default {
 
     &__hero {
       gap: 12px;
-    }
-
-    &__backdrop {
-      width: 70%;
-      mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        rgba(0, 0, 0, 0.2) 12%,
-        rgba(0, 0, 0, 0.65) 40%,
-        #000 70%
-      );
     }
   }
 }

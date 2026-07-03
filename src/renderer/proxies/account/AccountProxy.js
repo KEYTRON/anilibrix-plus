@@ -24,8 +24,7 @@ export default class AccountProxy extends BaseProxy {
       fa2code: ''
     })
     const params = {
-      data,
-      headers: data.getHeaders()
+      data
     }
 
     try {
@@ -36,8 +35,18 @@ export default class AccountProxy extends BaseProxy {
       // Get status
       // If err === 'ok' -> authorization is success
       if (status === 'ok') {
-        // Parse header cookies
-        const headerCookies = __get(response, 'headers.set-cookie', null)
+        // Parse header cookies — browsers hide Set-Cookie from JS, so the
+        // internal server mirrors it into x-set-cookie-b64 (base64 for safety).
+        let headerCookies = __get(response, 'headers.set-cookie', null)
+        if (!headerCookies) {
+          const b64 = __get(response, 'headers.x-set-cookie-b64', null)
+          if (b64) {
+            try {
+              const decoded = atob(b64)
+              headerCookies = decoded.split('\n')
+            } catch (_) {}
+          }
+        }
         const cookies = cookieParser(headerCookies, { map: true })
         const session = __get(cookies, 'PHPSESSID.value', null)
 
@@ -80,8 +89,7 @@ export default class AccountProxy extends BaseProxy {
   async getProfile () {
     const data = this.getFormDataObject({ query: 'user' })
     const params = {
-      data,
-      headers: data.getHeaders()
+      data
     }
     const response = await this.submit('POST', this.getApiEndpoint(), params)
 

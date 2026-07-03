@@ -29,6 +29,19 @@ import 'dayjs/locale/en'
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
+// After pinia hydrates from persisted state, push session to main
+// (so the store-compat layer in main has it for cookie-bearing requests).
+pinia.use(({ store }) => {
+  if (store.$id === 'account') {
+    store.$subscribe((_, state) => {
+      try {
+        const { ipcRenderer } = require('electron')
+        ipcRenderer.send('store:sync', { session: state.session })
+      } catch (e) { /* ipc unavailable */ }
+    }, { detached: true })
+  }
+})
+
 const app = createApp(App)
 
 app.use(pinia)

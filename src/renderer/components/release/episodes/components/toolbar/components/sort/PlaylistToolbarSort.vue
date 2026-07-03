@@ -1,7 +1,5 @@
 <template>
-  <v-btn height="48" @click="_setEpisodesSort(sortOrder)">
-    <v-icon>mdi-sort</v-icon>
-  </v-btn>
+  <v-btn icon="mdi-sort" variant="text" @click="_setEpisodesSort(sortOrder)"></v-btn>
 </template>
 
 <script>

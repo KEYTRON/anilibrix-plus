@@ -3,6 +3,18 @@
 // Old Vuetify 2 customizations (kept for reference, may need updating)
 // @import "plugins/vuetify/style";
 
+:root {
+  --alx-grey-2: #616161;
+  --alx-grey-3: #424242;
+  --alx-grey-4: #212121;
+  --alx-green-1: #43a047;
+  --alx-green-4: #1b5e20;
+  --alx-red-1: #e53935;
+  --alx-blue-1: #1e88e5;
+  --alx-white: #ffffff;
+  --alx-primary: rgb(var(--v-theme-primary));
+}
+
 *, *::after, *::before {
   -webkit-user-select: none;
   -webkit-user-drag: none;
@@ -26,6 +38,19 @@ html, body {
   width: 9px;
   background-color: #1d1d1d;
 }
+
+/* Vuetify 2 utility compatibility used across the migrated UI */
+.grey.darken-2 { background-color: var(--alx-grey-2) !important; }
+.grey.darken-3 { background-color: var(--alx-grey-3) !important; }
+.grey.darken-4 { background-color: var(--alx-grey-4) !important; }
+.green.darken-1 { background-color: var(--alx-green-1) !important; }
+.green.darken-4 { background-color: var(--alx-green-4) !important; }
+.red.darken-1 { background-color: var(--alx-red-1) !important; }
+.blue.darken-1 { background-color: var(--alx-blue-1) !important; }
+
+.white--text { color: var(--alx-white) !important; }
+.grey--text { color: rgba(255, 255, 255, 0.7) !important; }
+.primary--text { color: var(--alx-primary) !important; }
 
 // Replaces vue-clamp (Vue 2 only) — CSS line clamping
 .text-clamp {

@@ -9,6 +9,7 @@ import EpisodesTransformer from '@transformers/episode'
 // Utils
 import axios from 'axios'
 import { getLocale, translate } from '@/i18n'
+import { getInternalServerUrl } from '@utils/internalServer'
 
 // Handlers
 import { sendReleaseNotification, showAppError } from '@main/handlers/notifications/notifications-handler'
@@ -32,24 +33,24 @@ async function transformAndProcessReleases(items) {
 
   /* Start m3u8 rewrite */
   for (const release of releases) {
-    const { playlist } = release
+    const playlist = release?.episodes?.playlist || []
 
     for (const ep in playlist) {
       if (playlist[ep].sources.is_rutube) {
-        playlist[ep].fullhd = 'http://localhost:' + global.internalServerPort + '/rutube/' + playlist[ep].rutube_id + '/main.m3u8'
+        playlist[ep].fullhd = getInternalServerUrl(`/rutube/${playlist[ep].rutube_id}/main.m3u8`)
       } else {
         const { sd, hd, fullhd } = playlist[ep]
 
         if (fullhd) {
-          playlist[ep].fullhd = 'http://localhost:' + global.internalServerPort + '/hls/' + encodeURIComponent(playlist[ep].fullhd)
+          playlist[ep].fullhd = getInternalServerUrl(`/hls/${encodeURIComponent(playlist[ep].fullhd)}`)
         }
 
         if (hd) {
-          playlist[ep].hd = 'http://localhost:' + global.internalServerPort + '/hls/' + encodeURIComponent(playlist[ep].hd)
+          playlist[ep].hd = getInternalServerUrl(`/hls/${encodeURIComponent(playlist[ep].hd)}`)
         }
 
         if (sd) {
-          playlist[ep].sd = 'http://localhost:' + global.internalServerPort + '/hls/' + encodeURIComponent(playlist[ep].sd)
+          playlist[ep].sd = getInternalServerUrl(`/hls/${encodeURIComponent(playlist[ep].sd)}`)
         }
       }
     }
@@ -170,11 +171,6 @@ export default {
       try {
         commit(SET_RELEASES_LOADING, true)
         commit(SET_RELEASES_HAS_ERROR, false)
-
-        if (await global.apiCacheService.initialize() === 'already_initialized') {
-          await global.apiCacheService.downloadCache()
-          await global.apiCacheService.processCache()
-        }
 
         if (REQUEST_FOR_RELEASES) {
           REQUEST_FOR_RELEASES.cancel();

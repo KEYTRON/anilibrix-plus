@@ -20,12 +20,11 @@ class MainWindow extends Window {
       minWidth,
       minHeight,
       show: false,
-      frame: false,
+      frame: true,
       darkTheme: true,
       icon: nativeImage.createFromPath(
         path.join(process.resourcesPath, 'icons', 'icon.png')
       ),
-      titleBarStyle: 'hiddenInset',
       useContentSize: true,
       webPreferences: {
         webgl: true,
@@ -34,9 +33,7 @@ class MainWindow extends Window {
         autoplayPolicy: 'no-user-gesture-required',
         nodeIntegration: true,
         contextIsolation: false,
-        enableRemoteModule: true,
-        experimentalFeatures: true,
-        allowRunningInsecureContent: true
+        enableRemoteModule: true
       },
       backgroundColor: '#121212'
     }
@@ -54,7 +51,7 @@ class MainWindow extends Window {
   getWindowUrl () {
     return process.env.NODE_ENV === 'development'
       ? (process.env.VITE_DEV_SERVER_URL || 'http://localhost:5173')
-      : `file://${__dirname}/index.html`
+      : `file://${path.join(__dirname, '../renderer/index.html')}`
   }
 }
 

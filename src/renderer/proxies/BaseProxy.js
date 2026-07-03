@@ -1,7 +1,8 @@
 import __get from 'lodash/get'
 import axios from '@plugins/axios'
-import { meta, version } from '@package'
 import { getLocale, translate } from '@/i18n'
+import { getInternalServerOrigin, getInternalServerUrl } from '@utils/internalServer'
+import { meta, version } from '@package'
 
 export default class BaseProxy {
   /**
@@ -52,19 +53,19 @@ export default class BaseProxy {
    * @return {string}
    */
   getApiEndpoint () {
-    return `http://localhost:${global.internalServerPort}/public/api/index.php`
+    return getInternalServerUrl('/public/api/index.php')
   }
 
   getTorrentEndpoint () {
-    return `http://localhost:${global.internalServerPort}/`
+    return `${getInternalServerOrigin()}/`
   }
 
   getApiLoginEndpoint () {
-    return `http://localhost:${global.internalServerPort}/public/login.php`
+    return getInternalServerUrl('/public/login.php')
   }
 
   getApiLogoutEndpoint () {
-    return `http://localhost:${global.internalServerPort}/public/logout.php`
+    return getInternalServerUrl('/public/logout.php')
   }
 
   /**
@@ -73,8 +74,7 @@ export default class BaseProxy {
    * @return {string}
    */
   getStaticEndpoint () {
-    // eslint-disable-next-line camelcase
-    return 'http://localhost:' + global.internalServerPort + '/proxy-static?url='
+    return `${getInternalServerUrl('/proxy-static?url=')}`
   }
 
   /**
@@ -101,19 +101,20 @@ export default class BaseProxy {
    * @return {{}}
    */
   async getRequestHeaders () {
-    // Create headers
     const headers = {}
+    // Note: browsers forbid JS from setting "User-Agent" — let it default.
 
-    // Set header user agent
-    headers['user-agent'] = `${meta.name}/${version}`
-
-    // Set header session
-    // Set session in cookies
-    const { useAccountStore } = await import('@store/app/account/useAccountStore')
-    const session = useAccountStore().session
-    if (session && session.length > 0) {
-      headers.Cookie = `PHPSESSID=${session}; Path=/; Secure; HttpOnly`
-    }
+    // Attach PHPSESSID via X-PHPSESSID custom header.
+    // Browsers forbid JS from setting Cookie directly, so the internal
+    // server reads X-PHPSESSID and forwards it as the Cookie header upstream.
+    // Lazy import to avoid circular dependency: BaseProxy → store → AccountProxy → BaseProxy.
+    try {
+      const { useAccountStore } = await import('@store/app/account/useAccountStore')
+      const session = useAccountStore().session
+      if (session && session.length > 0) {
+        headers['x-phpsessid'] = session
+      }
+    } catch (e) { /* store may not be ready yet */ }
 
     return headers
   }

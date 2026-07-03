@@ -32,15 +32,12 @@ export const useAccountStore = defineStore('account', {
   actions: {
     /**
      * Try to login with provided credentials
+     * Throws on failure so caller can handle specific cases (e.g. "already authorized").
      */
     async login ({ login, password }) {
-      try {
-        this.setSession(null)
-        this.setProfile(null)
-        return await new AccountProxy().login({ login, password })
-      } catch (error) {
-        showAppError(error)
-      }
+      this.setSession(null)
+      this.setProfile(null)
+      return await new AccountProxy().login({ login, password })
     },
 
     /**
@@ -101,10 +98,15 @@ export const useAccountStore = defineStore('account', {
     },
 
     /**
-     * Set session value
+     * Set session value and sync to main process (awaitable so subsequent
+     * cookie-bearing requests see the updated session).
      */
-    setSession (session = null) {
+    async setSession (session = null) {
       this.session = session || null
+      try {
+        const { ipcRenderer } = require('electron')
+        await ipcRenderer.invoke('store:sync', { session: this.session })
+      } catch (e) { /* ipc unavailable in tests */ }
     },
 
     /**

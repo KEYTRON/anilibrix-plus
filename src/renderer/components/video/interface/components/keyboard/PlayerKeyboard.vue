@@ -1,7 +1,7 @@
 <script>
 
 import { AppKeyboardHandlerMixin } from '@mixins/app'
-import { toVideo } from '@utils/router/views'
+import { toVideo } from '@utils/router/views/routerViews'
 
 const props = {
   player: {

@@ -34,16 +34,33 @@ export async function initInternalServer () {
   
   server.all('/', (req, res) => res.send('Hello from Anilibrix Plus!'))
 
-  server.get('/public/torrent/download.php', expressProxy(apiController.endpoint));
-  server.post('/public/login.php', expressProxy(apiController.endpoint));
+  // Mirror Set-Cookie value into a regular header so the renderer (where browsers
+  // hide Set-Cookie from JS even with webSecurity: false) can read PHPSESSID.
+  // HTTP headers can't contain raw newlines, so base64-encode multi-cookie values.
+  const exposeSetCookie = {
+    userResHeaderDecorator (headers) {
+      const sc = headers['set-cookie']
+      if (sc && sc.length) {
+        const joined = Array.isArray(sc) ? sc.join('\n') : String(sc)
+        headers['x-set-cookie-b64'] = Buffer.from(joined, 'utf8').toString('base64')
+        headers['access-control-expose-headers'] = 'x-set-cookie-b64'
+      }
+      return headers
+    }
+  }
+
+  server.get('/public/torrent/download.php', expressProxy(apiController.endpoint))
+  server.post('/public/login.php', expressProxy(apiController.endpoint, exposeSetCookie))
   server.post('/public/logout.php', expressProxy(apiController.endpoint, {
-    userResDecorator: function(proxyRes, proxyResData) {
+    ...exposeSetCookie,
+    userResDecorator: function (proxyRes, proxyResData) {
       apiController.clearUserData()
       return proxyResData
     }
-  }));
+  }))
 
   await cacheManager.initialize()
+  await cacheService.initialize()
   const port = await getPort()
   server.listen(port)
 

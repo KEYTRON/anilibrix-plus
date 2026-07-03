@@ -6,10 +6,10 @@
 
         <player-headline v-bind="{player, release, episode}" class="pb-2"/>
         <player-timeline v-bind="{player}"/>
-        <v-row no-gutters justify="center">
+        <div class="interface__row">
 
           <!-- Links -->
-          <v-col align-self="center">
+          <div class="interface__col interface__col--left">
             <player-links
               v-bind="{release, source, player}"
               :upscale="() => $refs.upscale"
@@ -17,15 +17,15 @@
               :episodes="() => $refs.episodes"
               @set:time="setTime">
             </player-links>
-          </v-col>
+          </div>
 
           <!-- Play -->
-          <v-col align-self="center">
+          <div class="interface__col interface__col--center">
             <player-play v-bind="{player, release, episode}"/>
-          </v-col>
+          </div>
 
           <!-- Controls -->
-          <v-col align-self="center">
+          <div class="interface__col interface__col--right">
             <player-controls
               v-bind="{episode, source, player}"
               @set:speed="setSpeed"
@@ -34,8 +34,8 @@
               @toggle:pip="togglePIP"
               @toggle:fullscreen="toggleFullscreen">
             </player-controls>
-          </v-col>
-        </v-row>
+          </div>
+        </div>
 
       </div>
     </v-slide-y-reverse-transition>
@@ -352,6 +352,30 @@ export default {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.50) 50%, rgba(255, 255, 255, 0) 100%);
   user-select: none;
 
+  &__row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+  }
+
+  &__col {
+    display: flex;
+    align-items: center;
+
+    &--left {
+      flex: 1 1 0;
+      justify-content: flex-start;
+    }
+    &--center {
+      flex: 0 0 auto;
+      justify-content: center;
+    }
+    &--right {
+      flex: 1 1 0;
+      justify-content: flex-end;
+    }
+  }
 }
 
 </style>

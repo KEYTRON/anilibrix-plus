@@ -4,16 +4,18 @@
     ref="slider"
     color="secondary"
     class="slider__timeline"
+    thumb-label
+    track-size="3"
     :min="0"
     :max="is_ready ? duration : 100"
-    :value="is_ready ? time : 0"
+    :model-value="is_ready ? time : 0"
     :disabled="is_ready === false"
-    @change="player.currentTime = $event"
+    @update:model-value="onSeek"
     @mousedown="is_seeking = true"
     @mouseup="is_seeking = false">
 
-    <template v-slot:thumb-label="{ value }">
-      <div class="time font-weight-bold">{{ humanTime(value) }}</div>
+    <template v-slot:thumb-label="{ modelValue }">
+      <div class="time font-weight-bold">{{ humanTime(modelValue) }}</div>
     </template>
 
   </v-slider>
@@ -53,6 +55,10 @@ export default {
      * @return {number}
      */
     humanTime,
+    onSeek (val) {
+      this.time = val
+      if (this.is_ready) this.player.currentTime = val
+    },
     setPrimaryButtonState (e) {
       const flags = e.buttons !== undefined ? e.buttons : e.which;
       this.primaryMouseButtonDown = (flags & 1) === 1;

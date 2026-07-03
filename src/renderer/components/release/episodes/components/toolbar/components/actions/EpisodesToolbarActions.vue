@@ -1,9 +1,7 @@
 <template>
   <div>
 
-    <v-btn id="episodes__actions" height="48">
-      <v-icon>mdi-dots-vertical</v-icon>
-    </v-btn>
+    <v-btn id="episodes__actions" icon="mdi-dots-vertical" variant="text"></v-btn>
 
     <v-menu bottom left activator="#episodes__actions" :attach="container">
       <v-list dense class="grey darken-4">

@@ -2,7 +2,7 @@
 
 // Utils
 import { meta } from '@package'
-import { toVideo } from '@utils/router/views'
+import { toVideo } from '@utils/router/views/routerViews'
 import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 import { useNotificationsStore } from '@store/notifications/useNotificationsStore'
 import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
@@ -46,7 +46,7 @@ export default {
         // Show notification
         const episode = release.episodes[0]
         const title = episode ? episode.title : null
-        const poster = release.poster.image
+        const poster = release.poster
         const name = release.names.ru
 
         if (title && name) {

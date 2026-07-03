@@ -93,12 +93,17 @@
 </template>
 
 <script>
+import { markRaw } from 'vue'
 import { useAccountStore } from '@store/app/account/useAccountStore'
 import dayjs from 'dayjs'
 import confirmCreate from '@components/app/settings/categories/system/dialogs/confirmCreate.vue'
 import confirmSnapshotRemove from '@components/app/settings/categories/system/dialogs/confirmSnapshotRemove.vue'
 import confirmSnapshotRestore from '@components/app/settings/categories/system/dialogs/confirmSnapshotRestore.vue'
 import { catGirlFetch } from '@utils/fetch'
+
+const CONFIRM_CREATE = markRaw(confirmCreate)
+const CONFIRM_SNAPSHOT_REMOVE = markRaw(confirmSnapshotRemove)
+const CONFIRM_SNAPSHOT_RESTORE = markRaw(confirmSnapshotRestore)
 
 export default {
   data () {
@@ -127,13 +132,13 @@ export default {
   },
   computed: {
     confirmSnapshotRestore () {
-      return confirmSnapshotRestore
+      return CONFIRM_SNAPSHOT_RESTORE
     },
     confirmCreate () {
-      return confirmCreate
+      return CONFIRM_CREATE
     },
     confirmSnapshotRemove () {
-      return confirmSnapshotRemove
+      return CONFIRM_SNAPSHOT_REMOVE
     },
     _session () { return useAccountStore().session },
   },

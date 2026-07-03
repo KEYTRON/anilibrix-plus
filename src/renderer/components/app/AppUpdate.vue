@@ -3,6 +3,7 @@
     v-model="visible"
     persistent
     max-width="650"
+    content-class="update-dialog__content"
   >
     <v-card>
       <v-card-title class="text-h5">
@@ -16,17 +17,17 @@
       <v-card-actions>
         <v-btn
           color="red darken-1"
-          text
+          variant="text"
           v-on:click="visible = false"
         >
           {{ $t('common.close') }}
         </v-btn>
 
-        <v-btn @click="openLink(repository.url)">
+        <v-btn variant="text" @click="openLink(repository.url)">
           {{ $t('update.github') }}
         </v-btn>
 
-        <v-btn @click="openLink('https://t.me/anilibrix_plus')" color="blue darken-1">
+        <v-btn variant="text" @click="openLink('https://t.me/anilibrix_plus')" color="blue darken-1">
           {{ $t('update.telegram') }}
         </v-btn>
       </v-card-actions>
@@ -74,3 +75,15 @@ export default {
 
 }
 </script>
+
+<style>
+.update-dialog__content {
+  width: min(650px, calc(100vw - 32px));
+  margin: auto;
+}
+
+.update-dialog__content .v-card {
+  background: #1f1f1f;
+  color: #fff;
+}
+</style>

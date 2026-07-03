@@ -1,23 +1,21 @@
 <template>
   <v-navigation-drawer
     v-model="visible"
-    absolute
+    location="left"
     temporary
     width="400"
+    color="#1a1a1a"
     :style="{zIndex: 100}">
 
-    <!-- System Bar Offset-->
-    <app-system-bar-placeholder fixed/>
-
     <!-- Episodes -->
-    <v-card :class="{'mt-9': !this.isMacOnFullscreen}">
+    <v-card color="transparent" flat>
       <v-card-title>{{ $t('common.episodes') }}</v-card-title>
       <v-card-subtitle>{{ $t('player.toEpisodes') }}</v-card-subtitle>
       <episodes
         v-bind="{release, episodes}"
         class="pa-4"
         :playing="episode"
-        @episode="toVideo(release, $event)">
+        @episode="onEpisodeClick">
       </episodes>
     </v-card>
 
@@ -27,9 +25,6 @@
 <script>
 
 import Episodes from '@components/release/episodes'
-import AppSystemBarPlaceholder from '@components/app/systembar/placeholder'
-
-import { AppPlatformMixin } from '@mixins/app'
 import { toVideo } from '@utils/router/views/routerViews'
 
 const props = {
@@ -45,10 +40,8 @@ const props = {
 
 export default {
   props,
-  mixins: [AppPlatformMixin],
   components: {
     Episodes,
-    AppSystemBarPlaceholder
   },
 
   data () {
@@ -82,12 +75,14 @@ export default {
     },
 
     /**
-     * To video episode
+     * Close drawer and navigate to clicked episode
      *
      * @param episode
-     * @param release
      */
-    toVideo (release, episode) { toVideo(release, episode) },
+    onEpisodeClick (episode) {
+      this.visible = false
+      toVideo(this.release, episode)
+    },
 
   }
 

@@ -3,38 +3,37 @@
     <template v-if="is_mounted">
 
       <!-- Previous episode -->
-      <v-tooltip left :attach="$refs.play">
-        <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon large :disabled="!previous" @click="toVideo(release, previous, {fromStart: true})">
-            <v-icon>mdi-skip-previous</v-icon>
+      <v-tooltip location="top">
+        <template v-slot:activator="{ props: tooltipProps }">
+          <v-btn v-bind="tooltipProps" icon variant="text" size="large" :disabled="!previous" @click="toVideo(release, previous, {fromStart: true})">
+            <v-icon size="32">mdi-skip-previous</v-icon>
           </v-btn>
         </template>
         <div v-if="previous" class="play__tooltip py-2">
-          <div class="caption pb-1">{{ title }}</div>
+          <div class="text-caption pb-1">{{ title }}</div>
           <div class="font-weight-bold">{{ previous.title }}</div>
         </div>
       </v-tooltip>
 
       <v-btn
         icon
+        variant="text"
         class="mx-2"
-        width="90"
-        height="90"
+        size="x-large"
         :disabled="is_buffering"
         @click="player.togglePlay()">
-        <v-icon size="40">mdi-{{ is_playing ? 'pause' : 'play' }}</v-icon>
+        <v-icon size="48">mdi-{{ is_playing ? 'pause' : 'play' }}</v-icon>
       </v-btn>
 
-
       <!-- Next episode -->
-      <v-tooltip right :attach="$refs.play">
-        <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon large :disabled="!next" @click="toVideo(release, next, {fromStart: true})">
-            <v-icon>mdi-skip-next</v-icon>
+      <v-tooltip location="top">
+        <template v-slot:activator="{ props: tooltipProps }">
+          <v-btn v-bind="tooltipProps" icon variant="text" size="large" :disabled="!next" @click="toVideo(release, next, {fromStart: true})">
+            <v-icon size="32">mdi-skip-next</v-icon>
           </v-btn>
         </template>
         <div v-if="next" class="play__tooltip py-2">
-          <div class="caption pb-1">{{ title }}</div>
+          <div class="text-caption pb-1">{{ title }}</div>
           <div class="font-weight-bold">{{ next.title }}</div>
         </div>
       </v-tooltip>
@@ -142,15 +141,7 @@ export default {
     this.activityInterval = setInterval(() => {
       const a = new ActivityBuilder()
 
-      try {
-        const u = new URL(this.release.poster)
-
-        // store.getters['app/settings/system/staticEndpoint']
-        const un = new URL(u.searchParams.get('url'), process.env.DISCORD_STATIC_DOMAIN)
-        a.setImage(un.toString())
-      } catch (e) {
-        console.log(e)
-      }
+      a.setImage(this.release.poster)
       a.setActivityType(3)
       a.setLargeImageText('AniLibrix plus t.me/anilibrix_plus')
       a.firstLine(`[${this.episode.id}/${this.episodes.length}] ` + this.title)
@@ -201,7 +192,7 @@ export default {
       }
 
       const v = document.querySelector('video')
-      if (v && !v.audioTracks.length) {
+      if (v && v.audioTracks && !v.audioTracks.length) {
         noAudio()
       }
     })

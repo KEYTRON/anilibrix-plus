@@ -10,7 +10,7 @@ import AppToolBar from '@components/app/toolbar'
 
 // Utils
 import __shuffle from 'lodash/shuffle'
-import { toReleases } from '@utils/router/views'
+import { toReleases } from '@utils/router/views/routerViews'
 
 const props = {
   to: {
@@ -75,7 +75,8 @@ export default {
       return this.to
         ? {
           name: this.to.name,
-          params: this.to.params
+          params: this.to.params,
+          query: this.to.query
         }
         : { name: 'releases' }
     }

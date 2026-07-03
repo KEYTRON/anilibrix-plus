@@ -8,6 +8,19 @@ const NEW_IP = '31.184.217.238'
 let fixWwndChecked = false
 let fixWwwdNeeded = false
 
+function isSelfSignedCertificateError (error) {
+  return error?.cause?.code === 'DEPTH_ZERO_SELF_SIGNED_CERT' ||
+    error?.code === 'DEPTH_ZERO_SELF_SIGNED_CERT'
+}
+
+function canTemporarilyDisableTlsValidation () {
+  if (typeof process === 'undefined' || !process.versions?.node) {
+    return false
+  }
+
+  return typeof process.env === 'object'
+}
+
 async function checkWwnd () {
   if (fixWwndChecked) return
   try {
@@ -39,5 +52,26 @@ export async function catGirlFetch (url, init = {}) {
   }
 
   init.redirect = 'follow'
-  return fetch(url, init)
+
+  try {
+    return await fetch(url, init)
+  } catch (error) {
+    if (isSelfSignedCertificateError(error) && canTemporarilyDisableTlsValidation()) {
+      const previousValue = process.env.NODE_TLS_REJECT_UNAUTHORIZED
+
+      try {
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+        console.warn('Retrying request with certificate checks disabled', url)
+        return await fetch(url, init)
+      } finally {
+        if (previousValue === undefined) {
+          delete process.env.NODE_TLS_REJECT_UNAUTHORIZED
+        } else {
+          process.env.NODE_TLS_REJECT_UNAUTHORIZED = previousValue
+        }
+      }
+    }
+
+    throw error
+  }
 }

@@ -8,6 +8,16 @@ const RELEASES_VIEW = 'releases'
 const FAVORITES_VIEW = 'favorites'
 const ACCOUNT_LOGIN_VIEW = 'account.login'
 
+const getCurrentRouteName = () => router.currentRoute?.value?.name || null
+const encodeRouteState = (value) => {
+  try {
+    return value == null ? undefined : JSON.stringify(value)
+  } catch (error) {
+    console.error('Failed to serialize route state', error)
+    return undefined
+  }
+}
+
 /**
  * Go to login view
  * Check current route
@@ -15,7 +25,7 @@ const ACCOUNT_LOGIN_VIEW = 'account.login'
  * @return {Promise}
  */
 export const toLogin = () => {
-  if (router.currentRoute.name !== ACCOUNT_LOGIN_VIEW) {
+  if (getCurrentRouteName() !== ACCOUNT_LOGIN_VIEW) {
     return router.push({ name: ACCOUNT_LOGIN_VIEW })
   }
 }
@@ -26,7 +36,7 @@ export const toLogin = () => {
  * @return {Promise<Route>}
  */
 export const toFavorites = () => {
-  if (router.currentRoute.name !== FAVORITES_VIEW) {
+  if (getCurrentRouteName() !== FAVORITES_VIEW) {
     return router.push({ name: FAVORITES_VIEW })
   }
 }
@@ -40,13 +50,13 @@ export const toFavorites = () => {
 export const toRelease = (release = null) => {
   if (release) {
     const releaseId = __get(release, 'id')
-    const releaseName = __get(release, 'names.original')
+    const releaseName = __get(release, 'names.original') || __get(release, 'names.ru') || `release-${releaseId}`
 
     return router.push({
       name: RELEASE_VIEW,
       params: {
-        releaseId,
-        releaseName
+        releaseId: String(releaseId),
+        releaseName: String(releaseName)
       }
     })
   }
@@ -78,10 +88,13 @@ export const toVideo = (release = null, episode = null, params = {}) => {
       name: VIDEO_VIEW,
       params: {
         key,
-        release,
-        episode,
-        releaseName, ...params
-      }
+        releaseName
+      },
+      query: {
+        release: encodeRouteState(release),
+        episode: encodeRouteState(episode),
+        fromStart: params.fromStart ? '1' : undefined
+      },
     })
   }
 }
@@ -96,7 +109,7 @@ export const toVideo = (release = null, episode = null, params = {}) => {
 export const toBlank = (message = null, referer = null) => {
   return router.push({
     name: BLANK_VIEW,
-    params: {
+    query: {
       message,
       referer
     }

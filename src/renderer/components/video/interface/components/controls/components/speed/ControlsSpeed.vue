@@ -1,20 +1,20 @@
 <template>
-  <v-menu v-bind="{attach}" top nudge-left="60" nudge-top="45">
+  <v-menu location="top">
 
-    <!-- Quality -->
-    <template v-slot:activator="{ on }">
-      <v-btn v-bind="props" icon large>
-        <span class="caption font-weight-bold">{{ active.label }}</span>
+    <template v-slot:activator="{ props: menuProps }">
+      <v-btn v-bind="menuProps" icon variant="text" size="large" :title="$t('player.speed') || 'Скорость'">
+        <span class="text-caption font-weight-bold">{{ active.label }}</span>
       </v-btn>
     </template>
 
-    <!-- Qualities -->
-    <v-list dense>
-      <template v-for="(s, k) in variants" :key="k">
-        <v-list-item :input-value="s.value === active.value" @click="$emit('click', s.value)">
-          <v-list-item-subtitle v-text="s.label"/>
-        </v-list-item>
-      </template>
+    <v-list density="compact" bg-color="#1e1e1e">
+      <v-list-item
+        v-for="(s, k) in variants"
+        :key="k"
+        :active="s.value === active.value"
+        @click="$emit('click', s.value)">
+        <v-list-item-title>{{ s.label }}</v-list-item-title>
+      </v-list-item>
     </v-list>
 
   </v-menu>
@@ -35,6 +35,7 @@ const props = {
 
 export default {
   props,
+  emits: ['click'],
   data () {
     return {
       speed: 1

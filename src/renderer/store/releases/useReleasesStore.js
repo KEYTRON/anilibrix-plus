@@ -9,6 +9,7 @@ import EpisodesTransformer from '@transformers/episode'
 // Utils
 import axios from 'axios'
 import { getLocale, translate } from '@/i18n'
+import { getInternalServerUrl } from '@utils/internalServer'
 
 // Handlers
 import { showAppError, sendReleaseNotification } from '@utils/notifications'
@@ -27,24 +28,24 @@ async function transformAndProcessReleases (items) {
 
   /* Start m3u8 rewrite */
   for (const release of releases) {
-    const { playlist } = release
+    const playlist = release?.episodes?.playlist || []
 
     for (const ep in playlist) {
       if (playlist[ep].sources.is_rutube) {
-        playlist[ep].fullhd = 'http://localhost:' + global.internalServerPort + '/rutube/' + playlist[ep].rutube_id + '/main.m3u8'
+        playlist[ep].fullhd = getInternalServerUrl(`/rutube/${playlist[ep].rutube_id}/main.m3u8`)
       } else {
         const { sd, hd, fullhd } = playlist[ep]
 
         if (fullhd) {
-          playlist[ep].fullhd = 'http://localhost:' + global.internalServerPort + '/hls/' + encodeURIComponent(playlist[ep].fullhd)
+          playlist[ep].fullhd = getInternalServerUrl(`/hls/${encodeURIComponent(playlist[ep].fullhd)}`)
         }
 
         if (hd) {
-          playlist[ep].hd = 'http://localhost:' + global.internalServerPort + '/hls/' + encodeURIComponent(playlist[ep].hd)
+          playlist[ep].hd = getInternalServerUrl(`/hls/${encodeURIComponent(playlist[ep].hd)}`)
         }
 
         if (sd) {
-          playlist[ep].sd = 'http://localhost:' + global.internalServerPort + '/hls/' + encodeURIComponent(playlist[ep].sd)
+          playlist[ep].sd = getInternalServerUrl(`/hls/${encodeURIComponent(playlist[ep].sd)}`)
         }
       }
     }
@@ -100,11 +101,6 @@ export const useReleasesStore = defineStore('releases', {
         this.loading = true
         this.has_error = false
 
-        if (global.apiCacheService && await global.apiCacheService.initialize() === 'already_initialized') {
-          await global.apiCacheService.downloadCache()
-          await global.apiCacheService.processCache()
-        }
-
         if (REQUEST_FOR_RELEASES) {
           REQUEST_FOR_RELEASES.cancel()
         }
@@ -114,8 +110,10 @@ export const useReleasesStore = defineStore('releases', {
         const { items } = await new ReleaseProxy().getReleases({
           cancelToken: REQUEST_FOR_RELEASES.token
         })
+        console.log('[releases] fetched items', Array.isArray(items) ? items.length : 'non-array', items?.[0]?.id)
 
         const releases = await transformAndProcessReleases(items)
+        console.log('[releases] processed releases', releases.length, releases[0]?.id)
 
         await this._handleNewReleaseNotifications(releases)
 
@@ -124,7 +122,7 @@ export const useReleasesStore = defineStore('releases', {
       } catch (error) {
         if (!axios.isCancel(error)) {
           this.has_error = true
-          console.log(error)
+          console.log('[releases] load failed', error)
           showAppError(translate('errors.genericLoadReleases', {}, getLocale()))
         }
       } finally {
@@ -145,7 +143,7 @@ export const useReleasesStore = defineStore('releases', {
         const previousRelease = this.data.find(
           item => item.id === release.id && item.episodes.length === release.episodes.length
         )
-        return previousRelease === null
+        return previousRelease == null
       })
 
       for (const release of newReleases) {

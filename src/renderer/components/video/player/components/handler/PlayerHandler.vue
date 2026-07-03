@@ -1,10 +1,10 @@
 <template>
-  <div class="d-flex flex-column justify-center fill-height">
+  <div class="player-handler d-flex flex-column justify-center fill-height">
 
     <slot name="prepend"/>
 
     <!-- Video container -->
-    <video ref="player" crossorigin="anonymous" autoplay preload="auto">
+    <video ref="player" class="player-handler__video" crossorigin="anonymous" autoplay preload="auto">
       <slot name="video"/>
     </video>
 
@@ -13,6 +13,33 @@
 
   </div>
 </template>
+
+<style scoped>
+.player-handler {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #000;
+}
+.player-handler__video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #000;
+}
+.player-handler :deep(.plyr) {
+  width: 100%;
+  height: 100%;
+}
+.player-handler :deep(.plyr--video) {
+  background: #000;
+}
+.player-handler :deep(.plyr__video-wrapper) {
+  height: 100%;
+  background: #000;
+}
+</style>
 
 <script>
 

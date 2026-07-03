@@ -1,5 +1,7 @@
 import store from "@store";
 
+const DEFAULT_STATIC_ENDPOINT = 'https://anilibriaqt.anilib.top'
+
 export default function (cacheManager) {
   return async (req, res) => {
     try {
@@ -9,9 +11,11 @@ export default function (cacheManager) {
       }
 
       let parsedUrl;
+      const configuredStaticEndpoint = store.getters['app/settings/system/staticEndpoint']?.trim?.()
+      const staticEndpoint = configuredStaticEndpoint || DEFAULT_STATIC_ENDPOINT
 
       try {
-        parsedUrl = new URL(store.getters['app/settings/system/staticEndpoint'] + req.query.url);
+        parsedUrl = new URL(staticEndpoint + req.query.url);
         if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
           return res
             .status(400)

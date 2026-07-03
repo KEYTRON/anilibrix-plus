@@ -2,16 +2,14 @@
   <v-navigation-drawer
     v-if="source.type === 'torrent'"
     v-model="visible"
-    absolute
+    location="left"
     temporary
     width="350"
+    color="#1a1a1a"
     :style="{zIndex: 100}">
 
-    <!-- System Bar Offset-->
-    <app-system-bar-placeholder fixed/>
-
     <!-- Torrent Details -->
-    <v-card :class="{'mt-9': !this.isMacOnFullscreen}">
+    <v-card color="transparent" flat>
       <v-card-title>{{ $t('player.torrentTitle') }}</v-card-title>
       <v-card-subtitle>{{ $t('player.torrentSubtitle') }}</v-card-subtitle>
       <v-list dense>
@@ -40,10 +38,7 @@
 
 <script>
 
-import AppSystemBarPlaceholder from '@components/app/systembar/placeholder'
-
 import prettyBytes from 'pretty-bytes'
-import { AppPlatformMixin } from '@mixins/app'
 import { catchTorrentDownload } from '@main/handlers/torrents/torrents-handler'
 
 const props = {
@@ -55,10 +50,6 @@ const props = {
 
 export default {
   props,
-  mixins: [AppPlatformMixin],
-  components: {
-    AppSystemBarPlaceholder
-  },
   data () {
     return {
       speed: 0,

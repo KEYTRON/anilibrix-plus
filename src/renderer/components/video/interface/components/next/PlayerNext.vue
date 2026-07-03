@@ -1,6 +1,6 @@
 <template>
-  <v-overlay :value="visible" :opacity=".85">
-    <div v-show="visible" class="player__next">
+  <v-overlay v-model="visible" :opacity="0.85" persistent>
+    <div class="player__next">
 
       <!-- Title -->
       <template v-if="release && next">
@@ -12,23 +12,23 @@
 
       <!-- Progress -->
       <v-progress-circular
-        v-bind="{value}"
+        :model-value="value"
         size="80"
         class="my-6"
-        rotate="-90">
+        :rotate="-90">
         <v-btn
           icon
-          width="80"
-          height="80"
+          variant="flat"
+          size="x-large"
           :style="{backgroundColor: '#ffffff45'}"
           @click="toVideo(release, next)">
-          <v-icon large>mdi-skip-next</v-icon>
+          <v-icon size="36">mdi-skip-next</v-icon>
         </v-btn>
       </v-progress-circular>
 
       <!-- Cancel -->
       <div class="player__next__label player__next__label--bottom">
-        <v-btn text @click="cancel">{{ $t('player.nextCancel') }}</v-btn>
+        <v-btn variant="text" @click="cancel">{{ $t('player.nextCancel') }}</v-btn>
       </div>
 
     </div>

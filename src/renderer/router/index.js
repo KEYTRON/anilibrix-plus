@@ -23,9 +23,15 @@ const router = createRouter({
   )
 })
 
-// Suppress NavigationDuplicated errors
+// Suppress NavigationDuplicated errors but log other failures
+import { isNavigationFailure, NavigationFailureType } from 'vue-router'
 const originalPush = router.push.bind(router)
-router.push = (location) => originalPush(location).catch(() => null)
+router.push = (location) => originalPush(location).catch((err) => {
+  if (!isNavigationFailure(err, NavigationFailureType.duplicated)) {
+    console.warn('[router.push] navigation failed:', err, 'target:', location)
+  }
+  return null
+})
 
 router.beforeEach((to, from, next) => {
   if (to.name === 'release') {

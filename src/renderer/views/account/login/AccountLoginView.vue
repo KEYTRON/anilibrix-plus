@@ -14,37 +14,34 @@
           </v-card-text>
           <!-- Login / Email -->
           <!-- Password -->
-          <div class="d-flex py-6 pt-2">
+          <div class="d-flex py-6 pt-2 ga-2">
             <v-text-field
               v-model="login"
-              outlined
+              variant="outlined"
+              density="comfortable"
               hide-details
-              class="mr-1"
-              color="grey"
               :placeholder="$t('login.emailPlaceholder')"
-              prepend-inner-icon="mdi-account">
-            </v-text-field>
+              prepend-inner-icon="mdi-account"/>
             <v-text-field
               v-model="password"
-              outlined
+              variant="outlined"
+              density="comfortable"
               hide-details
-              class="ml-1"
               type="password"
               :placeholder="$t('login.passwordPlaceholder')"
-              prepend-inner-icon="mdi-lock">
-            </v-text-field>
+              prepend-inner-icon="mdi-lock"/>
           </div>
 
           <!-- Actions -->
           <div class="d-flex">
-            <v-btn v-bind="{loading}" class="mr-1" :disabled="$v.$invalid" @click="authorize">{{ $t('login.title') }}</v-btn>
-            <v-btn v-bind="{loading}" text @click="toBack">{{ $t('common.back') }}</v-btn>
+            <v-btn v-bind="{loading}" class="mr-1" :disabled="v$.$invalid" @click="authorize">{{ $t('login.title') }}</v-btn>
+            <v-btn v-bind="{loading}" variant="text" @click="toBack">{{ $t('common.back') }}</v-btn>
           </div>
 
           <v-divider class="my-6" />
 
           <div class="d-flex justify-center">
-            <v-btn :color="'blue darken-1'" @click="authorizeWithVK">{{ $t('login.vkLogin') }}</v-btn>
+            <v-btn color="#1976d2" variant="flat" @click="authorizeWithVK">{{ $t('login.vkLogin') }}</v-btn>
           </div>
 
         </v-card>
@@ -61,6 +58,7 @@ import LibriaTyan03 from '@assets/images/libria-tyan/LibriaTyan03.svg'
 import { ipcRenderer } from "electron";
 // Utils
 import { required } from '@vuelidate/validators'
+import useVuelidate from '@vuelidate/core'
 import { BackViewMixin } from '@mixins/views'
 import { invokeSafeStorageEncrypt } from '@main/handlers/app/app-handlers'
 import { useAccountStore } from '@store/app/account/useAccountStore'
@@ -69,6 +67,9 @@ import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
 export default {
   name: 'Account.Login.View',
   mixins: [BackViewMixin],
+  setup () {
+    return { v$: useVuelidate() }
+  },
   data () {
     return {
       tab: 0,
@@ -80,11 +81,19 @@ export default {
     }
   },
 
-  validations: {
-    login: { required },
-    password: { required },
+  validations () {
+    return {
+      login: { required },
+      password: { required },
+    }
   },
   mounted () {
+    // Already authorized — go back instead of showing login page
+    if (useAccountStore().isAuthorized) {
+      this.toBack()
+      return
+    }
+
     ipcRenderer.on('VK_CODE', async (event, session) => {
       try {
         this.loading = true
@@ -132,35 +141,49 @@ export default {
      * @return {Promise<void>}
      */
     async authorize () {
-      if (!this.$v.$invalid) {
+      if (!this.v$.$invalid) {
         try {
           this.loading = true
 
-          // Make login request with provided credentials
-          // Save account session
-          const payload = {
-            login: this.login,
-            password: this.password
-          }
-          const session = await useAccountStore().login(payload)
-
-
-          if (!session) {
-            return
+          const payload = { login: this.login, password: this.password }
+          const isAlreadyAuthorizedError = (e) => {
+            const msg = String(e?.response?.data?.mes || e?.response?.data?.err || e?.message || '')
+            return /already\s*authoriz|уже\s*авториз/i.test(msg)
           }
 
-          await Promise.allSettled([
-            await invokeSafeStorageEncrypt('user.login', this.login),
-            await invokeSafeStorageEncrypt('user.password', this.password)
-          ])
-          await useAccountStore().setSession(session)
+          // Helper: complete the login flow with a session id
+          const finishLogin = async (session) => {
+            await Promise.allSettled([
+              invokeSafeStorageEncrypt('user.login', this.login),
+              invokeSafeStorageEncrypt('user.password', this.password)
+            ])
+            await useAccountStore().setSession(session)
+            await useAccountStore().getProfile()
+            useFavoritesStore().getFavorites()
+            await this.toBack()
+          }
 
-          // Get profile data
-          await useAccountStore().getProfile()
-          await this.toBack()
+          let session = null
+          try {
+            session = await useAccountStore().login(payload)
+          } catch (e) {
+            if (isAlreadyAuthorizedError(e)) {
+              // Server has stale session — kill it and retry
+              try { await useAccountStore().logout() } catch (_) {}
+              try {
+                session = await useAccountStore().login(payload)
+              } catch (e2) {
+                this.$toast.error(e2?.message || 'Ошибка авторизации')
+                return
+              }
+            } else {
+              this.$toast.error(e?.message || 'Ошибка авторизации')
+              return
+            }
+          }
 
-          // Get user favorites
-          useFavoritesStore().getFavorites()
+          if (!session) return
+          await finishLogin(session)
 
         } finally {
           this.loading = false

@@ -9,8 +9,7 @@ export default class CatalogProxy extends BaseProxy {
   async getCatalogGenres () {
     const data = this.getFormDataObject({ query: 'genres' })
     const params = {
-      data,
-      headers: data.getHeaders()
+      data
     }
     const response = await this.submit('POST', this.getApiEndpoint(), params)
 
@@ -25,8 +24,7 @@ export default class CatalogProxy extends BaseProxy {
   async getCatalogYears () {
     const data = this.getFormDataObject({ query: 'years' })
     const params = {
-      data,
-      headers: data.getHeaders()
+      data
     }
     const response = await this.submit('POST', this.getApiEndpoint(), params)
 
@@ -65,7 +63,7 @@ export default class CatalogProxy extends BaseProxy {
 
     const params = {
       data,
-      headers: data.getHeaders(), ...parameters
+      ...parameters
     }
     const response = await this.submit('POST', this.getApiEndpoint(), params)
 

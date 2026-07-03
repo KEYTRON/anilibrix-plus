@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <app-system-bar/>
     <app-settings/>
 
     <app-loader v-if="loading"/>
@@ -20,7 +19,6 @@ import AppLoader from '@components/app/loader'
 import AppErrors from '@components/app/errors'
 import AppToolBar from '@components/app/toolbar'
 import AppSettings from '@components/app/settings'
-import AppSystemBar from '@components/app/systembar'
 import AppBaseLayout from '@layouts/base'
 import AppNotifications from '@components/app/notifications'
 import AppUpdate from '@components/app/AppUpdate.vue'
@@ -44,7 +42,6 @@ export default {
     AppErrors,
     AppToolBar,
     AppSettings,
-    AppSystemBar,
     AppBaseLayout,
     AppNotifications,
     AppUpdate
@@ -122,11 +119,9 @@ export default {
 
       if (version.includes('beta') && data.beta !== version) {
         this.update_notes = data.beta_notes
-        this.$refs.appUpdate.showDialog()
       }
       if (!version.includes('beta') && data.stable !== version) {
         this.update_notes = data.stable_notes
-        this.$refs.appUpdate.showDialog()
       }
     } catch (e) {
       console.error('Check version error', e)

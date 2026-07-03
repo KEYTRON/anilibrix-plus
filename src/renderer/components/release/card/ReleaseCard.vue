@@ -78,6 +78,7 @@ import Loader from './components/loader'
 import Favorite from './../favorite'
 import __orderBy from "lodash/orderBy";
 import {toVideo} from "@utils/router/views";
+import { useWatchStore } from '@store/app/watch/useWatchStore'
 
 const props = {
   loading: {
@@ -111,7 +112,6 @@ export default {
      * @return {*}
      */
     lastWatchedEpisode () {
-      const { useWatchStore } = require('@store/app/watch/useWatchStore')
       let lastWatchedEpIndex = null
       const episodes = this.$__get(this.release, 'episodes')
       const ordered = __orderBy(episodes || [], ['id'], [s => s.episodes.order])

@@ -1,14 +1,30 @@
 <template>
+
+  <!-- Compact pill badge, sized like the toolbar nav pills (rounded, fixed height) -->
+  <div
+    v-if="compact"
+    class="release__progress release__progress--compact"
+    :class="trackColorClass">
+    <span v-if="!loading && showNumbers" class="caption white--text font-weight-bold">
+      <span v-if="isComplete">{{ $t('release.progressAllWatched', { total }) }}</span>
+      <span v-else-if="isUnseen">{{ $t('release.progressNone', { episodes: episodes.length, total }) }}</span>
+      <span v-else>{{ $t('release.progressPartial', { watched, episodes: episodes.length, total }) }}</span>
+    </span>
+  </div>
+
+  <!-- Full-width proportional bar -->
   <v-progress-linear
+    v-else
     v-bind="{height}"
-    :color="isComplete && dense ? 'green darken-4' : color"
+    :color="isComplete ? '#2e7d32' : (isUnseen ? '#424242' : '#c62828')"
     class="release__progress"
     :class="{square}"
-    :background-color="dense ? (isComplete ? 'green darken-4' : (isUnseen ? 'grey darken-3' : 'red darken-1')): ''"
-    :value="progress"
+    bg-color="#212121"
+    bg-opacity="1"
+    :model-value="progress"
     :indeterminate="loading">
 
-    <template v-if="!loading && showNumbers" v-slot>
+    <template v-if="!loading && showNumbers" v-slot:default>
       <div class="release__progress__description caption white--text font-weight-bold px-4 ellipsis-container">
         <!-- Complete All Episodes -->
         <span v-if="isComplete" class="ellipsis-text">
@@ -37,6 +53,7 @@
 <script>
 
 import pluralize from '@utils/strings/pluralize'
+import { useWatchStore } from '@store/app/watch/useWatchStore'
 
 const props = {
   release: {
@@ -78,6 +95,10 @@ const props = {
   square: {
     type: Boolean,
     default: false
+  },
+  compact: {
+    type: Boolean,
+    default: false
   }
 }
 
@@ -98,7 +119,6 @@ export default {
      * @return {*}
      */
     progress () {
-      const { useWatchStore } = require('@store/app/watch/useWatchStore')
       const release_id = this.release.id
       const episodes = (this.episodes || []).map(x => x.id)
       const payload = {
@@ -116,7 +136,6 @@ export default {
      * @return {*}
      */
     watched () {
-      const { useWatchStore } = require('@store/app/watch/useWatchStore')
       const release_id = this.release.id
 
       const episodes = (this.episodes || []).map(x => x.id)
@@ -148,6 +167,15 @@ export default {
      */
     isUnseen () {
       return this.progress === 0
+    },
+
+    /**
+     * Background color class for the compact pill (matches the bar's state colors)
+     *
+     * @return {string}
+     */
+    trackColorClass () {
+      return this.isComplete ? 'bg-green-darken-4' : (this.isUnseen ? 'bg-grey-darken-3' : 'bg-red-darken-1')
     }
 
   }
@@ -163,6 +191,16 @@ export default {
 
   &.square {
     border-radius: 0 !important;
+  }
+
+  &--compact {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    height: 34px;
+    border-radius: 999px !important;
+    padding: 0 16px;
+    line-height: 1;
   }
 
   &__description {

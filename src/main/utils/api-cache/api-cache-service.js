@@ -41,7 +41,18 @@ export class APICacheService {
     if (this.cache.has(key)) return this.cache.get(key)
 
     const metadataPath = path.join(this.cachePath, `${key}.json`);
-    const metadataContent = await fs.readFile(metadataPath, 'utf8');
+    const metadataContent = await fs.readFile(metadataPath, 'utf8').catch(error => {
+      if (error.code === 'ENOENT') {
+        return null
+      }
+
+      throw error
+    });
+
+    if (metadataContent === null) {
+      return null
+    }
+
     const value = JSON.parse(metadataContent);
 
     this.cache.set(key, value)
@@ -291,7 +302,7 @@ export class APICacheService {
     console.log('Initializing API cache...');
 
     try {
-      await fs.mkdir(this.cachePath).catch(console.error);
+      await fs.mkdir(this.cachePath, { recursive: true }).catch(console.error);
 
       await this.downloadCache();
       await this.processCache();

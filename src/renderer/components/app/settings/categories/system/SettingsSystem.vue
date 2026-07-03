@@ -247,9 +247,10 @@
 </template>
 
 <script>
+import { markRaw } from 'vue'
 
-import Confirm from '@components/app/settings/categories/system/dialogs/confirm.vue'
-import snapshotsList from '@components/app/settings/categories/system/dialogs/snapshotsList.vue'
+import ConfirmDialog from '@components/app/settings/categories/system/dialogs/confirm.vue'
+import SnapshotsListDialog from '@components/app/settings/categories/system/dialogs/snapshotsList.vue'
 import { AppPlatformMixin } from '@mixins/app'
 import { useAccountStore } from '@store/app/account/useAccountStore'
 import { useSettingsStore } from '@store/app/settings/useSettingsStore'
@@ -260,8 +261,8 @@ export default {
   data () {
     return {
       isMounted: false,
-      Confirm,
-      snapshotsList
+      Confirm: markRaw(ConfirmDialog),
+      snapshotsList: markRaw(SnapshotsListDialog)
     }
   },
 

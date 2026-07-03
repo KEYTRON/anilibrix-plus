@@ -13,8 +13,8 @@
             <v-alert
               v-if="message"
               type="error"
-              dense
-              outlined
+              density="compact"
+              variant="outlined"
               class="mb-4"
               transition="scale-transition"
             >
@@ -27,8 +27,8 @@
             <v-alert
               v-if="error"
               type="error"
-              dense
-              outlined
+              density="compact"
+              variant="outlined"
               class="mb-4"
               transition="scale-transition"
             >
@@ -40,7 +40,7 @@
 
             <!-- Help Information -->
             <v-card
-              outlined
+              variant="outlined"
               color="red"
               class="pa-4"
             >
@@ -60,12 +60,12 @@
               <!-- Action Buttons -->
               <div class="mt-3 d-flex justify-space-between">
                 <v-btn
-                  small
-                  text
+                  size="small"
+                  variant="text"
                   color="primary"
                   to="/"
                 >
-                  <v-icon left small>mdi-home</v-icon>
+                  <v-icon start size="small">mdi-home</v-icon>
                   {{ $t('common.home') }}
                 </v-btn>
               </div>
@@ -80,7 +80,7 @@
 
 <script>
 import LibriaTyan01 from '@assets/images/libria-tyan/LibriaTyan01.svg'
-import {toReleases} from "@utils/router/views";
+import { toReleases } from '@utils/router/views/routerViews'
 
 export default {
   props: {

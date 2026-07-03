@@ -36,7 +36,8 @@ import { markRaw } from 'vue'
 
 import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 import { useWatchStore } from '@store/app/watch/useWatchStore'
-import { toBlank } from '@utils/router/views'
+import { toBlank } from '@utils/router/views/routerViews'
+import { AppKeyboardHandlerMixin } from '@mixins/app'
 
 const props = {
   release: {
@@ -56,6 +57,7 @@ const props = {
 export default {
   props,
   name: 'Video.View',
+  mixins: [AppKeyboardHandlerMixin],
   components: {
     VideoLayout,
     PlayerInterface,
@@ -190,6 +192,20 @@ export default {
       referer
     }) {
       return toBlank(message, referer)
+    },
+
+    /**
+     * Handle keyboard events
+     *
+     * @param e
+     */
+    handleKeyboardEvents (e) {
+      const code = e.which || e.keyCode
+
+      // Escape or Backspace to go back
+      if (code === 27 || code === 8) {
+        this.$router.back()
+      }
     },
 
     /**

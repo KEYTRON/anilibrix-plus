@@ -1,4 +1,5 @@
 import BaseProxy from '@proxies/BaseProxy'
+import { getInternalServerOrigin } from '@utils/internalServer'
 
 export default class ReleaseProxy extends BaseProxy {
   /**
@@ -13,7 +14,7 @@ export default class ReleaseProxy extends BaseProxy {
     })
     const params = {
       data,
-      headers: data.getHeaders(),
+      headers: {},
       ...parameters
     }
     const response = await this.submit('POST', this.getApiEndpoint(), params)
@@ -35,27 +36,27 @@ export default class ReleaseProxy extends BaseProxy {
     })
     const params = {
       data,
-      headers: data.getHeaders(),
+      headers: {},
       ...parameters
     }
     const response = await this.submit('POST', this.getApiEndpoint(), params)
     const { playlist } = response.data.data
     for (const ep in playlist) {
       if (playlist[ep].sources.is_rutube) {
-        playlist[ep].fullhd = 'http://localhost:' + global.internalServerPort + '/rutube/' + playlist[ep].rutube_id + '/main.m3u8'
+        playlist[ep].fullhd = getInternalServerOrigin() + '/rutube/' + playlist[ep].rutube_id + '/main.m3u8'
       } else {
         const { sd, hd, fullhd } = playlist[ep]
 
         if (fullhd) {
-          playlist[ep].fullhd = 'http://localhost:' + global.internalServerPort + '/hls/' + encodeURIComponent(playlist[ep].fullhd)
+          playlist[ep].fullhd = getInternalServerOrigin() + '/hls/' + encodeURIComponent(playlist[ep].fullhd)
         }
 
         if (hd) {
-          playlist[ep].hd = 'http://localhost:' + global.internalServerPort + '/hls/' + encodeURIComponent(playlist[ep].hd)
+          playlist[ep].hd = getInternalServerOrigin() + '/hls/' + encodeURIComponent(playlist[ep].hd)
         }
 
         if (sd) {
-          playlist[ep].sd = 'http://localhost:' + global.internalServerPort + '/hls/' + encodeURIComponent(playlist[ep].sd)
+          playlist[ep].sd = getInternalServerOrigin() + '/hls/' + encodeURIComponent(playlist[ep].sd)
         }
       }
     }
@@ -76,7 +77,7 @@ export default class ReleaseProxy extends BaseProxy {
     })
     const params = {
       data,
-      headers: data.getHeaders(),
+      headers: {},
       ...parameters
     }
     const response = await this.submit('POST', this.getApiEndpoint(), params)

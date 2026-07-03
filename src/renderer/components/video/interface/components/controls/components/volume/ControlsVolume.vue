@@ -1,20 +1,21 @@
 <template>
-  <div class="d-flex align-center shrink">
+  <div class="d-flex align-center shrink ga-2">
 
     <!-- Volume Mute -->
-    <v-btn icon large @click="$emit('change', 0)">
+    <v-btn icon variant="text" size="large" @click="$emit('change', 0)">
       <v-icon size="24">mdi-volume-{{ getVolumeState }}</v-icon>
     </v-btn>
 
     <!-- Volume Level -->
     <v-slider
       hide-details
-      min="0"
-      max="1"
-      step=".05"
-      :value="volume"
-      :style="{maxWidth: '70px', width: '70px'}"
-      @input="$emit('change', $event)">
+      :min="0"
+      :max="1"
+      :step="0.05"
+      track-size="3"
+      :model-value="volume"
+      :style="{maxWidth: '90px', width: '90px'}"
+      @update:model-value="$emit('change', $event)">
     </v-slider>
 
   </div>
@@ -31,6 +32,7 @@ const props = {
 
 export default {
   props,
+  emits: ['change'],
   data () {
     return {
       volume: .5,

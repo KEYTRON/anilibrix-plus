@@ -32,7 +32,7 @@ class TorrentWindow extends Window {
   getWindowUrl () {
     const base = process.env.NODE_ENV === 'development'
       ? (process.env.VITE_DEV_SERVER_URL || 'http://localhost:5173')
-      : `file://${__dirname}/`
+      : `file://${path.join(__dirname, '../renderer/')}`
     return `${base}webtorrent.html`
   }
 }

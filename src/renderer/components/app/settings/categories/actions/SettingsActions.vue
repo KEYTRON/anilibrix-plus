@@ -38,10 +38,14 @@
 </template>
 
 <script>
+import { markRaw } from 'vue'
 
 import ExitDialog from './dialogs/exit'
 import CacheDialog from './dialogs/cache'
 import { invokeShowConfig } from '@main/handlers/app/app-handlers'
+
+const EXIT_DIALOG = markRaw(ExitDialog)
+const CACHE_DIALOG = markRaw(CacheDialog)
 
 export default {
   data () {
@@ -94,11 +98,11 @@ export default {
     dialogs () {
       return [
         {
-          component: ExitDialog,
+          component: EXIT_DIALOG,
           ref: 'exit'
         },
         {
-          component: CacheDialog,
+          component: CACHE_DIALOG,
           ref: 'cache'
         }
       ]

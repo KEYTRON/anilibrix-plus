@@ -6,8 +6,8 @@
         dot
         :content="unseen"
         :model-value="unseen > 0">
-        <v-btn icon size="default" v-bind="menuProps" @click="_setSeen()">
-          <v-icon size="26">mdi-bell</v-icon>
+        <v-btn :ripple="false" icon size="default" v-bind="menuProps" @click="_setSeen()">
+          <v-icon size="22">mdi-bell</v-icon>
         </v-btn>
       </v-badge>
     </template>
@@ -17,7 +17,7 @@
       <div class="d-flex align-center px-4 py-2">
         <h5 class="text-medium-emphasis">{{ $t('toolbar.notificationsWeek') }}</h5>
         <v-spacer/>
-        <v-btn icon size="small" variant="text" @click.stop="_clearNotifications()">
+        <v-btn :ripple="false" icon size="small" variant="text" @click.stop="_clearNotifications()">
           <v-icon size="18">mdi-close</v-icon>
         </v-btn>
       </div>

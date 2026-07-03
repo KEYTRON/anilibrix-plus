@@ -53,9 +53,12 @@ export default class AppMenu {
   }
 
   init () {
+    // Hide the application menu bar — window controls are native (frame: true),
+    // DevTools is still accessible via F12 / Ctrl+Shift+I.
+    // The menu template is kept for tray and macOS app menu use.
     this._menu = Menu.buildFromTemplate(this._getMenuTemplate())
-    this._mainWindow.setMenu(this._menu)
-    this._torrentWindow.setMenu(this._menu)
+    if (this._mainWindow) this._mainWindow.setMenu(null)
+    if (this._torrentWindow) this._torrentWindow.setMenu(null)
 
     return this
   }

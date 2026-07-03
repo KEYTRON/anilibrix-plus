@@ -1,6 +1,7 @@
 // Proxy
 // Transformer
 import BaseTransformer from '@transformers/BaseTransformer'
+import { getInternalServerUrl } from '@utils/internalServer'
 
 // Utils
 import { useSettingsStore } from '@store/app/settings/useSettingsStore'
@@ -61,7 +62,7 @@ export default class EpisodesTransformer extends BaseTransformer {
 
       for (const ep in playlist) {
         if (playlist[ep].sources.is_rutube) {
-          playlist[ep].fullhd = 'http://localhost:' + global.internalServerPort + '/rutube/' + playlist[ep].rutube_id  + '/main.m3u8'
+          playlist[ep].fullhd = getInternalServerUrl(`/rutube/${playlist[ep].rutube_id}/main.m3u8`)
         }
       }
 
@@ -180,7 +181,7 @@ export default class EpisodesTransformer extends BaseTransformer {
    * @private
    */
   _parseUpscale (playlist, episodes) {
-    if (this.get(store, 'state.app.settings.player.upscale.process') === true) {
+    if (useSettingsStore().upscale?.process === true) {
       playlist.forEach(item => {
         // Get episode number
         // It is same as id in anilibria API
@@ -212,7 +213,7 @@ export default class EpisodesTransformer extends BaseTransformer {
    * @param torrents
    */
   _getTorrents (torrents = []) {
-    if (this.skipTorrents === false && this.get(store, 'state.app.settings.player.torrents.process') === true) {
+    if (this.skipTorrents === false && useSettingsStore().torrents?.process === true) {
       // Filter torrents
       // Exclude HEVC torrents (no codec available)
       return torrents
@@ -246,7 +247,7 @@ export default class EpisodesTransformer extends BaseTransformer {
         this._createEpisode(seriesNum, episodes)
 
         episodes[seriesNum].id = episodes[seriesNum].id ?? seriesNum
-        episodes[seriesNum].title = episodes[seriesNum].title || (useSettingsStore().system?.language === 'ru' ? `Серия ${seriesNum}` : `Episode ${seriesNum}`)
+        episodes[seriesNum].title = episodes[seriesNum].title || (useSettingsStore().language === 'ru' ? `Серия ${seriesNum}` : `Episode ${seriesNum}`)
         episodes[seriesNum].sources.push(this._createSource(type, label, alias, {
           torrent: {
             id: this.get(torrent, 'id'),

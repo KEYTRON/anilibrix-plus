@@ -48,6 +48,11 @@ import { toRelease } from '@utils/router/views/routerViews'
 import { useCatalogStore } from '@store/catalog/useCatalogStore'
 import {nextTick} from "vue";
 
+// Module-level (not component) flag: survives re-mounting the view while
+// navigating within the same process, but is naturally false again on the
+// next app launch — exactly the lifetime `resetVolatileState` needs.
+let hasResetCatalogVolatileState = false
+
 export default {
   name: 'Catalog.View',
   meta () {
@@ -117,6 +122,11 @@ export default {
   },
 
   created () {
+
+    if (!hasResetCatalogVolatileState) {
+      hasResetCatalogVolatileState = true
+      useCatalogStore().resetVolatileState()
+    }
 
     // Show releases on initial load
     if (this._is_initialized === false) this.showReleases()

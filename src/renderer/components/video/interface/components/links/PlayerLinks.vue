@@ -1,91 +1,90 @@
 <template>
-  <div class="d-flex align-center justify-start" ref="links">
+  <div class="player-links" ref="links">
     <template v-if="isMounted">
 
-      <!-- Releases -->
-      <v-tooltip right :attach="$refs.links">
+      <v-tooltip location="top" :text="$t('player.toReleases')">
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon large @click="toReleases">
+          <v-btn v-bind="props" icon variant="text" size="large" @click="toReleases">
             <v-icon size="24">mdi-view-column</v-icon>
           </v-btn>
         </template>
-        <span>{{ $t('player.toReleases') }}</span>
       </v-tooltip>
 
-      <!-- Release -->
-      <v-tooltip right :attach="$refs.links">
+      <v-tooltip location="top" :text="title">
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon large @click="() => toRelease(release)">
-            <v-avatar size="24">
-              <img v-bind="{src}">
-            </v-avatar>
+          <v-btn v-bind="props" icon variant="text" size="large" @click="() => toRelease(release)">
+            <img v-if="src" :src="src" alt="" class="player-links__avatar"/>
+            <v-icon v-else size="24">mdi-image</v-icon>
           </v-btn>
         </template>
-        <span>{{ title }}</span>
       </v-tooltip>
 
-
-
-      <!-- Catalog -->
-      <v-tooltip right :attach="$refs.links">
+      <v-tooltip location="top" :text="$t('player.toCatalog')">
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon large :to="{name: 'catalog'}">
+          <v-btn v-bind="props" icon variant="text" size="large" :to="{name: 'catalog'}">
             <v-icon size="24">mdi-folder-text-outline</v-icon>
           </v-btn>
         </template>
-        <span>{{ $t('player.toCatalog') }}</span>
       </v-tooltip>
 
-      <!-- Favorites -->
-      <v-tooltip right :attach="$refs.links">
+      <v-tooltip location="top" :text="$t('player.toFavorites')">
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon large @click="() => toFavorites()">
+          <v-btn v-bind="props" icon variant="text" size="large" @click="() => toFavorites()">
             <v-icon size="24">mdi-star</v-icon>
           </v-btn>
         </template>
-        <span>{{ $t('player.toFavorites') }}</span>
       </v-tooltip>
 
-      <!-- Episodes -->
-      <v-tooltip right :attach="$refs.links">
+      <v-tooltip location="top" :text="$t('player.toEpisodes')">
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon large @click="episodes().show()">
+          <v-btn v-bind="props" icon variant="text" size="large" @click="episodes().show()">
             <v-icon size="24">mdi-playlist-play</v-icon>
           </v-btn>
         </template>
-        <span>{{ $t('player.toEpisodes') }}</span>
       </v-tooltip>
 
-
-      <!-- Torrent -->
-      <v-tooltip v-if="source.type === 'torrent'" right :attach="$refs.links">
+      <v-tooltip v-if="source.type === 'torrent'" location="top" :text="$t('player.toTorrent')">
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon large @click="torrent().show()">
+          <v-btn v-bind="props" icon variant="text" size="large" @click="torrent().show()">
             <v-icon size="20">mdi-file-table-box-multiple</v-icon>
           </v-btn>
         </template>
-        <span>{{ $t('player.toTorrent') }}</span>
       </v-tooltip>
 
-      <!-- Opening skip button -->
-      <v-tooltip v-if="_opening_skip_button" right :attach="$refs.links">
+      <v-tooltip v-if="_opening_skip_button" location="top" :text="$t('player.openingSeek')">
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon large @click="skipOpening">
-            <span class="caption font-weight-bold">+{{ _opening_skip_time }}</span>
+          <v-btn v-bind="props" icon variant="text" size="large" @click="skipOpening">
+            <span class="text-caption font-weight-bold">+{{ _opening_skip_time }}</span>
           </v-btn>
         </template>
-        <span>{{ $t('player.openingSeek') }}</span>
       </v-tooltip>
-
 
     </template>
   </div>
 </template>
 
+<style scoped lang="scss">
+.player-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+
+  &__avatar {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    flex-shrink: 0;
+  }
+}
+</style>
+
 <script>
 
 import { useSettingsStore } from '@store/app/settings/useSettingsStore'
-import { toFavorites, toRelease, toReleases } from '@utils/router/views'
+import { toFavorites, toRelease, toReleases } from '@utils/router/views/routerViews'
 import screenfull from 'screenfull'
 
 const props = {

@@ -5,8 +5,8 @@
     <template v-if="!_isAuthorized">
       <v-tooltip location="left" :text="$t('toolbar.login')">
         <template #activator="{ props }">
-          <v-btn icon size="default" v-bind="props" @click="toLogin">
-            <v-icon size="26">mdi-account</v-icon>
+          <v-btn :ripple="false" icon size="default" v-bind="props" @click="toLogin">
+            <v-icon size="22">mdi-account</v-icon>
           </v-btn>
         </template>
       </v-tooltip>
@@ -20,9 +20,9 @@
         :offset="[8, 0]"
         min-width="180">
         <template #activator="{ props }">
-          <v-btn icon size="default" v-bind="props">
-            <v-icon v-if="menu" size="26">mdi-account</v-icon>
-            <v-avatar size="32" v-else>
+          <v-btn :ripple="false" icon size="default" v-bind="props">
+            <v-icon v-if="menu" size="22">mdi-account</v-icon>
+            <v-avatar size="28" v-else>
               <v-img :transition="false" :src="_profile.avatar"/>
             </v-avatar>
           </v-btn>
@@ -72,6 +72,7 @@ import { useAccountStore } from '@store/app/account/useAccountStore'
 import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
 import { useWatchStore } from '@store/app/watch/useWatchStore'
 import { toLogin } from '@utils/router/views/routerViews'
+import * as safeStorage from '@main/utils/safe-storage'
 
 export default {
   data () {
@@ -86,6 +87,7 @@ export default {
     _favorites () { return useFavoritesStore().items },
     _profile () { return useAccountStore().profile },
     _isAuthorized () { return useAccountStore().isAuthorized },
+    _session () { return useAccountStore().session },
 
     /**
      * Get favorites length
@@ -147,6 +149,25 @@ export default {
 
     toLogin () { toLogin() },
 
+    hasSavedCredentials () {
+      return safeStorage.getDecrypted('user.login') !== false && safeStorage.getDecrypted('user.password') !== false
+    },
+
+    startProfilePolling () {
+      if (this.handler !== null || !this._session) {
+        return
+      }
+
+      this.handler = setInterval(() => this.getProfile(), 1000 * 60 * 60 * 2)
+    },
+
+    stopProfilePolling () {
+      if (this.handler !== null) {
+        clearInterval(this.handler)
+        this.handler = null
+      }
+    },
+
     /**
      * Logout
      * Ignore error
@@ -172,6 +193,10 @@ export default {
      * @return {Promise<void>}
      */
     async getProfile () {
+      if (this.loading || (!this._session && !this.hasSavedCredentials())) {
+        return
+      }
+
       try {
 
         this.loading = true
@@ -187,20 +212,32 @@ export default {
     }
   },
 
-  async mounted () {
+  watch: {
+    _session: {
+      immediate: true,
+      async handler () {
+        if (!this._session) {
+          this.stopProfilePolling()
 
-    // Get profile data
-    await this.getProfile()
+          if (!this.hasSavedCredentials()) {
+            this.menu = false
+            return
+          }
+        }
 
-    // Set profile data
-    this.handler = setInterval(() => this.getProfile(), 1000 * 60 * 60 * 2)
+        if (!this._profile.id) {
+          await this.getProfile()
+        }
 
+        if (useAccountStore().isAuthorized) {
+          this.startProfilePolling()
+        }
+      }
+    }
   },
 
   beforeUnmount () {
-    if (this.handler) {
-      clearInterval(this.handler)
-    }
+    this.stopProfilePolling()
   }
 }
 

@@ -228,4 +228,11 @@ export async function initGlobals() {
     global.cacheURL = defaultsValues.cacheURL
     global.cacheHashesURL = defaultsValues.cacheHashesURL
   }
+
+  // Hard override from .env if explicitly set — used to pin a known-working
+  // domain when the dynamic-DNS one is unreachable (Node fetch ECONNRESETs).
+  if (process.env.DEFAULT_V1_TV) {
+    global.upstreamDomainV1Tv = process.env.DEFAULT_V1_TV
+    console.log('upstreamDomainV1Tv overridden from .env →', global.upstreamDomainV1Tv)
+  }
 }

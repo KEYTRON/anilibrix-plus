@@ -58,12 +58,25 @@ export default {
      * @return {*}
      */
     src () {
-      const url = new URL(this.$__get(this.release, 'poster'))
-      if (url.pathname === '/proxy-static') {
-        const u = url.searchParams.get('url')
-        const { pathname } = new URL(u)
+      const stored = this.$__get(this.release, 'poster')
+      if (!stored) return null
 
-        return getInternalServerUrl(`/proxy-static?url=${pathname}`)
+      try {
+        // Notifications are persisted indefinitely, so `poster` may be an absolute
+        // URL baked with a port from a previous app session (internal server picks
+        // a new random port every launch) — always re-derive it against the
+        // current live port instead of trusting the stored host/port.
+        const url = new URL(stored)
+        if (url.pathname === '/proxy-static') {
+          const u = url.searchParams.get('url')
+          // `u` is a relative path (e.g. "/storage/..."), so `new URL` needs a base
+          const { pathname } = new URL(u, 'http://localhost')
+
+          return getInternalServerUrl(`/proxy-static?url=${pathname}`)
+        }
+        return stored
+      } catch (e) {
+        return null
       }
     },
 

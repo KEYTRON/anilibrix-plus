@@ -1,9 +1,13 @@
 import __get from 'lodash/get'
 import { defineStore } from 'pinia'
+import { useReleaseStore } from '@store/release/useReleaseStore'
 
 export const useWatchStore = defineStore('watch', {
   state: () => ({
-    items: {}
+    items: {},
+    // Episode count "as of" the last watch interaction per release — freezes the
+    // progress denominator so newly aired episodes don't retroactively shrink %.
+    totals: {}
   }),
 
   getters: {
@@ -37,13 +41,25 @@ export const useWatchStore = defineStore('watch', {
         const episode = __get(state, ['items', key]) || null
         if (episode && episode.isSeen === true) watchedEpisodes.push(episode)
       }
-      return Array.isArray(episodes) && episodes.length > 0
-        ? (watchedEpisodes.length / episodes.length) * 100
-        : 0
+      const liveTotal = Array.isArray(episodes) ? episodes.length : 0
+      const total = __get(state, ['totals', release_id]) || liveTotal
+      return total > 0 ? (watchedEpisodes.length / total) * 100 : 0
     }
   },
 
   actions: {
+    /**
+     * Freeze the progress denominator at the release's current live episode
+     * count, so episodes airing later don't shrink already-made progress.
+     */
+    _refreshReleaseTotal (release_id) {
+      const releaseStore = useReleaseStore()
+      const releaseData = releaseStore.data
+      if (releaseData?.id === release_id && Array.isArray(releaseData.episodes)) {
+        this.totals = { ...this.totals, [release_id]: releaseData.episodes.length }
+      }
+    },
+
     /**
      * Set episode watch data
      */
@@ -67,6 +83,8 @@ export const useWatchStore = defineStore('watch', {
           ...this.items,
           [`${release_id}:${episode_id}`]: data
         }
+
+        this._refreshReleaseTotal(release_id)
       }
     },
 
@@ -77,6 +95,8 @@ export const useWatchStore = defineStore('watch', {
       const items = { ...this.items }
       delete items[`${release_id}:${episode_id}`]
       this.items = items
+
+      this._refreshReleaseTotal(release_id)
     },
 
     /**

@@ -41,14 +41,14 @@
                 :key="index"
                 @click="handleShareClick(item)"
               >
-                <v-list-item-icon class="mt-4">
-                  <v-icon>{{ item.icon }}</v-icon>
-                </v-list-item-icon>
-                
+                <template v-slot:prepend>
+                  <v-icon class="mt-4">{{ item.icon }}</v-icon>
+                </template>
+
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
                   <v-list-item-subtitle v-if="!item.isExternal" class="text-truncate" style="max-width: 200px;">{{ item.link }}</v-list-item-subtitle>
-                
-                <template v-slot:prepend>
+
+                <template v-slot:append>
                   <v-btn icon small>
                     <v-icon v-if="item.copied" color="success">mdi-check</v-icon>
                     <v-icon v-if="!item.copied && item.isExternal">mdi-open-in-new</v-icon>

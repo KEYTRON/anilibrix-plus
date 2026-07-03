@@ -39,14 +39,14 @@
                 :key="index"
                 @click="handleShareClick(item)"
               >
-                <v-list-item-icon>
+                <template v-slot:prepend>
                   <v-icon>{{ item.icon }}</v-icon>
-                </v-list-item-icon>
-                
+                </template>
+
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
                   <v-list-item-subtitle v-if="!item.isExternal" class="text-truncate" style="max-width: 200px;">{{ item.link }}</v-list-item-subtitle>
-                
-                <template v-slot:prepend>
+
+                <template v-slot:append>
                   <v-btn icon small>
                     <v-icon v-if="item.copied" color="success">mdi-check</v-icon>
                     <v-icon v-if="!item.copied && item.isExternal">mdi-open-in-new</v-icon>
@@ -95,9 +95,9 @@
 
       <!-- Release Tabs -->
       <v-tabs v-if="!loading" v-model="tab" class="shrink mb-4" background-color="transparent">
-        <v-tab>{{ $t('common.episodes') }}</v-tab>
-        <v-tab>{{ $t('common.comments') }}</v-tab>
-        <v-tab v-if="torrents.length > 0">{{ $t('common.torrents') }}</v-tab>
+        <v-tab :value="0">{{ $t('common.episodes') }}</v-tab>
+        <v-tab :value="1">{{ $t('common.comments') }}</v-tab>
+        <v-tab v-if="torrents.length > 0" :value="2">{{ $t('common.torrents') }}</v-tab>
       </v-tabs>
 
       <!-- Release Components -->
@@ -293,11 +293,13 @@ export default {
         },
         {
           is: Comments,
-          props: { release: this._release }
+          props: { release: this._release },
+          events: {}
         },
         {
           is: Torrents,
-          props: { torrents: this.torrents }
+          props: { torrents: this.torrents },
+          events: {}
         }
       ]
     },

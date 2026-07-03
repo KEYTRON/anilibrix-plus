@@ -13,8 +13,8 @@ let port
 let spawnedProcess
 
 const forwardFile = process.env.NODE_ENV === 'development'
-  ? path.join(path.dirname(__dirname), '..', '..', 'build', osMap[process.platform], process.arch, 'forward-proxy' + (process.platform === 'win32' ? '.exe' : ''))
-  : path.join(path.dirname(__dirname), '..', '..', 'bin', 'forward-proxy' + (process.platform === 'win32' ? '.exe' : ''))
+  ? path.join(__dirname, '..', '..', 'build', osMap[process.platform], process.arch, 'forward-proxy' + (process.platform === 'win32' ? '.exe' : ''))
+  : path.join(__dirname, '..', '..', 'bin', 'forward-proxy' + (process.platform === 'win32' ? '.exe' : ''))
 
 async function stopForwardProxy() {
   if (spawnedProcess) {
