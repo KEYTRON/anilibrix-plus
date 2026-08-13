@@ -136,5 +136,11 @@ export const useWatchStore = defineStore('watch', {
         )
       }
     }
+  },
+
+  // No persist config here previously — watch progress (and the "hours
+  // watched" profile stat computed from it) never survived an app restart.
+  persist: {
+    pick: ['items', 'totals']
   }
 })

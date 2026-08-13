@@ -165,7 +165,10 @@ export const useFavoritesStore = defineStore('favorites', {
     setSettingsShowCompleted (state) { this.settings.show_completed = state }
   },
 
+  // `pinia-plugin-persistedstate` v4 renamed `paths` to `pick` — see
+  // useCatalogStore.js for why the old key silently persisted/restored the
+  // full state, including `items` with poster URLs tied to a dead session.
   persist: {
-    paths: ['settings']
+    pick: ['settings']
   }
 })

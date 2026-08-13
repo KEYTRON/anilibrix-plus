@@ -131,29 +131,14 @@ export const useCatalogStore = defineStore('catalog', {
       this.items.page = page
     },
 
-    /**
-     * Drop `items`/`is_initialized` left over from a previous process.
-     * `persist.paths` only covers `filters`, but legacy localStorage snapshots
-     * (saved before that restriction existed) still carry the full state, and
-     * the persistedstate plugin restores whatever keys are present on hydration
-     * regardless of `paths`. Those releases include absolute poster URLs baked
-     * with the internal server's port from that old session — which gets a new
-     * random port every launch — so the cached posters 404/refuse forever and
-     * `is_initialized: true` blocks the view from ever re-fetching them.
-     */
-    resetVolatileState () {
-      this.items = {
-        data: [],
-        page: 1,
-        perPage: 12,
-        loading: true,
-        pagination: null
-      }
-      this.is_initialized = false
-    }
   },
 
+  // `pinia-plugin-persistedstate` v4 renamed `paths` to `pick` — this was
+  // silently a no-op under the old key, so the full state (including
+  // `items`, with poster URLs baked with the internal server's port, which
+  // gets a new random port every launch) was being persisted and restored
+  // unfiltered on every hydration.
   persist: {
-    paths: ['filters']
+    pick: ['filters']
   }
 })
