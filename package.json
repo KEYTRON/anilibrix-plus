@@ -116,8 +116,12 @@
       ]
     },
     "linux": {
-      "icon": "build/icons/app/icon.icns",
+      "icon": "build/icons/app",
+      "executableName": "anilibrix-prime",
       "category": "AudioVideo;Video;Player;",
+      "desktop": {
+        "StartupWMClass": "anilibrix-prime"
+      },
       "target": [
         {
           "target": "flatpak",
