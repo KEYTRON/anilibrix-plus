@@ -44,6 +44,20 @@ export default {
   beforeUnmount () {
     this.$refs.container.removeEventListener('scroll', this.onScroll)
   },
+  watch: {
+    // No scrollBehavior on the router (and it wouldn't apply here anyway —
+    // this div, not window, is what actually scrolls), so scroll position
+    // just carries over between routes by default: scroll down in Catalog,
+    // open a release, and it opens already scrolled partway into the page.
+    // Catalog restores its own position when returning from a release (see
+    // CatalogView.vue's beforeRouteEnter) — leave that case alone.
+    '$route' (to, from) {
+      if (to.name === 'catalog' && from?.name === 'release') return
+      this.$nextTick(() => {
+        if (this.$refs.container) this.$refs.container.scrollTop = 0
+      })
+    }
+  },
   computed: {
 
     /**
