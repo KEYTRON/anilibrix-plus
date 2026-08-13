@@ -7,7 +7,7 @@ const uuid = () => crypto.randomUUID()
 
 // Handlers
 import { showAppError } from '@utils/notifications'
-import * as safeStorage from '@main/utils/safe-storage'
+import { invokeSafeStorageDecrypt, invokeSafeStorageRemove } from '@main/handlers/app/app-handlers'
 
 import { defineStore } from 'pinia'
 
@@ -19,7 +19,11 @@ export const useAccountStore = defineStore('account', {
       id: null,
       login: null,
       avatar: null
-    }
+    },
+    // Flips to true once the initial silent-login attempt (via saved
+    // credentials) has resolved, so views gated on isAuthorized can show a
+    // loader instead of flashing "not authorized" while it's in flight.
+    authReady: false
   }),
 
   getters: {
@@ -51,8 +55,8 @@ export const useAccountStore = defineStore('account', {
       } finally {
         this.setSession(null)
         this.setProfile(null)
-        safeStorage.remove('user.login')
-        safeStorage.remove('user.password')
+        await invokeSafeStorageRemove('user.login')
+        await invokeSafeStorageRemove('user.password')
       }
     },
 
@@ -73,8 +77,8 @@ export const useAccountStore = defineStore('account', {
       try {
         await getProfileData()
       } catch (error) {
-        const login = safeStorage.getDecrypted('user.login')
-        const password = safeStorage.getDecrypted('user.password')
+        const login = await invokeSafeStorageDecrypt('user.login')
+        const password = await invokeSafeStorageDecrypt('user.password')
 
         if (login !== false && password !== false) {
           const session = await this.login({ login, password })
@@ -88,6 +92,13 @@ export const useAccountStore = defineStore('account', {
 
         throw error
       }
+    },
+
+    /**
+     * Mark the initial auth check as resolved (success or failure)
+     */
+    markAuthReady () {
+      this.authReady = true
     },
 
     /**

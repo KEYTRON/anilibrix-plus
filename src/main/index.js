@@ -254,6 +254,8 @@ if (!gotTheLock) {
       handlers.catchEnableSystemSleepBlockerEvent() // Disable system sleep
       handlers.catchDisableSystemSleepBlockerEvent() // Enable system sleep
       handlers.handleSafeStorageEncrypt()
+      handlers.handleSafeStorageDecrypt()
+      handlers.handleSafeStorageRemove()
       handlers.handleRichPresense(setActivity)
       handlers.handleRand()
       handlers.handleShowConfig()

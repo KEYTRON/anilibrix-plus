@@ -1,7 +1,7 @@
 import { Main, Torrent } from '@main/utils/windows'
 import { app, ipcMain, ipcRenderer } from 'electron'
 import { start as startSystemSleepBlocker, stop as stopSystemSleepBlocker } from '../../utils/power-save-blocker'
-import { setEncrypted } from '@main/utils/safe-storage'
+import { setEncrypted, getDecrypted, remove as removeSafeStorage } from '@main/utils/safe-storage'
 import { catGirlFetch } from '@utils/fetch';
 import { parse } from 'content-disposition-attachment';
 import FormData from 'form-data'
@@ -21,6 +21,8 @@ export const APP_DOCK_NUMBER = 'app:dock:number'
 export const APP_DEVTOOLS_MAIN = 'app:devtools:main'
 export const APP_DEVTOOLS_TORRENT = 'app:devtools:torrent'
 export const APP_SAFE_STORAGE_ENCRYPT_REQUEST = 'app:system:safe_storage:encrypt'
+export const APP_SAFE_STORAGE_DECRYPT_REQUEST = 'app:system:safe_storage:decrypt'
+export const APP_SAFE_STORAGE_REMOVE_REQUEST = 'app:system:safe_storage:remove'
 export const APP_SHOW_CONFIG = 'app:show_config'
 export const APP_RAND = 'app:rand'
 export const APP_TORRENT_PARSE = 'app:torrent_parse'
@@ -161,6 +163,48 @@ export const invokeSafeStorageEncrypt = (prop, data) => ipcRenderer.invoke(APP_S
 export const handleSafeStorageEncrypt = () => {
   ipcMain.handle(APP_SAFE_STORAGE_ENCRYPT_REQUEST, async (event, prop, data) => {
     return setEncrypted(prop, data)
+  })
+}
+
+/**
+ * Send decrypt request to safe storage
+ *
+ * `safeStorage` (electron.safeStorage) is a main-process-only API — it's not
+ * exposed to the renderer, so this can't be called directly from renderer
+ * code (see handleSafeStorageDecrypt for the main-process side).
+ *
+ * @param {string} prop Property name
+ * @return {Promise<string|false>}
+ */
+export const invokeSafeStorageDecrypt = (prop) => ipcRenderer.invoke(APP_SAFE_STORAGE_DECRYPT_REQUEST, prop)
+
+/**
+ * Listen decrypt request to safe storage
+ *
+ * @return {void}
+ */
+export const handleSafeStorageDecrypt = () => {
+  ipcMain.handle(APP_SAFE_STORAGE_DECRYPT_REQUEST, async (event, prop) => {
+    return getDecrypted(prop)
+  })
+}
+
+/**
+ * Send remove request to safe storage
+ *
+ * @param {string} prop Property name
+ * @return {Promise<void>}
+ */
+export const invokeSafeStorageRemove = (prop) => ipcRenderer.invoke(APP_SAFE_STORAGE_REMOVE_REQUEST, prop)
+
+/**
+ * Listen remove request to safe storage
+ *
+ * @return {void}
+ */
+export const handleSafeStorageRemove = () => {
+  ipcMain.handle(APP_SAFE_STORAGE_REMOVE_REQUEST, async (event, prop) => {
+    return removeSafeStorage(prop)
   })
 }
 

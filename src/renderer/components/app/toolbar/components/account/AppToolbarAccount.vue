@@ -72,7 +72,7 @@ import { useAccountStore } from '@store/app/account/useAccountStore'
 import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
 import { useWatchStore } from '@store/app/watch/useWatchStore'
 import { toLogin } from '@utils/router/views/routerViews'
-import * as safeStorage from '@main/utils/safe-storage'
+import { invokeSafeStorageDecrypt } from '@main/handlers/app/app-handlers'
 
 export default {
   data () {
@@ -149,8 +149,10 @@ export default {
 
     toLogin () { toLogin() },
 
-    hasSavedCredentials () {
-      return safeStorage.getDecrypted('user.login') !== false && safeStorage.getDecrypted('user.password') !== false
+    async hasSavedCredentials () {
+      const login = await invokeSafeStorageDecrypt('user.login')
+      const password = await invokeSafeStorageDecrypt('user.password')
+      return login !== false && password !== false
     },
 
     startProfilePolling () {
@@ -193,9 +195,8 @@ export default {
      * @return {Promise<void>}
      */
     async getProfile () {
-      if (this.loading || (!this._session && !this.hasSavedCredentials())) {
-        return
-      }
+      if (this.loading) return
+      if (!this._session && !(await this.hasSavedCredentials())) return
 
       try {
 
@@ -219,8 +220,9 @@ export default {
         if (!this._session) {
           this.stopProfilePolling()
 
-          if (!this.hasSavedCredentials()) {
+          if (!(await this.hasSavedCredentials())) {
             this.menu = false
+            useAccountStore().markAuthReady()
             return
           }
         }
@@ -232,6 +234,8 @@ export default {
         if (useAccountStore().isAuthorized) {
           this.startProfilePolling()
         }
+
+        useAccountStore().markAuthReady()
       }
     }
   },
