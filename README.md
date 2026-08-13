@@ -59,13 +59,26 @@
 
 ---
 
+### Видеокарта и рендеринг (Linux)
+
+На Linux приложение само определяет, через что рендериться — X11/XWayland или нативный Wayland, — по факту установленного видеодрайвера. Ручной настройки не требуется.
+
+| Видеокарта / драйвер | Что используется | Почему |
+| :--- | :--- | :--- |
+| NVIDIA (проприетарный драйвер) | X11 / XWayland (принудительно) | Известный баг обмена GPU-буферами (GBM/DMA-BUF) между Chromium и проприетарным драйвером под нативным Wayland: окно либо зависает на заставке, либо показывает повреждённую картинку вместо интерфейса. Особенно стабильно воспроизводится на архитектурах Pascal (GTX 10xx) и старше — на более новых картах (RTX, свежие драйверы) может отличаться. |
+| NVIDIA (открытый драйвер Nouveau) | Нативный Wayland | Этому багу не подвержен |
+| AMD (amdgpu) | Нативный Wayland | |
+| Intel (i915 / Xe) | Нативный Wayland | |
+| Сессия рабочего стола на X11 (GNOME X11 и любые DE без Wayland) | X11 | Определяется автоматически самим Chromium (`ozone-platform-hint=auto`), не зависит от видеокарты — на X11-сессии Wayland-режим и не запросится |
+
+Определение проприетарного драйвера NVIDIA — по наличию `/proc/driver/nvidia/version` (появляется только когда загружен именно проприетарный модуль ядра). Логика в `src/main/utils/app-switches.js`.
+
+---
+
 ### Сборка и запуск
 
 <details>
 <summary>🔧 Инструкция для разработчиков (нажмите для раскрытия)</summary>
-
-> **Требуемая версия Node.JS - 14.x.x**  
-> На других версиях, особенно выше, могут быть проблемы со сборкой нативных модулей.
 
 Перед запуском не забудьте скопировать и отредактировать пример файла `.env`:
 
@@ -74,29 +87,25 @@ cp .env.example .env
 ```
 
 ```bash
-# Установка и сборка зависимостей
-yarn install
+# Установка зависимостей
+npm install
 
-# Запуск с горячей перезагрузкой на localhost:9080
-yarn run serve
+# Запуск в dev-режиме
+npm run dev
 
-# Сборка production-версии
-yarn run build
+# Сборка production-бандла (без упаковки в дистрибутив)
+npm run build
 
-# Запуск ESLint --fix для JS/Vue файлов и компонентов в `src/`
-yarn run lint:fix
+# Запуск ESLint --fix для JS/Vue файлов в `src/`
+npm run lint:fix
 
-# Сборка под все платформы
-yarn run release
+# Сборка дистрибутивов под все платформы разом
+npm run release
 
-# Сборка под macOS
-yarn run release:mac
-
-# Сборка под Windows
-yarn run release:win
-
-# Сборка под Linux
-yarn run release:lin
+# Сборка под конкретную платформу
+npm run release:mac
+npm run release:windows
+npm run release:linux
 ```
 
 </details>
@@ -154,13 +163,26 @@ Custom hotkeys can also be set in the settings for:
 
 ---
 
+### GPU & Rendering (Linux)
+
+On Linux the app automatically decides how to render — X11/XWayland or native Wayland — based on the actual GPU driver installed. No manual configuration needed.
+
+| GPU / driver | Rendering used | Why |
+| :--- | :--- | :--- |
+| NVIDIA (proprietary driver) | X11 / XWayland (forced) | Known GPU buffer sharing bug (GBM/DMA-BUF) between Chromium and the proprietary driver under native Wayland: the window either hangs on the splash screen or shows corrupted content instead of the UI. Reliably reproducible on Pascal (GTX 10-series) and older — may vary on newer cards (RTX, recent drivers). |
+| NVIDIA (open-source Nouveau driver) | Native Wayland | Not affected by this bug |
+| AMD (amdgpu) | Native Wayland | |
+| Intel (i915 / Xe) | Native Wayland | |
+| Desktop session running X11 (GNOME on X11, any DE without Wayland) | X11 | Auto-detected by Chromium itself (`ozone-platform-hint=auto`) — independent of the GPU; native Wayland is simply never requested on an X11 session |
+
+The proprietary NVIDIA driver is detected via the presence of `/proc/driver/nvidia/version` (only exists when the proprietary kernel module is loaded). Logic lives in `src/main/utils/app-switches.js`.
+
+---
+
 ### Build and Run
 
 <details>
 <summary>🔧 Developer instructions (click to expand)</summary>
-
-> **Required Node.js version: 14.x.x**  
-> Other versions, especially newer ones, may have issues building native modules.
 
 Before starting, copy and edit the example `.env` file:
 
@@ -169,29 +191,25 @@ cp .env.example .env
 ```
 
 ```bash
-# Install and build dependencies
-yarn install
+# Install dependencies
+npm install
 
-# Start with hot reload on localhost:9080
-yarn run serve
+# Run in dev mode
+npm run dev
 
-# Build the production version
-yarn run build
+# Build the production bundle (without packaging into a distributable)
+npm run build
 
-# Run ESLint --fix for JS/Vue files and components in `src/`
-yarn run lint:fix
+# Run ESLint --fix for JS/Vue files in `src/`
+npm run lint:fix
 
-# Build for all platforms
-yarn run release
+# Build distributables for all platforms at once
+npm run release
 
-# Build for macOS
-yarn run release:mac
-
-# Build for Windows
-yarn run release:win
-
-# Build for Linux
-yarn run release:lin
+# Build for a specific platform
+npm run release:mac
+npm run release:windows
+npm run release:linux
 ```
 
 </details>
