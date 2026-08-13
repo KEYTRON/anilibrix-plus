@@ -106,7 +106,10 @@ export default {
   props,
   computed: {
     total () {
-      const totalValue = this.totalEpisodes
+      // release.total_series can be null (episode count not yet known for
+      // ongoing releases) — an explicitly-passed null bypasses the prop's
+      // string default, so guard here rather than relying on every caller.
+      const totalValue = (this.totalEpisodes || '')
         .replace('(0)', '(?)')
         .replace(/^(\d+)$/, '($1)')
         .replace(/^\d+\-(\d+)$/, '($1)')

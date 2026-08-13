@@ -85,6 +85,10 @@ export default {
     goforward() {
       this.$router.go(1)
     },
+    refreshNavState() {
+      this.canGoBack = window.history.state?.back !== null
+      this.canGoForward = window.history.state?.forward !== null
+    },
     async randomRelease() {
       this.diceIntervalId = setInterval(() => {
         if (this.direction) {
@@ -122,16 +126,24 @@ export default {
     return {
       dice: 5,
       diceIntervalId: null,
-      direction: 0
+      direction: 0,
+      // window.history.state isn't a Vue-reactive source, so canGoBack/
+      // canGoForward can't be computed — they'd only ever evaluate once and
+      // never update as the user navigates. Tracked as plain data instead,
+      // refreshed on every route change (see watch.$route below).
+      canGoBack: false,
+      canGoForward: false,
+    }
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler () {
+        this.$nextTick(this.refreshNavState)
+      }
     }
   },
   computed: {
-    canGoBack() {
-      return window.history.state?.back !== null
-    },
-    canGoForward() {
-      return window.history.state?.forward !== null
-    },
     /**
      * Check if should hide toolbar
      *
