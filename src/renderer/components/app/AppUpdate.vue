@@ -26,10 +26,6 @@
         <v-btn variant="text" @click="openLink(repository.url)">
           {{ $t('update.github') }}
         </v-btn>
-
-        <v-btn variant="text" @click="openLink('https://t.me/anilibrix_plus')" color="blue darken-1">
-          {{ $t('update.telegram') }}
-        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

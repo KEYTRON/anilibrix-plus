@@ -1,6 +1,6 @@
 export default {
   common: {
-    appTitle: 'AniLibrix Plus',
+    appTitle: 'AniLibrix Prime',
     search: 'Search',
     noData: 'No data',
     back: 'Back',
@@ -53,8 +53,7 @@ export default {
   },
   update: {
     title: 'Update available',
-    github: 'Download from GitHub',
-    telegram: 'Download from Telegram'
+    github: 'Download from GitHub'
   },
   settings: {
     title: 'App settings',
@@ -279,7 +278,6 @@ export default {
     telegram: 'Telegram channel',
     sourceCode: 'Source code on GitHub',
     anilibria: 'AniLibria',
-    unofficial: 'Unofficial releases channel',
     donate: 'Support the project',
     minimize: 'Minimize app',
     quit: 'Quit app',
@@ -291,7 +289,7 @@ export default {
     forceReload: 'Reload app',
     window: 'Window',
     saveLogsDialog: 'Save logs',
-    splashStartTitle: 'Starting Anilibrix Plus...'
+    splashStartTitle: 'Starting Anilibrix Prime...'
   },
   errors: {
     genericLoadReleases: 'Failed to load releases',

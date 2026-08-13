@@ -25,10 +25,6 @@ export const createAboutTemplate = () => [
     click: () => shell.openExternal(meta.links.anilibria)
   },
   {
-    label: t('main.unofficial'),
-    click: () => shell.openExternal(meta.links.unofficial)
-  },
-  {
     label: t('main.donate'),
     click: () => shell.openExternal(meta.links.donate)
   },

@@ -1,6 +1,6 @@
 export default {
   common: {
-    appTitle: 'AniLibrix Plus',
+    appTitle: 'AniLibrix Prime',
     search: 'Поиск',
     noData: 'Нет данных',
     back: 'Назад',
@@ -53,8 +53,7 @@ export default {
   },
   update: {
     title: 'Доступно обновление',
-    github: 'Скачать Github',
-    telegram: 'Скачать Telegram'
+    github: 'Скачать Github'
   },
   settings: {
     title: 'Настройки приложения',
@@ -279,7 +278,6 @@ export default {
     telegram: 'Telegram-канал',
     sourceCode: 'Исходный код на GitHub',
     anilibria: 'Анилибрия',
-    unofficial: 'Канал не официальных релизов',
     donate: 'Поддержать проект',
     minimize: 'Свернуть приложение',
     quit: 'Закрыть приложение',
@@ -291,7 +289,7 @@ export default {
     forceReload: 'Перезагрузить приложение',
     window: 'Окно',
     saveLogsDialog: 'Save logs',
-    splashStartTitle: 'Starting Anilibrix Plus...'
+    splashStartTitle: 'Starting Anilibrix Prime...'
   },
   errors: {
     genericLoadReleases: 'Произошла ошибка при загрузке релизов',

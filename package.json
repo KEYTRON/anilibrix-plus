@@ -6,12 +6,12 @@
     "email": "anilibria@protonmail.com",
     "url": "https://anilibria.tv"
   },
-  "description": "AniLibrix Plus - AniLibria desktop app (Anilibrix fork)",
+  "description": "AniLibrix Prime - AniLibria desktop app (Anilibrix fork)",
   "license": "MIT",
   "main": "./out/main/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/KEYTRON/anilibrix-plus"
+    "url": "https://github.com/KEYTRON/anilibrix-prime"
   },
   "scripts": {
     "dev": "electron-vite dev -- --no-sandbox",
@@ -29,16 +29,15 @@
   "meta": {
     "name": "AniLibrix",
     "links": {
-      "github": "https://github.com/KEYTRON/anilibrix-plus",
+      "github": "https://github.com/KEYTRON/anilibrix-prime",
       "donate": "https://www.anilibria.tv/pages/donate.php",
       "telegram": "tg://resolve?domain=anilibrix",
-      "anilibria": "https://anilibria.tv",
-      "unofficial": "tg://resolve?domain=anilibrix_plus"
+      "anilibria": "https://anilibria.tv"
     }
   },
   "build": {
-    "productName": "AniLibrix Plus",
-    "artifactName": "AniLibrixPlus-${os}-${arch}-${version}.${ext}",
+    "productName": "AniLibrix Prime",
+    "artifactName": "AniLibrixPrime-${os}-${arch}-${version}.${ext}",
     "appId": "com.anilibria.anilibrix",
     "directories": {
       "output": "release"

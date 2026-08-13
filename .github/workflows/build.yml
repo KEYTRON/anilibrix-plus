@@ -100,7 +100,7 @@ jobs:
             }]
           }' package.json > package.json.tmp && mv package.json.tmp package.json
 
-          jq '.name = "anilibrix-plus"' package.json > package.json.tmp && mv package.json.tmp package.json
+          jq '.name = "anilibrix-prime"' package.json > package.json.tmp && mv package.json.tmp package.json
 
           yarn
 
@@ -183,7 +183,7 @@ jobs:
 
       - name: Prepare build application (Windows)
         run: |
-          jq '.name = "anilibrix-plus"' package.json > package.json.tmp && mv package.json.tmp package.json
+          jq '.name = "anilibrix-prime"' package.json > package.json.tmp && mv package.json.tmp package.json
 
       - name: Install project dependencies
         run: yarn install --ignore-platform --ignore-engines

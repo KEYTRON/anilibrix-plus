@@ -1,14 +1,14 @@
-# AniLibrix Plus
+# AniLibrix Prime
 
 [![🇷🇺 Русский](https://img.shields.io/badge/%F0%9F%87%B7%F0%9F%87%BA-Russian-blue?style=for-the-badge)](#russian)
 [![🇺🇸 English](https://img.shields.io/badge/%F0%9F%87%BA%F0%9F%87%B8-English-red?style=for-the-badge)](#english)
 
 [![License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://github.com/anilibria/alice/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/AnimeHaze/anilibrix-plus.svg)](https://github.com/AnimeHaze/anilibrix-plus/issues)
+[![GitHub issues](https://img.shields.io/github/issues/KEYTRON/anilibrix-prime.svg)](https://github.com/KEYTRON/anilibrix-prime/issues)
 
 <div>
     <a href="https://anilibria.tv/">
-        <img align="right" alt="" src="https://raw.githubusercontent.com/AnimeHaze/anilibrix-plus/lord/build/icons/app/512x512.png" width="200" height="200" />
+        <img align="right" alt="" src="https://raw.githubusercontent.com/KEYTRON/anilibrix-prime/lord/build/icons/app/512x512.png" width="200" height="200" />
     </a>
 </div>
 
@@ -18,15 +18,11 @@
 
 Десктопный аниме-кинотеатр Анилибрии для любого вашего компьютера.
 
-[![Канал обновлений](https://img.shields.io/badge/%D0%A2%D0%B5%D0%BB%D0%B5%D0%B3%D1%80%D0%B0%D0%BC_%D0%BA%D0%B0%D0%BD%D0%B0%D0%BB-%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-blue?style=for-the-badge&logo=telegram)](https://t.me/anilibrix_plus) [![Чат приложения](https://img.shields.io/badge/%D0%A2%D0%B5%D0%BB%D0%B5%D0%B3%D1%80%D0%B0%D0%BC-%D1%87%D0%B0%D1%82_%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F-blue?style=for-the-badge&logo=telegram&link=https%3A%2F%2Ft.me%2Fanilibrix_plus_chat)](https://t.me/anilibrix_plus_chat)
+![Anilibrix](https://raw.githubusercontent.com/KEYTRON/anilibrix-prime/lord/.github/assets/anilibrix.png)
 
-[![Загрузите из Snap Store](https://snapcraft.io/static/images/badges/ru/snap-store-black.svg)](https://snapcraft.io/anilibrix-plus)
+### Сравнение возможностей: Anilibria (официальный) vs Anilibrix Prime
 
-![Anilibrix](https://raw.githubusercontent.com/AnimeHaze/anilibrix-plus/lord/.github/assets/anilibrix.png)
-
-### Сравнение возможностей: Anilibria (официальный) vs Anilibrix Plus
-
-| Особенность / Функция | AnilibriX (официальный) | AnilibriX Plus (неофициальный форк) |
+| Особенность / Функция | AnilibriX (официальный) | AnilibriX Prime (неофициальный форк) |
 | :--- | :--- | :--- |
 | **Авторизация** | Только стандартная (логин/пароль) | ✅ **Вход через ВКонтакте** <br> <details><summary>Скриншот</summary>![Вход через ВКонтакте](./assets/img.png)</details> |
 | **Управление плеером** | Нет пропуска опенинга / эндинга | ✅ **Авто-пропуск опенинга** <br>✅ **Ручной пропуск в один клик** <br>✅ **Ручной пропуск горячей клавишей** <details><summary>Скриншоты</summary>![Кнопка пропуска](./assets/opening-skip.png)![Настройки пропуска](./assets/opening-skip2.png)</details> |
@@ -117,15 +113,11 @@ yarn run release:lin
 
 AniLibria's desktop anime theater for any computer.
 
-[![Updates channel](https://img.shields.io/badge/Telegram-Updates%20channel-blue?style=for-the-badge&logo=telegram)](https://t.me/anilibrix_plus) [![App chat](https://img.shields.io/badge/Telegram-App%20chat-blue?style=for-the-badge&logo=telegram)](https://t.me/anilibrix_plus_chat)
+![Anilibrix](https://raw.githubusercontent.com/KEYTRON/anilibrix-prime/lord/.github/assets/anilibrix.png)
 
-[![Download on Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/anilibrix-plus)
+### Feature Comparison: Anilibria (official) vs Anilibrix Prime
 
-![Anilibrix](https://raw.githubusercontent.com/AnimeHaze/anilibrix-plus/lord/.github/assets/anilibrix.png)
-
-### Feature Comparison: Anilibria (official) vs Anilibrix Plus
-
-| Feature / Capability | AnilibriX (official) | AnilibriX Plus (unofficial fork) |
+| Feature / Capability | AnilibriX (official) | AnilibriX Prime (unofficial fork) |
 | :--- | :--- | :--- |
 | **Authorization** | Standard login/password only | ✅ **VK login** <br> <details><summary>Screenshot</summary>![VK login](./assets/img.png)</details> |
 | **Player controls** | No opening/ending skip | ✅ **Automatic opening skip** <br>✅ **Manual one-click skip** <br>✅ **Manual hotkey skip** <details><summary>Screenshots</summary>![Skip button](./assets/opening-skip.png)![Skip settings](./assets/opening-skip2.png)</details> |

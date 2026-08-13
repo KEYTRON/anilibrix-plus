@@ -42,10 +42,6 @@ export default {
           action: () => require('@electron/remote').shell.openExternal(meta.links.donate)
         },
         {
-          title: this.$t('main.unofficial'),
-          action: () => require('@electron/remote').shell.openExternal(meta.links.unofficial)
-        },
-        {
           title: this.$t('main.telegram'),
           value: '@anilibrix',
           action: () => require('@electron/remote').shell.openExternal(meta.links.telegram)

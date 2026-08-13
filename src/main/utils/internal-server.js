@@ -32,7 +32,7 @@ export async function initInternalServer () {
   server.get('/rutube/:id/*', lazyRutube)
   server.get('/hls/:url', lazyVideo)
   
-  server.all('/', (req, res) => res.send('Hello from Anilibrix Plus!'))
+  server.all('/', (req, res) => res.send('Hello from Anilibrix Prime!'))
 
   // Mirror Set-Cookie value into a regular header so the renderer (where browsers
   // hide Set-Cookie from JS even with webSecurity: false) can read PHPSESSID.

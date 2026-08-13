@@ -108,7 +108,7 @@ export default {
 
   async mounted () {
     try {
-      const data = await fetch('https://raw.githubusercontent.com/AnimeHaze/anilibrix-plus/refs/heads/lord/latest.json')
+      const data = await fetch('https://raw.githubusercontent.com/KEYTRON/anilibrix-prime/refs/heads/lord/latest.json')
         .then(async x => {
           const text = await x.text()
           try { return JSON.parse(text) } catch (e) {
