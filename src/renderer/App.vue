@@ -32,6 +32,7 @@ import { useAppStore } from '@store/app/useAppStore'
 import { useSettingsStore } from '@store/app/settings/useSettingsStore'
 import { useReleasesStore } from '@store/releases/useReleasesStore'
 import { useFavoritesStore } from '@store/favorites/useFavoritesStore'
+import { useAccountStore } from '@store/app/account/useAccountStore'
 import { mapStores } from 'pinia'
 import get from 'lodash/get'
 
@@ -52,7 +53,8 @@ export default {
       appStore: useAppStore(),
       settingsStore: useSettingsStore(),
       releasesStore: useReleasesStore(),
-      favoritesStore: useFavoritesStore()
+      favoritesStore: useFavoritesStore(),
+      accountStore: useAccountStore()
     }
   },
 
@@ -65,6 +67,7 @@ export default {
   },
 
   computed: {
+    _isAuthorized () { return this.accountStore.isAuthorized },
     _welcome_view () { return this.appStore.welcome_view },
     _updates_enabled () { return this.settingsStore.system?.updates?.enabled },
     _updates_timeout () {
@@ -144,6 +147,16 @@ export default {
   },
 
   watch: {
+    // The initial getFavorites() call in created() fires immediately on
+    // mount, racing against the silent-login/session-restore sequence
+    // (which needs a real network round-trip and reliably loses that
+    // race) — without this, favorites never gets a second chance once the
+    // session actually becomes available.
+    _isAuthorized: {
+      handler (isAuthorized) {
+        if (isAuthorized) this.favoritesStore.getFavorites()
+      }
+    },
     _updates_enabled: {
       immediate: true,
       handler () { this.toggleUpdates() }
