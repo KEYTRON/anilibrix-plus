@@ -118,6 +118,14 @@ npm run release:linux
 
 ---
 
+### Планы на будущее
+
+- Тестирование и сборка под **macOS ARM (Apple Silicon)**
+- Возможно — тестирование под **Void Linux (musl)** и семейством **BSD**
+- Оптимизация кода: ускорение работы и снижение потребления памяти
+
+---
+
 #### Перевод на английский: Claude Sonnet 5 🤖
 
 ---
@@ -225,6 +233,14 @@ npm run release:linux
 ```
 
 </details>
+
+---
+
+### Future plans
+
+- Testing and builds for **macOS ARM (Apple Silicon)**
+- Possibly — testing on **Void Linux (musl)** and the **BSD** family
+- Code optimization: faster performance and lower memory usage
 
 ---
 
