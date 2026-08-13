@@ -5,6 +5,7 @@
       <v-card class="mb-2" color="transparent" flat>
         <v-card-actions class="pa-0">
           <card v-bind="{loading}" class="flex-grow-1" :release="__release"/>
+          <favorite v-if="_release" :release="_release" color="primary"/>
           <v-menu offset-y :close-on-content-click="false">
             <template v-slot:activator="{ props }">
               <v-btn
@@ -167,6 +168,7 @@ import Card from '@components/release/card'
 import Episodes from '@components/release/episodes'
 import Comments from '@components/release/comments'
 import Torrents from '@components/release/torrents'
+import Favorite from '@components/release/favorite'
 
 import { toVideo } from '@utils/router/views'
 import { useReleaseStore } from '@store/release/useReleaseStore'
@@ -194,7 +196,8 @@ export default {
   components: {
     Card,
     Episodes,
-    Comments
+    Comments,
+    Favorite
   },
   data () {
     return {
